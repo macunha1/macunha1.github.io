@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>It&#39;s me, Macunha!</title>
+    <link>https://macunha.me/en/</link>
+    <description>Recent content on It&#39;s me, Macunha!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 11 Jan 2019 22:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://macunha.me/en/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DevOps: Benefits</title>
+      <link>https://macunha.me/en/blog/devops-benefits/</link>
+      <pubDate>Fri, 11 Jan 2019 22:00:00 +0000</pubDate>
+      
+      <guid>https://macunha.me/en/blog/devops-benefits/</guid>
+      <description>Introduction Main benefits that a company generally expects and finds in the adoption of culture:
+Faster and Cheaper Releases Since releases will be continuous and frequent, deliverables will turn into small changes with the benefit of increasing speed in the development cycle (delivering always).
+Improved Operational support with quick fixed If there is a failure during delivery, the impact is minimal because the amount of modifications is small, just as the rollback is faster.</description>
+    </item>
+    
+    <item>
+      <title>DevOps: The Genesis</title>
+      <link>https://macunha.me/en/blog/devops-genesis/</link>
+      <pubDate>Fri, 11 Jan 2019 21:00:00 +0000</pubDate>
+      
+      <guid>https://macunha.me/en/blog/devops-genesis/</guid>
+      <description>Introduction First of all, it&amp;rsquo;s all about agile.
+The DevOps methodology was created on top of agile methods, to deliver a higher value inside software releases, automating feature release through pipelines, that can test hypothesis faster allowing higher adaptability using &amp;ldquo;fail-fast&amp;rdquo; approaches. Those changes are more cultural than technical, so it&amp;rsquo;s normal to see DevOps being called culture.
+The implementation of DevOps happens through processes automation, having a strong sense of processes re-engineering inside the company.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://macunha.me/en/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://macunha.me/en/about/</guid>
+      <description>Hello!
+I&amp;rsquo;m Matheus Cunha, a Software Engineer focused on Systems Analysis and Engineering, including DevOps and Data Engineering fields. Experienced architecting decentralized and highly available systems, with a demonstrated history of working as a consultant for many businesses in Brazil, helping them to be more future-proof and competitive in a highly changing market. Always looking for ways to improve myself, learn more and go further.
+Also, I&amp;rsquo;m a open-source technology lover skilled in Linux, that writes code in:</description>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>https://macunha.me/en/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://macunha.me/en/projects/</guid>
+      <description>Under construction.</description>
+    </item>
+    
+  </channel>
+</rss>
