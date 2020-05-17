@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DevOps | It's me, Macunha!</title><link>https://macunha.me/en/category/devops/</link><atom:link href="https://macunha.me/en/category/devops/index.xml" rel="self" type="application/rss+xml"/><description>DevOps</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 11 Jan 2019 22:00:00 +0000</lastBuildDate><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>DevOps</title><link>https://macunha.me/en/category/devops/</link></image><item><title>DevOps: Benefits</title><link>https://macunha.me/en/post/2019/01/devops-benefits/</link><pubDate>Fri, 11 Jan 2019 22:00:00 +0000</pubDate><guid>https://macunha.me/en/post/2019/01/devops-benefits/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+&lt;p>Main benefits that a company generally expects and finds in the adoption of culture:&lt;/p>
+&lt;h2 id="faster-and-cheaper-releases">Faster and Cheaper Releases&lt;/h2>
+&lt;p>Since releases will be continuous and frequent, deliverables will turn into small changes with the benefit of increasing speed in the development cycle (delivering always).&lt;/p>
+&lt;h2 id="improved-operational-support-with-quick-fixed">Improved Operational support with quick fixed&lt;/h2>
+&lt;p>If there is a failure during delivery, the impact is minimal because the amount of modifications is small, just as the rollback is faster. Having a simple inspection and debugging.&lt;/p>
+&lt;h2 id="better-time-to-market-ttm">Better Time-to-market (TTM)&lt;/h2>
+&lt;p>The software will be delivered much earlier when it&amp;rsquo;s still an MVP. Customers will be integrated as part of the development process, bringing insights and feedback to the development team. Thus allowing for a higher launch speed in the market.&lt;/p>
+&lt;h2 id="superior-quality-products">Superior quality products&lt;/h2>
+&lt;p>As has been said before, early failures prevent defects from being delivered to production, because:&lt;/p>
+&lt;ul>
+&lt;li>Reduces the volume of defects in the product as a whole;&lt;/li>
+&lt;li>Increases frequency of new features and releases;&lt;/li>
+&lt;li>Appropriate development processes in teams, including automation.&lt;/li>
+&lt;/ul>
+&lt;h1 id="now-we-understood-why-lets-talk-about-how">Now we understood WHY, let&amp;rsquo;s talk about HOW&lt;/h1>
+&lt;h2 id="continuous-releases-integration-delivery-deployment">Continuous releases (integration, delivery, deployment)&lt;/h2>
+&lt;p>Usually follows a code versioning approach (through Git) using specific branches for each environment (e.g.: feature branches with git flow).&lt;/p>
+&lt;h2 id="continuous-integration">Continuous integration&lt;/h2>
+&lt;p>Automatic execution of unit tests, integration tests and code quality analysis against a git branch, to ensure that there was no disruption of the modified piece of code.&lt;/p>
+&lt;h2 id="continuous-delivery">Continuous delivery&lt;/h2>
+&lt;p>Packaging the software that is tested and approved, to deliver it somewhere that it is possible to use in a deploy later. Examples are libs delivered in repositories to be integrated into the code during the next update and code deploy.&lt;/p>
+&lt;h2 id="continuous-deployment">Continuous deployment&lt;/h2>
+&lt;p>Once you have completed all of the above steps, you can do automated deployments right in the environments, when the team is more confident about the tools they are testing, as well as the risk they&amp;rsquo;re taking and also understanding that there is a possibility of failure in a tests environment without worrying that it&amp;rsquo;s going to be divergent from production.&lt;/p>
+&lt;h2 id="configuration-andor-infrastructure-as-code">Configuration (and/or Infrastructure) as code&lt;/h2>
+&lt;p>To be able to test software with assertiveness, and to understand that it will transit between environments without changing behavior, it is essential that the configurations are also expressed in code. This allows the settings to be also versioned, following the code. Also guaranteeing a uniformity among the environments, which enables:&lt;/p>
+&lt;ul>
+&lt;li>Reduction in maintenance costs, having a single point to look at and understand the operation of the system;&lt;/li>
+&lt;li>Easy to recreate the infrastructure, if it is necessary to move everything to another place, this can happen with a few manual interactions;&lt;/li>
+&lt;li>Allows for a code review of infrastructure and configurations, which consequently brings a culture of collaboration in the development, sharing of knowledge and increases the democratization of the infra;&lt;/li>
+&lt;li>Documentation as code, helping new team members get a faster warm up.&lt;/li>
+&lt;/ul>
+&lt;p>These points were well-stressed by the Heroku team and gave rise to the famous paper: [The Twelve-Factor App] (&lt;a href="https://12factor.net/)">https://12factor.net/)&lt;/a>. It&amp;rsquo;s an excellent reading for the explanation of the benefits of configuration management.&lt;/p>
+&lt;h2 id="observability-monitoring-and-self-healing">Observability, Monitoring, and self-healing&lt;/h2>
+&lt;p>At the end of the delivery process, the software must be monitored. Avoiding to wait for an external report of failures, ensuring that the actions are proactive rather than reactive.&lt;/p>
+&lt;p>With mature monitoring, it&amp;rsquo;s possible to create trigger against alerts, creating a self-healing system in which actions (scripts) are performed to &lt;strong>fix known&lt;/strong> failures in the infrastructure so that everyone can sleep peacefully at night, without having to worry about the on-call schedule that makes you read some documentation at dawn. (If you have had experience with this, you know for sure how bad it is).&lt;/p>
+&lt;p>Scaling up only those cases that are extreme exceptions (mistakes not known/expected) in the process for the employee to act, ensuring higher health in operation.&lt;/p>
+&lt;h2 id="processes-automation">Processes automation&lt;/h2>
+&lt;p>All processes that cause Muda should be addressed with automation, allowing people to work more quickly. Good examples of processes that are usually automated are:&lt;/p>
+&lt;ul>
+&lt;li>Deployment;&lt;/li>
+&lt;li>Self-healing (system resilience in response to anomalies);&lt;/li>
+&lt;li>Renewal of Certificates;&lt;/li>
+&lt;li>Execution of tests (unitary, integration, functional, etc.);&lt;/li>
+&lt;li>Monitoring (with auto-discovery);&lt;/li>
+&lt;li>User Governance;&lt;/li>
+&lt;/ul>
+&lt;h1 id="devops-toolchainhttpsenwikipediaorgwikidevops_toolchain">
+&lt;a href="https://en.wikipedia.org/wiki/DevOps_toolchain" target="_blank" rel="noopener">DevOps toolchain&lt;/a>&lt;/h1>
+&lt;p>A combination of tools to facilitate the maintenance and operation of the system, with the flow:&lt;/p>
+&lt;p>&lt;img src="https://macunha.me/img/content/devops-lifecycle.png" alt="Development Cycle Using DevOps">&lt;/p>
+&lt;blockquote>
+&lt;p>Note: Any similarity to the PDCA is pure certainty.&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;strong>Plan&lt;/strong>: Project planning phase, in which feedbacks are collected for requirements survey, and backlog creation;&lt;/li>
+&lt;li>&lt;strong>Create&lt;/strong>: Creation of a deliverable (to validate a hypothesis), such as an MVP;&lt;/li>
+&lt;li>&lt;strong>Verify&lt;/strong>: Pass the deliverable to the test phase;&lt;/li>
+&lt;li>&lt;strong>Package:&lt;/strong> Package the build to be able to put it in some testing environment;&lt;/li>
+&lt;li>&lt;strong>Release&lt;/strong>: Deploy packaged deliverable;&lt;/li>
+&lt;li>&lt;strong>Configure&lt;/strong>: Perform the configuration of the deliverable in the testing environment, trying to get as close as possible to the twelve-factor app.&lt;/li>
+&lt;li>&lt;strong>Monitor&lt;/strong>: After deploying to the environment, track business metrics and infrastructure to ensure everything is working as expected.&lt;/li>
+&lt;/ul>
+&lt;h1 id="conclusion">Conclusion&lt;/h1>
+&lt;p>During the implementation of these techniques it is possible to observe improvements in the development process, the most notable gains are:&lt;/p>
+&lt;ul>
+&lt;li>Increase in team engagement;&lt;/li>
+&lt;li>Knowledge sharing;&lt;/li>
+&lt;li>Reduction of bottlenecks;&lt;/li>
+&lt;li>More free time to do work that really matters (adds value to the user experience or generates impact);&lt;/li>
+&lt;li>Greater confidence in delivering software.&lt;/li>
+&lt;/ul></description></item><item><title>DevOps: The Genesis</title><link>https://macunha.me/en/post/2019/01/devops-genesis/</link><pubDate>Fri, 11 Jan 2019 21:00:00 +0000</pubDate><guid>https://macunha.me/en/post/2019/01/devops-genesis/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+&lt;p>First of all, it&amp;rsquo;s all about agile.&lt;/p>
+&lt;p>The DevOps methodology was created on top of agile methods, to deliver a higher value inside software releases, automating feature release through pipelines, that can test hypothesis faster allowing higher adaptability using &amp;ldquo;fail-fast&amp;rdquo; approaches. Those changes are more cultural than technical, so it&amp;rsquo;s normal to see DevOps being called culture.&lt;/p>
+&lt;p>The implementation of DevOps happens through processes automation, having a strong sense of processes re-engineering inside the company. Comparing to the cultural change, the technical is easy to implement. Therefore the role that a &amp;ldquo;DevOps Engineer/Analyst&amp;rdquo; performs is very confusing, which enables many SysAdmins and Infra Analysts assuming the role of &amp;ldquo;DevOps.&amp;rdquo;&lt;/p>
+&lt;h2 id="lean-is-the-basis-of-agile">Lean is the basis of Agile&lt;/h2>
+&lt;p>Reality is not as happy as it sounds. After World War II, Japan was destroyed and under-resourced after losing the war. With a limited amount of resources, the country needed to reinvent itself and survive after a time of severe depression. During that time two guys gained attention inside a company that later gave its name after the methodology.&lt;/p>
+&lt;p>Those guys were Eiji Toyoda and Taiichi Ohno, inside Toyota Motor Corporation. They&amp;rsquo;re the founders of the &amp;ldquo;Toyota production model&amp;rdquo; also known as Toyotism.&lt;/p>
+&lt;h2 id="toyota-gave-birth-to-lean">Toyota gave birth to Lean&lt;/h2>
+&lt;p>Lean teaches how to optimize the end-to-end process, focusing on processes that create value for customers. Bottlenecks in the process must be removed, and wasteful activities need to be identified and avoided. Both explained and defined by LEAN 3M: Muda, Mura, and Muri.&lt;/p>
+&lt;p>Also teaches to improve yourself day after day and always focus on quality through Kaizen (continuous improvement).&lt;/p>
+&lt;p>Japanese culture truly believes that quality is the main objective to deliver value to customers since quality is what brings your clients back.&lt;/p>
+&lt;h2 id="kaizen">Kaizen&lt;/h2>
+&lt;p>A mindset that helps to look at each part of the process exclusively and think about the improvements. Involving the people who are part of the process, encourage the inclusion of these people in the decisions of change, since:&lt;/p>
+&lt;ul>
+&lt;li>It is much easier to accept a change when it is not imposed (top-down);&lt;/li>
+&lt;li>There is a greater absorption of change by people when they&amp;rsquo;re included in the planning;&lt;/li>
+&lt;li>The people who are involved in the process bring their concerns and suggestions, which contribute positively to the evolution of the change, making the idea more robust.&lt;/li>
+&lt;/ul>
+&lt;p>The process of defining improvements through Kaizen happens (usually) in the following order:&lt;/p>
+&lt;ol>
+&lt;li>Define data-driven objectives;&lt;/li>
+&lt;li>Review the current state and develop an improvement plan;&lt;/li>
+&lt;li>Implement improvement;&lt;/li>
+&lt;li>Review the implementation and improve what does not work;&lt;/li>
+&lt;li>Report the results and determine the items to be monitored.&lt;/li>
+&lt;/ol>
+&lt;p>This process is also called &lt;strong>PDCA: Plain-Do-Control-Act&lt;/strong>, which is summarized in:&lt;/p>
+&lt;ul>
+&lt;li>Plan (develop the hypothesis);&lt;/li>
+&lt;li>Do (experiment);&lt;/li>
+&lt;li>Check (validate results);&lt;/li>
+&lt;li>Act (refine the experiment and start over).&lt;/li>
+&lt;/ul>
+&lt;h1 id="3m-muda-mura-muri">3M: Muda, Mura, Muri&lt;/h1>
+&lt;h2 id="muda-waste">Muda (waste)&lt;/h2>
+&lt;p>Any activity that consumes time without adding value to the final consumer. e.g.:&lt;/p>
+&lt;ul>
+&lt;li>over-production;&lt;/li>
+&lt;li>idle time in the process;&lt;/li>
+&lt;li>products with a defect.&lt;/li>
+&lt;/ul>
+&lt;p>It&amp;rsquo;s important to remember that there are different levels of Muda that can be removed quickly or not, and the classification depends on the time for removal.&lt;/p>
+&lt;p>An example of a more time-consuming Muda is the discontinuation of legacy software that ends up with longer release cycles, causing teams to be idle, followed by an often long or manual test routine.&lt;/p>
+&lt;h2 id="mura-unevenness">Mura (unevenness)&lt;/h2>
+&lt;p>Unevenness in operation, caused by activities that are very changeable and unpredictable, generating different results in all executions. e.g., the execution of tasks that were not well planned and ended up arriving with strict deadlines. The team runs in the rush, generating exhaustion, despair, and moreover, when finished leaves the people who have performed these tasks waiting (for feedback, or confirmation that it is completed).&lt;/p>
+&lt;h2 id="muri-overload">Muri (overload)&lt;/h2>
+&lt;p>Overburdening equipment or operators by requiring them to run at a higher or harder pace beyond the limit, to achieve some goal or expectation, causing fatigue and consequently failures during the process. These failures are usually human errors caused by fatigue during overwork.&lt;/p>
+&lt;h2 id="back-to-agile">Back to Agile&lt;/h2>
+&lt;p>In 2000 a group of 17 people met at a resort in Oregon to talk about ideas that could improve the flow of software development. After a year of mature ideas, these people met again and published the ideas, which we now know as &lt;strong>Agile Manifesto&lt;/strong>.&lt;/p>
+&lt;p>Main points are:&lt;/p>
+&lt;p>&lt;strong>Individuals and interactions&lt;/strong> over processes and tools
+&lt;strong>Working software&lt;/strong> over comprehensive documentation
+&lt;strong>Customer collaboration&lt;/strong> over contract negotiation
+&lt;strong>Responding to change&lt;/strong> over following a plan&lt;/p>
+&lt;p>I will restrict the explanation of these points with the DevOps point of view, keeping on track (now).&lt;/p>
+&lt;h2 id="individuals-and-interactions">Individuals and interactions&lt;/h2>
+&lt;p>&lt;em>over processes and tools&lt;/em>&lt;/p>
+&lt;p>First comes the individuals, they should receive the necessary tooling to work with, and then be empowered to do their jobs. Interactions between people are greatly encouraged, for sharing knowledge and also for facilitating creative flow within development teams.&lt;/p>
+&lt;p>An excellent example of interaction encouraged through DevOps is the code review habit. Considering that small parts of the software will be iterated and approved in the pipeline passing through different environments, automatically, the best way to prevent defects is through code review.&lt;/p>
+&lt;p>This habit brings benefits such as:&lt;/p>
+&lt;ul>
+&lt;li>Knowledge sharing;&lt;/li>
+&lt;li>Observation of the problem from a different point of view;&lt;/li>
+&lt;li>Team engagement;&lt;/li>
+&lt;li>Lesser bugs.&lt;/li>
+&lt;/ul>
+&lt;h2 id="working-software">Working software&lt;/h2>
+&lt;p>&lt;em>over comprehensive documentation&lt;/em>&lt;/p>
+&lt;p>Here&amp;rsquo;s a trick in &amp;ldquo;working software,&amp;rdquo; software that works is not code that compiles. The software that works is what meets the requirements of the user; i.e., the software that solves the problem and the pains of the user.&lt;/p>
+&lt;p>As the market is very dynamic, and evolves with high speed, often during the software development project the requirements change due to external factors. Therefore, knowing that it is not possible to predict all the elements, many &amp;ldquo;workarounds&amp;rdquo; are made during development and documented. Passing the responsibility to the user to handle the faults, and perform the workarounds, expending more effort than would be required to perform the tasks using the software.&lt;/p>
+&lt;blockquote>
+&lt;p>Deliver a working software frequently, ranging from a few weeks to a few months, considering shorter time-scale. - Agile Manifesto&lt;/p>
+&lt;/blockquote>
+&lt;p>Encouraging as many deployments as possible, so that failures happen as early as possible, thus allowing their impact to be much less.&lt;/p>
+&lt;h1 id="fail-fast">Fail-fast!&lt;/h1>
+&lt;p>Failures are understood and encouraged because it&amp;rsquo;s part of the mindset. Because:&lt;/p>
+&lt;ul>
+&lt;li>Only those who &lt;strong>do&lt;/strong> make mistakes;&lt;/li>
+&lt;li>Shit happens.&lt;/li>
+&lt;/ul>
+&lt;p>Therefore, it&amp;rsquo;s best for failures to occur early, while the cost of correction is still low. Failing a controlled testing environment allows the fix to be much faster (and cheaper) than it would if the fix were already in production.&lt;/p>
+&lt;p>For this approach to succeed, there is a premise that environments are production copies, or at least as close as possible. Otherwise, there will be behavioral changes in the software between the environments, making the test environment unfeasible.&lt;/p>
+&lt;p>If the environments are divergent, the promotion of bugs for production will be very frequent, causing late failures, which are expensive failures.&lt;/p>
+&lt;h2 id="customer--collaboration">Customer collaboration&lt;/h2>
+&lt;p>&lt;em>over contract negotiation&lt;/em>&lt;/p>
+&lt;p>Know your client! Including it in the process is the best approach to have working software. After iterating over deliverables, it&amp;rsquo;s essential to create a positive feedback loop with your client, bringing it as close as possible to the development of the tools that he/she is going to use.&lt;/p>
+&lt;p>We can describe this situation with:&lt;/p>
+&lt;ul>
+&lt;li>From point A it is possible to see only point B;&lt;/li>
+&lt;li>From point B it is possible to see point C;&lt;/li>
+&lt;/ul>
+&lt;p>Therefore there is a great incentive for the software to be delivered in parts, continuously. Thus gathering user feedback on the next steps, following the concepts of evolutionary prototyping, which were widely publicized through
+&lt;a href="http://theleanstartup.com/book" target="_blank" rel="noopener">&lt;em>The Lean Startup&lt;/em>&lt;/a>.&lt;/p>
+&lt;p>This point contrasts sharply with the previous one about continuous release, so that it is possible to present the prototype and evolve it throughout the project.&lt;/p>
+&lt;p>Learn who your customer/consumer/user is, and whom you are making the software for, as this is the only way you can deliver value to that customer. An essential part of the software development process is to be empathic with user problems, and to truly understand what the problem is to be solved, and the result of the impact on software development (value creation for the user).&lt;/p>
+&lt;h2 id="responding-to-change">Responding to change&lt;/h2>
+&lt;p>&lt;em>over following a plan&lt;/em>&lt;/p>
+&lt;p>Redesigning the requirements overtime is part of the job, and a necessary step to success. If you want to build something useful that is going to grow and have absorption, it&amp;rsquo;s a key feature to include your client in the implementation process.&lt;/p>
+&lt;p>It will be the only way to bring all the problems of the user to the table and create the best solution for all these problems because the user is the only person that knows the real challenges he faces in their routine dealing with software.&lt;/p>
+&lt;p>With continuous delivery of software along with monitoring results, the process of collecting feedback is much simpler and faster.&lt;/p>
+&lt;h1 id="devops-devops-devops">DevOps, DevOps, DevOps&lt;/h1>
+&lt;p>With the popularization of DevOps, a lot of disagreement came out there followed by a significant confusion about the subject. It is very common to come across different interpretations of &lt;strong>what is DevOps&lt;/strong>. There is a lot of euphemism in the area, and gourmetization on LinkedIn, with many SysAdmins calling themselves DevOps since they learned to code shell script inside Python.&lt;/p>
+&lt;p>Do you want to keep reading?
+&lt;a href="https://macunha.me/en/post/2019/01/devops-benefits/">Here are the benefits of adopting DevOps techniques.&lt;/a>&lt;/p></description></item></channel></rss>
