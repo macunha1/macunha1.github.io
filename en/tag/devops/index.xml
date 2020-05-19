@@ -172,4 +172,101 @@
 &lt;h1 id="devops-devops-devops">DevOps, DevOps, DevOps&lt;/h1>
 &lt;p>With the popularization of DevOps, a lot of disagreement came out there followed by a significant confusion about the subject. It is very common to come across different interpretations of &lt;strong>what is DevOps&lt;/strong>. There is a lot of euphemism in the area, and gourmetization on LinkedIn, with many SysAdmins calling themselves DevOps since they learned to code shell script inside Python.&lt;/p>
 &lt;p>Do you want to keep reading?
-&lt;a href="https://macunha.me/en/post/2019/01/devops-benefits/">Here are the benefits of adopting DevOps techniques.&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;a href="https://macunha.me/en/post/2019/01/devops-benefits/">Here are the benefits of adopting DevOps techniques.&lt;/a>&lt;/p></description></item><item><title>Movida Rent A DevOps</title><link>https://macunha.me/en/project/2016/movida-rent-a-devops/</link><pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2016/movida-rent-a-devops/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+&lt;h2 id="summary">Summary&lt;/h2>
+&lt;p>JSL Holdings Ltd, holder of Julio Simões Logistica (biggest logistics
+players in LATAM) bought Movida Rent a Car in 2013 to expand the
+portfolio and open new market opportunities on car rental and selling
+markets.&lt;/p>
+&lt;p>JSL invested around R$1.8 billion in Movida, and multiplied its annual
+revenues by 21 times from BRL 58m to BRL 1.2b, in 3 years. Based on
+these successful results, JSL Holdings Ltd planned an IPO for Movida.&lt;/p>
+&lt;h2 id="problem">Problem&lt;/h2>
+&lt;p>In order to be public traded, Movida had to pass through an audition
+process, and their IT software deployment weren't PCI compliant.&lt;/p>
+&lt;p>The project started on December 2016, planning to implement an automated
+software release process adopting DevOps on their data center. With the
+goals:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>security&lt;/strong>; no person would need to access the Linux servers. and&lt;/li>
+&lt;li>&lt;strong>productivity&lt;/strong>; releasing features faster to shorten their
+time-to-market.&lt;/li>
+&lt;/ol>
+&lt;h1 id="solution">Solution&lt;/h1>
+&lt;h2 id="technical-implementation">Technical Implementation&lt;/h2>
+&lt;p>Our first goal was to implement the CI/CD pipeline using Jenkins,
+responsible to pack new features, create a release, and deploy it on
+their data center. Apart from the production deployment, the pipeline
+also supported the creation of ephemeral on-demand environments for
+feature homologation and feedback retrieval from users.&lt;/p>
+&lt;p>To have a faster and more controlled release cycle, we migrated the Git
+server from a cloud-hosted to the data center. Through this action we
+reduced in 5 minutes the deployment overall time and increased the
+control over accesses in their repositories.&lt;/p>
+&lt;p>The CI/CD implementation used Jenkins to control the CI/CD flow, GitLab
+with LDAP authentication, and Ansible as a Configuration Manager. A
+complete deployment took around 2 minutes from the git push to having
+code running on production.&lt;/p>
+&lt;p>Apart from the CI/CD deployment process, we also had to work in a
+self-service strategy for running jobs without directly SSH access to
+servers. Rundeck came into place, with RBAC configurations and
+visibility over the history of executed jobs.&lt;/p>
+&lt;h2 id="impact-and-results">Impact and results&lt;/h2>
+&lt;p>Movida went through audition early on January 2017, by the end of
+January 2017 they received the approval.&lt;/p>
+&lt;p>Two weeks later, in February 2017 Movida launched their IPO, marked as
+the first Brazilian IPO of 2017. Movida went public on the 8th of
+February, 2017, raising BRL 645m.&lt;/p></description></item><item><title>Nextel Digital Release</title><link>https://macunha.me/en/project/2016/nextel-digital-release/</link><pubDate>Wed, 30 Nov 2016 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2016/nextel-digital-release/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+&lt;h2 id="summary">Summary&lt;/h2>
+&lt;p>Nextel planed to develop a mobile application to reduce their
+contact rate and operational costs with call centers. &amp;ldquo;Nextel Digital&amp;rdquo;
+was the name given to the project responsible for releasing this
+application.&lt;/p>
+&lt;p>&amp;ldquo;Nextel Digital&amp;rdquo; absorbed more goals like improving the User
+experience, and turned into a new product called &amp;ldquo;Happy&amp;rdquo;, a digital
+cell phone operator. Nextel Happy allows users to manage their plans and
+data entirely from the mobile app, from activating your SIM to managing
+your family plan.&lt;/p>
+&lt;p>This project helped Nextel to increase their customers base, improved
+the users&amp;rsquo; experience, and decrease operational costs (in 16%) all at
+once.&lt;/p>
+&lt;h2 id="problem">Problem&lt;/h2>
+&lt;p>Nextel Brazil executive team decided to work with outsourcing on the
+development of this product to absorb the knowledge from digital
+companies and to complement their internal capabilities. Also to bring
+different perspectives into play, improving the creative process.&lt;/p>
+&lt;p>Our team assumed the responsibility to architect and to implement the
+Cloud infrastructure ensuring high-availability, resilience and
+consistency of the software.&lt;/p>
+&lt;p>We were also responsible for the data synchronization between Nextel
+data center and the cloud. Securely moving tons of GB of users&amp;rsquo; data to
+the cloud daily without data loss or duplication.&lt;/p>
+&lt;h1 id="solution">Solution&lt;/h1>
+&lt;h2 id="technical-implementation">Technical implementation&lt;/h2>
+&lt;p>We choose GlusterFS to ensure consistency, installed between Nextel Data
+Center and AWS. Users&amp;rsquo; data (e.g. data plan consumption, minutes of
+call) synchronization went through GlusterFS to AWS.
+Nextel IT operations inserted data into GlusterFS directly from cell
+phone towers in near-real-time.&lt;/p>
+&lt;p>Once the data is available at AWS mounted volumes, the Celery
+implementation comes into play. At the core of the architecture, Celery
+(implemented in Python 3) using Redis as the message broker, running
+asynchronous jobs inspects events on the GlusterFS. When Celery detects
+a new file it parses the content and starts the multi-part upload to AWS
+S3, then compares the checksums to ensure consistency (and retries in
+case it&amp;rsquo;s inconsistent).&lt;/p>
+&lt;p>After reaching AWS S3 the object event triggers a AWS Lambda function to
+parse the content and index it on Elasticsearch, whose are later served
+to clients through an REST API.&lt;/p>
+&lt;p>The entire infrastructure setup was immutable, to facilitate the
+evolution and reliability, using Ansible as a Configuration Manager and
+AWS CloudFormation as the Cloud Provisioner. In just a couple minutes it
+is possible to recreate everything with minimum effort.&lt;/p>
+&lt;h2 id="impact-and-results">Impact and results&lt;/h2>
+&lt;p>The entire process of making data from a cell phone tower available to
+end users time went down from 1 day to 5 minutes. This reduced
+in ~56% the contact rate on Nextel call centers, due to a self-service
+alternative provided in the mobile app.&lt;/p>
+&lt;p>In addition, users can manage their call history and
+plan consumption directly on the mobile phone, with updates in
+near-real-time. Providing consistent and interactive feedback.&lt;/p></description></item></channel></rss>
