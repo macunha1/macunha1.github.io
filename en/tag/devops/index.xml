@@ -182,8 +182,9 @@ markets.&lt;/p>
 revenues by 21 times from BRL 58m to BRL 1.2b, in 3 years. Based on
 these successful results, JSL Holdings Ltd planned an IPO for Movida.&lt;/p>
 &lt;h2 id="problem">Problem&lt;/h2>
-&lt;p>In order to be public traded, Movida had to pass through an audition
-process, and their IT software deployment weren't PCI compliant.&lt;/p>
+&lt;p>In order to be public traded, Movida had to pass through an audition.
+However, the software solution did not comply with some security
+standards.&lt;/p>
 &lt;p>The project started on December 2016, planning to implement an automated
 software release process adopting DevOps on their data center. With the
 goals:&lt;/p>
