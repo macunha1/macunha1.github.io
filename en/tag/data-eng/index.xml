@@ -2,15 +2,15 @@
 &lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>In order to be able to innovate and maintain itself in a highly changing
 and evolving market, Dotz went through a process of digital
-transformation and had the help of some consultants along the way. Among
-the steps to get closer to a digital model, the implementation of a Data
-Lake emerged, with the requirements of being
-&lt;a href="https://en.wikipedia.org/wiki/Serverless_computing" target="_blank" rel="noopener">serverless&lt;/a> and cloud-native
-to support the decision making process and shorten time-to-market during
-the launch of a new products.&lt;/p>
+transformation and had the help of some consultants along the way.&lt;/p>
+&lt;p>Among the steps to get closer to a digital model, the implementation of
+a Data Lake emerged, with the requirements of being
+&lt;a href="https://en.wikipedia.org/wiki/Serverless_computing" target="_blank" rel="noopener">serverless&lt;/a> and
+cloud-native to support the decision-making process and shorten
+time-to-market during the launch of products.&lt;/p>
 &lt;h2 id="problem">Problem&lt;/h2>
 &lt;p>Dotz is one of the largest companies in the field of loyalty program in
-Brazil, and they&amp;rsquo;d face a high number of issues with data disconnection
+Brazil and they&amp;rsquo;d face a high number of issues with data disconnection
 making it difficult to analyze their users' behaviors. Since they
 received data from numerous supermarkets and stores, it&amp;rsquo;s difficult to
 clusterizate products, since the name is different depending on the
@@ -21,11 +21,11 @@ source. To help with this analysis, they decided to build a Data Lake.&lt;/p>
 Cloud Platform (GCP) to support this strategy and allow a 360-degree
 view of customers (users with points a.k.a. Dotz) and partners (the
 supermarkets offering the loyalty program).&lt;/p>
-&lt;p>The design was focused on cloud-managed services and serverless computing
-offered by Google, serving the core competencies of a Data Lake such as
-scalable storage using Google Cloud Storage, and Google BigQuery. With
-part of the process running inside Kubernetes, responsible for data
-cleansing ETL flow management.&lt;/p>
+&lt;p>The design was focused on cloud-managed services and serverless
+computing offered by Google, serving the core competencies of a Data
+Lake such as scalable storage using Google Cloud Storage, and Google
+BigQuery. With part of the process running inside Kubernetes,
+responsible for data cleansing ETL flow management.&lt;/p>
 &lt;p>We streamed data with Apache Beam running under Google DataFlow,
 parallel mass processing with Apache Spark jobs running on Google
 DataProc, exploratory analysis with Google DataLab, Machine Learning
@@ -50,14 +50,14 @@ data &amp;amp; analytics team aimed at shortening decision making process and
 in delivering a higher quality to customers through a low cost operational
 process.&lt;/p>
 &lt;p>Among the main objectives of this project, we had the automation of
-credit analysis (executed during the approval of customer registration, using Machine
-Learning), a process that until then was long and manual, being handled
-by the back office.&lt;/p>
+credit analysis (executed during the approval of customer registration,
+using Machine Learning), a process that until then was long and manual,
+being handled by the back office.&lt;/p>
 &lt;p>Followed by a better offer of products to the client, carrying out the
-categorization according to the profile of each customer, allowing suggestions
-of more attractive products, in line with personal preferences,
-as well as according to the profile of each investor (conservative, moderate
-or aggressive).&lt;/p>
+categorization according to the profile of each customer, allowing
+suggestions of more attractive products, in line with personal preferences,
+as well as according to the profile of each investor (conservative,
+moderate or aggressive).&lt;/p>
 &lt;p>Last but not least, the intelligent detection of money laundry and
 reporting to the responsible authorities.&lt;/p>
 &lt;h2 id="problem">Problem&lt;/h2>

@@ -185,7 +185,7 @@ em 21 vezes de R$ 58m para R$ 1,2b, em 3 anos. Com base nestes resultados
 de sucesso, a JSL Holdings Ltd planejou um IPO para a Movida.&lt;/p>
 &lt;h2 id="problemática">Problemática&lt;/h2>
 &lt;p>Para ser negociada em bolsa, a Movida teria que passar por uma auditoria.
-Porém a solução de softwares não estava de acordo com algumas normas de
+Porém a solução de software não estava de acordo com algumas normas de
 segurança.&lt;/p>
 &lt;p>O projeto começou em Dezembro de 2016, planejando a implementação de um
 processo de automátizado de publicação de software adotando DevOps em seu
@@ -210,7 +210,7 @@ em seus repositórios.&lt;/p>
 autenticação LDAP, e Ansible como Configuration Manager. Um deployment
 completo leva cerca de 2 minutos desde o &lt;code>git push&lt;/code> até o código estar em
 produção.&lt;/p>
-&lt;p>Além do processo de implantação do CI/CD, também tivemos que trabalhar em um
+&lt;p>Além da implantação de um pipeline para CI/CD, também trabalhamos em uma
 estratégia de self-service para a execução de jobs sem acesso direto por SSH
 aos servidores. Rundeck entrou em cena, com configurações de RBAC e
 visibilidade sobre o histórico de jobs executados.&lt;/p>

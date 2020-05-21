@@ -175,7 +175,53 @@
 &lt;h1 id="devops-devops-devops">DevOps, DevOps, DevOps&lt;/h1>
 &lt;p>Com a divulgação da palavra DevOps, existe muita gente falando sobre DevOps por aí. Existindo muita divergência no que é falado, e criando uma confusão grande sobre o tema. Acaba sendo muito comum se deparar com diferentes interpretações sobre &lt;strong>o que é DevOps&lt;/strong>. Existe muito eufemismo na área, e gourmetização em cima do LinkedIn, com muitos SysAdmins por aí se dizendo DevOps, pois aprenderam a codar shell script dentro do Python.&lt;/p>
 &lt;p>Tá afim de continuar lendo?
-&lt;a href="https://macunha.me/pt/post/2019/01/devops-benefits/">Dá uma olhada nos benefícios de implementar DevOps.&lt;/a>&lt;/p></description></item><item><title>Easynvest Data Platform</title><link>https://macunha.me/pt/project/2017/easynvest-data-platform/</link><pubDate>Mon, 03 Jul 2017 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2017/easynvest-data-platform/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+&lt;a href="https://macunha.me/pt/post/2019/01/devops-benefits/">Dá uma olhada nos benefícios de implementar DevOps.&lt;/a>&lt;/p></description></item><item><title>Dotz Data Labs</title><link>https://macunha.me/pt/project/2017/dotz-data-labs/</link><pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2017/dotz-data-labs/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+&lt;h2 id="sumário">Sumário&lt;/h2>
+&lt;p>Para poder inovar e se manter em um mercado em constante mudança e
+evolução, Dotz passou por um processo de transformação digital e teve
+a ajuda de alguns consultores neste percurso.&lt;/p>
+&lt;p>Entre as iniciativas para se aproximar de um modelo digital, surgiu a
+implementação de um Data Lake, com o requisito de ser
+&lt;a href="https://en.wikipedia.org/wiki/Serverless_computing" target="_blank" rel="noopener">serverless&lt;/a> e
+cloud-native, auxiliando no processo de tomada de decisão e encurtando
+o time-to-market durante o lançamento de novos produtos.&lt;/p>
+&lt;h2 id="problemática">Problemática&lt;/h2>
+&lt;p>A Dotz é uma das maiores empresas no campo de programas de fidelidade no
+Brasil, e enfrentaria um grande número de problemas com desconexão de
+dados dificultando a análise do comportamento de seus usuários. Como
+eles receberam dados de inúmeros supermercados e lojas, é difícil
+agrupar os produtos, já que o nome é diferente dependendo da fonte. Para
+ajudar nesta análise, eles decidiram construir um Data Lake.&lt;/p>
+&lt;h1 id="solução">Solução&lt;/h1>
+&lt;h2 id="implementação-técnica">Implementação Técnica&lt;/h2>
+&lt;p>Construímos e implantamos uma arquitetura gerenciada da Big Data usando
+a Plataforma Cloud do Google (GCP) para suportar esta estratégia e
+permitir uma visão de 360 graus dos clientes (usuários com pontos a.k.a.
+Dotz) e parceiros que oferecem o programa de fidelidade.&lt;/p>
+&lt;p>O design foi focado em serviços gerênciados pela nuvem e serverless
+oferecida pelo Google, servindo as principais competências de um Data
+Lake como o armazenamento escalável usando o Google Cloud Storage, e o
+Google BigQuery. Com parte do processo rodando containerizado em
+Kubernetes, responsável pela limpeza de dados e gerenciar o ETL.&lt;/p>
+&lt;p>Transmitimos dados com o Apache Beam rodando sob o Google DataFlow,
+processamento em massa paralelo com Apache Spark jobs executados no
+Google DataProc, análise exploratória com o Google DataLab, Machine
+Learning Analysis com o Google ML e visualização de dados no Google Data
+Studio.&lt;/p>
+&lt;p>Os dados são transportados por meio de um modelo data-driven, onde os
+dados foram planejados para streaming, including o ETL (que funciona em
+um micro-batch, para permitir a exploração em near-real-time). Estes dados
+passam pelo pipeline de dados utilizando o serviço de mensageria do Google
+Pub/Sub, em que cada mensagem é serializada utilizando o formato Avro,
+reduzindo a carga e permitindo que o transporte seja econômico, rápido e
+confiável.&lt;/p>
+&lt;h2 id="impacto-e-resultados">Impacto e resultados&lt;/h2>
+&lt;p>Tudo isso permitiu à Dotz ter uma melhor estrutura em sua plataforma
+analítica, previamente gerenciada em uma grande instância do MS SQL
+Server, sendo deslocada para um Data Lake com camadas que permitem a
+categorização, governança, qualidade e segurança dos dados.&lt;/p>
+&lt;p>Suporte a processos analíticos de dados dos usuários, exploração ágil
+e monetização de seus conhecimentos sobre o comportamento dos clientes.&lt;/p></description></item><item><title>Easynvest Data Platform</title><link>https://macunha.me/pt/project/2017/easynvest-data-platform/</link><pubDate>Mon, 03 Jul 2017 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2017/easynvest-data-platform/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
 &lt;h2 id="sumário">Sumário&lt;/h2>
 &lt;p>Dentro do planejamento anual da Easynvest, um investimento na expansão da
 equipe de data &amp;amp; analytics teve como objetivo encurtar a tomada de decisão
@@ -247,7 +293,7 @@ em 21 vezes de R$ 58m para R$ 1,2b, em 3 anos. Com base nestes resultados
 de sucesso, a JSL Holdings Ltd planejou um IPO para a Movida.&lt;/p>
 &lt;h2 id="problemática">Problemática&lt;/h2>
 &lt;p>Para ser negociada em bolsa, a Movida teria que passar por uma auditoria.
-Porém a solução de softwares não estava de acordo com algumas normas de
+Porém a solução de software não estava de acordo com algumas normas de
 segurança.&lt;/p>
 &lt;p>O projeto começou em Dezembro de 2016, planejando a implementação de um
 processo de automátizado de publicação de software adotando DevOps em seu
@@ -272,7 +318,7 @@ em seus repositórios.&lt;/p>
 autenticação LDAP, e Ansible como Configuration Manager. Um deployment
 completo leva cerca de 2 minutos desde o &lt;code>git push&lt;/code> até o código estar em
 produção.&lt;/p>
-&lt;p>Além do processo de implantação do CI/CD, também tivemos que trabalhar em um
+&lt;p>Além da implantação de um pipeline para CI/CD, também trabalhamos em uma
 estratégia de self-service para a execução de jobs sem acesso direto por SSH
 aos servidores. Rundeck entrou em cena, com configurações de RBAC e
 visibilidade sobre o histórico de jobs executados.&lt;/p>
@@ -338,50 +384,4 @@ Como consequência, o tempo de duração das chamadas nos call center caiu
 ~56%, devido à alternativa de self-service fornecida no aplicativo.&lt;/p>
 &lt;p>Além disso, os usuários podem gerenciar seu histórico de chamadas e
 planejar o consumo diretamente pelo celular, com atualizações em
-near-real-time. Proporcionano um feedback consistente e interativo.&lt;/p></description></item><item><title>Dotz Data Labs</title><link>https://macunha.me/pt/project/2017/dotz-data-labs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2017/dotz-data-labs/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
-&lt;h2 id="sumário">Sumário&lt;/h2>
-&lt;p>Para poder inovar e se manter em um mercado em constante mudança e
-evolução, Dotz passou por um processo de transformação digital e teve
-a ajuda de alguns consultores neste percurso.&lt;/p>
-&lt;p>Entre as iniciativas para se aproximar de um modelo digital, surgiu a
-implementação de um Data Lake, com o requisito de ser
-&lt;a href="https://en.wikipedia.org/wiki/Serverless_computing" target="_blank" rel="noopener">serverless&lt;/a> e
-cloud-native, auxiliando no processo de tomada de decisão e encurtando
-o time-to-market durante o lançamento de novos produtos.&lt;/p>
-&lt;h2 id="problemática">Problemática&lt;/h2>
-&lt;p>A Dotz é uma das maiores empresas no campo de programas de fidelidade no
-Brasil, e enfrentaria um grande número de problemas com desconexão de
-dados dificultando a análise do comportamento de seus usuários. Como
-eles receberam dados de inúmeros supermercados e lojas, é difícil
-agrupar os produtos, já que o nome é diferente dependendo da fonte. Para
-ajudar nesta análise, eles decidiram construir um Data Lake.&lt;/p>
-&lt;h1 id="solução">Solução&lt;/h1>
-&lt;h2 id="implementação-técnica">Implementação Técnica&lt;/h2>
-&lt;p>Construímos e implantamos uma arquitetura gerenciada da Big Data usando
-a Plataforma Cloud do Google (GCP) para suportar esta estratégia e
-permitir uma visão de 360 graus dos clientes (usuários com pontos a.k.a.
-Dotz) e parceiros que oferecem o programa de fidelidade.&lt;/p>
-&lt;p>O design foi focado em serviços gerênciados pela nuvem e serverless
-oferecida pelo Google, servindo as principais competências de um Data
-Lake como o armazenamento escalável usando o Google Cloud Storage, e o
-Google BigQuery. Com parte do processo rodando containerizado em
-Kubernetes, responsável pela limpeza de dados e gerenciar o ETL.&lt;/p>
-&lt;p>Transmitimos dados com o Apache Beam rodando sob o Google DataFlow,
-processamento em massa paralelo com Apache Spark jobs executados no
-Google DataProc, análise exploratória com o Google DataLab, Machine
-Learning Analysis com o Google ML e visualização de dados no Google Data
-Studio.&lt;/p>
-&lt;p>Os dados são transportados por meio de um modelo data-driven, onde os
-dados foram planejados para streaming, including o ETL (que funciona em
-um micro-batch, para permitir a exploração em near-real-time). Estes dados
-passam pelo pipeline de dados utilizando o serviço de mensageria do Google
-Pub/Sub, em que cada mensagem é serializada utilizando o formato Avro,
-reduzindo a carga e permitindo que o transporte seja econômico, rápido e
-confiável.&lt;/p>
-&lt;h2 id="impacto-e-resultados">Impacto e resultados&lt;/h2>
-&lt;p>Tudo isso permitiu à Dotz ter uma melhor estrutura em sua plataforma
-analítica, previamente gerenciada em uma grande instância do MS SQL
-Server, sendo deslocada para um Data Lake com camadas que permitem a
-categorização, governança, qualidade e segurança dos dados.&lt;/p>
-&lt;p>Suporte a processos analíticos de dados dos usuários, exploração ágil
-e monetização de seus conhecimentos sobre o comportamento dos clientes.&lt;/p></description></item></channel></rss>
+near-real-time. Proporcionano um feedback consistente e interativo.&lt;/p></description></item></channel></rss>
