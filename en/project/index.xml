@@ -1,4 +1,111 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Projects | It's me, Macunha!</title><link>https://macunha.me/en/project/</link><atom:link href="https://macunha.me/en/project/index.xml" rel="self" type="application/rss+xml"/><description>Projects</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 17 Feb 2018 00:00:00 +0000</lastBuildDate><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>Projects</title><link>https://macunha.me/en/project/</link></image><item><title>Dotz Data Labs</title><link>https://macunha.me/en/project/2017/dotz-data-labs/</link><pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2017/dotz-data-labs/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Projects | It's me, Macunha!</title><link>https://macunha.me/en/project/</link><atom:link href="https://macunha.me/en/project/index.xml" rel="self" type="application/rss+xml"/><description>Projects</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 21 Jul 2019 00:00:00 +0000</lastBuildDate><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>Projects</title><link>https://macunha.me/en/project/</link></image><item><title>ReclameAQUI Data Lake</title><link>https://macunha.me/en/project/2019/reclameaqui-data-lake/</link><pubDate>Sun, 21 Jul 2019 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2019/reclameaqui-data-lake/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+&lt;h2 id="summary">Summary&lt;/h2>
+&lt;p>ReclameAQUI (Portuguese for &amp;ldquo;complain here&amp;rdquo;) is an interesting and unique
+business. They&amp;rsquo;re a content aggregator for customers&amp;rsquo; experience sharing
+(especially bad experiences) about shopping (online and offline). However, it
+goes further than a mere &amp;ldquo;complaints website&amp;rdquo; offering an interface for
+companies to answers complaints, helping customers with their issues.&lt;/p>
+&lt;p>The service is simply the biggest in this regard (worldwide) receiving 600K
+unique visitors each day, searching for a company&amp;rsquo;s reputation before closing a
+deal/purchase.&lt;/p>
+&lt;h2 id="problem">Problem&lt;/h2>
+&lt;p>Even though they are already advanced in the digital approach to business,
+having most services hosted on Cloud computing and analytical culture, their
+data lake needed some upgrades. The most relevant motivator of this project was
+the sky-high bills from GCP especially related to BigQuery data consumption.&lt;/p>
+&lt;p>Apart from the cost-reduction tasks and data ingestion process optimization, we
+took the opportunity to implement data cryptograph at-rest, governance, and
+obfuscation during query executions against the data lake. Making data
+accessible by everyone in the company, controlling identity access and
+management through LDAP (auditing each access, to be fully compliant with
+GDPR), we could offer a self-service data lake so different business actors
+could satisfy their needs &amp;ldquo;drinking&amp;rdquo; from the lake.&lt;/p>
+&lt;h1 id="solution">Solution&lt;/h1>
+&lt;h2 id="tech-implementation">Tech implementation&lt;/h2>
+&lt;p>Key objectives were cost-optimization of the existing Data Lake, improvement
+(and extension) of existing data ingestion pipelines, and security enhancements.&lt;/p>
+&lt;p>Starting from Data Lake&amp;rsquo;s cost optimization, we redesigned the data ingestion,
+using a &amp;ldquo;landing&amp;rdquo; area for raw data, making data transformations later to suit
+the desired data models. Saving the results in other Data Lake layers to achieve
+greater performance in queries.&lt;/p>
+&lt;p>We shifted away from the Streaming inserts in BigQuery by adding a step to load
+data at the end of the ingestion pipeline. Apache NiFi was the main software
+responsible for orchestrating and executing the pipeline, covering also the
+improvements in data ingestion through processes re-engineering.&lt;/p>
+&lt;p>Auditing in the Data Lake was managed through Apache Ranger. In order to have
+it fully supported we implemented a JDBC driver using a component from Apache
+Calcite called Avatica. Authentication for Apache Ranger went through a custom
+plugin (also developed during the project) for LDAP consuming user info from
+Google Cloud Identity, reflecting the existing organization&amp;rsquo;s users and groups
+from Google Suite.&lt;/p>
+&lt;p>To make the game more interesting, we containerized the workflow and heavily
+used Kubernetes (GKE) to manage these components. Most of the Apache projects
+didn&amp;rsquo;t have Helm Charts at the time and we developed and made some
+of them open-source.&lt;/p>
+&lt;h2 id="impact-and-results">Impact and results&lt;/h2>
+&lt;p>During project time we could measure an estimative of roughly 56% in Data Lake
+cost-optimization through reengineering of processes and resources, especially
+the removal of streaming inserts to BigQuery.&lt;/p>
+&lt;p>We made relevant progress in security and governance during the project with the
+introduction of Apache Ranger and Data Lake auditing for access and usage,
+providing advanced security capabilities to ReclameAQUI, which anticipated itself
+towards GDPR and data privacy concerns.&lt;/p></description></item><item><title>Clipping Service News OCR</title><link>https://macunha.me/en/project/2018/clipping-service-news-ocr/</link><pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2018/clipping-service-news-ocr/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+&lt;h2 id="summary">Summary&lt;/h2>
+&lt;p>As the owner of the biggest Brazilian media data set, the media monitoring
+leader Clipping Service was having issues with scalability, getting close to
+their data center maximum capacity.&lt;/p>
+&lt;p>Clipping Service operates on a huge scale, receiving around ~4.5K media press
+pages per day from roughly 300 newspapers in both digital and printed versions.
+Previously employees called &amp;ldquo;readers&amp;rdquo; were responsible for reading and clipping
+(adding highlight into the targeted content) to be later passed onto the
+&amp;ldquo;reviewers&amp;rdquo; team.&lt;/p>
+&lt;p>As if the burden of reading countless pages a day were not enough, the readers&amp;rsquo;
+operation begins around 4:30 a.m. when the &amp;ldquo;first reading&amp;rdquo; begins (i.e., the
+delivery of the morning papers).&lt;/p>
+&lt;h2 id="problem">Problem&lt;/h2>
+&lt;p>For over 20 years this content has been ingested by so-called &amp;ldquo;readers&amp;rdquo;. But due
+to the advent of the internet and the digital press boom at the end of the 90&amp;rsquo;s,
+and nowadays of social media, companies are transferring their clipping
+investments to monitoring other areas. Therefore requiring a Clipping Service
+action to remain competitive in the market.&lt;/p>
+&lt;p>Through news reading automation using OCR, NLP, and artificial intelligence to
+categorize media, the plan was to achieve a higher throughput during ingestion,
+giving readers more free time to review the content. Consequently achieving a
+higher quality in the content, since we as humans aren&amp;rsquo;t good at doing
+repetitive tasks, especially when it comes to reading endless pages searching
+for names and words.&lt;/p>
+&lt;h1 id="solution">Solution&lt;/h1>
+&lt;h2 id="tech-implementation">Tech implementation&lt;/h2>
+&lt;p>After spending some time researching and benchmarking the alternatives at hand
+we decided to use Python as the implementation language for handling texts,
+OCR, and NLP (using NLTK). Given its extended API and libraries for NLP and
+image processing.&lt;/p>
+&lt;p>As the cloud provider we choose AWS due to it&amp;rsquo;s stability and consistency over
+other vendors, the conclusion at the time was: AWS price estimative 14.67%
+greater than GCP. However, AWS&amp;rsquo;s popularity is greater than GCP and proven in
+terms of stability, support, and integrity. Making a safer choice for a
+slightly higher price.&lt;/p>
+&lt;p>The tech stack was: Python 3 using Dramatiq as the task processing library,
+running Tesseract OCR jobs, processing text with NLTK and images with Pillow
+(ImageMagick wrapper). Redis was the message broker for Dramatiq, a simple
+Postgres database stored metrics regarding the execution and we had an
+Elasticsearch storing the processed content.&lt;/p>
+&lt;p>Requests coming from the data center reached an API Gateway, responsible for
+executing a Lambda function, and delivering the content result.&lt;/p>
+&lt;p>The best part of the design? We stored and served the content via AWS S3. Each
+part was designed with fault tolerance, and we simply turned off the entire
+cloud infrastructure after the operation, to turn on only the next day.&lt;/p>
+&lt;p>Operating only from 4am to 2pm, a &amp;ldquo;serverless&amp;rdquo; and ephemeral project benefiting
+from an aggressive cloud cost reduction.&lt;/p>
+&lt;h2 id="impact-and-results">Impact and results&lt;/h2>
+&lt;p>Clipping Service reduced its reading team workforce by ~78%, offering internal
+hiring for other areas of the company and a voluntary dismissal plan with
+benefits, making the process as human as possible for the former employees.&lt;/p>
+&lt;p>Using automation for reading tasks, Clipping Service could reach considerable
+improvements in the media press ingestion throughput (around 20 times faster),
+offering higher quality in press clipping service for its customers and saw the
+opportunity in creating a self-service press clipping service later, since the
+operational cost decreased significantly.&lt;/p></description></item><item><title>Dotz Data Labs</title><link>https://macunha.me/en/project/2017/dotz-data-labs/</link><pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2017/dotz-data-labs/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
 &lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>In order to be able to innovate and maintain itself in a highly changing
 and evolving market, Dotz went through a process of digital

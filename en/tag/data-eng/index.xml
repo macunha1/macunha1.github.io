@@ -53,10 +53,10 @@ include Big Data, Artificial Intelligence and Cloud Computing
 &lt;a href="https://www.zdnet.com/article/how-to-use-cloud-computing-and-big-data-to-support-digital-transformation/" target="_blank" rel="noopener">[1]&lt;/a>
 &lt;a href="https://digitalhealth.london/cloud-big-data-ai-lead-nhs-digital-transformation/" target="_blank" rel="noopener">[2]&lt;/a>
 &lt;a href="https://www.ibm.com/blogs/cloud-computing/2018/11/05/guiding-framework-digital-transformation-garage/" target="_blank" rel="noopener">[3]&lt;/a>.&lt;/p>
-&lt;p>Among the benefits of using Cloud instead of On-premises
-we can list:&lt;/p>
-&lt;p>An interesting comparison can be read at
-&lt;a href="https://databricks.com/blog/2017/05/31/top-5-reasons-for-choosing-s3-over-hdfs.html" target="_blank" rel="noopener">Databricks blog&lt;/a>
+&lt;p>An interesting comparison between the benefits of using Cloud Computing in the
+context of Big Data instead of On-premises&amp;rsquo; servers can be read at
+&lt;a href="https://databricks.com/blog/2017/05/31/top-5-reasons-for-choosing-s3-over-hdfs.html" target="_blank" rel="noopener">Databricks
+blog&lt;/a>,
 which is the company
 &lt;a href="https://www.washingtonpost.com/news/the-switch/wp/2016/06/09/this-is-where-the-real-action-in-artificial-intelligence-takes-place/" target="_blank" rel="noopener">founded by the creators of Apache Spark&lt;/a>.&lt;/p>
 &lt;p>As we see a widespread adoption of Cloud Computing (even by companies
@@ -67,10 +67,10 @@ Hadoop&lt;/a> since the Data Teams (BI/Data
 Science/Analytics) increasingly choose to use tools like
 &lt;a href="https://cloud.google.com/bigquery/" target="_blank" rel="noopener">Google
 BigQuery&lt;/a> or
-&lt;a href="https://aws.amazon.com/redshift/" target="_blank" rel="noopener">AWS Redshift&lt;/a>,
-it doesn&amp;rsquo;t make sense to climb a Hadoop only to use
-&lt;a href="https://hortonworks.com/apache/yarn/" target="_blank" rel="noopener">YARN&lt;/a>
-to manage the resources.&lt;/p>
+&lt;a href="https://aws.amazon.com/redshift/" target="_blank" rel="noopener">AWS Redshift&lt;/a>.
+Therefore, it doesn&amp;rsquo;t make sense to spin-up a Hadoop with the only intention to
+use
+&lt;a href="https://hortonworks.com/apache/yarn/" target="_blank" rel="noopener">YARN&lt;/a> as the resources manager.&lt;/p>
 &lt;p>An alternative is the use of Hadoop cluster providers such as
 &lt;a href="https://cloud.google.com/dataproc" target="_blank" rel="noopener">Google
 DataProc&lt;/a> or
@@ -78,8 +78,8 @@ DataProc&lt;/a> or
 for the creation of ephemeral clusters. Just to name a few options.&lt;/p>
 &lt;p>To better understand the design of Spark Operator, the doc from
 &lt;a href="https://github.com/GoogleCloudPlatform/spark-on-k8s-operatoR/blob/master/docs/design.md#the-crd-controller" target="_blank" rel="noopener">GCP on GitHub&lt;/a>
-as a no-brainer.&lt;/p>
-&lt;h1 id="lets-get-our-hands-on">Let&amp;rsquo;s get our hands-on!&lt;/h1>
+is a no-brainer.&lt;/p>
+&lt;h1 id="lets-get-hands-on">Let&amp;rsquo;s get hands-on!&lt;/h1>
 &lt;h2 id="warming-up-the-engine">Warming up the engine&lt;/h2>
 &lt;p>Now that the word has been spread, let&amp;rsquo;s get our hands on it to show
 the engine running. For that, let&amp;rsquo;s use:&lt;/p>
@@ -109,12 +109,12 @@ which will took &lt;em>some hours&lt;/em> to finish, or&lt;/li>
 &lt;/ul>
 &lt;p>Once the necessary tools are installed, it&amp;rsquo;s necessary to
 include Apache Spark path in &lt;code>PATH&lt;/code> environment variable, to ease the
-invokation of Apache Spark executables. Simply run:&lt;/p>
+invocation of Apache Spark executables. Simply run:&lt;/p>
 &lt;pre>&lt;code class="language-bash">export PATH=${PATH}:/path/to/apache-spark-X.Y.Z/bin
 &lt;/code>&lt;/pre>
 &lt;h2 id="creating-the-minikube-cluster">Creating the Minikube &amp;ldquo;cluster&amp;rdquo;&lt;/h2>
 &lt;p>At last, to have a Kubernetes &amp;ldquo;cluster&amp;rdquo; we will start a &lt;code>minikube&lt;/code>
-with the intention of running a example from
+with the intention of running an example from
 &lt;a href="https://github.com/apache/spark/blob/master/examples/src/main/scala/org/apache/spark/examples/SparkPi.scala" target="_blank" rel="noopener">Spark
 repository&lt;/a>
 called &lt;code>SparkPi&lt;/code> just as a demonstration.&lt;/p>
@@ -122,10 +122,9 @@ called &lt;code>SparkPi&lt;/code> just as a demonstration.&lt;/p>
 --memory=4g
 &lt;/code>&lt;/pre>
 &lt;h2 id="building-the-docker-image">Building the Docker image&lt;/h2>
-&lt;p>Let&amp;rsquo;s use the Minikube Docker daemon to not depend on an external
-registry (and only generate Docker image layers on the VM,
-facilitating a garbage disposal later). Minikube has a wrapper that
-makes our life easier:&lt;/p>
+&lt;p>Let&amp;rsquo;s use the Minikube Docker daemon to not depend on an external registry (and
+only generate Docker image layers on the VM, facilitating garbage disposal
+later). Minikube has a wrapper that makes our life easier:&lt;/p>
 &lt;pre>&lt;code class="language-bash">eval $(minikube docker-env)
 &lt;/code>&lt;/pre>
 &lt;p>After having the daemon environment variables configured, we need a
@@ -141,7 +140,7 @@ configured, just run:&lt;/p>
 that would be used for a Hadoop Spark cluster
 &lt;a href="https://spark.apache.org/docs/latest/submitting-applications.html" target="_blank" rel="noopener">spark-submit&lt;/a>.&lt;/p>
 &lt;p>However, Spark Operator supports defining jobs in the &amp;ldquo;Kubernetes
-language&amp;rdquo; using
+dialect&amp;rdquo; using
 &lt;a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/" target="_blank" rel="noopener">CRD&lt;/a>,
 &lt;a href="https://github.com/GoogleCloudPlatform/spark-on-k8s-operator/tree/master/examples" target="_blank" rel="noopener">here are some examples&lt;/a> - for later.&lt;/p>
 &lt;h1 id="fire-in-the-hole">Fire in the hole!&lt;/h1>
@@ -245,113 +244,4 @@ environment (unless you want to keep playing with it):&lt;/p>
 &lt;h2 id="last-words">Last words&lt;/h2>
 &lt;p>I hope your curiosity got &lt;em>sparked&lt;/em> and some ideas for further
 development have raised for your Big Data workloads. If you have any
-doubt or suggestion, don&amp;rsquo;t hesitate to share on the comment section.&lt;/p></description></item><item><title>Dotz Data Labs</title><link>https://macunha.me/en/project/2017/dotz-data-labs/</link><pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2017/dotz-data-labs/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
-&lt;h2 id="summary">Summary&lt;/h2>
-&lt;p>In order to be able to innovate and maintain itself in a highly changing
-and evolving market, Dotz went through a process of digital
-transformation and had the help of some consultants along the way.&lt;/p>
-&lt;p>Among the steps to get closer to a digital model, the implementation of
-a Data Lake emerged, with the requirements of being
-&lt;a href="https://en.wikipedia.org/wiki/Serverless_computing" target="_blank" rel="noopener">serverless&lt;/a> and
-cloud-native to support the decision-making process and shorten
-time-to-market during the launch of products.&lt;/p>
-&lt;h2 id="problem">Problem&lt;/h2>
-&lt;p>Dotz is one of the largest companies in the field of loyalty program in
-Brazil and they&amp;rsquo;d face a high number of issues with data disconnection
-making it difficult to analyze their users' behaviors. Since they
-received data from numerous supermarkets and stores, it&amp;rsquo;s difficult to
-clusterizate products, since the name is different depending on the
-source. To help with this analysis, they decided to build a Data Lake.&lt;/p>
-&lt;h1 id="solution">Solution&lt;/h1>
-&lt;h2 id="technical-implementation">Technical Implementation&lt;/h2>
-&lt;p>We built and deployed a Big Data's managed architecture using Google's
-Cloud Platform (GCP) to support this strategy and allow a 360-degree
-view of customers (users with points a.k.a. Dotz) and partners (the
-supermarkets offering the loyalty program).&lt;/p>
-&lt;p>The design was focused on cloud-managed services and serverless
-computing offered by Google, serving the core competencies of a Data
-Lake such as scalable storage using Google Cloud Storage, and Google
-BigQuery. With part of the process running inside Kubernetes,
-responsible for data cleansing ETL flow management.&lt;/p>
-&lt;p>We streamed data with Apache Beam running under Google DataFlow,
-parallel mass processing with Apache Spark jobs running on Google
-DataProc, exploratory analysis with Google DataLab, Machine Learning
-Analysis with Google ML and Data visualization in Google Data Studio.&lt;/p>
-&lt;p>Data is transported using an event-driven model, where every data is
-collected using a streaming model, even the ETL (which runs on a
-micro-batch, to enable near real-time exploration). These data goes
-through the data pipeline using Google Pub/Sub message-oriented
-middleware, and every message is serialized using Avro format, which
-reduces the payload and allows transportation to be cost-effective, fast
-and reliable.&lt;/p>
-&lt;h2 id="impact-and-results">Impact and results&lt;/h2>
-&lt;p>It all allowed Dotz to have a better structure on their analytical
-platform, previously managed inside a large MS SQL Server instance,
-which moved to a Data Lake with layers allowing data categorization,
-governance, quality and security.&lt;/p>
-&lt;p>Supporting analytical processes of users data, faster exploration and
-monetization of their knowledge on customers' behavior.&lt;/p></description></item><item><title>Easynvest Data Platform</title><link>https://macunha.me/en/project/2017/easynvest-data-platform/</link><pubDate>Mon, 03 Jul 2017 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2017/easynvest-data-platform/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
-&lt;h2 id="summary">Summary&lt;/h2>
-&lt;p>Within Easynvest&amp;rsquo;s annual planning, an investment in the expansion of
-data &amp;amp; analytics team aimed at shortening decision making process and
-in delivering a higher quality to customers through a low cost operational
-process.&lt;/p>
-&lt;p>Among the main objectives of this project, we had the automation of
-credit analysis (executed during the approval of customer registration,
-using Machine Learning), a process that until then was long and manual,
-being handled by the back office.&lt;/p>
-&lt;p>Followed by a better offer of products to the client, carrying out the
-categorization according to the profile of each customer, allowing
-suggestions of more attractive products, in line with personal preferences,
-as well as according to the profile of each investor (conservative,
-moderate or aggressive).&lt;/p>
-&lt;p>Last but not least, the intelligent detection of money laundry and
-reporting to the responsible authorities.&lt;/p>
-&lt;h2 id="problem">Problem&lt;/h2>
-&lt;p>However, there were limitations in the data tools, mainly due to the
-fact that they were proprietary software (with limited licenses) and
-designed for usage inside data centers. In addition, the analytical
-database was modeled for traditional Business Intelligence models
-(OLAP, etc), making the decision making process heavy, due to the
-demanding amount of interactions during ETL.&lt;/p>
-&lt;p>Previously for a client to be approved, the process took 10 to 15 days.
-Gathering all necessary information, providing a complete perspective of
-the profile, including credit analysis. After collecting the information,
-the back office generated an internal credit analysis score.&lt;/p>
-&lt;p>In most cases, the client was not notified of updates regarding the
-process and did not receive feedback at the end (if refused) unless
-explicitly requested (by contacting support via chat or email, for
-example) which made the process time consuming and costly. Not to
-mention the countless amounts of customers lost to the competition during
-this long wait.&lt;/p>
-&lt;h1 id="solution">Solution&lt;/h1>
-&lt;h2 id="technical-implementation">Technical Implementation&lt;/h2>
-&lt;p>To make it possible, we built an hybrid-cloud implementation using AWS
-cloud-based components (mainly AWS S3, EMR and ECS), to extend the data
-centers' capability, implementing a cloud-first Hadoop ecosystem
-(replacing the proprietary software components with open-source
-equivalents). Giving Easynvest the possibility to grow the Data Lake
-exponentially.&lt;/p>
-&lt;p>The Data Lake design was robust, aimed to handle the execution of heavy
-analytical processes through Machine Learning models, with support for
-data quality, metadata governance, information security and data serving
-(data owners could share data with consumers from other areas within the
-company, allowing to self-service their analytical data).&lt;/p>
-&lt;p>A Chatbot was also used to reduce the operational load in the
-environment, this bot is responsible for maintaining and updating
-infrastructure components. From triggering deployments to generating
-encryption keys on-demand for data security and governance. Implemented
-with the Errbot framework for Python interacting with Slack.&lt;/p>
-&lt;p>Going further, we implemented the best practices in DevOps, using Jenkins
-as a tool for CI/CD of the developed components alongside with Ansible for
-Configuration Management.&lt;/p>
-&lt;h2 id="impact-and-results">Impact and results&lt;/h2>
-&lt;p>Thanks to the utilization of layers in the Data Lake and the
-implementation of data pipelines, we were able to reduce the data
-ingestion time by 78% and to include metadata and data catalog, in
-addition to automating much of the work that used to be done manually.&lt;/p>
-&lt;p>Thus bringing positive results, especially reducing the registration
-approval time for consumers from roughly 10 days to 1 day. It also made
-the data platform more democratic, providing relevant information that
-facilitates the analysis of areas such as risk (credit analysis) and
-support, without having to give up security.&lt;/p></description></item></channel></rss>
+doubt or suggestion, don&amp;rsquo;t hesitate to share on the comment section.&lt;/p></description></item></channel></rss>

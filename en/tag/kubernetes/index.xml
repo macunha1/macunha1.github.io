@@ -53,10 +53,10 @@ include Big Data, Artificial Intelligence and Cloud Computing
 &lt;a href="https://www.zdnet.com/article/how-to-use-cloud-computing-and-big-data-to-support-digital-transformation/" target="_blank" rel="noopener">[1]&lt;/a>
 &lt;a href="https://digitalhealth.london/cloud-big-data-ai-lead-nhs-digital-transformation/" target="_blank" rel="noopener">[2]&lt;/a>
 &lt;a href="https://www.ibm.com/blogs/cloud-computing/2018/11/05/guiding-framework-digital-transformation-garage/" target="_blank" rel="noopener">[3]&lt;/a>.&lt;/p>
-&lt;p>Among the benefits of using Cloud instead of On-premises
-we can list:&lt;/p>
-&lt;p>An interesting comparison can be read at
-&lt;a href="https://databricks.com/blog/2017/05/31/top-5-reasons-for-choosing-s3-over-hdfs.html" target="_blank" rel="noopener">Databricks blog&lt;/a>
+&lt;p>An interesting comparison between the benefits of using Cloud Computing in the
+context of Big Data instead of On-premises&amp;rsquo; servers can be read at
+&lt;a href="https://databricks.com/blog/2017/05/31/top-5-reasons-for-choosing-s3-over-hdfs.html" target="_blank" rel="noopener">Databricks
+blog&lt;/a>,
 which is the company
 &lt;a href="https://www.washingtonpost.com/news/the-switch/wp/2016/06/09/this-is-where-the-real-action-in-artificial-intelligence-takes-place/" target="_blank" rel="noopener">founded by the creators of Apache Spark&lt;/a>.&lt;/p>
 &lt;p>As we see a widespread adoption of Cloud Computing (even by companies
@@ -67,10 +67,10 @@ Hadoop&lt;/a> since the Data Teams (BI/Data
 Science/Analytics) increasingly choose to use tools like
 &lt;a href="https://cloud.google.com/bigquery/" target="_blank" rel="noopener">Google
 BigQuery&lt;/a> or
-&lt;a href="https://aws.amazon.com/redshift/" target="_blank" rel="noopener">AWS Redshift&lt;/a>,
-it doesn&amp;rsquo;t make sense to climb a Hadoop only to use
-&lt;a href="https://hortonworks.com/apache/yarn/" target="_blank" rel="noopener">YARN&lt;/a>
-to manage the resources.&lt;/p>
+&lt;a href="https://aws.amazon.com/redshift/" target="_blank" rel="noopener">AWS Redshift&lt;/a>.
+Therefore, it doesn&amp;rsquo;t make sense to spin-up a Hadoop with the only intention to
+use
+&lt;a href="https://hortonworks.com/apache/yarn/" target="_blank" rel="noopener">YARN&lt;/a> as the resources manager.&lt;/p>
 &lt;p>An alternative is the use of Hadoop cluster providers such as
 &lt;a href="https://cloud.google.com/dataproc" target="_blank" rel="noopener">Google
 DataProc&lt;/a> or
@@ -78,8 +78,8 @@ DataProc&lt;/a> or
 for the creation of ephemeral clusters. Just to name a few options.&lt;/p>
 &lt;p>To better understand the design of Spark Operator, the doc from
 &lt;a href="https://github.com/GoogleCloudPlatform/spark-on-k8s-operatoR/blob/master/docs/design.md#the-crd-controller" target="_blank" rel="noopener">GCP on GitHub&lt;/a>
-as a no-brainer.&lt;/p>
-&lt;h1 id="lets-get-our-hands-on">Let&amp;rsquo;s get our hands-on!&lt;/h1>
+is a no-brainer.&lt;/p>
+&lt;h1 id="lets-get-hands-on">Let&amp;rsquo;s get hands-on!&lt;/h1>
 &lt;h2 id="warming-up-the-engine">Warming up the engine&lt;/h2>
 &lt;p>Now that the word has been spread, let&amp;rsquo;s get our hands on it to show
 the engine running. For that, let&amp;rsquo;s use:&lt;/p>
@@ -109,12 +109,12 @@ which will took &lt;em>some hours&lt;/em> to finish, or&lt;/li>
 &lt;/ul>
 &lt;p>Once the necessary tools are installed, it&amp;rsquo;s necessary to
 include Apache Spark path in &lt;code>PATH&lt;/code> environment variable, to ease the
-invokation of Apache Spark executables. Simply run:&lt;/p>
+invocation of Apache Spark executables. Simply run:&lt;/p>
 &lt;pre>&lt;code class="language-bash">export PATH=${PATH}:/path/to/apache-spark-X.Y.Z/bin
 &lt;/code>&lt;/pre>
 &lt;h2 id="creating-the-minikube-cluster">Creating the Minikube &amp;ldquo;cluster&amp;rdquo;&lt;/h2>
 &lt;p>At last, to have a Kubernetes &amp;ldquo;cluster&amp;rdquo; we will start a &lt;code>minikube&lt;/code>
-with the intention of running a example from
+with the intention of running an example from
 &lt;a href="https://github.com/apache/spark/blob/master/examples/src/main/scala/org/apache/spark/examples/SparkPi.scala" target="_blank" rel="noopener">Spark
 repository&lt;/a>
 called &lt;code>SparkPi&lt;/code> just as a demonstration.&lt;/p>
@@ -122,10 +122,9 @@ called &lt;code>SparkPi&lt;/code> just as a demonstration.&lt;/p>
 --memory=4g
 &lt;/code>&lt;/pre>
 &lt;h2 id="building-the-docker-image">Building the Docker image&lt;/h2>
-&lt;p>Let&amp;rsquo;s use the Minikube Docker daemon to not depend on an external
-registry (and only generate Docker image layers on the VM,
-facilitating a garbage disposal later). Minikube has a wrapper that
-makes our life easier:&lt;/p>
+&lt;p>Let&amp;rsquo;s use the Minikube Docker daemon to not depend on an external registry (and
+only generate Docker image layers on the VM, facilitating garbage disposal
+later). Minikube has a wrapper that makes our life easier:&lt;/p>
 &lt;pre>&lt;code class="language-bash">eval $(minikube docker-env)
 &lt;/code>&lt;/pre>
 &lt;p>After having the daemon environment variables configured, we need a
@@ -141,7 +140,7 @@ configured, just run:&lt;/p>
 that would be used for a Hadoop Spark cluster
 &lt;a href="https://spark.apache.org/docs/latest/submitting-applications.html" target="_blank" rel="noopener">spark-submit&lt;/a>.&lt;/p>
 &lt;p>However, Spark Operator supports defining jobs in the &amp;ldquo;Kubernetes
-language&amp;rdquo; using
+dialect&amp;rdquo; using
 &lt;a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/" target="_blank" rel="noopener">CRD&lt;/a>,
 &lt;a href="https://github.com/GoogleCloudPlatform/spark-on-k8s-operator/tree/master/examples" target="_blank" rel="noopener">here are some examples&lt;/a> - for later.&lt;/p>
 &lt;h1 id="fire-in-the-hole">Fire in the hole!&lt;/h1>
@@ -245,4 +244,55 @@ environment (unless you want to keep playing with it):&lt;/p>
 &lt;h2 id="last-words">Last words&lt;/h2>
 &lt;p>I hope your curiosity got &lt;em>sparked&lt;/em> and some ideas for further
 development have raised for your Big Data workloads. If you have any
-doubt or suggestion, don&amp;rsquo;t hesitate to share on the comment section.&lt;/p></description></item></channel></rss>
+doubt or suggestion, don&amp;rsquo;t hesitate to share on the comment section.&lt;/p></description></item><item><title>ReclameAQUI Data Lake</title><link>https://macunha.me/en/project/2019/reclameaqui-data-lake/</link><pubDate>Sun, 21 Jul 2019 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2019/reclameaqui-data-lake/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+&lt;h2 id="summary">Summary&lt;/h2>
+&lt;p>ReclameAQUI (Portuguese for &amp;ldquo;complain here&amp;rdquo;) is an interesting and unique
+business. They&amp;rsquo;re a content aggregator for customers&amp;rsquo; experience sharing
+(especially bad experiences) about shopping (online and offline). However, it
+goes further than a mere &amp;ldquo;complaints website&amp;rdquo; offering an interface for
+companies to answers complaints, helping customers with their issues.&lt;/p>
+&lt;p>The service is simply the biggest in this regard (worldwide) receiving 600K
+unique visitors each day, searching for a company&amp;rsquo;s reputation before closing a
+deal/purchase.&lt;/p>
+&lt;h2 id="problem">Problem&lt;/h2>
+&lt;p>Even though they are already advanced in the digital approach to business,
+having most services hosted on Cloud computing and analytical culture, their
+data lake needed some upgrades. The most relevant motivator of this project was
+the sky-high bills from GCP especially related to BigQuery data consumption.&lt;/p>
+&lt;p>Apart from the cost-reduction tasks and data ingestion process optimization, we
+took the opportunity to implement data cryptograph at-rest, governance, and
+obfuscation during query executions against the data lake. Making data
+accessible by everyone in the company, controlling identity access and
+management through LDAP (auditing each access, to be fully compliant with
+GDPR), we could offer a self-service data lake so different business actors
+could satisfy their needs &amp;ldquo;drinking&amp;rdquo; from the lake.&lt;/p>
+&lt;h1 id="solution">Solution&lt;/h1>
+&lt;h2 id="tech-implementation">Tech implementation&lt;/h2>
+&lt;p>Key objectives were cost-optimization of the existing Data Lake, improvement
+(and extension) of existing data ingestion pipelines, and security enhancements.&lt;/p>
+&lt;p>Starting from Data Lake&amp;rsquo;s cost optimization, we redesigned the data ingestion,
+using a &amp;ldquo;landing&amp;rdquo; area for raw data, making data transformations later to suit
+the desired data models. Saving the results in other Data Lake layers to achieve
+greater performance in queries.&lt;/p>
+&lt;p>We shifted away from the Streaming inserts in BigQuery by adding a step to load
+data at the end of the ingestion pipeline. Apache NiFi was the main software
+responsible for orchestrating and executing the pipeline, covering also the
+improvements in data ingestion through processes re-engineering.&lt;/p>
+&lt;p>Auditing in the Data Lake was managed through Apache Ranger. In order to have
+it fully supported we implemented a JDBC driver using a component from Apache
+Calcite called Avatica. Authentication for Apache Ranger went through a custom
+plugin (also developed during the project) for LDAP consuming user info from
+Google Cloud Identity, reflecting the existing organization&amp;rsquo;s users and groups
+from Google Suite.&lt;/p>
+&lt;p>To make the game more interesting, we containerized the workflow and heavily
+used Kubernetes (GKE) to manage these components. Most of the Apache projects
+didn&amp;rsquo;t have Helm Charts at the time and we developed and made some
+of them open-source.&lt;/p>
+&lt;h2 id="impact-and-results">Impact and results&lt;/h2>
+&lt;p>During project time we could measure an estimative of roughly 56% in Data Lake
+cost-optimization through reengineering of processes and resources, especially
+the removal of streaming inserts to BigQuery.&lt;/p>
+&lt;p>We made relevant progress in security and governance during the project with the
+introduction of Apache Ranger and Data Lake auditing for access and usage,
+providing advanced security capabilities to ReclameAQUI, which anticipated itself
+towards GDPR and data privacy concerns.&lt;/p></description></item></channel></rss>
