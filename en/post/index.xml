@@ -53,10 +53,10 @@ include Big Data, Artificial Intelligence and Cloud Computing
 &lt;a href="https://www.zdnet.com/article/how-to-use-cloud-computing-and-big-data-to-support-digital-transformation/" target="_blank" rel="noopener">[1]&lt;/a>
 &lt;a href="https://digitalhealth.london/cloud-big-data-ai-lead-nhs-digital-transformation/" target="_blank" rel="noopener">[2]&lt;/a>
 &lt;a href="https://www.ibm.com/blogs/cloud-computing/2018/11/05/guiding-framework-digital-transformation-garage/" target="_blank" rel="noopener">[3]&lt;/a>.&lt;/p>
-&lt;p>Among the benefits of using Cloud instead of On-premises
-we can list:&lt;/p>
-&lt;p>An interesting comparison can be read at
-&lt;a href="https://databricks.com/blog/2017/05/31/top-5-reasons-for-choosing-s3-over-hdfs.html" target="_blank" rel="noopener">Databricks blog&lt;/a>
+&lt;p>An interesting comparison between the benefits of using Cloud Computing in the
+context of Big Data instead of On-premises&amp;rsquo; servers can be read at
+&lt;a href="https://databricks.com/blog/2017/05/31/top-5-reasons-for-choosing-s3-over-hdfs.html" target="_blank" rel="noopener">Databricks
+blog&lt;/a>,
 which is the company
 &lt;a href="https://www.washingtonpost.com/news/the-switch/wp/2016/06/09/this-is-where-the-real-action-in-artificial-intelligence-takes-place/" target="_blank" rel="noopener">founded by the creators of Apache Spark&lt;/a>.&lt;/p>
 &lt;p>As we see a widespread adoption of Cloud Computing (even by companies
@@ -67,10 +67,10 @@ Hadoop&lt;/a> since the Data Teams (BI/Data
 Science/Analytics) increasingly choose to use tools like
 &lt;a href="https://cloud.google.com/bigquery/" target="_blank" rel="noopener">Google
 BigQuery&lt;/a> or
-&lt;a href="https://aws.amazon.com/redshift/" target="_blank" rel="noopener">AWS Redshift&lt;/a>,
-it doesn&amp;rsquo;t make sense to climb a Hadoop only to use
-&lt;a href="https://hortonworks.com/apache/yarn/" target="_blank" rel="noopener">YARN&lt;/a>
-to manage the resources.&lt;/p>
+&lt;a href="https://aws.amazon.com/redshift/" target="_blank" rel="noopener">AWS Redshift&lt;/a>.
+Therefore, it doesn&amp;rsquo;t make sense to spin-up a Hadoop with the only intention to
+use
+&lt;a href="https://hortonworks.com/apache/yarn/" target="_blank" rel="noopener">YARN&lt;/a> as the resources manager.&lt;/p>
 &lt;p>An alternative is the use of Hadoop cluster providers such as
 &lt;a href="https://cloud.google.com/dataproc" target="_blank" rel="noopener">Google
 DataProc&lt;/a> or
@@ -78,8 +78,8 @@ DataProc&lt;/a> or
 for the creation of ephemeral clusters. Just to name a few options.&lt;/p>
 &lt;p>To better understand the design of Spark Operator, the doc from
 &lt;a href="https://github.com/GoogleCloudPlatform/spark-on-k8s-operatoR/blob/master/docs/design.md#the-crd-controller" target="_blank" rel="noopener">GCP on GitHub&lt;/a>
-as a no-brainer.&lt;/p>
-&lt;h1 id="lets-get-our-hands-on">Let&amp;rsquo;s get our hands-on!&lt;/h1>
+is a no-brainer.&lt;/p>
+&lt;h1 id="lets-get-hands-on">Let&amp;rsquo;s get hands-on!&lt;/h1>
 &lt;h2 id="warming-up-the-engine">Warming up the engine&lt;/h2>
 &lt;p>Now that the word has been spread, let&amp;rsquo;s get our hands on it to show
 the engine running. For that, let&amp;rsquo;s use:&lt;/p>
@@ -109,12 +109,12 @@ which will took &lt;em>some hours&lt;/em> to finish, or&lt;/li>
 &lt;/ul>
 &lt;p>Once the necessary tools are installed, it&amp;rsquo;s necessary to
 include Apache Spark path in &lt;code>PATH&lt;/code> environment variable, to ease the
-invokation of Apache Spark executables. Simply run:&lt;/p>
+invocation of Apache Spark executables. Simply run:&lt;/p>
 &lt;pre>&lt;code class="language-bash">export PATH=${PATH}:/path/to/apache-spark-X.Y.Z/bin
 &lt;/code>&lt;/pre>
 &lt;h2 id="creating-the-minikube-cluster">Creating the Minikube &amp;ldquo;cluster&amp;rdquo;&lt;/h2>
 &lt;p>At last, to have a Kubernetes &amp;ldquo;cluster&amp;rdquo; we will start a &lt;code>minikube&lt;/code>
-with the intention of running a example from
+with the intention of running an example from
 &lt;a href="https://github.com/apache/spark/blob/master/examples/src/main/scala/org/apache/spark/examples/SparkPi.scala" target="_blank" rel="noopener">Spark
 repository&lt;/a>
 called &lt;code>SparkPi&lt;/code> just as a demonstration.&lt;/p>
@@ -122,10 +122,9 @@ called &lt;code>SparkPi&lt;/code> just as a demonstration.&lt;/p>
 --memory=4g
 &lt;/code>&lt;/pre>
 &lt;h2 id="building-the-docker-image">Building the Docker image&lt;/h2>
-&lt;p>Let&amp;rsquo;s use the Minikube Docker daemon to not depend on an external
-registry (and only generate Docker image layers on the VM,
-facilitating a garbage disposal later). Minikube has a wrapper that
-makes our life easier:&lt;/p>
+&lt;p>Let&amp;rsquo;s use the Minikube Docker daemon to not depend on an external registry (and
+only generate Docker image layers on the VM, facilitating garbage disposal
+later). Minikube has a wrapper that makes our life easier:&lt;/p>
 &lt;pre>&lt;code class="language-bash">eval $(minikube docker-env)
 &lt;/code>&lt;/pre>
 &lt;p>After having the daemon environment variables configured, we need a
@@ -141,7 +140,7 @@ configured, just run:&lt;/p>
 that would be used for a Hadoop Spark cluster
 &lt;a href="https://spark.apache.org/docs/latest/submitting-applications.html" target="_blank" rel="noopener">spark-submit&lt;/a>.&lt;/p>
 &lt;p>However, Spark Operator supports defining jobs in the &amp;ldquo;Kubernetes
-language&amp;rdquo; using
+dialect&amp;rdquo; using
 &lt;a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/" target="_blank" rel="noopener">CRD&lt;/a>,
 &lt;a href="https://github.com/GoogleCloudPlatform/spark-on-k8s-operator/tree/master/examples" target="_blank" rel="noopener">here are some examples&lt;/a> - for later.&lt;/p>
 &lt;h1 id="fire-in-the-hole">Fire in the hole!&lt;/h1>

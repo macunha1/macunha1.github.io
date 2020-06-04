@@ -57,9 +57,9 @@ que incluam Big Data, Inteligência Artificial e Cloud Computing
 &lt;a href="https://www.zdnet.com/article/how-to-use-cloud-computing-and-big-data-to-support-digital-transformation/" target="_blank" rel="noopener">[1]&lt;/a>
 &lt;a href="https://digitalhealth.london/cloud-big-data-ai-lead-nhs-digital-transformation/" target="_blank" rel="noopener">[2]&lt;/a>
 &lt;a href="https://www.ibm.com/blogs/cloud-computing/2018/11/05/guiding-framework-digital-transformation-garage/" target="_blank" rel="noopener">[3]&lt;/a>.&lt;/p>
-&lt;p>Para compreender os benefícios de utilizar Cloud ao invés de On-premises
-vale a pena ler o artigo
-&lt;a href="https://databricks.com/blog/2017/05/31/top-5-reasons-for-choosing-s3-over-hdfs.html" target="_blank" rel="noopener">da Databricks&lt;/a>
+&lt;p>Para compreender os benefícios de utilizar Cloud ao invés de On-premises no
+contexto de Big Data vale a pena ler o artigo
+&lt;a href="https://databricks.com/blog/2017/05/31/top-5-reasons-for-choosing-s3-over-hdfs.html" target="_blank" rel="noopener">da Databricks&lt;/a>,
 que é a empresa
 &lt;a href="https://www.washingtonpost.com/news/the-switch/wp/2016/06/09/this-is-where-the-real-action-in-artificial-intelligence-takes-place/" target="_blank" rel="noopener">fundada pelos criadores do Apache
 Spark&lt;/a>.&lt;/p>
@@ -72,10 +72,10 @@ já que os times de Dados (BI/Data Science/Analytics) optam cada vez
 mais por utilizar ferramentas como
 &lt;a href="https://cloud.google.com/bigquery/" target="_blank" rel="noopener">Google BigQuery&lt;/a>
 ou
-&lt;a href="https://aws.amazon.com/redshift/" target="_blank" rel="noopener">AWS Redshift&lt;/a>, não faz sentido
+&lt;a href="https://aws.amazon.com/redshift/" target="_blank" rel="noopener">AWS Redshift&lt;/a>. Portanto, não faz sentido
 subir um Hadoop apenas para utilizar o
 &lt;a href="https://hortonworks.com/apache/yarn/" target="_blank" rel="noopener">YARN&lt;/a>
-para gerenciar os recursos.&lt;/p>
+como gerenciador os recursos.&lt;/p>
 &lt;p>Uma alternativa é a utilização de provisionadores de clusters Hadoop
 como o
 &lt;a href="https://cloud.google.com/dataproc" target="_blank" rel="noopener">Google DataProc&lt;/a> ou o
@@ -146,7 +146,7 @@ corretamente, basta executar:&lt;/p>
 &lt;p>Vamos pegar a via expressa para executar o SparkPi, usando o mesmo
 comando que seria utilizado para um cluster Spark
 &lt;a href="https://spark.apache.org/docs/latest/submitting-applications.html" target="_blank" rel="noopener">spark-submit&lt;/a>.&lt;/p>
-&lt;p>Porém, o Spark Operator dá suporte a definição de jobs no &amp;ldquo;idioma do
+&lt;p>Porém, o Spark Operator dá suporte a definição de jobs no &amp;ldquo;dialeto do
 Kubernetes&amp;rdquo; usando
 &lt;a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/" target="_blank" rel="noopener">CRD&lt;/a>,
 &lt;a href="https://github.com/GoogleCloudPlatform/spark-on-k8s-operator/tree/master/examples" target="_blank" rel="noopener">aqui tem alguns exemplos&lt;/a> - para depois.&lt;/p>

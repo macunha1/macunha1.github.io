@@ -57,9 +57,9 @@ que incluam Big Data, Inteligência Artificial e Cloud Computing
 &lt;a href="https://www.zdnet.com/article/how-to-use-cloud-computing-and-big-data-to-support-digital-transformation/" target="_blank" rel="noopener">[1]&lt;/a>
 &lt;a href="https://digitalhealth.london/cloud-big-data-ai-lead-nhs-digital-transformation/" target="_blank" rel="noopener">[2]&lt;/a>
 &lt;a href="https://www.ibm.com/blogs/cloud-computing/2018/11/05/guiding-framework-digital-transformation-garage/" target="_blank" rel="noopener">[3]&lt;/a>.&lt;/p>
-&lt;p>Para compreender os benefícios de utilizar Cloud ao invés de On-premises
-vale a pena ler o artigo
-&lt;a href="https://databricks.com/blog/2017/05/31/top-5-reasons-for-choosing-s3-over-hdfs.html" target="_blank" rel="noopener">da Databricks&lt;/a>
+&lt;p>Para compreender os benefícios de utilizar Cloud ao invés de On-premises no
+contexto de Big Data vale a pena ler o artigo
+&lt;a href="https://databricks.com/blog/2017/05/31/top-5-reasons-for-choosing-s3-over-hdfs.html" target="_blank" rel="noopener">da Databricks&lt;/a>,
 que é a empresa
 &lt;a href="https://www.washingtonpost.com/news/the-switch/wp/2016/06/09/this-is-where-the-real-action-in-artificial-intelligence-takes-place/" target="_blank" rel="noopener">fundada pelos criadores do Apache
 Spark&lt;/a>.&lt;/p>
@@ -72,10 +72,10 @@ já que os times de Dados (BI/Data Science/Analytics) optam cada vez
 mais por utilizar ferramentas como
 &lt;a href="https://cloud.google.com/bigquery/" target="_blank" rel="noopener">Google BigQuery&lt;/a>
 ou
-&lt;a href="https://aws.amazon.com/redshift/" target="_blank" rel="noopener">AWS Redshift&lt;/a>, não faz sentido
+&lt;a href="https://aws.amazon.com/redshift/" target="_blank" rel="noopener">AWS Redshift&lt;/a>. Portanto, não faz sentido
 subir um Hadoop apenas para utilizar o
 &lt;a href="https://hortonworks.com/apache/yarn/" target="_blank" rel="noopener">YARN&lt;/a>
-para gerenciar os recursos.&lt;/p>
+como gerenciador os recursos.&lt;/p>
 &lt;p>Uma alternativa é a utilização de provisionadores de clusters Hadoop
 como o
 &lt;a href="https://cloud.google.com/dataproc" target="_blank" rel="noopener">Google DataProc&lt;/a> ou o
@@ -146,7 +146,7 @@ corretamente, basta executar:&lt;/p>
 &lt;p>Vamos pegar a via expressa para executar o SparkPi, usando o mesmo
 comando que seria utilizado para um cluster Spark
 &lt;a href="https://spark.apache.org/docs/latest/submitting-applications.html" target="_blank" rel="noopener">spark-submit&lt;/a>.&lt;/p>
-&lt;p>Porém, o Spark Operator dá suporte a definição de jobs no &amp;ldquo;idioma do
+&lt;p>Porém, o Spark Operator dá suporte a definição de jobs no &amp;ldquo;dialeto do
 Kubernetes&amp;rdquo; usando
 &lt;a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/" target="_blank" rel="noopener">CRD&lt;/a>,
 &lt;a href="https://github.com/GoogleCloudPlatform/spark-on-k8s-operator/tree/master/examples" target="_blank" rel="noopener">aqui tem alguns exemplos&lt;/a> - para depois.&lt;/p>
@@ -251,112 +251,4 @@ ambiente (a menos que você queira continuar brincando com ele):&lt;/p>
 &lt;p>Espero ter dispertado bastante curiosidade e algumas ideias para
 ir além no desenvolvimento dos seus workloads de Big Data.
 Se tiver alguma dúvida ou sugestão, não deixe de postar na seção de
-comentários.&lt;/p></description></item><item><title>Dotz Data Labs</title><link>https://macunha.me/pt/project/2017/dotz-data-labs/</link><pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2017/dotz-data-labs/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
-&lt;h2 id="sumário">Sumário&lt;/h2>
-&lt;p>Para poder inovar e se manter em um mercado em constante mudança e
-evolução, Dotz passou por um processo de transformação digital e teve
-a ajuda de alguns consultores neste percurso.&lt;/p>
-&lt;p>Entre as iniciativas para se aproximar de um modelo digital, surgiu a
-implementação de um Data Lake, com o requisito de ser
-&lt;a href="https://en.wikipedia.org/wiki/Serverless_computing" target="_blank" rel="noopener">serverless&lt;/a> e
-cloud-native, auxiliando no processo de tomada de decisão e encurtando
-o time-to-market durante o lançamento de novos produtos.&lt;/p>
-&lt;h2 id="problemática">Problemática&lt;/h2>
-&lt;p>A Dotz é uma das maiores empresas no campo de programas de fidelidade no
-Brasil, e enfrentaria um grande número de problemas com desconexão de
-dados dificultando a análise do comportamento de seus usuários. Como
-eles receberam dados de inúmeros supermercados e lojas, é difícil
-agrupar os produtos, já que o nome é diferente dependendo da fonte. Para
-ajudar nesta análise, eles decidiram construir um Data Lake.&lt;/p>
-&lt;h1 id="solução">Solução&lt;/h1>
-&lt;h2 id="implementação-técnica">Implementação Técnica&lt;/h2>
-&lt;p>Construímos e implantamos uma arquitetura gerenciada da Big Data usando
-a Plataforma Cloud do Google (GCP) para suportar esta estratégia e
-permitir uma visão de 360 graus dos clientes (usuários com pontos a.k.a.
-Dotz) e parceiros que oferecem o programa de fidelidade.&lt;/p>
-&lt;p>O design foi focado em serviços gerênciados pela nuvem e serverless
-oferecida pelo Google, servindo as principais competências de um Data
-Lake como o armazenamento escalável usando o Google Cloud Storage, e o
-Google BigQuery. Com parte do processo rodando containerizado em
-Kubernetes, responsável pela limpeza de dados e gerenciar o ETL.&lt;/p>
-&lt;p>Transmitimos dados com o Apache Beam rodando sob o Google DataFlow,
-processamento em massa paralelo com Apache Spark jobs executados no
-Google DataProc, análise exploratória com o Google DataLab, Machine
-Learning Analysis com o Google ML e visualização de dados no Google Data
-Studio.&lt;/p>
-&lt;p>Os dados são transportados por meio de um modelo data-driven, onde os
-dados foram planejados para streaming, including o ETL (que funciona em
-um micro-batch, para permitir a exploração em near-real-time). Estes dados
-passam pelo pipeline de dados utilizando o serviço de mensageria do Google
-Pub/Sub, em que cada mensagem é serializada utilizando o formato Avro,
-reduzindo a carga e permitindo que o transporte seja econômico, rápido e
-confiável.&lt;/p>
-&lt;h2 id="impacto-e-resultados">Impacto e resultados&lt;/h2>
-&lt;p>Tudo isso permitiu à Dotz ter uma melhor estrutura em sua plataforma
-analítica, previamente gerenciada em uma grande instância do MS SQL
-Server, sendo deslocada para um Data Lake com camadas que permitem a
-categorização, governança, qualidade e segurança dos dados.&lt;/p>
-&lt;p>Suporte a processos analíticos de dados dos usuários, exploração ágil
-e monetização de seus conhecimentos sobre o comportamento dos clientes.&lt;/p></description></item><item><title>Easynvest Data Platform</title><link>https://macunha.me/pt/project/2017/easynvest-data-platform/</link><pubDate>Mon, 03 Jul 2017 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2017/easynvest-data-platform/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
-&lt;h2 id="sumário">Sumário&lt;/h2>
-&lt;p>Dentro do planejamento anual da Easynvest, um investimento na expansão da
-equipe de data &amp;amp; analytics teve como objetivo encurtar a tomada de decisão
-e entregar maior qualidade aos clientes por meio de um processo operacional
-com baixo custo.&lt;/p>
-&lt;p>Dentre os principais objetivos deste projeto, tivemos a automatização de
-análise de crédito na aprovação do cadastro de clientes utilizando Machine
-Learning, um processo que até então era longo e manual, sendo realizado pelo
-back office.&lt;/p>
-&lt;p>Seguido de uma melhor oferta de produtos ao cliente, realizando a
-categorização de acordo com o perfil de cada cliente, permitindo sugestões
-mais atraentes de produtos, estando alinhadas com as preferências pessoais,
-assim como de acordo com o perfil de cada investidor (conservador, moderado
-ou agressivo).&lt;/p>
-&lt;p>Por último, mas não menos importante, a detecção inteligente de lavagem de
-dinheiro gerando relatórios para as autoridades responsáveis.&lt;/p>
-&lt;h2 id="problemática">Problemática&lt;/h2>
-&lt;p>Entretanto, houve limitações nas ferramentas de dados, principalmente devido ao
-fato de seram softwares proprietários (com licenças limitadas) e projetados para
-uso em data centers. Além disso, o banco de dados analítico foi modelado
-para modelos tradicionais de Business Intelligence (OLAP, etc), tornando o
-processo de tomada de decisão pesado, devido à quantidade exigente de interações
-durante o ETL.&lt;/p>
-&lt;p>Anteriormente para um cliente ser aprovado, o processo levava de 10 a 15 dias.
-Para que todas as informações necessárias fossem coletadas, tendo uma perspectiva
-completa do perfil, includindo análises de crédito. Após coletar as informações o
-back office gerava uma pontuação na análise interna de crédito.&lt;/p>
-&lt;p>Sendo que, na maioria dos casos, o cliente não era notificado sobre atualizações
-referentes ao processo e não recebia feedback ao fim (caso recusado), a menos que
-fosse explicitamente solicitado (contatando o suporte via chat ou e-mail, por
-exemplo) o que tornava o processo demorado e custoso. Sem contar as inúmeras
-quantidades de clientes perdidos para a concorrência durante esta longa espera.&lt;/p>
-&lt;h1 id="solução">Solução&lt;/h1>
-&lt;h2 id="implementação-técnica">Implementação Técnica&lt;/h2>
-&lt;p>Para tornar isso possível, construímos uma implementação híbrida em nuvem usando AWS
-componentes baseados em nuvem (principalmente AWS S3, EMR e ECS), para extender a
-capacidade do data center, implementando um ecossistema Hadoop cloud-first
-(substituindo os componentes de software proprietário por open-source equivalentes).
-Dando à Easynvest a possibilidade de crescer seu Data Lake exponencialmente.&lt;/p>
-&lt;p>O design do Data Lake foi robusto, visando lidar com a execução pesada de processos
-analíticos através de modelos de Machine Learning, com suporte para data quality,
-governança de metadados, segurança da informação e self-service de dados (os
-proprietários dos dados poderiam compartilhar seus dados com consumidores de outras
-áreas da empresa, permitindo o auto-serviço de seus dados analíticos).&lt;/p>
-&lt;p>Um Chatbot também foi utilizado para reduzir a carga operacional no ambiente, sendo
-responsável pela manutenção e atualização dos componentes de infra-estrutura.
-Desde o acionamento de deployments até a geração de chaves de criptografia on-demand
-para segurança e governança da plataforma de dados. Implementado com Errbot em Python
-interagindo com Slack.&lt;/p>
-&lt;p>Indo além, implementamos as melhores práticas de DevOps, tendo Jenkins como
-ferramenta para CI/CD dos componentes desenvolvidos junto com Ansible para
-Gerenciamento da Configuração.&lt;/p>
-&lt;h2 id="impacto-e-resultados">Impacto e resultados&lt;/h2>
-&lt;p>Graças à utilização de camadas no Data Lake e a implementação de pipelines de dados,
-conseguimos reduzir o tempo de ingestão dos dados em 78%, incluindo metadados e
-catálogo de dados, além de automatizar grande parte do trabalho que antes era feito
-manualmente durante a ingestão.&lt;/p>
-&lt;p>Assim, trazendo resultados positivos, principalmente durante a aprovação de novos
-registros de usuários, de ~10 dias para aproximadamente 1 dia. Tornando também
-a plataforma de dados mais democrática, fornecendo informações relevantes que
-facilita a análise de outras áreas da companhia como risco (análise de crédito) e
-suporte (atendimento), sem ter que abrir mão da segurança.&lt;/p></description></item></channel></rss>
+comentários.&lt;/p></description></item></channel></rss>

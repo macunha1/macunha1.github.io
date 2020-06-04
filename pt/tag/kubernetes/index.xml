@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>kubernetes | It's me, Macunha!</title><link>https://macunha.me/pt/tag/kubernetes/</link><atom:link href="https://macunha.me/pt/tag/kubernetes/index.xml" rel="self" type="application/rss+xml"/><description>kubernetes</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>pt-br</language><lastBuildDate>Sun, 21 Jul 2019 00:00:00 +0000</lastBuildDate><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>kubernetes</title><link>https://macunha.me/pt/tag/kubernetes/</link></image><item><title>ReclameAQUI Data Lake</title><link>https://macunha.me/pt/project/2019/reclameaqui-data-lake/</link><pubDate>Sun, 21 Jul 2019 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2019/reclameaqui-data-lake/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+&lt;h2 id="resumo">Resumo&lt;/h2>
+&lt;p>ReclameAQUI é um negócio interessante e único. É um agregador de conteúdo para
+troca de experiências dos clientes (especialmente más experiências) sobre
+compras (online e offline). No entanto, vai além de um simples &amp;ldquo;site de
+reclamações&amp;rdquo;, oferecendo uma interface para as empresas responderem às
+reclamações, ajudando os clientes com seus problemas.&lt;/p>
+&lt;p>O serviço é simplesmente o maior neste sentido (mundial) recebendo diariamente
+600K visitantes únicos, buscando a reputação de uma empresa antes de fechar um
+negócio/compra.&lt;/p>
+&lt;h2 id="problema">Problema&lt;/h2>
+&lt;p>Apesar de já estarem avançados na abordagem de business digital, tendo a
+maioria dos serviços hospedados em Cloud computing e cultura analítica, seu
+Data Lake precisava de alguns upgrades. O maior motivador deste projeto foram as
+contas altíssimas da GCP, especialmente relacionadas ao consumo de dados no
+BigQuery.&lt;/p>
+&lt;p>Além das tarefas de redução de custos e otimização do processo de ingestão de
+dados, aproveitamos a oportunidade para implementar criptografia de dados
+at-rest, governança e obfuscação durante as queries contra o data lake. Tornando
+os dados acessíveis por todos na empresa, controlando o acesso e gerenciamento
+de identidade através do LDAP (auditando cada acesso, para estar em total
+conformidade com a GDPR), pudemos oferecer um Data Lake self-service para que
+diferentes atores empresariais pudessem satisfazer suas necessidades &amp;ldquo;bebendo&amp;rdquo;
+do lake.&lt;/p>
+&lt;h1 id="solução">Solução&lt;/h1>
+&lt;h2 id="implementação-técnica">Implementação técnica&lt;/h2>
+&lt;p>Os principais objetivos foram otimização de custos do Data Lake existente,
+melhoria (e extensão) dos pipelines de ingestão de dados existentes, e
+aperfeiçoamentos na segurança.&lt;/p>
+&lt;p>Partindo pela otimização de custos do Data Lake, reimplantamos os pipelines de
+ingestão de dados, utilizando uma área de &amp;ldquo;landing&amp;rdquo; para dados brutos e
+posteriormente transformações eram realizadas para adequar os modelos de dados
+desejados. Salvando os resultados em outras camadas do Data Lake, para atingir
+maior performance nas queries.&lt;/p>
+&lt;p>Removemos as Streaming inserts no BigQuery adicionando um step para fazer load
+dos dados ao fim da ingestão. O Apache NiFi foi o principal software responsável
+pela orquestração e execução da ingestão de dados, abrangendo também as
+melhorias da ingestão de dados através da reengenharia dos processos.&lt;/p>
+&lt;p>A auditoria no Data Lake foi gerenciada através do Apache Ranger. Para ter
+suporte total, implementamos um driver JDBC usando um componente do Apache
+Calcite chamado Avatica. A autenticação para o Apache Ranger passou por um
+plugin personalizado (também desenvolvido durante o projeto) para LDAP
+consumindo informações de usuários do Google Cloud Identity, refletindo a
+organização de grupos e usuários existente do Google Suite.&lt;/p>
+&lt;p>Para tornar o jogo mais interessante, containerizamos o workflow e utilizamos
+bastante Kubernetes (GKE) para gerenciar estes componentes. A maioria dos
+componentes Apache não tinha Helm Charts na época e nós os desenvolvemos e
+tornamos alguns open-source.&lt;/p>
+&lt;h2 id="impacto-e-resultados">Impacto e resultados&lt;/h2>
+&lt;p>Durante o tempo do projeto pudemos medir uma estimativa de aproximadamente 56%
+de redução de custos do Data Lake através da otimização de recursos e
+reengenharia de processos, especialmente a remoção de Streaming inserts no
+BigQuery.&lt;/p>
+&lt;p>Obtivemos progresso relevante em termos de segurança e governança durante o
+projeto, com a introdução do Apache Ranger e auditoria de acesso e uso do Data
+Lake, fornecendo capacidades avançadas de segurança à ReclameAQUI, que se
+antecipou frente à LGPD e as preocupações em questão da privacidade dos dados.&lt;/p></description></item></channel></rss>

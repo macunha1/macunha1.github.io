@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>It's me, Macunha!</title><link>https://macunha.me/pt/</link><atom:link href="https://macunha.me/pt/index.xml" rel="self" type="application/rss+xml"/><description>It's me, Macunha!</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>pt-br</language><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>It's me, Macunha!</title><link>https://macunha.me/pt/</link></image><item><title>Quickstart: Apache Spark no Kubernetes</title><link>https://macunha.me/pt/post/2020/05/quickstart-apache-spark-no-kubernetes/</link><pubDate>Thu, 21 May 2020 23:00:57 +0200</pubDate><guid>https://macunha.me/pt/post/2020/05/quickstart-apache-spark-no-kubernetes/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>It's me, Macunha!</title><link>https://macunha.me/pt/</link><atom:link href="https://macunha.me/pt/index.xml" rel="self" type="application/rss+xml"/><description>It's me, Macunha!</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>pt-br</language><lastBuildDate>Thu, 21 May 2020 23:00:57 +0200</lastBuildDate><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>It's me, Macunha!</title><link>https://macunha.me/pt/</link></image><item><title>Quickstart: Apache Spark no Kubernetes</title><link>https://macunha.me/pt/post/2020/05/quickstart-apache-spark-no-kubernetes/</link><pubDate>Thu, 21 May 2020 23:00:57 +0200</pubDate><guid>https://macunha.me/pt/post/2020/05/quickstart-apache-spark-no-kubernetes/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
 &lt;h2 id="apache-spark-operator-para-kubernetes">Apache Spark Operator para Kubernetes&lt;/h2>
 &lt;p>Desde o seu lançamento em 2014 pela Google, o Kubernetes tem ganhado
 muita popularidade junto com o próprio Docker e desde 2016 passou a
@@ -57,9 +57,9 @@ que incluam Big Data, Inteligência Artificial e Cloud Computing
 &lt;a href="https://www.zdnet.com/article/how-to-use-cloud-computing-and-big-data-to-support-digital-transformation/" target="_blank" rel="noopener">[1]&lt;/a>
 &lt;a href="https://digitalhealth.london/cloud-big-data-ai-lead-nhs-digital-transformation/" target="_blank" rel="noopener">[2]&lt;/a>
 &lt;a href="https://www.ibm.com/blogs/cloud-computing/2018/11/05/guiding-framework-digital-transformation-garage/" target="_blank" rel="noopener">[3]&lt;/a>.&lt;/p>
-&lt;p>Para compreender os benefícios de utilizar Cloud ao invés de On-premises
-vale a pena ler o artigo
-&lt;a href="https://databricks.com/blog/2017/05/31/top-5-reasons-for-choosing-s3-over-hdfs.html" target="_blank" rel="noopener">da Databricks&lt;/a>
+&lt;p>Para compreender os benefícios de utilizar Cloud ao invés de On-premises no
+contexto de Big Data vale a pena ler o artigo
+&lt;a href="https://databricks.com/blog/2017/05/31/top-5-reasons-for-choosing-s3-over-hdfs.html" target="_blank" rel="noopener">da Databricks&lt;/a>,
 que é a empresa
 &lt;a href="https://www.washingtonpost.com/news/the-switch/wp/2016/06/09/this-is-where-the-real-action-in-artificial-intelligence-takes-place/" target="_blank" rel="noopener">fundada pelos criadores do Apache
 Spark&lt;/a>.&lt;/p>
@@ -72,10 +72,10 @@ já que os times de Dados (BI/Data Science/Analytics) optam cada vez
 mais por utilizar ferramentas como
 &lt;a href="https://cloud.google.com/bigquery/" target="_blank" rel="noopener">Google BigQuery&lt;/a>
 ou
-&lt;a href="https://aws.amazon.com/redshift/" target="_blank" rel="noopener">AWS Redshift&lt;/a>, não faz sentido
+&lt;a href="https://aws.amazon.com/redshift/" target="_blank" rel="noopener">AWS Redshift&lt;/a>. Portanto, não faz sentido
 subir um Hadoop apenas para utilizar o
 &lt;a href="https://hortonworks.com/apache/yarn/" target="_blank" rel="noopener">YARN&lt;/a>
-para gerenciar os recursos.&lt;/p>
+como gerenciador os recursos.&lt;/p>
 &lt;p>Uma alternativa é a utilização de provisionadores de clusters Hadoop
 como o
 &lt;a href="https://cloud.google.com/dataproc" target="_blank" rel="noopener">Google DataProc&lt;/a> ou o
@@ -146,7 +146,7 @@ corretamente, basta executar:&lt;/p>
 &lt;p>Vamos pegar a via expressa para executar o SparkPi, usando o mesmo
 comando que seria utilizado para um cluster Spark
 &lt;a href="https://spark.apache.org/docs/latest/submitting-applications.html" target="_blank" rel="noopener">spark-submit&lt;/a>.&lt;/p>
-&lt;p>Porém, o Spark Operator dá suporte a definição de jobs no &amp;ldquo;idioma do
+&lt;p>Porém, o Spark Operator dá suporte a definição de jobs no &amp;ldquo;dialeto do
 Kubernetes&amp;rdquo; usando
 &lt;a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/" target="_blank" rel="noopener">CRD&lt;/a>,
 &lt;a href="https://github.com/GoogleCloudPlatform/spark-on-k8s-operator/tree/master/examples" target="_blank" rel="noopener">aqui tem alguns exemplos&lt;/a> - para depois.&lt;/p>
@@ -251,7 +251,63 @@ ambiente (a menos que você queira continuar brincando com ele):&lt;/p>
 &lt;p>Espero ter dispertado bastante curiosidade e algumas ideias para
 ir além no desenvolvimento dos seus workloads de Big Data.
 Se tiver alguma dúvida ou sugestão, não deixe de postar na seção de
-comentários.&lt;/p></description></item><item><title>DevOps: Os benefícios da implementação</title><link>https://macunha.me/pt/post/2019/01/devops-benefits/</link><pubDate>Fri, 11 Jan 2019 23:00:00 +0000</pubDate><guid>https://macunha.me/pt/post/2019/01/devops-benefits/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+comentários.&lt;/p></description></item><item><title>ReclameAQUI Data Lake</title><link>https://macunha.me/pt/project/2019/reclameaqui-data-lake/</link><pubDate>Sun, 21 Jul 2019 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2019/reclameaqui-data-lake/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+&lt;h2 id="resumo">Resumo&lt;/h2>
+&lt;p>ReclameAQUI é um negócio interessante e único. É um agregador de conteúdo para
+troca de experiências dos clientes (especialmente más experiências) sobre
+compras (online e offline). No entanto, vai além de um simples &amp;ldquo;site de
+reclamações&amp;rdquo;, oferecendo uma interface para as empresas responderem às
+reclamações, ajudando os clientes com seus problemas.&lt;/p>
+&lt;p>O serviço é simplesmente o maior neste sentido (mundial) recebendo diariamente
+600K visitantes únicos, buscando a reputação de uma empresa antes de fechar um
+negócio/compra.&lt;/p>
+&lt;h2 id="problema">Problema&lt;/h2>
+&lt;p>Apesar de já estarem avançados na abordagem de business digital, tendo a
+maioria dos serviços hospedados em Cloud computing e cultura analítica, seu
+Data Lake precisava de alguns upgrades. O maior motivador deste projeto foram as
+contas altíssimas da GCP, especialmente relacionadas ao consumo de dados no
+BigQuery.&lt;/p>
+&lt;p>Além das tarefas de redução de custos e otimização do processo de ingestão de
+dados, aproveitamos a oportunidade para implementar criptografia de dados
+at-rest, governança e obfuscação durante as queries contra o data lake. Tornando
+os dados acessíveis por todos na empresa, controlando o acesso e gerenciamento
+de identidade através do LDAP (auditando cada acesso, para estar em total
+conformidade com a GDPR), pudemos oferecer um Data Lake self-service para que
+diferentes atores empresariais pudessem satisfazer suas necessidades &amp;ldquo;bebendo&amp;rdquo;
+do lake.&lt;/p>
+&lt;h1 id="solução">Solução&lt;/h1>
+&lt;h2 id="implementação-técnica">Implementação técnica&lt;/h2>
+&lt;p>Os principais objetivos foram otimização de custos do Data Lake existente,
+melhoria (e extensão) dos pipelines de ingestão de dados existentes, e
+aperfeiçoamentos na segurança.&lt;/p>
+&lt;p>Partindo pela otimização de custos do Data Lake, reimplantamos os pipelines de
+ingestão de dados, utilizando uma área de &amp;ldquo;landing&amp;rdquo; para dados brutos e
+posteriormente transformações eram realizadas para adequar os modelos de dados
+desejados. Salvando os resultados em outras camadas do Data Lake, para atingir
+maior performance nas queries.&lt;/p>
+&lt;p>Removemos as Streaming inserts no BigQuery adicionando um step para fazer load
+dos dados ao fim da ingestão. O Apache NiFi foi o principal software responsável
+pela orquestração e execução da ingestão de dados, abrangendo também as
+melhorias da ingestão de dados através da reengenharia dos processos.&lt;/p>
+&lt;p>A auditoria no Data Lake foi gerenciada através do Apache Ranger. Para ter
+suporte total, implementamos um driver JDBC usando um componente do Apache
+Calcite chamado Avatica. A autenticação para o Apache Ranger passou por um
+plugin personalizado (também desenvolvido durante o projeto) para LDAP
+consumindo informações de usuários do Google Cloud Identity, refletindo a
+organização de grupos e usuários existente do Google Suite.&lt;/p>
+&lt;p>Para tornar o jogo mais interessante, containerizamos o workflow e utilizamos
+bastante Kubernetes (GKE) para gerenciar estes componentes. A maioria dos
+componentes Apache não tinha Helm Charts na época e nós os desenvolvemos e
+tornamos alguns open-source.&lt;/p>
+&lt;h2 id="impacto-e-resultados">Impacto e resultados&lt;/h2>
+&lt;p>Durante o tempo do projeto pudemos medir uma estimativa de aproximadamente 56%
+de redução de custos do Data Lake através da otimização de recursos e
+reengenharia de processos, especialmente a remoção de Streaming inserts no
+BigQuery.&lt;/p>
+&lt;p>Obtivemos progresso relevante em termos de segurança e governança durante o
+projeto, com a introdução do Apache Ranger e auditoria de acesso e uso do Data
+Lake, fornecendo capacidades avançadas de segurança à ReclameAQUI, que se
+antecipou frente à LGPD e as preocupações em questão da privacidade dos dados.&lt;/p></description></item><item><title>DevOps: Os benefícios da implementação</title><link>https://macunha.me/pt/post/2019/01/devops-benefits/</link><pubDate>Fri, 11 Jan 2019 23:00:00 +0000</pubDate><guid>https://macunha.me/pt/post/2019/01/devops-benefits/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
 &lt;p>Principais benefícios que uma companhia geralmente espera e encontra na adoção da cultura:&lt;/p>
 &lt;h2 id="releases-mais-rápidos-e-baratos">Releases mais rápidos e baratos&lt;/h2>
 &lt;p>Como os releases serão frequentes, as entregas acabam sendo pequenas. Entregas pequenas trazem o benefício de aumentar a velocidade no ciclo de desenvolvimento (entregando sempre)&lt;/p>
@@ -428,7 +484,67 @@ comentários.&lt;/p></description></item><item><title>DevOps: Os benefícios da 
 &lt;h1 id="devops-devops-devops">DevOps, DevOps, DevOps&lt;/h1>
 &lt;p>Com a divulgação da palavra DevOps, existe muita gente falando sobre DevOps por aí. Existindo muita divergência no que é falado, e criando uma confusão grande sobre o tema. Acaba sendo muito comum se deparar com diferentes interpretações sobre &lt;strong>o que é DevOps&lt;/strong>. Existe muito eufemismo na área, e gourmetização em cima do LinkedIn, com muitos SysAdmins por aí se dizendo DevOps, pois aprenderam a codar shell script dentro do Python.&lt;/p>
 &lt;p>Tá afim de continuar lendo?
-&lt;a href="https://macunha.me/pt/post/2019/01/devops-benefits/">Dá uma olhada nos benefícios de implementar DevOps.&lt;/a>&lt;/p></description></item><item><title>Dotz Data Labs</title><link>https://macunha.me/pt/project/2017/dotz-data-labs/</link><pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2017/dotz-data-labs/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+&lt;a href="https://macunha.me/pt/post/2019/01/devops-benefits/">Dá uma olhada nos benefícios de implementar DevOps.&lt;/a>&lt;/p></description></item><item><title>Clipping Service News OCR</title><link>https://macunha.me/pt/project/2018/clipping-service-news-ocr/</link><pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2018/clipping-service-news-ocr/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+&lt;h2 id="sumário">Sumário&lt;/h2>
+&lt;p>Como proprietário do maior conjunto de dados de mídia do Brasil, o líder em
+monitoramento de mídia Clipping Service estava com problemas de escalabilidade,
+aproximando-se da capacidade máxima de seu data center e de seus &amp;ldquo;leitores&amp;rdquo;.&lt;/p>
+&lt;p>Clipping Service opera em grande escala, recebendo cerca de ~4,5K páginas de
+mídia por dia de cerca de 300 jornais, tanto na versão digital como na impressa.
+Anteriormente os funcionários chamados de &amp;ldquo;leitores&amp;rdquo; eram responsáveis pela
+leitura e clipping (adicionando destaque ao conteúdo alvo) para depois serem
+repassados para a equipe de &amp;ldquo;revisores&amp;rdquo;.&lt;/p>
+&lt;p>Como se o fardo de ler inúmeras páginas por dia não fosse suficiente, a operação
+dos leitores começa por volta das 4:30 da manhã quando a &amp;ldquo;primeira leitura&amp;rdquo;
+inicia (ou seja, a entrega dos impressos matinais).&lt;/p>
+&lt;h2 id="problema">Problema&lt;/h2>
+&lt;p>Por mais de 20 anos este conteúdo foi ingerido pelos chamados &amp;ldquo;leitores&amp;rdquo;. Mas,
+devido ao advento da internet e do boom da imprensa digital a partir do final
+dos anos 90, e atualmente de mídias social as empresas estão transferindo seus
+investimentos de clipping para o monitoramento de outras áreas. Exigindo
+portanto uma ação do Clipping Service para se manter competitiva no mercado.&lt;/p>
+&lt;p>Através da automação da leitura de notícias usando OCR, PLN e inteligência
+artificial para categorizar as mídias, o plano era alcançar um maior rendimento
+durante a ingestão, dando aos leitores mais tempo livre para revisar o conteúdo.
+Consequentemente, alcançar uma maior qualidade no conteúdo, já que nós como
+humanos não somos bons em fazer tarefas repetitivas, especialmente quando se
+trata de ler páginas intermináveis em busca de nomes e palavras.&lt;/p>
+&lt;h1 id="solução">Solução&lt;/h1>
+&lt;h2 id="implementação-técnica">Implementação técnica&lt;/h2>
+&lt;p>Após algum tempo de pesquisa e benchmarking das alternativas, decidimos usar
+Python como linguagem de implementação para lidar com textos, OCR e PLN (usando
+NLTK). Dada sua API estendida e bibliotecas para PLN e processamento de imagens.&lt;/p>
+&lt;p>Como fornecedor de nuvem escolhemos AWS devido a sua estabilidade e consistência
+em relação a outros fornecedores, a conclusão na época foi: AWS possui uma
+estimativa de preço 14,67% maior do que a GCP. Entretanto, a popularidade da AWS
+é maior do que a GCP, assim como é uma nuvem comprovada em termos de
+estabilidade, suporte e integridade. Fazendo uma escolha mais segura por um
+preço ligeiramente superior.&lt;/p>
+&lt;p>A stack foi: Python 3 usando Dramatiq como biblioteca de processamento de
+tarefas, executando OCR por meio do Tesseract, processando texto com NLTK e
+imagens com Pillow (wrapper do ImageMagick). Redis foi o mensage broker do
+Dramatiq, um banco relacional simples estava no Postgres armazenando métricas
+referentes à execução e tínhamos também um Elasticsearch armazenando o conteúdo
+processado.&lt;/p>
+&lt;p>As solicitações vindas do data center chegaram a um Gateway API, responsável por
+executar uma função Lambda, e entregar o resultado do conteúdo.&lt;/p>
+&lt;p>A melhor parte do design? Armazenávamos e servimos o conteúdo por meio do AWS
+S3. Cada peça foi desenhada com tolerância a falhas, e nós simplesmente
+desligávamos toda a infra-estrutura em nuvem depois da operação, para ligar
+apenas no dia seguinte.&lt;/p>
+&lt;p>Operando apenas das 4h às 14h, um projeto &amp;ldquo;serverless&amp;rdquo; e efêmero com beneficiado
+por uma redução de custos em núvem agressiva.&lt;/p>
+&lt;h2 id="impacto-e-resultados">Impacto e resultados&lt;/h2>
+&lt;p>A Clipping Service reduziu em ~78% o quadro de funcionários da equipe de
+leitura, oferecendo contratação interna para outras áreas da empresa e um plano
+de demissão voluntário com benefícios, tornando o processo o mais humano
+possível para os funcionários que preferissem sair.&lt;/p>
+&lt;p>Utilizando automação para tarefas de leitura, a Clipping Service pôde alcançar
+melhorias consideráveis durante o processo de ingestão de mídia (cerca de 20
+vezes mais rápido), oferecendo maior qualidade no serviço de clipping para seus
+clientes e viu a oportunidade de criar posteriormente um serviço de auto-serviço
+de recortes de imprensa, uma vez que o custo operacional diminuiu
+significativamente.&lt;/p></description></item><item><title>Dotz Data Labs</title><link>https://macunha.me/pt/project/2017/dotz-data-labs/</link><pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2017/dotz-data-labs/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
 &lt;h2 id="sumário">Sumário&lt;/h2>
 &lt;p>Para poder inovar e se manter em um mercado em constante mudança e
 evolução, Dotz passou por um processo de transformação digital e teve
