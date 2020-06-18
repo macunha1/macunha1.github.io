@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>nlp | It's me, Macunha!</title><link>https://macunha.me/pt/tag/nlp/</link><atom:link href="https://macunha.me/pt/tag/nlp/index.xml" rel="self" type="application/rss+xml"/><description>nlp</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>pt-br</language><lastBuildDate>Tue, 11 Sep 2018 00:00:00 +0000</lastBuildDate><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>nlp</title><link>https://macunha.me/pt/tag/nlp/</link></image><item><title>Clipping Service News OCR</title><link>https://macunha.me/pt/project/2018/clipping-service-news-ocr/</link><pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2018/clipping-service-news-ocr/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+&lt;h2 id="sumário">Sumário&lt;/h2>
+&lt;p>Como proprietário do maior conjunto de dados de mídia do Brasil, o líder em
+monitoramento de mídia Clipping Service estava com problemas de escalabilidade,
+aproximando-se da capacidade máxima de seu data center e de seus &amp;ldquo;leitores&amp;rdquo;.&lt;/p>
+&lt;p>Clipping Service opera em grande escala, recebendo cerca de ~4,5K páginas de
+mídia por dia de cerca de 300 jornais, tanto na versão digital como na impressa.
+Anteriormente os funcionários chamados de &amp;ldquo;leitores&amp;rdquo; eram responsáveis pela
+leitura e clipping (adicionando destaque ao conteúdo alvo) para depois serem
+repassados para a equipe de &amp;ldquo;revisores&amp;rdquo;.&lt;/p>
+&lt;p>Como se o fardo de ler inúmeras páginas por dia não fosse suficiente, a operação
+dos leitores começa por volta das 4:30 da manhã quando a &amp;ldquo;primeira leitura&amp;rdquo;
+inicia (ou seja, a entrega dos impressos matinais).&lt;/p>
+&lt;h2 id="problema">Problema&lt;/h2>
+&lt;p>Por mais de 20 anos este conteúdo foi ingerido pelos chamados &amp;ldquo;leitores&amp;rdquo;. Mas,
+devido ao advento da internet e do boom da imprensa digital a partir do final
+dos anos 90, e atualmente de mídias social as empresas estão transferindo seus
+investimentos de clipping para o monitoramento de outras áreas. Exigindo
+portanto uma ação do Clipping Service para se manter competitiva no mercado.&lt;/p>
+&lt;p>Através da automação da leitura de notícias usando OCR, PLN e inteligência
+artificial para categorizar as mídias, o plano era alcançar um maior rendimento
+durante a ingestão, dando aos leitores mais tempo livre para revisar o conteúdo.
+Consequentemente, alcançar uma maior qualidade no conteúdo, já que nós como
+humanos não somos bons em fazer tarefas repetitivas, especialmente quando se
+trata de ler páginas intermináveis em busca de nomes e palavras.&lt;/p>
+&lt;h1 id="solução">Solução&lt;/h1>
+&lt;h2 id="implementação-técnica">Implementação técnica&lt;/h2>
+&lt;p>Após algum tempo de pesquisa e benchmarking das alternativas, decidimos usar
+Python como linguagem de implementação para lidar com textos, OCR e PLN (usando
+NLTK). Dada sua API estendida e bibliotecas para PLN e processamento de imagens.&lt;/p>
+&lt;p>Como fornecedor de nuvem escolhemos AWS devido a sua estabilidade e consistência
+em relação a outros fornecedores, a conclusão na época foi: AWS possui uma
+estimativa de preço 14,67% maior do que a GCP. Entretanto, a popularidade da AWS
+é maior do que a GCP, assim como é uma nuvem comprovada em termos de
+estabilidade, suporte e integridade. Fazendo uma escolha mais segura por um
+preço ligeiramente superior.&lt;/p>
+&lt;p>A stack foi: Python 3 usando Dramatiq como biblioteca de processamento de
+tarefas, executando OCR por meio do Tesseract, processando texto com NLTK e
+imagens com Pillow (wrapper do ImageMagick). Redis foi o mensage broker do
+Dramatiq, um banco relacional simples estava no Postgres armazenando métricas
+referentes à execução e tínhamos também um Elasticsearch armazenando o conteúdo
+processado.&lt;/p>
+&lt;p>As solicitações vindas do data center chegaram a um Gateway API, responsável por
+executar uma função Lambda, e entregar o resultado do conteúdo.&lt;/p>
+&lt;p>A melhor parte do design? Armazenávamos e servimos o conteúdo por meio do AWS
+S3. Cada peça foi desenhada com tolerância a falhas, e nós simplesmente
+desligávamos toda a infra-estrutura em nuvem depois da operação, para ligar
+apenas no dia seguinte.&lt;/p>
+&lt;p>Operando apenas das 4h às 14h, um projeto &amp;ldquo;serverless&amp;rdquo; e efêmero com beneficiado
+por uma redução de custos em núvem agressiva.&lt;/p>
+&lt;h2 id="impacto-e-resultados">Impacto e resultados&lt;/h2>
+&lt;p>A Clipping Service reduziu em ~78% o quadro de funcionários da equipe de
+leitura, oferecendo contratação interna para outras áreas da empresa e um plano
+de demissão voluntário com benefícios, tornando o processo o mais humano
+possível para os funcionários que preferissem sair.&lt;/p>
+&lt;p>Utilizando automação para tarefas de leitura, a Clipping Service pôde alcançar
+melhorias consideráveis durante o processo de ingestão de mídia (cerca de 20
+vezes mais rápido), oferecendo maior qualidade no serviço de clipping para seus
+clientes e viu a oportunidade de criar posteriormente um serviço de auto-serviço
+de recortes de imprensa, uma vez que o custo operacional diminuiu
+significativamente.&lt;/p></description></item></channel></rss>

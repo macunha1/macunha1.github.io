@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tutorials | It's me, Macunha!</title><link>https://macunha.me/en/category/tutorials/</link><atom:link href="https://macunha.me/en/category/tutorials/index.xml" rel="self" type="application/rss+xml"/><description>Tutorials</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 21 May 2020 23:00:57 +0200</lastBuildDate><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>Tutorials</title><link>https://macunha.me/en/category/tutorials/</link></image><item><title>Quickstart: Apache Spark on Kubernetes</title><link>https://macunha.me/en/post/2020/05/quickstart-apache-spark-on-kubernetes/</link><pubDate>Thu, 21 May 2020 23:00:57 +0200</pubDate><guid>https://macunha.me/en/post/2020/05/quickstart-apache-spark-on-kubernetes/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+&lt;h2 id="the-apache-spark-operator-for-kubernetes">The Apache Spark Operator for Kubernetes&lt;/h2>
+&lt;p>Since its launch in 2014 by Google, Kubernetes has gained a lot of
+popularity along with Docker itself and since 2016 has become the &lt;em>de
+facto Container Orchestrator&lt;/em>, established as a market standard.
+Having cloud-managed versions available in &lt;strong>all&lt;/strong> the &lt;em>major Clouds&lt;/em>.
+&lt;a href="https://cloud.google.com/kubernetes-engine/" target="_blank" rel="noopener">[1]&lt;/a>
+&lt;a href="https://aws.amazon.com/eks/" target="_blank" rel="noopener">[2]&lt;/a>
+&lt;a href="https://docs.microsoft.com/en-us/azure/aks/" target="_blank" rel="noopener">[3]&lt;/a> (including
+&lt;a href="https://www.digitalocean.com/products/kubernetes/" target="_blank" rel="noopener">Digital Ocean&lt;/a> and
+&lt;a href="https://www.alibabacloud.com/product/kubernetes" target="_blank" rel="noopener">Alibaba&lt;/a>).&lt;/p>
+&lt;p>With this popularity came various implementations and &lt;em>use-cases&lt;/em> of
+the orchestrator, among them the execution of
+&lt;a href="https://kubernetes.io/docs/tutorials/stateful-application/" target="_blank" rel="noopener">Stateful
+applications&lt;/a>
+including
+&lt;a href="https://vitess.io/zh/docs/get-started/kubernetes/" target="_blank" rel="noopener">databases using containers&lt;/a>.&lt;/p>
+&lt;p>What would be the motivation to host an orchestrated database? That&amp;rsquo;s
+a great question. But let&amp;rsquo;s focus on the
+&lt;a href="https://github.com/GoogleCloudPlatform/spark-on-k8s-operator/blob/master/docs/design.md" target="_blank" rel="noopener">Spark Operator&lt;/a>
+running workloads on Kubernetes.&lt;/p>
+&lt;p>A native Spark Operator
+&lt;a href="https://github.com/kubernetes/kubernetes/issues/34377" target="_blank" rel="noopener">idea came out&lt;/a>
+in 2016, before that you couldn&amp;rsquo;t run Spark jobs natively except
+some &lt;em>hacky alternatives&lt;/em>, like
+&lt;a href="https://kubernetes.io/blog/2016/03/using-spark-and-zeppelin-to-process-big-data-on-kubernetes/" target="_blank" rel="noopener">running Apache Zeppelin&lt;/a>
+inside Kubernetes or creating your
+&lt;a href="https://github.com/kubernetes/examples/tree/master/staging/spark" target="_blank" rel="noopener">Apache Spark cluster inside
+Kubernetes (from the official Kubernetes organization on GitHub)&lt;/a>
+referencing the
+&lt;a href="http://spark.apache.org/docs/latest/spark-standalone.html" target="_blank" rel="noopener">Spark workers in Stand-alone mode&lt;/a>.&lt;/p>
+&lt;p>However, the native execution would be far more interesting for taking
+advantage of
+&lt;a href="https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/" target="_blank" rel="noopener">Kubernetes Scheduler&lt;/a>
+responsible for taking action of allocating resources, giving
+elasticity and an simpler interface to manage Apache Spark workloads.&lt;/p>
+&lt;p>Considering that,
+&lt;a href="https://issues.apache.org/jira/browse/SPARK-18278" target="_blank" rel="noopener">Apache Spark Operator development got attention&lt;/a>,
+merged and released into
+&lt;a href="https://spark.apache.org/releases/spark-release-2-3-0.html" target="_blank" rel="noopener">Spark version 2.3.0&lt;/a>
+launched in
+&lt;a href="https://spark.apache.org/news/index.html" target="_blank" rel="noopener">February, 2018&lt;/a>.&lt;/p>
+&lt;p>If you&amp;rsquo;re eager for reading more regarding the Apache Spark proposal,
+you can head to the
+&lt;a href="https://docs.google.com/document/d/1_bBzOZ8rKiOSjQg78DXOA3ZBIo_KkDJjqxVuq0yXdew/edit#heading=h.9bhogel14x0y" target="_blank" rel="noopener">design document published in Google Docs.&lt;/a>&lt;/p>
+&lt;h2 id="why-kubernetes">Why Kubernetes?&lt;/h2>
+&lt;p>As companies are currently seeking to
+&lt;a href="https://www.cio.com/article/3211428/what-is-digital-transformation-a-necessary-disruption.html" target="_blank" rel="noopener">reinvent themselves through the
+widely spoken digital transformation&lt;/a>
+in order for them to be competitive and, above all, to survive in an
+increasingly dynamic market, it is common to see approaches that
+include Big Data, Artificial Intelligence and Cloud Computing
+&lt;a href="https://www.zdnet.com/article/how-to-use-cloud-computing-and-big-data-to-support-digital-transformation/" target="_blank" rel="noopener">[1]&lt;/a>
+&lt;a href="https://digitalhealth.london/cloud-big-data-ai-lead-nhs-digital-transformation/" target="_blank" rel="noopener">[2]&lt;/a>
+&lt;a href="https://www.ibm.com/blogs/cloud-computing/2018/11/05/guiding-framework-digital-transformation-garage/" target="_blank" rel="noopener">[3]&lt;/a>.&lt;/p>
+&lt;p>An interesting comparison between the benefits of using Cloud Computing in the
+context of Big Data instead of On-premises&amp;rsquo; servers can be read at
+&lt;a href="https://databricks.com/blog/2017/05/31/top-5-reasons-for-choosing-s3-over-hdfs.html" target="_blank" rel="noopener">Databricks
+blog&lt;/a>,
+which is the company
+&lt;a href="https://www.washingtonpost.com/news/the-switch/wp/2016/06/09/this-is-where-the-real-action-in-artificial-intelligence-takes-place/" target="_blank" rel="noopener">founded by the creators of Apache Spark&lt;/a>.&lt;/p>
+&lt;p>As we see a widespread adoption of Cloud Computing (even by companies
+that would be able to afford the hardware and run on-premises), we
+notice that most of these Cloud implementations don&amp;rsquo;t have an
+&lt;a href="https://hadoop.apache.org/" target="_blank" rel="noopener">Apache
+Hadoop&lt;/a> since the Data Teams (BI/Data
+Science/Analytics) increasingly choose to use tools like
+&lt;a href="https://cloud.google.com/bigquery/" target="_blank" rel="noopener">Google
+BigQuery&lt;/a> or
+&lt;a href="https://aws.amazon.com/redshift/" target="_blank" rel="noopener">AWS Redshift&lt;/a>.
+Therefore, it doesn&amp;rsquo;t make sense to spin-up a Hadoop with the only intention to
+use
+&lt;a href="https://hortonworks.com/apache/yarn/" target="_blank" rel="noopener">YARN&lt;/a> as the resources manager.&lt;/p>
+&lt;p>An alternative is the use of Hadoop cluster providers such as
+&lt;a href="https://cloud.google.com/dataproc" target="_blank" rel="noopener">Google
+DataProc&lt;/a> or
+&lt;a href="https://aws.amazon.com/emr/" target="_blank" rel="noopener">AWS EMR&lt;/a>
+for the creation of ephemeral clusters. Just to name a few options.&lt;/p>
+&lt;p>To better understand the design of Spark Operator, the doc from
+&lt;a href="https://github.com/GoogleCloudPlatform/spark-on-k8s-operatoR/blob/master/docs/design.md#the-crd-controller" target="_blank" rel="noopener">GCP on GitHub&lt;/a>
+is a no-brainer.&lt;/p>
+&lt;h1 id="lets-get-hands-on">Let&amp;rsquo;s get hands-on!&lt;/h1>
+&lt;h2 id="warming-up-the-engine">Warming up the engine&lt;/h2>
+&lt;p>Now that the word has been spread, let&amp;rsquo;s get our hands on it to show
+the engine running. For that, let&amp;rsquo;s use:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;a href="https://www.docker.com/" target="_blank" rel="noopener">Docker&lt;/a> as the container engine for
+Kubernetes
+&lt;a href="https://docs.docker.com/install/" target="_blank" rel="noopener">(installation guide)&lt;/a>;&lt;/li>
+&lt;li>Minikube
+&lt;a href="https://kubernetes.io/docs/tasks/tools/install-minikube/" target="_blank" rel="noopener">(installation guide)&lt;/a>
+to facilitate the provisioning of the Kubernetes (yes, it will be
+a local execution);&lt;/li>
+&lt;li>For interaction with the Kubernetes API it is necessary to have
+&lt;code>kubectl&lt;/code> installed,
+&lt;a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/" target="_blank" rel="noopener">if you don&amp;rsquo;t have it, follow instructions
+here&lt;/a>.&lt;/li>
+&lt;li>a compiled version of Apache Spark larger than 2.3.0.
+&lt;ol>
+&lt;li>you can either compile
+&lt;a href="https://github.com/apache/spark" target="_blank" rel="noopener">source code&lt;/a>,
+which will took &lt;em>some hours&lt;/em> to finish, or&lt;/li>
+&lt;li>download a compiled version
+&lt;a href="https://spark.apache.org/downloads.html" target="_blank" rel="noopener">here&lt;/a>
+(recommended).&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;p>Once the necessary tools are installed, it&amp;rsquo;s necessary to
+include Apache Spark path in &lt;code>PATH&lt;/code> environment variable, to ease the
+invocation of Apache Spark executables. Simply run:&lt;/p>
+&lt;pre>&lt;code class="language-bash">export PATH=${PATH}:/path/to/apache-spark-X.Y.Z/bin
+&lt;/code>&lt;/pre>
+&lt;h2 id="creating-the-minikube-cluster">Creating the Minikube &amp;ldquo;cluster&amp;rdquo;&lt;/h2>
+&lt;p>At last, to have a Kubernetes &amp;ldquo;cluster&amp;rdquo; we will start a &lt;code>minikube&lt;/code>
+with the intention of running an example from
+&lt;a href="https://github.com/apache/spark/blob/master/examples/src/main/scala/org/apache/spark/examples/SparkPi.scala" target="_blank" rel="noopener">Spark
+repository&lt;/a>
+called &lt;code>SparkPi&lt;/code> just as a demonstration.&lt;/p>
+&lt;pre>&lt;code class="language-bash">minikube start --cpus=2 \
+--memory=4g
+&lt;/code>&lt;/pre>
+&lt;h2 id="building-the-docker-image">Building the Docker image&lt;/h2>
+&lt;p>Let&amp;rsquo;s use the Minikube Docker daemon to not depend on an external registry (and
+only generate Docker image layers on the VM, facilitating garbage disposal
+later). Minikube has a wrapper that makes our life easier:&lt;/p>
+&lt;pre>&lt;code class="language-bash">eval $(minikube docker-env)
+&lt;/code>&lt;/pre>
+&lt;p>After having the daemon environment variables configured, we need a
+Docker image to run the jobs. There is a
+&lt;a href="https://github.com/apache/spark/blob/master/bin/docker-image-tool.sh" target="_blank" rel="noopener">shell script in the Spark
+repository&lt;/a>
+to help with this. Considering that our &lt;code>PATH&lt;/code> was properly
+configured, just run:&lt;/p>
+&lt;pre>&lt;code class="language-bash">docker-image-tool.sh -m -t latest build
+&lt;/code>&lt;/pre>
+&lt;p>&lt;em>FYI:&lt;/em> The &lt;code>-m&lt;/code> parameter here indicates a minikube build.&lt;/p>
+&lt;p>Let&amp;rsquo;s take the highway to execute SparkPi, using the same command
+that would be used for a Hadoop Spark cluster
+&lt;a href="https://spark.apache.org/docs/latest/submitting-applications.html" target="_blank" rel="noopener">spark-submit&lt;/a>.&lt;/p>
+&lt;p>However, Spark Operator supports defining jobs in the &amp;ldquo;Kubernetes
+dialect&amp;rdquo; using
+&lt;a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/" target="_blank" rel="noopener">CRD&lt;/a>,
+&lt;a href="https://github.com/GoogleCloudPlatform/spark-on-k8s-operator/tree/master/examples" target="_blank" rel="noopener">here are some examples&lt;/a> - for later.&lt;/p>
+&lt;h1 id="fire-in-the-hole">Fire in the hole!&lt;/h1>
+&lt;p>Mid the gap between the Scala version and .jar when you&amp;rsquo;re
+parameterizing with your Apache Spark version:&lt;/p>
+&lt;pre>&lt;code class="language-bash">spark-submit --master k8s://https://$(minikube ip):8443 \
+--deploy-mode cluster \
+--name spark-pi \
+--class org.apache.spark.examples.SparkPi \
+--conf spark.executor.instances=2 \
+--executor-memory 1024m \
+--conf spark.kubernetes.container.image=spark:latest \
+local:///opt/spark/examples/jars/spark-examples_2.11-X.Y.Z.jar # here
+&lt;/code>&lt;/pre>
+&lt;p>What&amp;rsquo;s new is:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>--master&lt;/code>: Accepts a prefix &lt;code>k8s://&lt;/code> in the URL, for the
+Kubernetes master API endpoint, exposed by the command
+&lt;code>https://$(minikube ip):8443&lt;/code>. BTW, in case you want to
+know, it&amp;rsquo;s a
+&lt;a href="https://www.gnu.org/software/bash/manual/html_node/Command-Substitution.html" target="_blank" rel="noopener">shell command substitution&lt;/a>;&lt;/li>
+&lt;li>&lt;code>--conf spark.kubernetes.container.image=&lt;/code>: Configures the Docker
+image to run in Kubernetes.&lt;/li>
+&lt;/ul>
+&lt;p>Sample output:&lt;/p>
+&lt;pre>&lt;code>...
+19/08/22 11:59:09 INFO LoggingPodStatusWatcherImpl: State changed,
+new state: pod name: spark-pi-1566485909677-driver namespace: default
+labels: spark-app-selector -&amp;gt; spark-20477e803e7648a59e9bcd37394f7f60,
+spark-role -&amp;gt; driver pod uid: c789c4d2-27c4-45ce-ba10-539940cccb8d
+creation time: 2019-08-22T14:58:30Z service account name: default
+volumes: spark-local-dir-1, spark-conf-volume, default-token-tj7jn
+node name: minikube start time: 2019-08-22T14:58:30Z container
+images: spark:docker phase: Succeeded status:
+[ContainerStatus(containerID=docker://e044d944d2ebee2855cd2b993c62025d
+6406258ef247648a5902bf6ac09801cc, image=spark:docker,
+imageID=docker://sha256:86649110778a10aa5d6997d1e3d556b35454e9657978f3
+a87de32c21787ff82f, lastState=ContainerState(running=null,
+terminated=null, waiting=null, additionalProperties={}),
+name=spark-kubernetes-driver, ready=false, restartCount=0,
+state=ContainerState(running=null,
+terminated=ContainerStateTerminated(containerID=docker://e044d944d2ebe
+e2855cd2b993c62025d6406258ef247648a5902bf6ac09801cc, exitCode=0,
+finishedAt=2019-08-22T14:59:08Z, message=null, reason=Completed,
+signal=null, startedAt=2019-08-22T14:58:32Z,
+additionalProperties={}), waiting=null, additionalProperties={}),
+additionalProperties={})]
+19/08/22 11:59:09 INFO LoggingPodStatusWatcherImpl: Container final
+statuses: Container name: spark-kubernetes-driver Container image:
+spark:docker Container state: Terminated Exit code: 0
+&lt;/code>&lt;/pre>
+&lt;p>To see the job result (and the whole execution) we can run a
+&lt;code>kubectl logs&lt;/code> passing the name of the driver pod as a parameter:&lt;/p>
+&lt;pre>&lt;code class="language-bash">kubectl logs $(kubectl get pods | grep 'spark-pi.*-driver')
+&lt;/code>&lt;/pre>
+&lt;p>Which brings the output (omitted some entries), similar to:&lt;/p>
+&lt;pre>&lt;code>...
+19/08/22 14:59:08 INFO TaskSetManager: Finished task 1.0 in stage 0.0
+(TID 1) in 52 ms on 172.17.0.7 (executor 1) (2/2)
+19/08/22 14:59:08 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose
+tasks have all completed, from pool19/08/22 14:59:08 INFO
+DAGScheduler: ResultStage 0 (reduce at SparkPi.scala:38) finished in
+0.957 s
+19/08/22 14:59:08 INFO DAGScheduler: Job 0 finished: reduce at
+SparkPi.scala:38, took 1.040608 s Pi is roughly 3.138915694578473
+19/08/22 14:59:08 INFO SparkUI: Stopped Spark web UI at
+http://spark-pi-1566485909677-driver-svc.default.svc:4040
+19/08/22 14:59:08 INFO KubernetesClusterSchedulerBackend: Shutting
+down all executors
+19/08/22 14:59:08 INFO
+KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Asking
+each executor to shut down
+19/08/22 14:59:08 WARN ExecutorPodsWatchSnapshotSource: Kubernetes
+client has been closed (this is expected if the application is
+shutting down.)
+19/08/22 14:59:08 INFO MapOutputTrackerMasterEndpoint:
+MapOutputTrackerMasterEndpoint stopped!
+19/08/22 14:59:08 INFO MemoryStore: MemoryStore cleared
+19/08/22 14:59:08 INFO BlockManager: BlockManager stopped
+19/08/22 14:59:08 INFO BlockManagerMaster: BlockManagerMaster stopped
+19/08/22 14:59:08 INFO
+OutputCommitCoordinator$OutputCommitCoordinatorEndpoint:
+OutputCommitCoordinator stopped!
+19/08/22 14:59:08 INFO SparkContext: Successfully stopped SparkContext
+19/08/22 14:59:08 INFO ShutdownHookManager: Shutdown hook called
+19/08/22 14:59:08 INFO ShutdownHookManager: Deleting directory
+/tmp/spark-aeadc6ba-36aa-4b7e-8c74-53aa48c3c9b2
+19/08/22 14:59:08 INFO ShutdownHookManager: Deleting directory
+/var/data/spark-084e8326-c8ce-4042-a2ed-75c1eb80414a/spark-ef8117bf-90
+d0-4a0d-9cab-f36a7bb18910
+...
+&lt;/code>&lt;/pre>
+&lt;p>The result appears in:&lt;/p>
+&lt;pre>&lt;code>19/08/22 14:59:08 INFO DAGScheduler: Job 0 finished: reduce at
+SparkPi.scala:38, took 1.040608 s Pi is roughly 3.138915694578473
+&lt;/code>&lt;/pre>
+&lt;p>Finally, let&amp;rsquo;s delete the VM that Minikube generates, to clean up the
+environment (unless you want to keep playing with it):&lt;/p>
+&lt;pre>&lt;code class="language-bash">minikube delete
+&lt;/code>&lt;/pre>
+&lt;h2 id="last-words">Last words&lt;/h2>
+&lt;p>I hope your curiosity got &lt;em>sparked&lt;/em> and some ideas for further
+development have raised for your Big Data workloads. If you have any
+doubt or suggestion, don&amp;rsquo;t hesitate to share on the comment section.&lt;/p></description></item></channel></rss>
