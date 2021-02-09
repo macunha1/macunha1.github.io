@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Projects | It's me, Macunha!</title><link>https://macunha.me/en/project/</link><atom:link href="https://macunha.me/en/project/index.xml" rel="self" type="application/rss+xml"/><description>Projects</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 21 Jul 2019 00:00:00 +0000</lastBuildDate><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>Projects</title><link>https://macunha.me/en/project/</link></image><item><title>ReclameAQUI Data Lake</title><link>https://macunha.me/en/project/2019/reclameaqui-data-lake/</link><pubDate>Sun, 21 Jul 2019 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2019/reclameaqui-data-lake/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
 &lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>ReclameAQUI (Portuguese for &amp;ldquo;complain here&amp;rdquo;) is an interesting and unique
-business. They&amp;rsquo;re a content aggregator for customers&amp;rsquo; experience sharing
+business. They&amp;rsquo;re a content aggregator for customers' experience sharing
 (especially bad experiences) about shopping (online and offline). However, it
 goes further than a mere &amp;ldquo;complaints website&amp;rdquo; offering an interface for
 companies to answers complaints, helping customers with their issues.&lt;/p>
@@ -59,7 +59,7 @@ pages per day from roughly 300 newspapers in both digital and printed versions.
 Previously employees called &amp;ldquo;readers&amp;rdquo; were responsible for reading and clipping
 (adding highlight into the targeted content) to be later passed onto the
 &amp;ldquo;reviewers&amp;rdquo; team.&lt;/p>
-&lt;p>As if the burden of reading countless pages a day were not enough, the readers&amp;rsquo;
+&lt;p>As if the burden of reading countless pages a day were not enough, the readers'
 operation begins around 4:30 a.m. when the &amp;ldquo;first reading&amp;rdquo; begins (i.e., the
 delivery of the morning papers).&lt;/p>
 &lt;h2 id="problem">Problem&lt;/h2>
@@ -271,7 +271,7 @@ cell phone operator. Nextel Happy allows users to manage their plans and
 data entirely from the mobile app, from activating your SIM to managing
 your family plan.&lt;/p>
 &lt;p>This project helped Nextel to increase their customers base, improved
-the users&amp;rsquo; experience, and decrease operational costs (in 16%) all at
+the users' experience, and decrease operational costs (in 16%) all at
 once.&lt;/p>
 &lt;h2 id="problem">Problem&lt;/h2>
 &lt;p>Nextel Brazil executive team decided to work with outsourcing on the
@@ -282,12 +282,12 @@ different perspectives into play, improving the creative process.&lt;/p>
 Cloud infrastructure ensuring high-availability, resilience and
 consistency of the software.&lt;/p>
 &lt;p>We were also responsible for the data synchronization between Nextel
-data center and the cloud. Securely moving tons of GB of users&amp;rsquo; data to
+data center and the cloud. Securely moving tons of GB of users' data to
 the cloud daily without data loss or duplication.&lt;/p>
 &lt;h1 id="solution">Solution&lt;/h1>
 &lt;h2 id="technical-implementation">Technical implementation&lt;/h2>
 &lt;p>We choose GlusterFS to ensure consistency, installed between Nextel Data
-Center and AWS. Users&amp;rsquo; data (e.g. data plan consumption, minutes of
+Center and AWS. Users' data (e.g. data plan consumption, minutes of
 call) synchronization went through GlusterFS to AWS.
 Nextel IT operations inserted data into GlusterFS directly from cell
 phone towers in near-real-time.&lt;/p>

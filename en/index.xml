@@ -54,7 +54,7 @@ include Big Data, Artificial Intelligence and Cloud Computing
 &lt;a href="https://digitalhealth.london/cloud-big-data-ai-lead-nhs-digital-transformation/" target="_blank" rel="noopener">[2]&lt;/a>
 &lt;a href="https://www.ibm.com/blogs/cloud-computing/2018/11/05/guiding-framework-digital-transformation-garage/" target="_blank" rel="noopener">[3]&lt;/a>.&lt;/p>
 &lt;p>An interesting comparison between the benefits of using Cloud Computing in the
-context of Big Data instead of On-premises&amp;rsquo; servers can be read at
+context of Big Data instead of On-premises' servers can be read at
 &lt;a href="https://databricks.com/blog/2017/05/31/top-5-reasons-for-choosing-s3-over-hdfs.html" target="_blank" rel="noopener">Databricks
 blog&lt;/a>,
 which is the company
@@ -247,7 +247,7 @@ development have raised for your Big Data workloads. If you have any
 doubt or suggestion, don&amp;rsquo;t hesitate to share on the comment section.&lt;/p></description></item><item><title>ReclameAQUI Data Lake</title><link>https://macunha.me/en/project/2019/reclameaqui-data-lake/</link><pubDate>Sun, 21 Jul 2019 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2019/reclameaqui-data-lake/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
 &lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>ReclameAQUI (Portuguese for &amp;ldquo;complain here&amp;rdquo;) is an interesting and unique
-business. They&amp;rsquo;re a content aggregator for customers&amp;rsquo; experience sharing
+business. They&amp;rsquo;re a content aggregator for customers' experience sharing
 (especially bad experiences) about shopping (online and offline). However, it
 goes further than a mere &amp;ldquo;complaints website&amp;rdquo; offering an interface for
 companies to answers complaints, helping customers with their issues.&lt;/p>
@@ -616,7 +616,7 @@ pages per day from roughly 300 newspapers in both digital and printed versions.
 Previously employees called &amp;ldquo;readers&amp;rdquo; were responsible for reading and clipping
 (adding highlight into the targeted content) to be later passed onto the
 &amp;ldquo;reviewers&amp;rdquo; team.&lt;/p>
-&lt;p>As if the burden of reading countless pages a day were not enough, the readers&amp;rsquo;
+&lt;p>As if the burden of reading countless pages a day were not enough, the readers'
 operation begins around 4:30 a.m. when the &amp;ldquo;first reading&amp;rdquo; begins (i.e., the
 delivery of the morning papers).&lt;/p>
 &lt;h2 id="problem">Problem&lt;/h2>
@@ -828,7 +828,7 @@ cell phone operator. Nextel Happy allows users to manage their plans and
 data entirely from the mobile app, from activating your SIM to managing
 your family plan.&lt;/p>
 &lt;p>This project helped Nextel to increase their customers base, improved
-the users&amp;rsquo; experience, and decrease operational costs (in 16%) all at
+the users' experience, and decrease operational costs (in 16%) all at
 once.&lt;/p>
 &lt;h2 id="problem">Problem&lt;/h2>
 &lt;p>Nextel Brazil executive team decided to work with outsourcing on the
@@ -839,12 +839,12 @@ different perspectives into play, improving the creative process.&lt;/p>
 Cloud infrastructure ensuring high-availability, resilience and
 consistency of the software.&lt;/p>
 &lt;p>We were also responsible for the data synchronization between Nextel
-data center and the cloud. Securely moving tons of GB of users&amp;rsquo; data to
+data center and the cloud. Securely moving tons of GB of users' data to
 the cloud daily without data loss or duplication.&lt;/p>
 &lt;h1 id="solution">Solution&lt;/h1>
 &lt;h2 id="technical-implementation">Technical implementation&lt;/h2>
 &lt;p>We choose GlusterFS to ensure consistency, installed between Nextel Data
-Center and AWS. Users&amp;rsquo; data (e.g. data plan consumption, minutes of
+Center and AWS. Users' data (e.g. data plan consumption, minutes of
 call) synchronization went through GlusterFS to AWS.
 Nextel IT operations inserted data into GlusterFS directly from cell
 phone towers in near-real-time.&lt;/p>

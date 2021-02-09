@@ -366,7 +366,7 @@ cell phone operator. Nextel Happy allows users to manage their plans and
 data entirely from the mobile app, from activating your SIM to managing
 your family plan.&lt;/p>
 &lt;p>This project helped Nextel to increase their customers base, improved
-the users&amp;rsquo; experience, and decrease operational costs (in 16%) all at
+the users' experience, and decrease operational costs (in 16%) all at
 once.&lt;/p>
 &lt;h2 id="problem">Problem&lt;/h2>
 &lt;p>Nextel Brazil executive team decided to work with outsourcing on the
@@ -377,12 +377,12 @@ different perspectives into play, improving the creative process.&lt;/p>
 Cloud infrastructure ensuring high-availability, resilience and
 consistency of the software.&lt;/p>
 &lt;p>We were also responsible for the data synchronization between Nextel
-data center and the cloud. Securely moving tons of GB of users&amp;rsquo; data to
+data center and the cloud. Securely moving tons of GB of users' data to
 the cloud daily without data loss or duplication.&lt;/p>
 &lt;h1 id="solution">Solution&lt;/h1>
 &lt;h2 id="technical-implementation">Technical implementation&lt;/h2>
 &lt;p>We choose GlusterFS to ensure consistency, installed between Nextel Data
-Center and AWS. Users&amp;rsquo; data (e.g. data plan consumption, minutes of
+Center and AWS. Users' data (e.g. data plan consumption, minutes of
 call) synchronization went through GlusterFS to AWS.
 Nextel IT operations inserted data into GlusterFS directly from cell
 phone towers in near-real-time.&lt;/p>
