@@ -1,4 +1,166 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts | It's me, Macunha!</title><link>https://macunha.me/en/post/</link><atom:link href="https://macunha.me/en/post/index.xml" rel="self" type="application/rss+xml"/><description>Posts</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 21 May 2020 23:00:57 +0200</lastBuildDate><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>Posts</title><link>https://macunha.me/en/post/</link></image><item><title>Quickstart: Apache Spark on Kubernetes</title><link>https://macunha.me/en/post/2020/05/quickstart-apache-spark-on-kubernetes/</link><pubDate>Thu, 21 May 2020 23:00:57 +0200</pubDate><guid>https://macunha.me/en/post/2020/05/quickstart-apache-spark-on-kubernetes/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts | It's me, Macunha!</title><link>https://macunha.me/en/post/</link><atom:link href="https://macunha.me/en/post/index.xml" rel="self" type="application/rss+xml"/><description>Posts</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 31 Mar 2021 00:00:00 +0200</lastBuildDate><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>Posts</title><link>https://macunha.me/en/post/</link></image><item><title>Terraform Design Best Practices</title><link>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</link><pubDate>Wed, 31 Mar 2021 00:00:00 +0200</pubDate><guid>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</guid><description>&lt;h2 id="intro">Intro&lt;/h2>
+&lt;p>As someone who believes in empowering people and distributing power in order to
+achieve higher outcomes I always felt that the best existing best-practices proposals
+don&amp;rsquo;t touch some key aspects (IMHO) on code evolution and business structures.&lt;/p>
+&lt;p>Therefore, this design document shall compose on the previous including some
+self-service Ops and micro-services spice to the mix.&lt;/p>
+&lt;p>On
+&lt;a href="https://www.terraform-best-practices.com" target="_blank" rel="noopener">Terraform best practices&lt;/a> great insights on how to write code inside a
+module is provided, e.g.
+&lt;a href="https://www.terraform-best-practices.com/naming" target="_blank" rel="noopener">naming conventions&lt;/a>,
+&lt;a href="https://www.terraform-best-practices.com/code-structure#getting-started-with-structuring-of-terraform-configurations" target="_blank" rel="noopener">Terraform file naming&lt;/a>.&lt;/p>
+&lt;p>We can&amp;rsquo;t leave Terragrunt epic blog post unmentioned:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;a href="https://blog.gruntwork.io/5-lessons-learned-from-writing-over-300-000-lines-of-infrastructure-code-36ba7fadeac1" target="_blank" rel="noopener">5 Lessons Learned From Writing Over 300,000 Lines of Infrastructure Code&lt;/a>;&lt;/li>
+&lt;/ul>
+&lt;p>As well as the
+&lt;a href="https://terragrunt.gruntwork.io/docs/getting-started/quick-start/#promote-immutable-versioned-terraform-modules-across-environments" target="_blank" rel="noopener">Terragrunt documentation pointing&lt;/a> &amp;ldquo;one of the most important
+lessons&amp;rdquo; is that:&lt;/p>
+&lt;blockquote>
+&lt;p>large modules should be considered harmful. That is, it is a Bad Idea to define
+all of your environments (dev, stage, prod, etc), or even a large amount of
+infrastructure (servers, databases, load balancers, DNS, etc), in a single
+Terraform module. Large modules are slow, insecure, hard to update, hard to code
+review, hard to test, and brittle (i.e., you have all your eggs in one basket).&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="bad-idea-capitalized">&amp;ldquo;Bad Idea&amp;rdquo; capitalized!&lt;/h3>
+&lt;p>Which is totally true, as this &amp;ldquo;Bad Idea&amp;rdquo; usually coming from a lack of care
+towards Terraform code design tend to be harmful in the long run, with a
+tendency towards making the implementation a
+&lt;a href="https://en.wikipedia.org/wiki/Big%5Fball%5Fof%5Fmud" target="_blank" rel="noopener">big ball of mud&lt;/a>.&lt;/p>
+&lt;blockquote>
+&lt;p>A Big Ball of Mud is a haphazardly structured, sprawling, sloppy,
+duct-tape-and-baling-wire, spaghetti-code jungle. These systems show
+unmistakable signs of unregulated growth, and repeated, expedient repair.
+Information is shared promiscuously among distant elements of the system,
+often to the point where nearly all the important information becomes global
+or duplicated.&lt;/p>
+&lt;/blockquote>
+&lt;!--quoteend-->
+&lt;blockquote>
+&lt;p>The overall structure of the system may never have been well defined.&lt;/p>
+&lt;/blockquote>
+&lt;p>Oftentimes, Terraform code implementation fluctuate towards mono-repositories
+(a.k.a. monorepos) containing all the specification in a single place. In order
+to tame the chaos, the Terraform state needs to be at least sub-divided into
+logical sections.&lt;/p>
+&lt;h2 id="design">Design&lt;/h2>
+&lt;h3 id="shallow-tree-of-shared-resources">Shallow &amp;ldquo;tree&amp;rdquo; of shared resources&lt;/h3>
+&lt;p>Following the
+&lt;a href="https://www.terraform-best-practices.com/code-structure#common-recommendations-for-structuring-code" target="_blank" rel="noopener">recommendations for structuring code&lt;/a> one of the proposals is to
+keep a shallow &amp;ldquo;tree&amp;rdquo; of resources and modules. This tree produces a small and
+clear distribution of Terraform code.&lt;/p>
+&lt;p>Why a shallow &amp;ldquo;tree&amp;rdquo; of resources? It helps achieving a short amount of
+resources and modules that result in a small
+&lt;a href="https://www.terraform.io/docs/language/state/remote.html" target="_blank" rel="noopener">remote state&lt;/a> file. With a small
+remote state we speed-up the development process and reduce waste (&lt;em>Muda&lt;/em> in the
+Toyota 3M model), as the shallow tree enables faster executions of Terraform
+(less data to sync and compare).&lt;/p>
+&lt;p>The granularity level will be defined for each specific case (no silver bullet)
+balancing the smallest and most feasible composition possible.&lt;/p>
+&lt;h3 id="product-areas--a-dot-k-dot-a-dot-business-capabilities--structure-and-ownership">Product areas (a.k.a. Business capabilities) structure and ownership&lt;/h3>
+&lt;p>Ideally, the
+&lt;a href="https://www.terraform-best-practices.com/key-concepts#composition" target="_blank" rel="noopener">composition level&lt;/a> would be organized around Product Areas (either
+squads/crews or guilds) with a fallback to shared technologies (e.g. vpc,
+databases). Therefore, Terraform compositions are designed around what Martin
+Fowler
+&lt;a href="https://youtu.be/wgdBVIX9ifA?t=388" target="_blank" rel="noopener">calls &amp;ldquo;Business capabilities&amp;rdquo;&lt;/a> in micro-services terminology, ideally the
+Terraform composition will follow the organizational structure so that each team
+&amp;ldquo;owns&amp;rdquo; (in both senses: ownership and freedom) its own state.&lt;/p>
+&lt;p>The main goal here is to structure the Terraform code as a reflection of the
+organization so that is fosters self-service Ops. If the Infrastructure as Code
+is mature enough to the point of having well-described Terraform modules,
+everyone should be empowered to define these modules by setting the parameters
+according to their needs, without centralizing power on a Operations team.&lt;/p>
+&lt;p>The resource composition must gravitate towards the following (ordered by
+priority from higher to lower):&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Product Areas (ownership) directory structure:&lt;/p>
+&lt;ol>
+&lt;li>squad/crew OR guild;&lt;/li>
+&lt;li>product.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;p>Shared resources, around technologies.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Looking on the structure from bottom-up it starts from the product and then
+attributes the product to a crew through the directory tree.&lt;/p>
+&lt;p>e.g.:&lt;/p>
+&lt;pre>&lt;code class="language-text"># Squad or Crew
+red-team
+└── payment # Product (i.e. micro-service) name
+└── main.tf # Any resource used by the payment product
+# Guild (organized around technology)
+back-end
+└─ monolith # Shared application in terms of ownership
+   └── main.tf # Cloud resources used by the monolith
+&lt;/code>&lt;/pre>
+&lt;p>On the example above, we can&amp;rsquo;t ignore that &lt;code>monolith&lt;/code> is a product with shared
+ownership among back-end developers and therefore it is organized to follow the
+business structure.&lt;/p>
+&lt;p>The structure is inspired
+&lt;a href="https://terragrunt.gruntwork.io/docs/getting-started/quick-start/#promote-immutable-versioned-terraform-modules-across-environments" target="_blank" rel="noopener">on Terragrunt&amp;rsquo;s best-practices&lt;/a> to some extend.
+However, it distinct from Terragrunt proposal in the way resources are divided,
+rather than organizing resources exclusively around technologies.&lt;/p>
+&lt;h3 id="shared-resources-organized-around-technologies">Shared resources, organized around technologies&lt;/h3>
+&lt;p>Oftentimes in organizations we will face shared resources among products, there
+is no way around reality. e.g. a shared VPC or SQL database.&lt;/p>
+&lt;p>However, these situations should be the exception and not the norm. Dealt
+similar to the organization of Terraform compositions around
+guilds/technologies.&lt;/p>
+&lt;pre>&lt;code class="language-text">platform # as in Platform Engineering
+└── vpc
+└── main.tf
+back-end
+└── database
+└── main.tf
+&lt;/code>&lt;/pre>
+&lt;h3 id="files-inside-the-composition">Files inside the composition?&lt;/h3>
+&lt;p>Ideally the files in the sub-directory (which specify the composition) are going
+to partially
+&lt;a href="https://www.terraform-best-practices.com/code-structure#getting-started-with-structuring-of-terraform-configurations" target="_blank" rel="noopener">follow this spec&lt;/a> and include &lt;code>data.tf&lt;/code>, &lt;code>terraform.tf&lt;/code> and
+&lt;code>providers.tf&lt;/code> on top of that.&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>main.tf:&lt;/strong> contains locals, module and resource definitions;&lt;/li>
+&lt;li>&lt;strong>variables.tf:&lt;/strong> contains declarations of variables (i.e. inputs/parameters)
+used in main.tf;&lt;/li>
+&lt;li>&lt;strong>data.tf:&lt;/strong> contains data-resources for input data used in main.tf;&lt;/li>
+&lt;li>&lt;strong>outputs.tf:&lt;/strong> contains outputs from the resources created in main.tf;&lt;/li>
+&lt;li>&lt;strong>providers.tf:&lt;/strong> contains provider and provider&amp;rsquo;s versions definitions;&lt;/li>
+&lt;li>&lt;strong>terraform.tf:&lt;/strong> contains the terraform back-end (e.g. remote state)
+definition;&lt;/li>
+&lt;/ul>
+&lt;h3 id="what-about-terraform-modules">What about Terraform modules?&lt;/h3>
+&lt;p>
+&lt;a href="https://www.terraform.io/docs/language/modules/index.html" target="_blank" rel="noopener">Terraform modules&lt;/a> are containers for multiple resources that are used together
+to achieve a shared goal. Modules can be used to create lightweight
+abstractions, facilitating reusability and distribution of Terraform code.&lt;/p>
+&lt;p>Therefore, we assume that the following are anti-patterns that make Terraform
+modules' reusability difficult:&lt;/p>
+&lt;ul>
+&lt;li>Configuration of Terraform Providers inside a module;&lt;/li>
+&lt;li>Implementation of Business logic and/or hard-coded parameters in a
+module;&lt;/li>
+&lt;li>Default values are specified in optional variables instead of
+hard-coding;&lt;/li>
+&lt;li>Modules should be self-contained and provide a clear contract.
+Dependencies (pre-existing resources) must be specified through required
+variables.&lt;/li>
+&lt;li>Modules must serve to a singular purpose. Multiple purpose must be
+achieved through composability of modules and not by &amp;ldquo;monolithic&amp;rdquo; modules.&lt;/li>
+&lt;/ul>
+&lt;p>Modules are abstractions that should be used to reduce the amount of code
+duplication, implementing the
+&lt;a href="https://en.wikipedia.org/wiki/Don%27t%5Frepeat%5Fyourself" target="_blank" rel="noopener">DRY (don&amp;rsquo;t repeat yourself) principle&lt;/a>.&lt;/p>
+&lt;p>On top of that, modules are an important factor to reduce the parity among
+environments, which helps to better address the
+&lt;a href="https://12factor.net/" target="_blank" rel="noopener">Twelve-Factor App model&lt;/a> in
+regards to
+&lt;a href="https://12factor.net/dev-prod-parity" target="_blank" rel="noopener">Factor X (ten)&lt;/a>.&lt;/p></description></item><item><title>Quickstart: Apache Spark on Kubernetes</title><link>https://macunha.me/en/post/2020/05/quickstart-apache-spark-on-kubernetes/</link><pubDate>Thu, 21 May 2020 23:00:57 +0200</pubDate><guid>https://macunha.me/en/post/2020/05/quickstart-apache-spark-on-kubernetes/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
 &lt;h2 id="the-apache-spark-operator-for-kubernetes">The Apache Spark Operator for Kubernetes&lt;/h2>
 &lt;p>Since its launch in 2014 by Google, Kubernetes has gained a lot of
 popularity along with Docker itself and since 2016 has become the &lt;em>de
@@ -673,7 +835,7 @@ groceries, not the way you would buy perfume.
 &lt;/blockquote>
 &lt;p>We should carefully look to where we&amp;rsquo;re going with our choices. So we don&amp;rsquo;t
 overspend and keep things going for more time, thus we go further.&lt;/p>
-&lt;p>\* The original text is: &amp;ldquo;If you are shopping for common stocks [&amp;hellip;]&amp;rdquo;. But, as
+&lt;p>NOTE: The original text is: &amp;ldquo;If you are shopping for common stocks [&amp;hellip;]&amp;rdquo;. But, as
 a Software Engineer, I just switched the syntax so we could adapt it to more
 use-cases (:&lt;/p>
 &lt;p>I learned from my own experience that over-engineered decisions end up bringing
