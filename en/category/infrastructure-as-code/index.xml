@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Infrastructure As Code | It's me, Macunha!</title><link>https://macunha.me/en/category/infrastructure-as-code/</link><atom:link href="https://macunha.me/en/category/infrastructure-as-code/index.xml" rel="self" type="application/rss+xml"/><description>Infrastructure As Code</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Matheus Cunha</copyright><lastBuildDate>Wed, 31 Mar 2021 00:00:00 +0200</lastBuildDate><image><url>https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_3.png</url><title>Infrastructure As Code</title><link>https://macunha.me/en/category/infrastructure-as-code/</link></image><item><title>Terraform Design Best Practices</title><link>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</link><pubDate>Wed, 31 Mar 2021 00:00:00 +0200</pubDate><guid>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</guid><description>&lt;h2 id="intro">Intro&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Infrastructure As Code | It's me, Macunha!</title><link>https://macunha.me/en/category/infrastructure-as-code/</link><atom:link href="https://macunha.me/en/category/infrastructure-as-code/index.xml" rel="self" type="application/rss+xml"/><description>Infrastructure As Code</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Matheus Cunha</copyright><lastBuildDate>Wed, 31 Mar 2021 00:00:00 +0200</lastBuildDate><image><url>https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>Infrastructure As Code</title><link>https://macunha.me/en/category/infrastructure-as-code/</link></image><item><title>Terraform Design Best Practices</title><link>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</link><pubDate>Wed, 31 Mar 2021 00:00:00 +0200</pubDate><guid>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</guid><description>&lt;h2 id="intro">Intro&lt;/h2>
 &lt;p>As someone who believes in empowering people and distributing power in order to
 achieve higher outcomes I always felt that the best existing best-practices proposals
 don&amp;rsquo;t touch some key aspects (IMHO) on code evolution and business structures.&lt;/p>
@@ -31,7 +31,7 @@ Information is shared promiscuously among distant elements of the system,
 often to the point where nearly all the important information becomes global
 or duplicated.&lt;/p>
 &lt;/blockquote>
-&lt;!--quoteend-->
+&lt;!-- raw HTML omitted -->
 &lt;blockquote>
 &lt;p>The overall structure of the system may never have been well defined.&lt;/p>
 &lt;/blockquote>
@@ -80,7 +80,7 @@ priority from higher to lower):&lt;/p>
 &lt;p>Looking on the structure from bottom-up it starts from the product and then
 attributes the product to a crew through the directory tree.&lt;/p>
 &lt;p>e.g.:&lt;/p>
-&lt;pre>&lt;code class="language-text"># Squad or Crew
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text"># Squad or Crew
 red-team
 └── payment # Product (i.e. micro-service) name
 └── main.tf # Any resource used by the payment product
@@ -88,8 +88,7 @@ red-team
 back-end
 └─ monolith # Shared application in terms of ownership
    └── main.tf # Cloud resources used by the monolith
-&lt;/code>&lt;/pre>
-&lt;p>On the example above, we can&amp;rsquo;t ignore that &lt;code>monolith&lt;/code> is a product with shared
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>On the example above, we can&amp;rsquo;t ignore that &lt;code>monolith&lt;/code> is a product with shared
 ownership among back-end developers and therefore it is organized to follow the
 business structure.&lt;/p>
 &lt;p>The structure is inspired &lt;a href="https://terragrunt.gruntwork.io/docs/getting-started/quick-start/#promote-immutable-versioned-terraform-modules-across-environments" target="_blank" rel="noopener">on Terragrunt&amp;rsquo;s best-practices&lt;/a> to some extend.
@@ -101,14 +100,13 @@ is no way around reality. e.g. a shared VPC or SQL database.&lt;/p>
 &lt;p>However, these situations should be the exception and not the norm. Dealt
 similar to the organization of Terraform compositions around
 guilds/technologies.&lt;/p>
-&lt;pre>&lt;code class="language-text">platform # as in Platform Engineering
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">platform # as in Platform Engineering
 └── vpc
 └── main.tf
 back-end
 └── database
 └── main.tf
-&lt;/code>&lt;/pre>
-&lt;h3 id="files-inside-the-composition">Files inside the composition?&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="files-inside-the-composition">Files inside the composition?&lt;/h3>
 &lt;p>Ideally the files in the sub-directory (which specify the composition) are going
 to partially &lt;a href="https://www.terraform-best-practices.com/code-structure#getting-started-with-structuring-of-terraform-configurations" target="_blank" rel="noopener">follow this spec&lt;/a> and include &lt;code>data.tf&lt;/code>, &lt;code>terraform.tf&lt;/code> and
 &lt;code>providers.tf&lt;/code> on top of that.&lt;/p>

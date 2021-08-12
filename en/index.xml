@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>It's me, Macunha!</title><link>https://macunha.me/en/</link><atom:link href="https://macunha.me/en/index.xml" rel="self" type="application/rss+xml"/><description>It's me, Macunha!</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Matheus Cunha</copyright><lastBuildDate>Wed, 31 Mar 2021 00:00:00 +0200</lastBuildDate><image><url>https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_3.png</url><title>It's me, Macunha!</title><link>https://macunha.me/en/</link></image><item><title>Terraform Design Best Practices</title><link>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</link><pubDate>Wed, 31 Mar 2021 00:00:00 +0200</pubDate><guid>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</guid><description>&lt;h2 id="intro">Intro&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>It's me, Macunha!</title><link>https://macunha.me/en/</link><atom:link href="https://macunha.me/en/index.xml" rel="self" type="application/rss+xml"/><description>It's me, Macunha!</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Matheus Cunha</copyright><lastBuildDate>Wed, 31 Mar 2021 00:00:00 +0200</lastBuildDate><image><url>https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>It's me, Macunha!</title><link>https://macunha.me/en/</link></image><item><title>Terraform Design Best Practices</title><link>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</link><pubDate>Wed, 31 Mar 2021 00:00:00 +0200</pubDate><guid>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</guid><description>&lt;h2 id="intro">Intro&lt;/h2>
 &lt;p>As someone who believes in empowering people and distributing power in order to
 achieve higher outcomes I always felt that the best existing best-practices proposals
 don&amp;rsquo;t touch some key aspects (IMHO) on code evolution and business structures.&lt;/p>
@@ -31,7 +31,7 @@ Information is shared promiscuously among distant elements of the system,
 often to the point where nearly all the important information becomes global
 or duplicated.&lt;/p>
 &lt;/blockquote>
-&lt;!--quoteend-->
+&lt;!-- raw HTML omitted -->
 &lt;blockquote>
 &lt;p>The overall structure of the system may never have been well defined.&lt;/p>
 &lt;/blockquote>
@@ -80,7 +80,7 @@ priority from higher to lower):&lt;/p>
 &lt;p>Looking on the structure from bottom-up it starts from the product and then
 attributes the product to a crew through the directory tree.&lt;/p>
 &lt;p>e.g.:&lt;/p>
-&lt;pre>&lt;code class="language-text"># Squad or Crew
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text"># Squad or Crew
 red-team
 └── payment # Product (i.e. micro-service) name
 └── main.tf # Any resource used by the payment product
@@ -88,8 +88,7 @@ red-team
 back-end
 └─ monolith # Shared application in terms of ownership
    └── main.tf # Cloud resources used by the monolith
-&lt;/code>&lt;/pre>
-&lt;p>On the example above, we can&amp;rsquo;t ignore that &lt;code>monolith&lt;/code> is a product with shared
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>On the example above, we can&amp;rsquo;t ignore that &lt;code>monolith&lt;/code> is a product with shared
 ownership among back-end developers and therefore it is organized to follow the
 business structure.&lt;/p>
 &lt;p>The structure is inspired &lt;a href="https://terragrunt.gruntwork.io/docs/getting-started/quick-start/#promote-immutable-versioned-terraform-modules-across-environments" target="_blank" rel="noopener">on Terragrunt&amp;rsquo;s best-practices&lt;/a> to some extend.
@@ -101,14 +100,13 @@ is no way around reality. e.g. a shared VPC or SQL database.&lt;/p>
 &lt;p>However, these situations should be the exception and not the norm. Dealt
 similar to the organization of Terraform compositions around
 guilds/technologies.&lt;/p>
-&lt;pre>&lt;code class="language-text">platform # as in Platform Engineering
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">platform # as in Platform Engineering
 └── vpc
 └── main.tf
 back-end
 └── database
 └── main.tf
-&lt;/code>&lt;/pre>
-&lt;h3 id="files-inside-the-composition">Files inside the composition?&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="files-inside-the-composition">Files inside the composition?&lt;/h3>
 &lt;p>Ideally the files in the sub-directory (which specify the composition) are going
 to partially &lt;a href="https://www.terraform-best-practices.com/code-structure#getting-started-with-structuring-of-terraform-configurations" target="_blank" rel="noopener">follow this spec&lt;/a> and include &lt;code>data.tf&lt;/code>, &lt;code>terraform.tf&lt;/code> and
 &lt;code>providers.tf&lt;/code> on top of that.&lt;/p>
@@ -228,30 +226,26 @@ which will took &lt;em>some hours&lt;/em> to finish, or&lt;/li>
 &lt;p>Once the necessary tools are installed, it&amp;rsquo;s necessary to
 include Apache Spark path in &lt;code>PATH&lt;/code> environment variable, to ease the
 invocation of Apache Spark executables. Simply run:&lt;/p>
-&lt;pre>&lt;code class="language-bash">export PATH=${PATH}:/path/to/apache-spark-X.Y.Z/bin
-&lt;/code>&lt;/pre>
-&lt;h2 id="creating-the-minikube-cluster">Creating the Minikube &amp;ldquo;cluster&amp;rdquo;&lt;/h2>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">export PATH&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>PATH&lt;span style="color:#e6db74">}&lt;/span>:/path/to/apache-spark-X.Y.Z/bin
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="creating-the-minikube-cluster">Creating the Minikube &amp;ldquo;cluster&amp;rdquo;&lt;/h2>
 &lt;p>At last, to have a Kubernetes &amp;ldquo;cluster&amp;rdquo; we will start a &lt;code>minikube&lt;/code>
 with the intention of running an example from &lt;a href="https://github.com/apache/spark/blob/master/examples/src/main/scala/org/apache/spark/examples/SparkPi.scala" target="_blank" rel="noopener">Spark
 repository&lt;/a>
 called &lt;code>SparkPi&lt;/code> just as a demonstration.&lt;/p>
-&lt;pre>&lt;code class="language-bash">minikube start --cpus=2 \
---memory=4g
-&lt;/code>&lt;/pre>
-&lt;h2 id="building-the-docker-image">Building the Docker image&lt;/h2>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">minikube start --cpus&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> --memory&lt;span style="color:#f92672">=&lt;/span>4g
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="building-the-docker-image">Building the Docker image&lt;/h2>
 &lt;p>Let&amp;rsquo;s use the Minikube Docker daemon to not depend on an external registry (and
 only generate Docker image layers on the VM, facilitating garbage disposal
 later). Minikube has a wrapper that makes our life easier:&lt;/p>
-&lt;pre>&lt;code class="language-bash">eval $(minikube docker-env)
-&lt;/code>&lt;/pre>
-&lt;p>After having the daemon environment variables configured, we need a
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">eval &lt;span style="color:#66d9ef">$(&lt;/span>minikube docker-env&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>After having the daemon environment variables configured, we need a
 Docker image to run the jobs. There is a &lt;a href="https://github.com/apache/spark/blob/master/bin/docker-image-tool.sh" target="_blank" rel="noopener">shell script in the Spark
 repository&lt;/a>
 to help with this. Considering that our &lt;code>PATH&lt;/code> was properly
 configured, just run:&lt;/p>
-&lt;pre>&lt;code class="language-bash">docker-image-tool.sh -m -t latest build
-&lt;/code>&lt;/pre>
-&lt;p>&lt;em>FYI:&lt;/em> The &lt;code>-m&lt;/code> parameter here indicates a minikube build.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">docker-image-tool.sh -m -t latest build
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;em>FYI:&lt;/em> The &lt;code>-m&lt;/code> parameter here indicates a minikube build.&lt;/p>
 &lt;p>Let&amp;rsquo;s take the highway to execute SparkPi, using the same command
 that would be used for a Hadoop Spark cluster &lt;a href="https://spark.apache.org/docs/latest/submitting-applications.html" target="_blank" rel="noopener">spark-submit&lt;/a>.&lt;/p>
 &lt;p>However, Spark Operator supports defining jobs in the &amp;ldquo;Kubernetes
@@ -260,16 +254,15 @@ dialect&amp;rdquo; using &lt;a href="https://kubernetes.io/docs/concepts/extend-
 &lt;h1 id="fire-in-the-hole">Fire in the hole!&lt;/h1>
 &lt;p>Mid the gap between the Scala version and .jar when you&amp;rsquo;re
 parameterizing with your Apache Spark version:&lt;/p>
-&lt;pre>&lt;code class="language-bash">spark-submit --master k8s://https://$(minikube ip):8443 \
---deploy-mode cluster \
---name spark-pi \
---class org.apache.spark.examples.SparkPi \
---conf spark.executor.instances=2 \
---executor-memory 1024m \
---conf spark.kubernetes.container.image=spark:latest \
-local:///opt/spark/examples/jars/spark-examples_2.11-X.Y.Z.jar # here
-&lt;/code>&lt;/pre>
-&lt;p>What&amp;rsquo;s new is:&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">spark-submit --master k8s://https://&lt;span style="color:#66d9ef">$(&lt;/span>minikube ip&lt;span style="color:#66d9ef">)&lt;/span>:8443 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> --deploy-mode cluster &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> --name spark-pi &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> --class org.apache.spark.examples.SparkPi &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> --conf spark.executor.instances&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> --executor-memory 1024m &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> --conf spark.kubernetes.container.image&lt;span style="color:#f92672">=&lt;/span>spark:latest &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> local:///opt/spark/examples/jars/spark-examples_2.11-X.Y.Z.jar &lt;span style="color:#75715e"># here&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>What&amp;rsquo;s new is:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>--master&lt;/code>: Accepts a prefix &lt;code>k8s://&lt;/code> in the URL, for the
 Kubernetes master API endpoint, exposed by the command
@@ -304,12 +297,10 @@ additionalProperties={})]
 19/08/22 11:59:09 INFO LoggingPodStatusWatcherImpl: Container final
 statuses: Container name: spark-kubernetes-driver Container image:
 spark:docker Container state: Terminated Exit code: 0
-&lt;/code>&lt;/pre>
-&lt;p>To see the job result (and the whole execution) we can run a
+&lt;/code>&lt;/pre>&lt;p>To see the job result (and the whole execution) we can run a
 &lt;code>kubectl logs&lt;/code> passing the name of the driver pod as a parameter:&lt;/p>
-&lt;pre>&lt;code class="language-bash">kubectl logs $(kubectl get pods | grep 'spark-pi.*-driver')
-&lt;/code>&lt;/pre>
-&lt;p>Which brings the output (omitted some entries), similar to:&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl logs &lt;span style="color:#66d9ef">$(&lt;/span>kubectl get pods | grep &lt;span style="color:#e6db74">&amp;#39;spark-pi.*-driver&amp;#39;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Which brings the output (omitted some entries), similar to:&lt;/p>
 &lt;pre>&lt;code>...
 19/08/22 14:59:08 INFO TaskSetManager: Finished task 1.0 in stage 0.0
 (TID 1) in 52 ms on 172.17.0.7 (executor 1) (2/2)
@@ -345,16 +336,13 @@ OutputCommitCoordinator stopped!
 /var/data/spark-084e8326-c8ce-4042-a2ed-75c1eb80414a/spark-ef8117bf-90
 d0-4a0d-9cab-f36a7bb18910
 ...
-&lt;/code>&lt;/pre>
-&lt;p>The result appears in:&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>The result appears in:&lt;/p>
 &lt;pre>&lt;code>19/08/22 14:59:08 INFO DAGScheduler: Job 0 finished: reduce at
 SparkPi.scala:38, took 1.040608 s Pi is roughly 3.138915694578473
-&lt;/code>&lt;/pre>
-&lt;p>Finally, let&amp;rsquo;s delete the VM that Minikube generates, to clean up the
+&lt;/code>&lt;/pre>&lt;p>Finally, let&amp;rsquo;s delete the VM that Minikube generates, to clean up the
 environment (unless you want to keep playing with it):&lt;/p>
-&lt;pre>&lt;code class="language-bash">minikube delete
-&lt;/code>&lt;/pre>
-&lt;h2 id="last-words">Last words&lt;/h2>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">minikube delete
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="last-words">Last words&lt;/h2>
 &lt;p>I hope your curiosity got &lt;em>sparked&lt;/em> and some ideas for further
 development have raised for your Big Data workloads. If you have any
 doubt or suggestion, don&amp;rsquo;t hesitate to share on the comment section.&lt;/p></description></item><item><title>ReclameAQUI Data Lake</title><link>https://macunha.me/en/project/reclameaqui-data-lake/</link><pubDate>Sun, 21 Jul 2019 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/reclameaqui-data-lake/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>

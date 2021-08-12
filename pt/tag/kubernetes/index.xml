@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>kubernetes | It's me, Macunha!</title><link>https://macunha.me/pt/tag/kubernetes/</link><atom:link href="https://macunha.me/pt/tag/kubernetes/index.xml" rel="self" type="application/rss+xml"/><description>kubernetes</description><generator>Wowchemy (https://wowchemy.com)</generator><language>pt-br</language><copyright>© 2021 Matheus Cunha</copyright><lastBuildDate>Thu, 21 May 2020 23:00:57 +0200</lastBuildDate><image><url>https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_3.png</url><title>kubernetes</title><link>https://macunha.me/pt/tag/kubernetes/</link></image><item><title>Quickstart: Apache Spark no Kubernetes</title><link>https://macunha.me/pt/post/2020/05/quickstart-apache-spark-no-kubernetes/</link><pubDate>Thu, 21 May 2020 23:00:57 +0200</pubDate><guid>https://macunha.me/pt/post/2020/05/quickstart-apache-spark-no-kubernetes/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>kubernetes | It's me, Macunha!</title><link>https://macunha.me/pt/tag/kubernetes/</link><atom:link href="https://macunha.me/pt/tag/kubernetes/index.xml" rel="self" type="application/rss+xml"/><description>kubernetes</description><generator>Wowchemy (https://wowchemy.com)</generator><language>pt-br</language><copyright>© 2021 Matheus Cunha</copyright><lastBuildDate>Thu, 21 May 2020 23:00:57 +0200</lastBuildDate><image><url>https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>kubernetes</title><link>https://macunha.me/pt/tag/kubernetes/</link></image><item><title>Quickstart: Apache Spark no Kubernetes</title><link>https://macunha.me/pt/post/2020/05/quickstart-apache-spark-no-kubernetes/</link><pubDate>Thu, 21 May 2020 23:00:57 +0200</pubDate><guid>https://macunha.me/pt/post/2020/05/quickstart-apache-spark-no-kubernetes/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
 &lt;h2 id="apache-spark-operator-para-kubernetes">Apache Spark Operator para Kubernetes&lt;/h2>
 &lt;p>Desde o seu lançamento em 2014 pela Google, o Kubernetes tem ganhado
 muita popularidade junto com o próprio Docker e desde 2016 passou a
@@ -89,30 +89,26 @@ que vai tomar &lt;em>algumas horas&lt;/em> até terminar, quanto&lt;/li>
 &lt;/ul>
 &lt;p>Assim que o Apache estiver descompactado, vamos adicionar o
 caminho no PATH para facilitar a execução:&lt;/p>
-&lt;pre>&lt;code class="language-bash">export PATH=${PATH}:/path/to/apache-spark-X.Y.Z/bin
-&lt;/code>&lt;/pre>
-&lt;h2 id="criando-o-cluster-com-minikube">Criando o &amp;ldquo;cluster&amp;rdquo; com Minikube&lt;/h2>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">export PATH&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>PATH&lt;span style="color:#e6db74">}&lt;/span>:/path/to/apache-spark-X.Y.Z/bin
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="criando-o-cluster-com-minikube">Criando o &amp;ldquo;cluster&amp;rdquo; com Minikube&lt;/h2>
 &lt;p>Agora, para ter um Kubernetes vamos iniciar um &lt;code>minikube&lt;/code> com o
 propósito de rodar um dos exemplos disponíveis no &lt;a href="https://github.com/apache/spark/blob/master/examples/src/main/scala/org/apache/spark/examples/SparkPi.scala" target="_blank" rel="noopener">repositório do Spark&lt;/a>
 chamado &lt;code>SparkPi&lt;/code> apenas para demonstração.&lt;/p>
-&lt;pre>&lt;code class="language-bash">minikube start --cpus=2 \
---memory=4g
-&lt;/code>&lt;/pre>
-&lt;h2 id="buildando-a-imagem-docker">Buildando a imagem Docker&lt;/h2>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">minikube start --cpus&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> --memory&lt;span style="color:#f92672">=&lt;/span>4g
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buildando-a-imagem-docker">Buildando a imagem Docker&lt;/h2>
 &lt;p>Vamos utilizar o Docker daemon do Minikube para não depender de um
 registry externo (e só gerar lixo na VM, facilitando a limpeza
 depois). Para isso, o minikube tem um wrapper que facilita a nossa
 vida:&lt;/p>
-&lt;pre>&lt;code class="language-bash">eval $(minikube docker-env)
-&lt;/code>&lt;/pre>
-&lt;p>Após ter configurado as variáveis de ambiente para o Docker daemon,
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">eval &lt;span style="color:#66d9ef">$(&lt;/span>minikube docker-env&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Após ter configurado as variáveis de ambiente para o Docker daemon,
 vamos precisar de uma imagem Docker para executar os jobs.
 Existe um &lt;a href="https://github.com/apache/spark/blob/master/bin/docker-image-tool.sh" target="_blank" rel="noopener">shell script no repositório do Spark&lt;/a>
 para ajudar com isso. Considerando que o &lt;code>PATH&lt;/code> está configurado
 corretamente, basta executar:&lt;/p>
-&lt;pre>&lt;code class="language-bash">docker-image-tool.sh -m -t latest build
-&lt;/code>&lt;/pre>
-&lt;p>&lt;em>Obs.:&lt;/em> O parâmetro &lt;code>-m&lt;/code> aqui indica que é um build para o minikube.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">docker-image-tool.sh -m -t latest build
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;em>Obs.:&lt;/em> O parâmetro &lt;code>-m&lt;/code> aqui indica que é um build para o minikube.&lt;/p>
 &lt;p>Vamos pegar a via expressa para executar o SparkPi, usando o mesmo
 comando que seria utilizado para um cluster Spark &lt;a href="https://spark.apache.org/docs/latest/submitting-applications.html" target="_blank" rel="noopener">spark-submit&lt;/a>.&lt;/p>
 &lt;p>Porém, o Spark Operator dá suporte a definição de jobs no &amp;ldquo;dialeto do
@@ -121,16 +117,15 @@ Kubernetes&amp;rdquo; usando &lt;a href="https://kubernetes.io/docs/concepts/ext
 &lt;h2 id="fire-in-the-hole">Fire in the hole!&lt;/h2>
 &lt;p>Cuidado com o vão entre a versão do Scala e a plataforma quando
 estiver parametrizando o job:&lt;/p>
-&lt;pre>&lt;code class="language-bash">spark-submit --master k8s://https://$(minikube ip):8443 \
---deploy-mode cluster \
---name spark-pi \
---class org.apache.spark.examples.SparkPi \
---conf spark.executor.instances=2 \
---executor-memory 1024m \
---conf spark.kubernetes.container.image=spark:latest \
-local:///opt/spark/examples/jars/spark-examples_2.11-X.Y.Z.jar # aqui
-&lt;/code>&lt;/pre>
-&lt;p>O que temos de novidade é:&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">spark-submit --master k8s://https://&lt;span style="color:#66d9ef">$(&lt;/span>minikube ip&lt;span style="color:#66d9ef">)&lt;/span>:8443 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> --deploy-mode cluster &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> --name spark-pi &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> --class org.apache.spark.examples.SparkPi &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> --conf spark.executor.instances&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> --executor-memory 1024m &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> --conf spark.kubernetes.container.image&lt;span style="color:#f92672">=&lt;/span>spark:latest &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> local:///opt/spark/examples/jars/spark-examples_2.11-X.Y.Z.jar &lt;span style="color:#75715e"># aqui&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>O que temos de novidade é:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>--master&lt;/code>: Aceita o prefixo &lt;code>k8s://&lt;/code> na URL, para o endpoint da
 API do Kubernetes, exposta pelo commando &lt;code>https://$(minikube ip):8443&lt;/code>.
@@ -165,12 +160,10 @@ additionalProperties={})]
 19/08/22 11:59:09 INFO LoggingPodStatusWatcherImpl: Container final
 statuses: Container name: spark-kubernetes-driver Container image:
 spark:docker Container state: Terminated Exit code: 0
-&lt;/code>&lt;/pre>
-&lt;p>Para ver o resultado do job (e toda a execução), podemos mandar um
+&lt;/code>&lt;/pre>&lt;p>Para ver o resultado do job (e toda a execução), podemos mandar um
 &lt;code>kubectl logs&lt;/code> passando o nome do pod do driver como parâmetro:&lt;/p>
-&lt;pre>&lt;code class="language-bash">kubectl logs $(kubectl get pods | grep 'spark-pi.*-driver')
-&lt;/code>&lt;/pre>
-&lt;p>Que traz o output (algumas entradas foram omitidas), parecido com:&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl logs &lt;span style="color:#66d9ef">$(&lt;/span>kubectl get pods | grep &lt;span style="color:#e6db74">&amp;#39;spark-pi.*-driver&amp;#39;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Que traz o output (algumas entradas foram omitidas), parecido com:&lt;/p>
 &lt;pre>&lt;code>...
 19/08/22 14:59:08 INFO TaskSetManager: Finished task 1.0 in stage 0.0
 (TID 1) in 52 ms on 172.17.0.7 (executor 1) (2/2)
@@ -205,16 +198,13 @@ OutputCommitCoordinator stopped!
 19/08/22 14:59:08 INFO ShutdownHookManager: Deleting directory
 /var/data/spark-084e8326-c8ce-4042-a2ed-75c1eb80414a/spark-ef8117bf-90
 d0-4a0d-9cab-f36a7bb18910
-&lt;/code>&lt;/pre>
-&lt;p>O resultado aparece no stdout:&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>O resultado aparece no stdout:&lt;/p>
 &lt;pre>&lt;code>19/08/22 14:59:08 INFO DAGScheduler: Job 0 finished: reduce at
 SparkPi.scala:38, took 1.040608 s Pi is roughly 3.138915694578473
-&lt;/code>&lt;/pre>
-&lt;p>Para finalizar, vamos deletar a VM que o Minikube gera, para limpar o
+&lt;/code>&lt;/pre>&lt;p>Para finalizar, vamos deletar a VM que o Minikube gera, para limpar o
 ambiente (a menos que você queira continuar brincando com ele):&lt;/p>
-&lt;pre>&lt;code class="language-bash">minikube delete
-&lt;/code>&lt;/pre>
-&lt;h2 id="últimas-palavras">Últimas palavras&lt;/h2>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">minikube delete
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="últimas-palavras">Últimas palavras&lt;/h2>
 &lt;p>Espero ter dispertado bastante curiosidade e algumas ideias para
 ir além no desenvolvimento dos seus workloads de Big Data.
 Se tiver alguma dúvida ou sugestão, não deixe de postar na seção de
