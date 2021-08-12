@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>culture | It's me, Macunha!</title><link>https://macunha.me/en/tag/culture/</link><atom:link href="https://macunha.me/en/tag/culture/index.xml" rel="self" type="application/rss+xml"/><description>culture</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 11 Jan 2019 22:00:00 +0000</lastBuildDate><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>culture</title><link>https://macunha.me/en/tag/culture/</link></image><item><title>DevOps: Benefits</title><link>https://macunha.me/en/post/2019/01/devops-benefits/</link><pubDate>Fri, 11 Jan 2019 22:00:00 +0000</pubDate><guid>https://macunha.me/en/post/2019/01/devops-benefits/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>culture | It's me, Macunha!</title><link>https://macunha.me/en/tag/culture/</link><atom:link href="https://macunha.me/en/tag/culture/index.xml" rel="self" type="application/rss+xml"/><description>culture</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Matheus Cunha</copyright><lastBuildDate>Fri, 11 Jan 2019 22:00:00 +0000</lastBuildDate><image><url>https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_3.png</url><title>culture</title><link>https://macunha.me/en/tag/culture/</link></image><item><title>DevOps: Benefits</title><link>https://macunha.me/en/post/2019/01/devops-benefits/</link><pubDate>Fri, 11 Jan 2019 22:00:00 +0000</pubDate><guid>https://macunha.me/en/post/2019/01/devops-benefits/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
 &lt;p>Main benefits that a company generally expects and finds in the adoption of
 culture:&lt;/p>
 &lt;h2 id="faster-and-cheaper-releases">Faster and Cheaper Releases&lt;/h2>
@@ -58,8 +58,7 @@ knowledge and increases the democratization of the infra;&lt;/li>
 &lt;li>Documentation as code, helping new team members get a faster warm up.&lt;/li>
 &lt;/ul>
 &lt;p>These points were well-stressed by the Heroku team and gave rise to the famous
-paper:
-&lt;a href="https://12factor.net/" target="_blank" rel="noopener">The Twelve-Factor App&lt;/a>. It&amp;rsquo;s an excellent reading
+paper: &lt;a href="https://12factor.net/" target="_blank" rel="noopener">The Twelve-Factor App&lt;/a>. It&amp;rsquo;s an excellent reading
 for the explanation of the benefits of configuration management.&lt;/p>
 &lt;h2 id="observability-monitoring-and-self-healing">Observability, Monitoring, and self-healing&lt;/h2>
 &lt;p>At the end of the delivery process, the software must be monitored. Avoiding to
@@ -86,11 +85,15 @@ automated are:&lt;/p>
 &lt;li>Monitoring (with auto-discovery);&lt;/li>
 &lt;li>User Governance;&lt;/li>
 &lt;/ul>
-&lt;h1 id="devops-toolchainhttpsenwikipediaorgwikidevops_toolchain">
-&lt;a href="https://en.wikipedia.org/wiki/DevOps_toolchain" target="_blank" rel="noopener">DevOps toolchain&lt;/a>&lt;/h1>
+&lt;h1 id="devops-toolchainhttpsenwikipediaorgwikidevops_toolchain">&lt;a href="https://en.wikipedia.org/wiki/DevOps_toolchain" target="_blank" rel="noopener">DevOps toolchain&lt;/a>&lt;/h1>
 &lt;p>A combination of tools to facilitate the maintenance and operation of the
 system, with the flow:&lt;/p>
-&lt;p>&lt;img src="https://macunha.me/img/content/devops-lifecycle.png" alt="Development Cycle Using DevOps">&lt;/p>
+&lt;p>
+&lt;figure >
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >&lt;img src="https://macunha.me/img/content/devops-lifecycle.png" alt="Development Cycle Using DevOps" loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
 &lt;blockquote>
 &lt;p>Note: Any similarity to the PDCA is pure certainty.&lt;/p>
 &lt;/blockquote>
@@ -279,8 +282,7 @@ development of the tools that he/she is going to use.&lt;/p>
 &lt;/ul>
 &lt;p>Therefore there is a great incentive for the software to be delivered in parts,
 continuously. Thus gathering user feedback on the next steps, following the
-concepts of evolutionary prototyping, which were widely publicized through
-&lt;a href="http://theleanstartup.com/book" target="_blank" rel="noopener">&lt;em>The
+concepts of evolutionary prototyping, which were widely publicized through &lt;a href="http://theleanstartup.com/book" target="_blank" rel="noopener">&lt;em>The
 Lean Startup&lt;/em>&lt;/a>.&lt;/p>
 &lt;p>This point contrasts sharply with the previous one about continuous release, so
 that it is possible to present the prototype and evolve it throughout the
@@ -308,5 +310,4 @@ by a significant confusion about the subject. It is very common to come across
 different interpretations of &lt;strong>what is DevOps&lt;/strong>. There is a lot of euphemism in
 the area, and gourmetization on LinkedIn, with many SysAdmins calling themselves
 DevOps since they learned to code shell script inside Python.&lt;/p>
-&lt;p>Do you want to keep reading?
-&lt;a href="https://macunha.me/en/post/2019/01/devops-benefits/">Here are the benefits of adopting DevOps techniques.&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>Do you want to keep reading? &lt;a href="https://macunha.me/en/post/2019/01/devops-benefits/">Here are the benefits of adopting DevOps techniques.&lt;/a>&lt;/p></description></item></channel></rss>

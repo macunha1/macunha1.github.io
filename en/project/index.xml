@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Projects | It's me, Macunha!</title><link>https://macunha.me/en/project/</link><atom:link href="https://macunha.me/en/project/index.xml" rel="self" type="application/rss+xml"/><description>Projects</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 21 Jul 2019 00:00:00 +0000</lastBuildDate><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>Projects</title><link>https://macunha.me/en/project/</link></image><item><title>ReclameAQUI Data Lake</title><link>https://macunha.me/en/project/2019/reclameaqui-data-lake/</link><pubDate>Sun, 21 Jul 2019 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2019/reclameaqui-data-lake/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Projects | It's me, Macunha!</title><link>https://macunha.me/en/project/</link><atom:link href="https://macunha.me/en/project/index.xml" rel="self" type="application/rss+xml"/><description>Projects</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Matheus Cunha</copyright><image><url>https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_3.png</url><title>Projects</title><link>https://macunha.me/en/project/</link></image><item><title>ReclameAQUI Data Lake</title><link>https://macunha.me/en/project/reclameaqui-data-lake/</link><pubDate>Sun, 21 Jul 2019 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/reclameaqui-data-lake/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
 &lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>ReclameAQUI (Portuguese for &amp;ldquo;complain here&amp;rdquo;) is an interesting and unique
 business. They&amp;rsquo;re a content aggregator for customers' experience sharing
@@ -49,7 +49,7 @@ the removal of streaming inserts to BigQuery.&lt;/p>
 &lt;p>We made relevant progress in security and governance during the project with the
 introduction of Apache Ranger and Data Lake auditing for access and usage,
 providing advanced security capabilities to ReclameAQUI, which anticipated itself
-towards GDPR and data privacy concerns.&lt;/p></description></item><item><title>Clipping Service News OCR</title><link>https://macunha.me/en/project/2018/clipping-service-news-ocr/</link><pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2018/clipping-service-news-ocr/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+towards GDPR and data privacy concerns.&lt;/p></description></item><item><title>Clipping Service News OCR</title><link>https://macunha.me/en/project/clipping-service-news-ocr/</link><pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/clipping-service-news-ocr/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
 &lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>As the owner of the biggest Brazilian media data set, the media monitoring
 leader Clipping Service was having issues with scalability, getting close to
@@ -105,7 +105,7 @@ benefits, making the process as human as possible for the former employees.&lt;/
 improvements in the media press ingestion throughput (around 20 times faster),
 offering higher quality in press clipping service for its customers and saw the
 opportunity in creating a self-service press clipping service later, since the
-operational cost decreased significantly.&lt;/p></description></item><item><title>Dotz Data Labs</title><link>https://macunha.me/en/project/2017/dotz-data-labs/</link><pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2017/dotz-data-labs/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+operational cost decreased significantly.&lt;/p></description></item><item><title>Dotz Data Labs</title><link>https://macunha.me/en/project/dotz-data-labs/</link><pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/dotz-data-labs/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
 &lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>In order to be able to innovate and maintain itself in a highly changing
 and evolving market, Dotz went through a process of digital
@@ -150,7 +150,7 @@ platform, previously managed inside a large MS SQL Server instance,
 which moved to a Data Lake with layers allowing data categorization,
 governance, quality and security.&lt;/p>
 &lt;p>Supporting analytical processes of users data, faster exploration and
-monetization of their knowledge on customers' behavior.&lt;/p></description></item><item><title>Easynvest Data Platform</title><link>https://macunha.me/en/project/2017/easynvest-data-platform/</link><pubDate>Mon, 03 Jul 2017 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2017/easynvest-data-platform/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+monetization of their knowledge on customers' behavior.&lt;/p></description></item><item><title>Easynvest Data Platform</title><link>https://macunha.me/en/project/easynvest-data-platform/</link><pubDate>Mon, 03 Jul 2017 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/easynvest-data-platform/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
 &lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>Within Easynvest&amp;rsquo;s annual planning, an investment in the expansion of
 data &amp;amp; analytics team aimed at shortening decision making process and
@@ -214,7 +214,7 @@ addition to automating much of the work that used to be done manually.&lt;/p>
 approval time for consumers from roughly 10 days to 1 day. It also made
 the data platform more democratic, providing relevant information that
 facilitates the analysis of areas such as risk (credit analysis) and
-support, without having to give up security.&lt;/p></description></item><item><title>Movida Rent A DevOps</title><link>https://macunha.me/en/project/2016/movida-rent-a-devops/</link><pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2016/movida-rent-a-devops/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+support, without having to give up security.&lt;/p></description></item><item><title>Movida Rent A DevOps</title><link>https://macunha.me/en/project/movida-rent-a-devops/</link><pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/movida-rent-a-devops/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
 &lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>JSL Holdings Ltd, holder of Julio Simões Logistica (biggest logistics
 players in LATAM) bought Movida Rent a Car in 2013 to expand the
@@ -259,7 +259,7 @@ visibility over the history of executed jobs.&lt;/p>
 January 2017 they received the approval.&lt;/p>
 &lt;p>Two weeks later, in February 2017 Movida launched their IPO, marked as
 the first Brazilian IPO of 2017. Movida went public on the 8th of
-February, 2017, raising BRL 645m.&lt;/p></description></item><item><title>Nextel Digital Release</title><link>https://macunha.me/en/project/2016/nextel-digital-release/</link><pubDate>Wed, 30 Nov 2016 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/2016/nextel-digital-release/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+February, 2017, raising BRL 645m.&lt;/p></description></item><item><title>Nextel Digital Release</title><link>https://macunha.me/en/project/nextel-digital-release/</link><pubDate>Wed, 30 Nov 2016 00:00:00 +0000</pubDate><guid>https://macunha.me/en/project/nextel-digital-release/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
 &lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>Nextel planed to develop a mobile application to reduce their
 contact rate and operational costs with call centers. &amp;ldquo;Nextel Digital&amp;rdquo;

@@ -1,137 +1,512 @@
-<!doctype html><html lang=pt-br><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=generator content="Source Themes Academic 4.8.0"><meta name=author content="Matheus Cunha"><meta name=description content="De onde vieram e para onde vão. DevOps não é apenas automação, mas sim uma cultura ágil para negócios"><link rel=alternate hreflang=en href=https://macunha.me/en/post/2019/01/devops-genesis/><link rel=alternate hreflang=pt-br href=https://macunha.me/pt/post/2019/01/devops-genesis/><meta name=theme-color content="#2962ff"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css crossorigin=anonymous title=hl-light><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css crossorigin=anonymous title=hl-dark disabled><script src=https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin=anonymous async></script><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap"><link rel=stylesheet href=https://macunha.me/css/academic.css><script async src="https://www.googletagmanager.com/gtag/js?id=UA-143794949-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-function trackOutboundLink(url,target){gtag('event','click',{'event_category':'outbound','event_label':url,'transport_type':'beacon','event_callback':function(){if(target!=='_blank'){document.location=url;}}});console.debug("Outbound link clicked: "+url);}
-function onClickCallback(event){if((event.target.tagName!=='A')||(event.target.host===window.location.host)){return;}
-trackOutboundLink(event.target,event.target.getAttribute('target'));}
-gtag('js',new Date());gtag('config','UA-143794949-1',{'anonymize_ip':true});document.addEventListener('click',onClickCallback,false);</script><link rel=manifest href=https://macunha.me/pt/index.webmanifest><link rel=icon type=image/png href=https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_32x32_fill_lanczos_center_2.png><link rel=apple-touch-icon type=image/png href=https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_192x192_fill_lanczos_center_2.png><link rel=canonical href=https://macunha.me/pt/post/2019/01/devops-genesis/><meta property="twitter:card" content="summary"><meta property="twitter:site" content="@_macunha1"><meta property="twitter:creator" content="@_macunha1"><meta property="og:site_name" content="It's me, Macunha!"><meta property="og:url" content="https://macunha.me/pt/post/2019/01/devops-genesis/"><meta property="og:title" content="DevOps: Genesis | It's me, Macunha!"><meta property="og:description" content="De onde vieram e para onde vão. DevOps não é apenas automação, mas sim uma cultura ágil para negócios"><meta property="og:image" content="https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png"><meta property="twitter:image" content="https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="pt-br"><meta property="article:published_time" content="2019-01-11T21:00:00+00:00"><meta property="article:modified_time" content="2020-06-18T07:19:15+02:00"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://macunha.me/pt/post/2019/01/devops-genesis/"},"headline":"DevOps: Genesis","datePublished":"2019-01-11T21:00:00Z","dateModified":"2020-06-18T07:19:15+02:00","author":{"@type":"Person","name":"Matheus Cunha"},"publisher":{"@type":"Organization","name":"It's me, Macunha!","logo":{"@type":"ImageObject","url":"https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_192x192_fill_lanczos_center_2.png"}},"description":"De onde vieram e para onde vão. DevOps não é apenas automação, mas sim uma cultura ágil para negócios"}</script><script src=https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js integrity="sha256-5VhCqFam2Cn+yjw61zbBNrbHVJ6SRydPeKopYlngbiQ=" crossorigin=anonymous></script><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.css integrity="sha256-zQ0LblD/Af8vOppw18+2anxsuaz3pWYyVWi+bTvTH8Q=" crossorigin=anonymous><script>window.addEventListener("load",function(){window.cookieconsent.initialise({"palette":{"popup":{"background":"#2962ff","text":"#fff"},"button":{"background":"#fff","text":"#2962ff"}},"theme":"classic","content":{"message":"Este site contém cookies para garantir que você tenha a melhor experência.","dismiss":"Entendi!","link":"Saiba mais","href":"https://www.cookiesandyou.com"}})});</script><title>DevOps: Genesis | It's me, Macunha!</title></head><body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents><aside class=search-results id=search><div class=container><section class=search-header><div class="row no-gutters justify-content-between mb-3"><div class=col-6><h1>Pesquisar</h1></div><div class="col-6 col-search-close"><a class=js-search href=#><i class="fas fa-times-circle text-muted" aria-hidden=true></i></a></div></div><div id=search-box><input name=q id=search-query placeholder=Pesquisar... autocapitalize=off autocomplete=off autocorrect=off spellcheck=false type=search></div></section><section class=section-search-results><div id=search-hits></div></section></div></aside><nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id=navbar-main><div class=container><div class="d-none d-lg-inline-flex"><a class=navbar-brand href=https://macunha.me/pt/>It's me, Macunha!</a></div><button type=button class=navbar-toggler data-toggle=collapse data-target=#navbar-content aria-controls=navbar aria-expanded=false aria-label="Alterar navegação">
-<span><i class="fas fa-bars"></i></span></button><div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none"><a class=navbar-brand href=https://macunha.me/pt/>It's me, Macunha!</a></div><div class="navbar-collapse main-menu-item collapse justify-content-end" id=navbar-content><ul class="navbar-nav d-md-inline-flex"><li class=nav-item><a class=nav-link href=https://macunha.me/pt/project/><span>Projetos</span></a></li><li class=nav-item><a class="nav-link active" href=https://macunha.me/pt/post/><span>Posts</span></a></li><li class=nav-item><a class=nav-link href=https://macunha.me/pt/author/matheus-cunha/><span>Sobre</span></a></li></ul></div><ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2"><li class=nav-item><a class="nav-link js-search" href=# aria-label=Pesquisar><i class="fas fa-search" aria-hidden=true></i></a></li><li class="nav-item dropdown theme-dropdown"><a href=# class="nav-link js-theme-selector" data-toggle=dropdown aria-haspopup=true><i class="fas fa-palette" aria-hidden=true></i></a><div class=dropdown-menu><a href=# class="dropdown-item js-set-theme-light"><span>Light</span></a>
-<a href=# class="dropdown-item js-set-theme-dark"><span>Dark</span></a>
-<a href=# class="dropdown-item js-set-theme-auto"><span>Automatic</span></a></div></li><li class="nav-item dropdown i18n-dropdown"><a href=# class="nav-link dropdown-toggle" data-toggle=dropdown aria-haspopup=true><i class="fas fa-globe mr-1" aria-hidden=true></i><span class="d-none d-lg-inline">Português</span></a><div class=dropdown-menu><div class="dropdown-item dropdown-item-active"><span>Português</span></div><a class=dropdown-item href=https://macunha.me/en/post/2019/01/devops-genesis/><span>English</span></a></div></li></ul></div></nav><article class=article><div class="article-container pt-3"><h1>DevOps: Genesis</h1><div class=article-metadata><span class=article-date>Última atualização em
-18/06/2020</span>
-<span class=middot-divider></span><span class=article-reading-time>9 minutos de leitura</span>
-<span class=middot-divider></span><a href=https://macunha.me/pt/post/2019/01/devops-genesis/#disqus_thread></a><span class=middot-divider></span><span class=article-categories><i class="fas fa-folder mr-1"></i><a href=https://macunha.me/pt/category/devops/>DevOps</a>, <a href=https://macunha.me/pt/category/agile-manifesto/>Agile Manifesto</a></span></div></div><div class=article-container><div class=article-style><h1 id=introdução>Introdução</h1><p><em>First of all, it’s all about Agile.</em></p><p>A metodologia DevOps foi criada utilizando os conceitos dos métodos Ágeis, para
+<!doctype html><html lang=pt-br>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Wowchemy 5.3.0 for Hugo">
+<meta name=author content="Matheus Cunha">
+<meta name=description content="De onde vieram e para onde vão. DevOps não é apenas automação, mas sim uma cultura ágil para negócios">
+<link rel=alternate hreflang=en href=https://macunha.me/en/post/2019/01/devops-genesis/>
+<link rel=alternate hreflang=pt-br href=https://macunha.me/pt/post/2019/01/devops-genesis/>
+<meta name=theme-color content="#1565c0">
+<link rel=stylesheet href=https://macunha.me/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin=anonymous media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css crossorigin=anonymous title=hl-light media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css crossorigin=anonymous title=hl-dark media=print onload="this.media='all'" disabled>
+<link rel=stylesheet href=https://macunha.me/css/wowchemy.f0cf03b20998d63e314819fa4a90c13f.css>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-143794949-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}function trackOutboundLink(a,b){gtag('event','click',{event_category:'outbound',event_label:a,transport_type:'beacon',event_callback:function(){b!=='_blank'&&(document.location=a)}}),console.debug("Outbound link clicked: "+a)}function onClickCallback(a){if(a.target.tagName!=='A'||a.target.host===window.location.host)return;trackOutboundLink(a.target,a.target.getAttribute('target'))}gtag('js',new Date),gtag('config','UA-143794949-1',{anonymize_ip:!0}),gtag('set',{cookie_flags:'SameSite=None;Secure'}),document.addEventListener('click',onClickCallback,!1)</script>
+<link rel=manifest href=https://macunha.me/pt/manifest.webmanifest>
+<link rel=icon type=image/png href=https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_32x32_fill_lanczos_center_3.png>
+<link rel=apple-touch-icon type=image/png href=https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_180x180_fill_lanczos_center_3.png>
+<link rel=canonical href=https://macunha.me/pt/post/2019/01/devops-genesis/>
+<meta property="twitter:card" content="summary">
+<meta property="og:site_name" content="It's me, Macunha!">
+<meta property="og:url" content="https://macunha.me/pt/post/2019/01/devops-genesis/">
+<meta property="og:title" content="DevOps: Genesis | It's me, Macunha!">
+<meta property="og:description" content="De onde vieram e para onde vão. DevOps não é apenas automação, mas sim uma cultura ágil para negócios"><meta property="og:image" content="https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_3.png">
+<meta property="twitter:image" content="https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="pt-br">
+<meta property="article:published_time" content="2019-01-11T21:00:00+00:00">
+<meta property="article:modified_time" content="2020-06-18T07:19:15+02:00">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://macunha.me/pt/post/2019/01/devops-genesis/"},"headline":"DevOps: Genesis","datePublished":"2019-01-11T21:00:00Z","dateModified":"2020-06-18T07:19:15+02:00","author":{"@type":"Person","name":"Matheus Cunha"},"publisher":{"@type":"Organization","name":"It's me, Macunha!","logo":{"@type":"ImageObject","url":"https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_192x192_fill_lanczos_center_3.png"}},"description":"De onde vieram e para onde vão. DevOps não é apenas automação, mas sim uma cultura ágil para negócios"}</script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js integrity="sha256-5VhCqFam2Cn+yjw61zbBNrbHVJ6SRydPeKopYlngbiQ=" crossorigin=anonymous></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.css integrity="sha256-zQ0LblD/Af8vOppw18+2anxsuaz3pWYyVWi+bTvTH8Q=" crossorigin=anonymous>
+<script>window.addEventListener("load",function(){window.cookieconsent.initialise({palette:{popup:{background:"#1565c0",text:"rgb(255, 255, 255)"},button:{background:"rgb(255, 255, 255)",text:"#1565c0"}},theme:"classic",content:{message:"Este site contém cookies para garantir que você tenha a melhor experência.",dismiss:"Entendi!",link:"Saiba mais",href:"https://www.cookiesandyou.com"}})})</script>
+<title>DevOps: Genesis | It's me, Macunha!</title>
+</head>
+<body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=1ea695d486767aac5f192dfd0ddf47d4>
+<script src=https://macunha.me/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js></script>
+<aside class=search-modal id=search>
+<div class=container>
+<section class=search-header>
+<div class="row no-gutters justify-content-between mb-3">
+<div class=col-6>
+<h1>Pesquisar</h1>
+</div>
+<div class="col-6 col-search-close">
+<a class=js-search href=# aria-label=Close><i class="fas fa-times-circle text-muted" aria-hidden=true></i></a>
+</div>
+</div>
+<div id=search-box>
+<input name=q id=search-query placeholder=Pesquisar... autocapitalize=off autocomplete=off autocorrect=off spellcheck=false type=search class=form-control aria-label=Pesquisar...>
+</div>
+</section>
+<section class=section-search-results>
+<div id=search-hits>
+</div>
+</section>
+</div>
+</aside>
+<div class=page-header>
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id=navbar-main>
+<div class=container-xl>
+<div class="d-none d-lg-inline-flex">
+<a class=navbar-brand href=https://macunha.me/pt/>It's me, Macunha!</a>
+</div>
+<button type=button class=navbar-toggler data-toggle=collapse data-target=#navbar-content aria-controls=navbar-content aria-expanded=false aria-label="Alterar navegação">
+<span><i class="fas fa-bars"></i></span>
+</button>
+<div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+<a class=navbar-brand href=https://macunha.me/pt/>It's me, Macunha!</a>
+</div>
+<div class="navbar-collapse main-menu-item collapse justify-content-end" id=navbar-content>
+<ul class="navbar-nav d-md-inline-flex">
+<li class=nav-item>
+<a class=nav-link href=https://macunha.me/pt/project/><span>Projetos</span></a>
+</li>
+<li class=nav-item>
+<a class="nav-link active" href=https://macunha.me/pt/post/><span>Posts</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://macunha.me/pt/author/matheus-cunha/><span>Sobre</span></a>
+</li>
+</ul>
+</div>
+<ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+<li class=nav-item>
+<a class="nav-link js-search" href=# aria-label=Pesquisar><i class="fas fa-search" aria-hidden=true></i></a>
+</li>
+<li class="nav-item dropdown theme-dropdown">
+<a href=# class=nav-link data-toggle=dropdown aria-haspopup=true aria-label="Display preferences">
+<i class="fas fa-moon" aria-hidden=true></i>
+</a>
+<div class=dropdown-menu>
+<a href=# class="dropdown-item js-set-theme-light">
+<span>Light</span>
+</a>
+<a href=# class="dropdown-item js-set-theme-dark">
+<span>Dark</span>
+</a>
+<a href=# class="dropdown-item js-set-theme-auto">
+<span>Automatic</span>
+</a>
+</div>
+</li>
+<li class="nav-item dropdown i18n-dropdown">
+<a href=# class="nav-link dropdown-toggle" data-toggle=dropdown aria-haspopup=true aria-label=Languages>
+<i class="fas fa-globe mr-1" aria-hidden=true></i><span class="d-none d-lg-inline">Português</span></a>
+<div class=dropdown-menu>
+<div class="dropdown-item dropdown-item-active">
+<span>Português</span>
+</div>
+<a class=dropdown-item href=https://macunha.me/en/post/2019/01/devops-genesis/>
+<span>English</span>
+</a>
+</div>
+</li>
+</ul>
+</div>
+</nav>
+</div>
+<div class=page-body>
+<article class=article>
+<div class="article-container pt-3">
+<h1>DevOps: Genesis</h1>
+<div class=article-metadata>
+<span class=article-date>
+Última atualização em
+18/06/2020
+</span>
+<span class=middot-divider></span>
+<span class=article-reading-time>
+9 minutos de leitura
+</span>
+<span class=middot-divider></span>
+<a href=https://macunha.me/pt/post/2019/01/devops-genesis/#disqus_thread></a>
+<span class=middot-divider></span>
+<span class=article-categories>
+<i class="fas fa-folder mr-1"></i><a href=https://macunha.me/pt/category/devops/>DevOps</a>, <a href=https://macunha.me/pt/category/agile-manifesto/>Agile Manifesto</a></span>
+</div>
+</div>
+<div class=article-container>
+<div class=article-style>
+<h1 id=introdução>Introdução</h1>
+<p><em>First of all, it’s all about Agile.</em></p>
+<p>A metodologia DevOps foi criada utilizando os conceitos dos métodos Ágeis, para
 entregar um grande valor durante o processo de desenvolvimento de software,
 automatizando o release de features com pipelines, para conseguir provar
 hipóteses mais rápido e assim se adaptar mais rápido às mudanças por meio de uma
 abordagem “fail-fast”. Essas mudanças são mais culturais do que técnicas,
-portanto é comum dizer que DevOps é cultura.</p><p>A implementação de DevOps acontece por meio da automação de processos, tendo
+portanto é comum dizer que DevOps é cultura.</p>
+<p>A implementação de DevOps acontece por meio da automação de processos, tendo
 muito forte dentro dessa implementação a reengenharia de processos da empresa. A
 implementação da parte técnica é simples e fácil se comparada com a mudança de
 comportamento das pessoas. Portanto, é bastante confuso o papel que um
 “Engenheiro/Analista DevOps” desempenharia, no meio dessa confusão, existem
-muitos SysAdmins e Analistas de Infra assumindo o papel de “DevOps”.</p><h2 id=first-things-first-lean-é-a-base-do-agile>First things first, Lean é a base do Agile</h2><p>A realidade não é tão feliz quanto parece. Depois da segunda guerra mundial, o
+muitos SysAdmins e Analistas de Infra assumindo o papel de “DevOps”.</p>
+<h2 id=first-things-first-lean-é-a-base-do-agile>First things first, Lean é a base do Agile</h2>
+<p>A realidade não é tão feliz quanto parece. Depois da segunda guerra mundial, o
 Japão estava destruído e com poucos recursos, após ter perdido a guerra. Com uma
 quantia limitada de recursos, o país precisou se reinventar e sobreviver após
 uma época de forte depressão, durante essa época dois caras ficaram famosos pelo
 trabalho realizado dentro de uma empresa, que mais tarde teve o nome dedicado ao
-modelo que foi criado.</p><p>Esses caras eram Eiji Toyoda e Taiichi Ohno, que trabalhavam para a Toyota Motor
+modelo que foi criado.</p>
+<p>Esses caras eram Eiji Toyoda e Taiichi Ohno, que trabalhavam para a Toyota Motor
 Corporation. Foram os fundadores do modelo de produção Toyota, também conhecido
-como Toyotismo.</p><h2 id=toyota-deu-origem-ao-lean>Toyota deu origem ao Lean</h2><p>Lean é uma metodologia que ensina a otimizar os processos da empresa;
+como Toyotismo.</p>
+<h2 id=toyota-deu-origem-ao-lean>Toyota deu origem ao Lean</h2>
+<p>Lean é uma metodologia que ensina a otimizar os processos da empresa;
 end-to-end, para dar mais atenção às tarefas que <strong>entregam valor</strong> ao
 consumidor final, incentivando ao máximo a remoção de bottlenecks no processo,
 assim como a análise de tarefas que são desperdício (definidas pelos 3M) para
-que sejam identificadas e removidas.</p><p>Essas tarefas consideradas desperdício são classificadas como 3M dentro do Lean
+que sejam identificadas e removidas.</p>
+<p>Essas tarefas consideradas desperdício são classificadas como 3M dentro do Lean
 que representam: <em>Muda, Mura, e Muri</em>. Outro ponto importante a destacar no
 processo é a utilização do método nomeado Kaizen (continuous improvement), com
 foco em melhorar continuamente buscando atingir um nível de excelência em
-qualidade.</p><p>A qualidade faz parte da cultura japonesa, pois existe a crença de que um
+qualidade.</p>
+<p>A qualidade faz parte da cultura japonesa, pois existe a crença de que um
 produto de qualidade traz o cliente de volta, mesmo que os produtos demorem mais
 para estragar, os clientes serão fiéis a eles, pois terão uma boa experiência.
-Antes mesmo de falarmos sobre user experience, eles já estavam pensando nisso.</p><h2 id=kaizen>Kaizen</h2><p>Um mindset que ajuda a olhar para cada parte do processo exclusivamente e pensar
+Antes mesmo de falarmos sobre user experience, eles já estavam pensando nisso.</p>
+<h2 id=kaizen>Kaizen</h2>
+<p>Um mindset que ajuda a olhar para cada parte do processo exclusivamente e pensar
 nas melhorias, envolvendo as pessoas que fazem parte do processo, assim
-incentiva que haja a inclusão dessas pessoas nas decisões de mudança, já que:</p><ul><li>Fica muito mais fácil de aceitar uma mudança quando ela não é imposta
-(top-down);</li><li>Há uma absorção maior das mudanças pelas pessoas, quando elas são incluídas
-no processo;</li><li>As pessoas que são incluídas no processo trazem as suas preocupações e
+incentiva que haja a inclusão dessas pessoas nas decisões de mudança, já que:</p>
+<ul>
+<li>Fica muito mais fácil de aceitar uma mudança quando ela não é imposta
+(top-down);</li>
+<li>Há uma absorção maior das mudanças pelas pessoas, quando elas são incluídas
+no processo;</li>
+<li>As pessoas que são incluídas no processo trazem as suas preocupações e
 sugestões, que contribuem positivamente com a evolução da mudança, tornando as
-ideias propostas mais robustas devido ao incentivo em relação à contribuição.</li></ul><p>O processo de definição das melhorias por meio de Kaizen acontece (normalmente)
-na seguinte ordem:</p><p><img src=https://cdn-images-1.medium.com/max/600/1*N8KelcHbixESci5Y0JQoYA.png alt="círculo PDCA"></p><ol><li>Definir objetivos com base em dados;</li><li>Revisar o estado atual e desenvolver um plano de melhoria;</li><li>Implementar a melhoria;</li><li>Revisar a implementação e corrigir o que não funciona;</li><li>Reportar os resultados e determinar os itens a serem monitorados.</li></ol><p>Esse processo é bastante chamado de <strong>PDCA: Plain-Do-Control-Act</strong>, que se
-resume em:</p><ul><li>Plan (desenvolver a hipótese);</li><li>Do (executar um experimento);</li><li>Check (validar os resultados);</li><li>Act (refinar o experimento e recomeçar).</li></ul><h1 id=3m-muda-mura-muri>3M: Muda, Mura, Muri</h1><h2 id=muda-desperdício>Muda (desperdício)</h2><p>Qualquer atividade que consuma tempo sem agregar valor ao consumidor final.
-Como por exemplo:</p><ul><li>produção em excesso;</li><li>tempo parado (ocioso) no processo;</li><li>defeito nos produtos.</li></ul><p>É importante lembrar que existem níveis diferentes de Muda que podem ser ou não
-removidos com rapidez, e a classificação depende do tempo para remoção.</p><p>Um exemplo de Muda mais demorado é a descontinuação de um software legado que
+ideias propostas mais robustas devido ao incentivo em relação à contribuição.</li>
+</ul>
+<p>O processo de definição das melhorias por meio de Kaizen acontece (normalmente)
+na seguinte ordem:</p>
+<p>
+<figure>
+<div class="d-flex justify-content-center">
+<div class=w-100><img src=https://cdn-images-1.medium.com/max/600/1*N8KelcHbixESci5Y0JQoYA.png alt="círculo PDCA" loading=lazy data-zoomable></div>
+</div></figure>
+</p>
+<ol>
+<li>Definir objetivos com base em dados;</li>
+<li>Revisar o estado atual e desenvolver um plano de melhoria;</li>
+<li>Implementar a melhoria;</li>
+<li>Revisar a implementação e corrigir o que não funciona;</li>
+<li>Reportar os resultados e determinar os itens a serem monitorados.</li>
+</ol>
+<p>Esse processo é bastante chamado de <strong>PDCA: Plain-Do-Control-Act</strong>, que se
+resume em:</p>
+<ul>
+<li>Plan (desenvolver a hipótese);</li>
+<li>Do (executar um experimento);</li>
+<li>Check (validar os resultados);</li>
+<li>Act (refinar o experimento e recomeçar).</li>
+</ul>
+<h1 id=3m-muda-mura-muri>3M: Muda, Mura, Muri</h1>
+<h2 id=muda-desperdício>Muda (desperdício)</h2>
+<p>Qualquer atividade que consuma tempo sem agregar valor ao consumidor final.
+Como por exemplo:</p>
+<ul>
+<li>produção em excesso;</li>
+<li>tempo parado (ocioso) no processo;</li>
+<li>defeito nos produtos.</li>
+</ul>
+<p>É importante lembrar que existem níveis diferentes de Muda que podem ser ou não
+removidos com rapidez, e a classificação depende do tempo para remoção.</p>
+<p>Um exemplo de Muda mais demorado é a descontinuação de um software legado que
 acaba tendo ciclos mais longos de release, causando tempo ocioso nos times,
-muitas vezes uma rotina de testes longa e manual.</p><h2 id=mura-desigualdade>Mura (desigualdade)</h2><p>Atividades que são muito variáveis e imprevisíveis, gerando resultados
+muitas vezes uma rotina de testes longa e manual.</p>
+<h2 id=mura-desigualdade>Mura (desigualdade)</h2>
+<p>Atividades que são muito variáveis e imprevisíveis, gerando resultados
 diferentes em todas as execuções. Por exemplo: a execução de tarefas que não
 foram bem planejadas e acabam chegando com prazos rígidos. São executadas na
 correria, gerando um desgaste, desespero, e ainda por cima, ao terminar deixam
 as pessoas que executaram essas tarefas esperando (seja um feedback, ou então a
-confirmação de que está finalizado).</p><h2 id=muri-sobrecarga>Muri (sobrecarga)</h2><p>Exigir que as pessoas (ou os equipamentos) trabalhem além do limite, para
+confirmação de que está finalizado).</p>
+<h2 id=muri-sobrecarga>Muri (sobrecarga)</h2>
+<p>Exigir que as pessoas (ou os equipamentos) trabalhem além do limite, para
 atingir algum tipo de meta ou expectativa, gerando cansaço e consequentemente
 falhas durante o processo. Essas falhas são geralmente erros humanos causados
-pelo cansaço durante o trabalho excessivo.</p><h1 id=voltando-ao-agile>Voltando ao Agile…</h1><p>No ano 2000 um grupo de 17 pessoas se encontrou em um resort em Oregon para
+pelo cansaço durante o trabalho excessivo.</p>
+<h1 id=voltando-ao-agile>Voltando ao Agile…</h1>
+<p>No ano 2000 um grupo de 17 pessoas se encontrou em um resort em Oregon para
 conversar sobre ideias que poderiam melhorar o fluxo de desenvolvimento de
 software. Depois de um ano de amadurecimento das ideias, essas pessoas se
 encontraram de novo e publicaram as ideias, que hoje conhecemos como: Agile
-Manifesto.</p><p>Os principais pontos são:</p><ul><li>Individuals and interactions over processes and tools</li><li>Working software over comprehensive documentation</li><li>Customer collaboration over contract negotiation</li><li>Responding to change over following a plan</li></ul><p>Vou me restringuir a explicação desses pontos com o ponto de vista DevOps, para
-não fugir (mais) do tema.</p><h2 id=individuals-and-interactions>Individuals and interactions</h2><p><em>over processes and tools</em></p><p>As pessoas devem receber o kit de ferramentas (tooling) apropriado para
+Manifesto.</p>
+<p>Os principais pontos são:</p>
+<ul>
+<li>Individuals and interactions over processes and tools</li>
+<li>Working software over comprehensive documentation</li>
+<li>Customer collaboration over contract negotiation</li>
+<li>Responding to change over following a plan</li>
+</ul>
+<p>Vou me restringuir a explicação desses pontos com o ponto de vista DevOps, para
+não fugir (mais) do tema.</p>
+<h2 id=individuals-and-interactions>Individuals and interactions</h2>
+<p><em>over processes and tools</em></p>
+<p>As pessoas devem receber o kit de ferramentas (tooling) apropriado para
 trabalhar e então serem empoderados para realizar seu trabalho. As interações
 entre pessoas é extremamente incentivada, para o compartilhamento de
 conhecimento e também para facilitar o fluxo criativo dentro dos times de
-desenvolvimento.</p><p>Um excelente exemplo de interação incentivada por meio de DevOps é o hábito de
+desenvolvimento.</p>
+<p>Um excelente exemplo de interação incentivada por meio de DevOps é o hábito de
 code review. Considerando que pequenas partes do software serão iteradas e
 aprovadas no pipeline passando por diferentes ambientes, de maneira automática,
-o melhor jeito de prevenir defeitos é por meio de code review.</p><p>Esse hábito traz benefício como:</p><ul><li>Compartilhamento de conhecimento no time;</li><li>Observação do problema em diferentes pontos de vista;</li><li>Engajamento no time;</li><li>Redução no número de bugs.</li></ul><h2 id=working-software>Working software</h2><p><em>over comprehensive documentation</em></p><p>Aqui existe um trick na questão do working software, um software que funciona
+o melhor jeito de prevenir defeitos é por meio de code review.</p>
+<p>Esse hábito traz benefício como:</p>
+<ul>
+<li>Compartilhamento de conhecimento no time;</li>
+<li>Observação do problema em diferentes pontos de vista;</li>
+<li>Engajamento no time;</li>
+<li>Redução no número de bugs.</li>
+</ul>
+<h2 id=working-software>Working software</h2>
+<p><em>over comprehensive documentation</em></p>
+<p>Aqui existe um trick na questão do working software, um software que funciona
 não é “compilou, tá funcionando”. O software que funciona é o que atende aos
 requisitos do usuário; i.e. o software que resolve o problema e as dores do
-usuário.</p><p>Como o mercado é muito dinâmico, e evolui com grande velocidade, muitas vezes
+usuário.</p>
+<p>Como o mercado é muito dinâmico, e evolui com grande velocidade, muitas vezes
 durante o projeto de desenvolvimento de software os requisitos mudam devido a
 fatores externos. Portanto, sabendo que não é possível prever todos os fatores,
 muitas gambiarras são feitas no meio do caminho e documentadas, para que o
 usuário final aprenda a lidar com as falhas, e executar os workarounds,
 gastando mais esforço do que seria necessário para realizar as tarefas por meio
-do software.</p><blockquote><p>Entregar frequentemente software funcionando, de poucas semanas a poucos
-meses, com preferência à menor escala de tempo</p></blockquote><p>Incentivando assim que hajam deployments tanto quanto o possível, para que as
+do software.</p>
+<blockquote>
+<p>Entregar frequentemente software funcionando, de poucas semanas a poucos
+meses, com preferência à menor escala de tempo</p>
+</blockquote>
+<p>Incentivando assim que hajam deployments tanto quanto o possível, para que as
 falhas aconteçam o mais cedo possível, permitindo assim que o impacto delas seja
-bem menor.</p><h1 id=fail-fast>Fail-fast!</h1><p>As falhas são compreendidas e incentivadas, pois faz parte do mindset entender
-que:</p><ul><li>Só erra quem faz;</li><li>Falhar é o melhor jeito de aprender e evoluir;</li><li>Shit happens.</li></ul><p>Nada como citar a Lei de Murphy para melhor contextualizar</p><blockquote><p>&ldquo;Se algo pode dar errado, dará.&rdquo;</p></blockquote><p>Portanto é melhor que as falhas ocorram cedo, enquanto o custo de correção ainda
+bem menor.</p>
+<h1 id=fail-fast>Fail-fast!</h1>
+<p>As falhas são compreendidas e incentivadas, pois faz parte do mindset entender
+que:</p>
+<ul>
+<li>Só erra quem faz;</li>
+<li>Falhar é o melhor jeito de aprender e evoluir;</li>
+<li>Shit happens.</li>
+</ul>
+<p>Nada como citar a Lei de Murphy para melhor contextualizar</p>
+<blockquote>
+<p>&ldquo;Se algo pode dar errado, dará.&rdquo;</p>
+</blockquote>
+<p>Portanto é melhor que as falhas ocorram cedo, enquanto o custo de correção ainda
 é baixo. Falhar em um ambiente controlado de testes, permite que a correção seja
 muito mais rápida (e barata) do que seria caso a correção acontecesse já em
-produção.</p><p>Para que essa abordagem tenha sucesso, existe a premissa de que os ambientes
+produção.</p>
+<p>Para que essa abordagem tenha sucesso, existe a premissa de que os ambientes
 sejam cópias de produção, ou pelo menos que seja o mais próximo possível. Do
 contrário, haverão mudanças de comportamento no software entre os ambientes,
-inviabilizando o ambiente de testes.</p><p>Caso os ambientes sejam divergentes, a promoção de bugs para produção será muito
-frequente, causando falhas tarde, que são falhas caras.</p><h2 id=customer-collaboration>Customer collaboration</h2><p><em>over contract negotiation</em></p><p>Também é possível que haja um má levantamento de requisitos durante o início do
+inviabilizando o ambiente de testes.</p>
+<p>Caso os ambientes sejam divergentes, a promoção de bugs para produção será muito
+frequente, causando falhas tarde, que são falhas caras.</p>
+<h2 id=customer-collaboration>Customer collaboration</h2>
+<p><em>over contract negotiation</em></p>
+<p>Também é possível que haja um má levantamento de requisitos durante o início do
 projeto, pois muitas vezes o próprio cliente/usuário não conseguiu prever todas
-as funcionalidades necessárias.</p><p>Podemos descrever essa situação como:</p><ul><li>Do ponto A é possível ver apenas o ponto B;</li><li>Do ponto B é possível ver o ponto C;</li></ul><p>Portanto há um grande incentivo para que o software seja entregue em partes,
+as funcionalidades necessárias.</p>
+<p>Podemos descrever essa situação como:</p>
+<ul>
+<li>Do ponto A é possível ver apenas o ponto B;</li>
+<li>Do ponto B é possível ver o ponto C;</li>
+</ul>
+<p>Portanto há um grande incentivo para que o software seja entregue em partes,
 continuamente. Colhendo assim os feedbacks do usuário sobre os próximos passos,
 seguindo os conceitos de prototipação evolutiva, que foram muito divulgados por
-meio do livro <em>The Lean Startup</em>.</p><p>Esse ponto faz muito contraste com o anterior, em relação à entrega contínua
+meio do livro <em>The Lean Startup</em>.</p>
+<p>Esse ponto faz muito contraste com o anterior, em relação à entrega contínua
 (continuous release), para que seja possível apresentar o protótipo e evoluir
-ele ao longo do projeto.</p><p><em>Saiba quem é o seu cliente/consumidor/usuário</em>, e para quem você está fazendo o
+ele ao longo do projeto.</p>
+<p><em>Saiba quem é o seu cliente/consumidor/usuário</em>, e para quem você está fazendo o
 software, pois esse é o único jeito de conseguir entregar valor para esse
 cliente. Parte importante do processo de desenvolvimento de software é ser
 empático com os problemas do usuário, e entender de verdade qual é o problema a
 ser resolvido, e o resultado causado pelo impacto no desenvolvimento do software
-(geração do valor para o usuário).</p><h2 id=responding-to-change>Responding to change</h2><p><em>over following a plan</em></p><p>Fazer um redesign dos requisitos durante o projeto é parte crucial para o
+(geração do valor para o usuário).</p>
+<h2 id=responding-to-change>Responding to change</h2>
+<p><em>over following a plan</em></p>
+<p>Fazer um redesign dos requisitos durante o projeto é parte crucial para o
 sucesso do projeto. Será o único jeito de conseguir trazer para a mesa todos os
 problemas do usuário, e criar a melhor solução para todos esses problemas, pois
 só o usuário sabe dos reais problemas que ele enfrenta no dia-a-dia lidando com
-o software.</p><p>Com a entrega contínua de software junto com o monitoramento dos resultados, o
-processo de coleta dos feedbacks fica muito mais simples e rápido.</p><h1 id=devops-devops-devops>DevOps, DevOps, DevOps</h1><p>Com a divulgação da palavra DevOps, existe muita gente falando sobre DevOps por
+o software.</p>
+<p>Com a entrega contínua de software junto com o monitoramento dos resultados, o
+processo de coleta dos feedbacks fica muito mais simples e rápido.</p>
+<h1 id=devops-devops-devops>DevOps, DevOps, DevOps</h1>
+<p>Com a divulgação da palavra DevOps, existe muita gente falando sobre DevOps por
 aí. Existindo muita divergência no que é falado, e criando uma confusão grande
 sobre o tema. Acaba sendo muito comum se deparar com diferentes interpretações
 sobre <strong>o que é DevOps</strong>. Existe muito eufemismo na área, e gourmetização em
 cima do LinkedIn, com muitos SysAdmins por aí se dizendo DevOps, pois aprenderam
-a codar shell script dentro do Python.</p><p>Tá afim de continuar lendo?
-<a href=https://macunha.me/pt/post/2019/01/devops-benefits/>Dá uma olhada nos benefícios de implementar DevOps.</a></p></div><div class=article-tags><a class="badge badge-light" href=https://macunha.me/pt/tag/devops/>devops</a>
+a codar shell script dentro do Python.</p>
+<p>Tá afim de continuar lendo? <a href=https://macunha.me/pt/post/2019/01/devops-benefits/>Dá uma olhada nos benefícios de implementar DevOps.</a></p>
+</div>
+<div class=article-tags>
+<a class="badge badge-light" href=https://macunha.me/pt/tag/devops/>devops</a>
 <a class="badge badge-light" href=https://macunha.me/pt/tag/culture/>culture</a>
 <a class="badge badge-light" href=https://macunha.me/pt/tag/agile/>agile</a>
-<a class="badge badge-light" href=https://macunha.me/pt/tag/lean/>lean</a></div><div class="media author-card content-widget-hr"><img class="avatar mr-3 avatar-circle" src=https://macunha.me/pt/author/matheus-cunha/avatar_hu538abb559021e5e818cc3fcb6b905317_34815_270x270_fill_q90_lanczos_center.jpg alt="Matheus Cunha"><div class=media-body><h5 class=card-title><a href=https://macunha.me>Matheus Cunha</a></h5><h6 class=card-subtitle>Engenheiro de Sistemas e Mágico</h6><p class=card-text>Apenas um amante de tecnologia empoderando empresas com computação &ldquo;high-tech&rdquo; para ajudar na inovação (:</p><ul class=network-icon aria-hidden=true><li><a href=https://github.com/macunha1/ target=_blank rel=noopener><i class="fab fa-github"></i></a></li><li><a href=https://gitlab.com/macunha/ target=_blank rel=noopener><i class="fab fa-gitlab"></i></a></li><li><a href=https://twitter.com/_macunha1 target=_blank rel=noopener><i class="fab fa-twitter"></i></a></li><li><a href=https://www.linkedin.com/in/macunha/ target=_blank rel=noopener><i class="fab fa-linkedin"></i></a></li><li><a href=https://medium.com/@macunha1 target=_blank rel=noopener><i class="fab fa-medium"></i></a></li></ul></div></div><section id=comments><div id=disqus_thread></div><script>let disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
-var d=document,s=d.createElement('script');s.async=true;s.src='https://'+"macunha1-me"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section></div></article><script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin=anonymous></script><script>const code_highlighting=true;</script><script>const isSiteThemeDark=false;</script><script>const search_config={"indexURI":"/pt/index.json","minLength":1,"threshold":0.3};const i18n={"no_results":"Sem resultados","placeholder":"Pesquisar...","results":"Resultados encontrados"};const content_type={'post':"Posts",'project':"Projetos",'publication':"Publicações",'talk':"Palestras",'slides':"Slides"};</script><script id=search-hit-fuse-template type=text/x-template>
-      <div class="search-hit" id="summary-{{key}}">
-      <div class="search-hit-content">
-        <div class="search-hit-name">
-          <a href="{{relpermalink}}">{{title}}</a>
-          <div class="article-metadata search-hit-type">{{type}}</div>
-          <p class="search-hit-description">{{snippet}}</p>
+<a class="badge badge-light" href=https://macunha.me/pt/tag/lean/>lean</a>
+</div>
+<div class=share-box aria-hidden=true>
+<ul class=share>
+<li>
+<a href="https://twitter.com/intent/tweet?url=https://macunha.me/pt/post/2019/01/devops-genesis/&text=DevOps:%20Genesis" target=_blank rel=noopener class=share-btn-twitter>
+<i class="fab fa-twitter"></i>
+</a>
+</li>
+<li>
+<a href="https://www.facebook.com/sharer.php?u=https://macunha.me/pt/post/2019/01/devops-genesis/&t=DevOps:%20Genesis" target=_blank rel=noopener class=share-btn-facebook>
+<i class="fab fa-facebook"></i>
+</a>
+</li>
+<li>
+<a href="mailto:?subject=DevOps:%20Genesis&body=https://macunha.me/pt/post/2019/01/devops-genesis/" target=_blank rel=noopener class=share-btn-email>
+<i class="fas fa-envelope"></i>
+</a>
+</li>
+<li>
+<a href="https://www.linkedin.com/shareArticle?url=https://macunha.me/pt/post/2019/01/devops-genesis/&title=DevOps:%20Genesis" target=_blank rel=noopener class=share-btn-linkedin>
+<i class="fab fa-linkedin-in"></i>
+</a>
+</li>
+<li>
+<a href="whatsapp://send?text=DevOps:%20Genesis%20https://macunha.me/pt/post/2019/01/devops-genesis/" target=_blank rel=noopener class=share-btn-whatsapp>
+<i class="fab fa-whatsapp"></i>
+</a>
+</li>
+<li>
+<a href="https://service.weibo.com/share/share.php?url=https://macunha.me/pt/post/2019/01/devops-genesis/&title=DevOps:%20Genesis" target=_blank rel=noopener class=share-btn-weibo>
+<i class="fab fa-weibo"></i>
+</a>
+</li>
+</ul>
+</div>
+<div class="media author-card content-widget-hr">
+<a href=https://macunha.me><img class="avatar mr-3 avatar-circle" src=https://macunha.me/pt/author/matheus-cunha/avatar_hu538abb559021e5e818cc3fcb6b905317_34815_270x270_fill_q90_lanczos_center.jpg alt="Matheus Cunha"></a>
+<div class=media-body>
+<h5 class=card-title><a href=https://macunha.me>Matheus Cunha</a></h5>
+<h6 class=card-subtitle>Engenheiro de Sistemas e Mágico</h6>
+<p class=card-text>Apenas um amante de tecnologia empoderando empresas com computação &ldquo;high-tech&rdquo; para ajudar na inovação (:</p>
+<ul class=network-icon aria-hidden=true>
+<li>
+<a href=https://github.com/macunha1/ target=_blank rel=noopener>
+<i class="fab fa-github"></i>
+</a>
+</li>
+<li>
+<a href=https://gitlab.com/macunha/ target=_blank rel=noopener>
+<i class="fab fa-gitlab"></i>
+</a>
+</li>
+<li>
+<a href=https://www.linkedin.com/in/macunha/ target=_blank rel=noopener>
+<i class="fab fa-linkedin"></i>
+</a>
+</li>
+<li>
+<a href=https://medium.com/@macunha1 target=_blank rel=noopener>
+<i class="fab fa-medium"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<section id=comments>
+<div id=disqus_thread></div>
+<script>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='https://macunha1-me.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</section>
+<div class="article-widget content-widget-hr">
+<h3>Relacionados</h3>
+<ul>
+<li><a href=https://macunha.me/pt/post/2019/01/devops-benefits/>DevOps: Os benefícios da implementação</a></li>
+<li><a href=https://macunha.me/pt/project/movida-rent-a-devops/>Movida Rent A DevOps</a></li>
+<li><a href=https://macunha.me/pt/project/nextel-digital-release/>Nextel Digital Release</a></li>
+</ul>
+</div>
+</div>
+</article>
+</div>
+<div class=page-footer>
+<div class=container>
+<footer class=site-footer>
+<p class=powered-by>
+© 2021 Matheus Cunha
+</p>
+<p class="powered-by footer-license-icons">
+<a href=https://creativecommons.org/licenses/by-nc-nd/4.0 rel="noopener noreferrer" target=_blank aria-label="Creative Commons">
+<i class="fab fa-creative-commons fa-2x" aria-hidden=true></i>
+<i class="fab fa-creative-commons-by fa-2x" aria-hidden=true></i>
+<i class="fab fa-creative-commons-nc fa-2x" aria-hidden=true></i>
+<i class="fab fa-creative-commons-nd fa-2x" aria-hidden=true></i>
+</a>
+</p>
+<p class=powered-by>
+Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target=_blank rel=noopener>Wowchemy</a> — the free, <a href=https://github.com/wowchemy/wowchemy-hugo-modules target=_blank rel=noopener>open source</a> website builder that empowers creators.
+</p>
+</footer>
+</div>
+</div>
+<div id=modal class="modal fade" role=dialog>
+<div class=modal-dialog>
+<div class=modal-content>
+<div class=modal-header>
+<h5 class=modal-title>Citação</h5>
+<button type=button class=close data-dismiss=modal aria-label=Close>
+<span aria-hidden=true>&#215;</span>
+</button>
+</div>
+<div class=modal-body>
+<pre><code class="tex hljs"></code></pre>
+</div>
+<div class=modal-footer>
+<a class="btn btn-outline-primary my-1 js-copy-cite" href=# target=_blank>
+<i class="fas fa-copy"></i> Copiar
+</a>
+<a class="btn btn-outline-primary my-1 js-download-cite" href=# target=_blank>
+<i class="fas fa-download"></i> Download
+</a>
+<div id=modal-error></div>
+</div>
+</div>
+</div>
+</div>
+<script src=https://macunha.me/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin=anonymous></script>
+<script id=search-hit-fuse-template type=text/x-template>
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
-    </script><script src=https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin=anonymous></script><script id=dsq-count-scr src=https://macunha1-me.disqus.com/count.js async></script><script src=https://macunha.me/js/academic.min.37431be2d92d7fb0160054761ab79602.js></script><div class=container><footer class=site-footer><p class=powered-by></p><p class="powered-by footer-license-icons"><a href=https://creativecommons.org/licenses/by-nc-sa/4.0 rel="noopener noreferrer" target=_blank><img src=https://search.creativecommons.org/static/img/cc_icon.svg alt="CC icon">
-<img src=https://search.creativecommons.org/static/img/cc-by_icon.svg alt="CC by icon">
-<img src=https://search.creativecommons.org/static/img/cc-nc_icon.svg alt="CC NC icon">
-<img src=https://search.creativecommons.org/static/img/cc-nd_icon.svg alt="CC ND icon">
-<img src=https://search.creativecommons.org/static/img/cc-sa_icon.svg alt="CC SA icon"></a></p><p class=powered-by>Powered by the
-<a href=https://sourcethemes.com/academic/ target=_blank rel=noopener>Academic theme</a> for
-<a href=https://gohugo.io target=_blank rel=noopener>Hugo</a>.
-<span class=float-right aria-hidden=true><a href=# class=back-to-top><span class=button_icon><i class="fas fa-chevron-up fa-2x"></i></span></a></span></p></footer></div><div id=modal class="modal fade" role=dialog><div class=modal-dialog><div class=modal-content><div class=modal-header><h5 class=modal-title>Citação</h5><button type=button class=close data-dismiss=modal aria-label=Close>
-<span aria-hidden=true>&#215;</span></button></div><div class=modal-body><pre><code class="tex hljs"></code></pre></div><div class=modal-footer><a class="btn btn-outline-primary my-1 js-copy-cite" href=# target=_blank><i class="fas fa-copy"></i>Copiar</a>
-<a class="btn btn-outline-primary my-1 js-download-cite" href=# target=_blank><i class="fas fa-download"></i>Download</a><div id=modal-error></div></div></div></div></div></body></html>
+      </script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin=anonymous></script>
+<script id=dsq-count-scr src=https://macunha1-me.disqus.com/count.js async></script>
+<script src=https://macunha.me/pt/js/wowchemy.min.866966750963019650a87719f3d8159b.js></script>
+<script async defer src=https://buttons.github.io/buttons.js></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Projects | It's me, Macunha!</title><link>https://macunha.me/pt/project/</link><atom:link href="https://macunha.me/pt/project/index.xml" rel="self" type="application/rss+xml"/><description>Projects</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>pt-br</language><lastBuildDate>Sun, 21 Jul 2019 00:00:00 +0000</lastBuildDate><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>Projects</title><link>https://macunha.me/pt/project/</link></image><item><title>ReclameAQUI Data Lake</title><link>https://macunha.me/pt/project/2019/reclameaqui-data-lake/</link><pubDate>Sun, 21 Jul 2019 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2019/reclameaqui-data-lake/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Projects | It's me, Macunha!</title><link>https://macunha.me/pt/project/</link><atom:link href="https://macunha.me/pt/project/index.xml" rel="self" type="application/rss+xml"/><description>Projects</description><generator>Wowchemy (https://wowchemy.com)</generator><language>pt-br</language><copyright>© 2021 Matheus Cunha</copyright><lastBuildDate>Sun, 21 Jul 2019 00:00:00 +0000</lastBuildDate><image><url>https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_3.png</url><title>Projects</title><link>https://macunha.me/pt/project/</link></image><item><title>ReclameAQUI Data Lake</title><link>https://macunha.me/pt/project/reclameaqui-data-lake/</link><pubDate>Sun, 21 Jul 2019 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/reclameaqui-data-lake/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
 &lt;h2 id="resumo">Resumo&lt;/h2>
 &lt;p>ReclameAQUI é um negócio interessante e único. É um agregador de conteúdo para
 troca de experiências dos clientes (especialmente más experiências) sobre
@@ -54,7 +54,7 @@ BigQuery.&lt;/p>
 &lt;p>Obtivemos progresso relevante em termos de segurança e governança durante o
 projeto, com a introdução do Apache Ranger e auditoria de acesso e uso do Data
 Lake, fornecendo capacidades avançadas de segurança à ReclameAQUI, que se
-antecipou frente à LGPD e as preocupações em questão da privacidade dos dados.&lt;/p></description></item><item><title>Clipping Service News OCR</title><link>https://macunha.me/pt/project/2018/clipping-service-news-ocr/</link><pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2018/clipping-service-news-ocr/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+antecipou frente à LGPD e as preocupações em questão da privacidade dos dados.&lt;/p></description></item><item><title>Clipping Service News OCR</title><link>https://macunha.me/pt/project/clipping-service-news-ocr/</link><pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/clipping-service-news-ocr/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
 &lt;h2 id="sumário">Sumário&lt;/h2>
 &lt;p>Como proprietário do maior conjunto de dados de mídia do Brasil, o líder em
 monitoramento de mídia Clipping Service estava com problemas de escalabilidade,
@@ -114,14 +114,13 @@ melhorias consideráveis durante o processo de ingestão de mídia (cerca de 20
 vezes mais rápido), oferecendo maior qualidade no serviço de clipping para seus
 clientes e viu a oportunidade de criar posteriormente um serviço de auto-serviço
 de recortes de imprensa, uma vez que o custo operacional diminuiu
-significativamente.&lt;/p></description></item><item><title>Dotz Data Labs</title><link>https://macunha.me/pt/project/2017/dotz-data-labs/</link><pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2017/dotz-data-labs/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+significativamente.&lt;/p></description></item><item><title>Dotz Data Labs</title><link>https://macunha.me/pt/project/dotz-data-labs/</link><pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/dotz-data-labs/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
 &lt;h2 id="sumário">Sumário&lt;/h2>
 &lt;p>Para poder inovar e se manter em um mercado em constante mudança e
 evolução, Dotz passou por um processo de transformação digital e teve
 a ajuda de alguns consultores neste percurso.&lt;/p>
 &lt;p>Entre as iniciativas para se aproximar de um modelo digital, surgiu a
-implementação de um Data Lake, com o requisito de ser
-&lt;a href="https://en.wikipedia.org/wiki/Serverless_computing" target="_blank" rel="noopener">serverless&lt;/a> e
+implementação de um Data Lake, com o requisito de ser &lt;a href="https://en.wikipedia.org/wiki/Serverless_computing" target="_blank" rel="noopener">serverless&lt;/a> e
 cloud-native, auxiliando no processo de tomada de decisão e encurtando
 o time-to-market durante o lançamento de novos produtos.&lt;/p>
 &lt;h2 id="problemática">Problemática&lt;/h2>
@@ -160,7 +159,7 @@ analítica, previamente gerenciada em uma grande instância do MS SQL
 Server, sendo deslocada para um Data Lake com camadas que permitem a
 categorização, governança, qualidade e segurança dos dados.&lt;/p>
 &lt;p>Suporte a processos analíticos de dados dos usuários, exploração ágil
-e monetização de seus conhecimentos sobre o comportamento dos clientes.&lt;/p></description></item><item><title>Easynvest Data Platform</title><link>https://macunha.me/pt/project/2017/easynvest-data-platform/</link><pubDate>Mon, 03 Jul 2017 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2017/easynvest-data-platform/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+e monetização de seus conhecimentos sobre o comportamento dos clientes.&lt;/p></description></item><item><title>Easynvest Data Platform</title><link>https://macunha.me/pt/project/easynvest-data-platform/</link><pubDate>Mon, 03 Jul 2017 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/easynvest-data-platform/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
 &lt;h2 id="sumário">Sumário&lt;/h2>
 &lt;p>Dentro do planejamento anual da Easynvest, um investimento na expansão da
 equipe de data &amp;amp; analytics teve como objetivo encurtar a tomada de decisão
@@ -222,7 +221,7 @@ manualmente durante a ingestão.&lt;/p>
 registros de usuários, de ~10 dias para aproximadamente 1 dia. Tornando também
 a plataforma de dados mais democrática, fornecendo informações relevantes que
 facilita a análise de outras áreas da companhia como risco (análise de crédito) e
-suporte (atendimento), sem ter que abrir mão da segurança.&lt;/p></description></item><item><title>Movida Rent A DevOps</title><link>https://macunha.me/pt/project/2016/movida-rent-a-devops/</link><pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2016/movida-rent-a-devops/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+suporte (atendimento), sem ter que abrir mão da segurança.&lt;/p></description></item><item><title>Movida Rent A DevOps</title><link>https://macunha.me/pt/project/movida-rent-a-devops/</link><pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/movida-rent-a-devops/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
 &lt;h2 id="sumário">Sumário&lt;/h2>
 &lt;p>JSL Holdings Ltda, detentora da Julio Simões Logistica (maior player LATAM
 de logística) comprou a Movida Rent a Car em 2013 para expandir o portfólio
@@ -266,7 +265,7 @@ visibilidade sobre o histórico de jobs executados.&lt;/p>
 receberam a aprovação.&lt;/p>
 &lt;p>Duas semanas depois, em fevereiro de 2017, a Movida lançou seu IPO,
 marcado como o primeiro IPO brasileiro de 2017. Abrindo seu capital
-no dia 8 de Fevereiro de 2017, levantando cerca de R$ 645M.&lt;/p></description></item><item><title>Nextel Digital Release</title><link>https://macunha.me/pt/project/2016/nextel-digital-release/</link><pubDate>Wed, 30 Nov 2016 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2016/nextel-digital-release/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+no dia 8 de Fevereiro de 2017, levantando cerca de R$ 645M.&lt;/p></description></item><item><title>Nextel Digital Release</title><link>https://macunha.me/pt/project/nextel-digital-release/</link><pubDate>Wed, 30 Nov 2016 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/nextel-digital-release/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
 &lt;h2 id="sumário">Sumário&lt;/h2>
 &lt;p>A Nextel planejou desenvolver uma aplicação móvel para reduzir seus
 custos operacionais com call centers e reduzir o &lt;em>contact rate&lt;/em>.
@@ -311,8 +310,7 @@ inconsistência).&lt;/p>
 &lt;p>Após chegar ao AWS S3, o evento do objeto aciona uma função AWS Lambda
 para analisar o conteúdo e indexá-lo no Elasticsearch, sendo
 posteriormente servido aos clientes através de uma API REST.&lt;/p>
-&lt;p>Toda o design da infrastrutura foi planejada para
-&lt;a href="https://www.oreilly.com/radar/an-introduction-to-immutable-infrastructure/" target="_blank" rel="noopener">ser imutável&lt;/a>,
+&lt;p>Toda o design da infrastrutura foi planejada para &lt;a href="https://www.oreilly.com/radar/an-introduction-to-immutable-infrastructure/" target="_blank" rel="noopener">ser imutável&lt;/a>,
 facilitando a evolução e confiabilidade, tendo Ansible como Configuration
 Manager e AWS CloudFormation como provisionador na nuvem. Em apenas
 alguns minutos é possível recriar todo o ecossistema, com esforço mínimo.&lt;/p>

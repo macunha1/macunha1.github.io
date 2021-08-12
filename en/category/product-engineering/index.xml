@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Product Engineering | It's me, Macunha!</title><link>https://macunha.me/en/category/product-engineering/</link><atom:link href="https://macunha.me/en/category/product-engineering/index.xml" rel="self" type="application/rss+xml"/><description>Product Engineering</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 28 Oct 2018 00:00:00 +0200</lastBuildDate><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>Product Engineering</title><link>https://macunha.me/en/category/product-engineering/</link></image><item><title>Insights from a perfectionist about Over-Engineering</title><link>https://macunha.me/en/post/2018/10/insights-from-a-perfectionist-about-over-engineering/</link><pubDate>Sun, 28 Oct 2018 00:00:00 +0200</pubDate><guid>https://macunha.me/en/post/2018/10/insights-from-a-perfectionist-about-over-engineering/</guid><description>&lt;h2 id="foreword">Foreword&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Product Engineering | It's me, Macunha!</title><link>https://macunha.me/en/category/product-engineering/</link><atom:link href="https://macunha.me/en/category/product-engineering/index.xml" rel="self" type="application/rss+xml"/><description>Product Engineering</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Matheus Cunha</copyright><lastBuildDate>Sun, 28 Oct 2018 00:00:00 +0200</lastBuildDate><image><url>https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_3.png</url><title>Product Engineering</title><link>https://macunha.me/en/category/product-engineering/</link></image><item><title>Insights from a perfectionist about Over-Engineering</title><link>https://macunha.me/en/post/2018/10/insights-from-a-perfectionist-about-over-engineering/</link><pubDate>Sun, 28 Oct 2018 00:00:00 +0200</pubDate><guid>https://macunha.me/en/post/2018/10/insights-from-a-perfectionist-about-over-engineering/</guid><description>&lt;h2 id="foreword">Foreword&lt;/h2>
 &lt;p>NOTE: This article is an open letter for me to keep reminding myself about what
 to prioritize when developing software, I am as much of a sinner in this aspect
 as the next person.&lt;/p>
@@ -26,8 +26,7 @@ of.&lt;/p>
 solutions for a simple problem. After all, we want to have not just the right
 set of tools, but the &lt;strong>best&lt;/strong> right? How can we be ground-breaking, innovative,
 disruptive, and pick-your-buzzword-poison otherwise? Well, as Nathan Marz
-(creator of Apache Storm) puts better in his
-&lt;a href="http://nathanmarz.com/blog/suffering-oriented-programming.html" target="_blank" rel="noopener">suffering-oriented programming&lt;/a>:&lt;/p>
+(creator of Apache Storm) puts better in his &lt;a href="http://nathanmarz.com/blog/suffering-oriented-programming.html" target="_blank" rel="noopener">suffering-oriented programming&lt;/a>:&lt;/p>
 &lt;blockquote>
 &lt;p>[…] don&amp;rsquo;t build technology unless you feel the pain of not having it. It applies
 to the big, architectural decisions as well as the smaller everyday programming
@@ -36,8 +35,7 @@ you&amp;rsquo;re always working on something important, and it ensures that you 
 well-versed in a problem space before attempting a large investment.&lt;/p>
 &lt;/blockquote>
 &lt;p>This method describes a good way to think about LEAN and evolving products
-through
-&lt;a href="https://dzone.com/articles/what-is-minimum-viable-product-and-how-to-build-it" target="_blank" rel="noopener">an MVP concept&lt;/a>, helping to keep track of what &lt;strong>really&lt;/strong> matters when it
+through &lt;a href="https://dzone.com/articles/what-is-minimum-viable-product-and-how-to-build-it" target="_blank" rel="noopener">an MVP concept&lt;/a>, helping to keep track of what &lt;strong>really&lt;/strong> matters when it
 comes to a good balance between Product and Engineering efforts.&lt;/p>
 &lt;p>As we&amp;rsquo;re daily overfed with information, it&amp;rsquo;s easy to make mistakes trying to
 choose the right set of tools to work with. From picking Frameworks to Operating
@@ -61,11 +59,9 @@ would regrow two heads&amp;rdquo;, or even better: these solutions are creating 
 problems, by trying to solve problems &lt;strong>that may not even exist&lt;/strong>.&lt;/p>
 &lt;p>Yeah, Google orchestrated MySQL instance deployment using Borg. The first
 &lt;a href="https://sre.google/sre-book/automation-at-google/" target="_blank" rel="noopener">version (POC) was released in 2008 and finished by 2009&lt;/a> at that time the revenue
-of the Ad service was
-&lt;a href="https://www.statista.com/statistics/266249/advertising-revenue-of-google/" target="_blank" rel="noopener">estimated at USD ~22.9 Bi&lt;/a>. Ask yourself, do your database
+of the Ad service was &lt;a href="https://www.statista.com/statistics/266249/advertising-revenue-of-google/" target="_blank" rel="noopener">estimated at USD ~22.9 Bi&lt;/a>. Ask yourself, do your database
 serves a &lt;strong>USD 22.9 BILLION service&lt;/strong>? Do you &lt;em>really need&lt;/em> orchestration there?
-Chances are, and let&amp;rsquo;s face it,
-&lt;a href="https://blog.bradfieldcs.com/you-are-not-google-84912cf44afb" target="_blank" rel="noopener">You Are Not Google&lt;/a>. This is an extreme example
+Chances are, and let&amp;rsquo;s face it, &lt;a href="https://blog.bradfieldcs.com/you-are-not-google-84912cf44afb" target="_blank" rel="noopener">You Are Not Google&lt;/a>. This is an extreme example
 but it serves to illustrate the main concept of &lt;em>suffering-oriented
 programming&lt;/em>:&lt;/p>
 &lt;blockquote>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>devops | It's me, Macunha!</title><link>https://macunha.me/pt/tag/devops/</link><atom:link href="https://macunha.me/pt/tag/devops/index.xml" rel="self" type="application/rss+xml"/><description>devops</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>pt-br</language><lastBuildDate>Fri, 11 Jan 2019 22:00:00 +0000</lastBuildDate><image><url>https://macunha.me/images/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>devops</title><link>https://macunha.me/pt/tag/devops/</link></image><item><title>DevOps: Os benefícios da implementação</title><link>https://macunha.me/pt/post/2019/01/devops-benefits/</link><pubDate>Fri, 11 Jan 2019 22:00:00 +0000</pubDate><guid>https://macunha.me/pt/post/2019/01/devops-benefits/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>devops | It's me, Macunha!</title><link>https://macunha.me/pt/tag/devops/</link><atom:link href="https://macunha.me/pt/tag/devops/index.xml" rel="self" type="application/rss+xml"/><description>devops</description><generator>Wowchemy (https://wowchemy.com)</generator><language>pt-br</language><copyright>© 2021 Matheus Cunha</copyright><lastBuildDate>Fri, 11 Jan 2019 22:00:00 +0000</lastBuildDate><image><url>https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_3.png</url><title>devops</title><link>https://macunha.me/pt/tag/devops/</link></image><item><title>DevOps: Os benefícios da implementação</title><link>https://macunha.me/pt/post/2019/01/devops-benefits/</link><pubDate>Fri, 11 Jan 2019 22:00:00 +0000</pubDate><guid>https://macunha.me/pt/post/2019/01/devops-benefits/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
 &lt;p>Principais benefícios que uma companhia geralmente espera e encontra na adoção
 da cultura:&lt;/p>
 &lt;h2 id="releases-mais-rápidos-e-baratos">Releases mais rápidos e baratos&lt;/h2>
@@ -59,8 +59,7 @@ compartilhamento do conhecimento e aumenta a democratização da infra;&lt;/li>
 mais rápido.&lt;/li>
 &lt;/ul>
 &lt;p>Esses pontos foram bem estressados pelo time da Heroku, e deram origem ao famoso
-paper:
-&lt;a href="https://12factor.net/" target="_blank" rel="noopener">The Twelve-Factor App&lt;/a>. Uma leitura muito boa
+paper: &lt;a href="https://12factor.net/" target="_blank" rel="noopener">The Twelve-Factor App&lt;/a>. Uma leitura muito boa
 para a explicação dos benefícios sobre gerência de configuração.&lt;/p>
 &lt;h2 id="monitoramento-e-self-healing">Monitoramento e self-healing&lt;/h2>
 &lt;p>Ao fim de todo o processo de entrega, o software deverá estar sendo monitorado,
@@ -88,11 +87,15 @@ costumam ser automatizados são:&lt;/p>
 &lt;li>Monitoramento (com auto-discovery);&lt;/li>
 &lt;li>Governança de usuários;&lt;/li>
 &lt;/ul>
-&lt;h1 id="devops-toolchainhttpsenwikipediaorgwikidevops_toolchain">
-&lt;a href="https://en.wikipedia.org/wiki/DevOps_toolchain" target="_blank" rel="noopener">DevOps toolchain&lt;/a>&lt;/h1>
+&lt;h1 id="devops-toolchainhttpsenwikipediaorgwikidevops_toolchain">&lt;a href="https://en.wikipedia.org/wiki/DevOps_toolchain" target="_blank" rel="noopener">DevOps toolchain&lt;/a>&lt;/h1>
 &lt;p>Uma combinação de ferramentas para facilitar a manutenção e operação do sistema,
 seguindo o seguinte fluxo:&lt;/p>
-&lt;p>&lt;img src="https://macunha.me/img/content/devops-lifecycle.png" alt="Ciclo de desenvolvimento utilizando DevOps">&lt;/p>
+&lt;p>
+&lt;figure >
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >&lt;img src="https://macunha.me/img/content/devops-lifecycle.png" alt="Ciclo de desenvolvimento utilizando DevOps" loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
 &lt;blockquote>
 &lt;p>Obs.: Qualquer semelhança com o PDCA é mera certeza.&lt;/p>
 &lt;/blockquote>
@@ -174,7 +177,12 @@ ideias propostas mais robustas devido ao incentivo em relação à contribuiçã
 &lt;/ul>
 &lt;p>O processo de definição das melhorias por meio de Kaizen acontece (normalmente)
 na seguinte ordem:&lt;/p>
-&lt;p>&lt;img src="https://cdn-images-1.medium.com/max/600/1*N8KelcHbixESci5Y0JQoYA.png" alt="círculo PDCA">&lt;/p>
+&lt;p>
+&lt;figure >
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >&lt;img src="https://cdn-images-1.medium.com/max/600/1*N8KelcHbixESci5Y0JQoYA.png" alt="círculo PDCA" loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
 &lt;ol>
 &lt;li>Definir objetivos com base em dados;&lt;/li>
 &lt;li>Revisar o estado atual e desenvolver um plano de melhoria;&lt;/li>
@@ -330,8 +338,7 @@ sobre o tema. Acaba sendo muito comum se deparar com diferentes interpretações
 sobre &lt;strong>o que é DevOps&lt;/strong>. Existe muito eufemismo na área, e gourmetização em
 cima do LinkedIn, com muitos SysAdmins por aí se dizendo DevOps, pois aprenderam
 a codar shell script dentro do Python.&lt;/p>
-&lt;p>Tá afim de continuar lendo?
-&lt;a href="https://macunha.me/pt/post/2019/01/devops-benefits/">Dá uma olhada nos benefícios de implementar DevOps.&lt;/a>&lt;/p></description></item><item><title>Movida Rent A DevOps</title><link>https://macunha.me/pt/project/2016/movida-rent-a-devops/</link><pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2016/movida-rent-a-devops/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+&lt;p>Tá afim de continuar lendo? &lt;a href="https://macunha.me/pt/post/2019/01/devops-benefits/">Dá uma olhada nos benefícios de implementar DevOps.&lt;/a>&lt;/p></description></item><item><title>Movida Rent A DevOps</title><link>https://macunha.me/pt/project/movida-rent-a-devops/</link><pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/movida-rent-a-devops/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
 &lt;h2 id="sumário">Sumário&lt;/h2>
 &lt;p>JSL Holdings Ltda, detentora da Julio Simões Logistica (maior player LATAM
 de logística) comprou a Movida Rent a Car em 2013 para expandir o portfólio
@@ -375,7 +382,7 @@ visibilidade sobre o histórico de jobs executados.&lt;/p>
 receberam a aprovação.&lt;/p>
 &lt;p>Duas semanas depois, em fevereiro de 2017, a Movida lançou seu IPO,
 marcado como o primeiro IPO brasileiro de 2017. Abrindo seu capital
-no dia 8 de Fevereiro de 2017, levantando cerca de R$ 645M.&lt;/p></description></item><item><title>Nextel Digital Release</title><link>https://macunha.me/pt/project/2016/nextel-digital-release/</link><pubDate>Wed, 30 Nov 2016 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/2016/nextel-digital-release/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
+no dia 8 de Fevereiro de 2017, levantando cerca de R$ 645M.&lt;/p></description></item><item><title>Nextel Digital Release</title><link>https://macunha.me/pt/project/nextel-digital-release/</link><pubDate>Wed, 30 Nov 2016 00:00:00 +0000</pubDate><guid>https://macunha.me/pt/project/nextel-digital-release/</guid><description>&lt;h1 id="introdução">Introdução&lt;/h1>
 &lt;h2 id="sumário">Sumário&lt;/h2>
 &lt;p>A Nextel planejou desenvolver uma aplicação móvel para reduzir seus
 custos operacionais com call centers e reduzir o &lt;em>contact rate&lt;/em>.
@@ -420,8 +427,7 @@ inconsistência).&lt;/p>
 &lt;p>Após chegar ao AWS S3, o evento do objeto aciona uma função AWS Lambda
 para analisar o conteúdo e indexá-lo no Elasticsearch, sendo
 posteriormente servido aos clientes através de uma API REST.&lt;/p>
-&lt;p>Toda o design da infrastrutura foi planejada para
-&lt;a href="https://www.oreilly.com/radar/an-introduction-to-immutable-infrastructure/" target="_blank" rel="noopener">ser imutável&lt;/a>,
+&lt;p>Toda o design da infrastrutura foi planejada para &lt;a href="https://www.oreilly.com/radar/an-introduction-to-immutable-infrastructure/" target="_blank" rel="noopener">ser imutável&lt;/a>,
 facilitando a evolução e confiabilidade, tendo Ansible como Configuration
 Manager e AWS CloudFormation como provisionador na nuvem. Em apenas
 alguns minutos é possível recriar todo o ecossistema, com esforço mínimo.&lt;/p>
