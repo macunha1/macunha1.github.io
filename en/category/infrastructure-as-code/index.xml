@@ -1,4 +1,189 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Infrastructure As Code | It's me, Macunha!</title><link>https://macunha.me/en/category/infrastructure-as-code/</link><atom:link href="https://macunha.me/en/category/infrastructure-as-code/index.xml" rel="self" type="application/rss+xml"/><description>Infrastructure As Code</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Matheus Cunha</copyright><lastBuildDate>Wed, 31 Mar 2021 00:00:00 +0200</lastBuildDate><image><url>https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>Infrastructure As Code</title><link>https://macunha.me/en/category/infrastructure-as-code/</link></image><item><title>Terraform Design Best Practices</title><link>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</link><pubDate>Wed, 31 Mar 2021 00:00:00 +0200</pubDate><guid>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</guid><description>&lt;h2 id="intro">Intro&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Infrastructure As Code | It's me, Macunha!</title><link>https://macunha.me/en/category/infrastructure-as-code/</link><atom:link href="https://macunha.me/en/category/infrastructure-as-code/index.xml" rel="self" type="application/rss+xml"/><description>Infrastructure As Code</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Matheus Cunha</copyright><lastBuildDate>Wed, 11 Aug 2021 00:00:00 +0200</lastBuildDate><image><url>https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>Infrastructure As Code</title><link>https://macunha.me/en/category/infrastructure-as-code/</link></image><item><title>Real-life Terraform Refactoring Guide</title><link>https://macunha.me/en/post/2021/08/real-life-terraform-refactoring-guide/</link><pubDate>Wed, 11 Aug 2021 00:00:00 +0200</pubDate><guid>https://macunha.me/en/post/2021/08/real-life-terraform-refactoring-guide/</guid><description>&lt;h2 id="intro">Intro&lt;/h2>
+&lt;p>As reality hits, the unavoidable fact of dealing with a hard-to-manage Terraform
+&lt;a href="https://en.wikipedia.org/wiki/Big%5Fball%5Fof%5Fmud" target="_blank" rel="noopener">Big ball of mud&lt;/a> code base comes in. There is no way around natural growth and
+evolution of code bases and the design flaws that come with it. Our Agile
+mindset is to &lt;a href="https://www.brainyquote.com/quotes/mark%5Fzuckerberg%5F453439" target="_blank" rel="noopener">&amp;ldquo;move fast and break things&amp;rdquo;&lt;/a>, implement something as simple as
+possible and let the design decisions for the next iterations (if any).&lt;/p>
+&lt;p>Refactoring Terraform code is actually as natural as developing it, time and
+time again you will be faced with a situation where a better structure or
+organization can be achieved, maybe you want to upgrade from a home-made module
+to an open-source/community alternative, maybe you just want to segregate your
+resources into different states to speed-up development. Regardless of the goal,
+once you get into it, you will realize that Terraform code refactoring is
+actually a basic missing step on the development process that no one told you
+before.&lt;/p>
+&lt;p>As the &lt;a href="http://nathanmarz.com/blog/suffering-oriented-programming.html" target="_blank" rel="noopener">Suffering-Oriented Programming&lt;/a> mantra dictates:&lt;/p>
+&lt;blockquote>
+&lt;p>&amp;ldquo;First make it possible. Then make it beautiful. Then make it fast.&amp;rdquo;&lt;/p>
+&lt;/blockquote>
+&lt;p>So, time to make the Terraform code beautiful!&lt;/p>
+&lt;h2 id="how-to-break-a-big-ball-of-mud-strangle-it">How to break a big ball of mud? STRANGLE IT&lt;/h2>
+&lt;p>&lt;!-- raw HTML omitted -->Martin Fowler has already written everything there is to write about
+(early 2000s) DevOps, Agile, and Software Development. Therefore, we could
+reference Martin Fowler for virtually anything Software related&lt;!-- raw HTML omitted -->, but
+really, the &lt;a href="https://martinfowler.com/books/refactoring.html" target="_blank" rel="noopener">Refactoring book&lt;/a> is &lt;strong>THE&lt;/strong> reference on this subject.&lt;/p>
+&lt;p>Martin Fowler shared the &lt;a href="https://martinfowler.com/bliki/StranglerFigApplication.html" target="_blank" rel="noopener">Stangler (Fig) Pattern&lt;/a>, which describes a strategy to
+refactor a legacy code base by re-implementing the same features (sometimes even
+the bugs) on another application.&lt;/p>
+&lt;blockquote>
+&lt;p>[&amp;hellip;] the huge strangler figs. They seed in the upper branches of a tree and
+gradually work their way down the tree until they root in the soil. Over many
+years they grow into fantastic and beautiful shapes, meanwhile strangling and
+killing the tree that was their host.&lt;/p>
+&lt;p>This metaphor struck me as a way of describing a way of doing a rewrite of an
+important system.&lt;/p>
+&lt;/blockquote>
+&lt;p>In this document we are going to follow the same idea:&lt;/p>
+&lt;ol>
+&lt;li>implement the same feature on a different &lt;a href="https://www.terraform-best-practices.com/key-concepts#composition" target="_blank" rel="noopener">Terraform composition&lt;/a>;&lt;/li>
+&lt;li>migrate the Terraform state;&lt;/li>
+&lt;li>delete (kill) the previous implementation.&lt;/li>
+&lt;/ol>
+&lt;h2 id="the-mono-repository--monorepo--approach-to-legacy">The mono-repository (monorepo) approach to Legacy&lt;/h2>
+&lt;p>Let&amp;rsquo;s suppose that your Terraform code base is versioned in a single repository
+(a.k.a. monorepo), following the random structure displayed below (just to help
+illustrate)&lt;/p>
+&lt;pre>&lt;code class="language-nil" data-lang="nil">.
+├── modules/ # Definition of TF modules used by underlying compositions
+├── global/ # Resources that aren't restricted to one environment
+│   ├── aws/
+├── production/ # Production environment resources
+│   └── aws/
+└── staging/ # Staging environment resources
+└── aws/
+&lt;/code>&lt;/pre>&lt;p>On this example each directory corresponds to a Terraform state. In order to
+apply changes you have to walk to a path and execute &lt;code>terraform&lt;/code>.&lt;/p>
+&lt;p>The structure on this example repository was created a few hypothetical years
+ago when the number of existing microservices and resources (DB, message queues,
+etc) was significantly smaller. At the time, it was feasible to keep Terraform
+definitions together because it was easier to maintain, Cloud resources were
+managed with one-shot!&lt;/p>
+&lt;p>As the time went by, the number of Products and the team grew, and engineers
+started facing concurrency issues: Terraform lock executions on a shared storage
+when someone else is running &lt;code>terraform apply&lt;/code> as well as a general slowness on
+&lt;strong>every execution&lt;/strong> since the number of data sources to sync is frightening.&lt;/p>
+&lt;p>A mono-repository approach is not necessarily bad, versioning is actually
+simpler when performed in one single repository. Ideally, there won&amp;rsquo;t be many
+changes on the scale of GiB meaning that it is safe to proceed on this one &lt;em>as
+long as the Terraform remote states are divided&lt;/em>.&lt;/p>
+&lt;h3 id="splitting-the-modules-sub-path-to-its-own-repository">Splitting the &lt;code>modules&lt;/code> sub-path to its own repository&lt;/h3>
+&lt;p>One thing to mention though is the &lt;code>modules&lt;/code> sub-path, this one could be stored
+in a different git repository to leverage its own versioning. Since Terraform
+modules and its implementations don&amp;rsquo;t always evolve in the same pace, keeping
+two distinct version trees is beneficial. Additionally, a separated repository
+for Terraform modules allows the specification of &amp;ldquo;pinned versions&amp;rdquo;, e.g.:&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-terraform" data-lang="terraform">&lt;span style="color:#66d9ef">module&lt;/span> &lt;span style="color:#e6db74">&amp;#34;aws_main_vpc&amp;#34;&lt;/span> {
+&lt;span style="color:#a6e22e">source&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git?ref=2ca733d&amp;#34;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;span style="color:#75715e"> # Note the ref=${GIT_REVISION_DIGEST}
+&lt;/span>&lt;span style="color:#75715e">&lt;/span>}
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>That reference for a module&amp;rsquo;s version should always be specified, regardless if
+it comes from an internal/private repository or public. When you specify the
+version, you are ensuring reproducibility.&lt;/p>
+&lt;p>Therefore, let&amp;rsquo;s move the &lt;code>modules&lt;/code> sub-path to another git repository,
+following instructions from &lt;a href="https://stackoverflow.com/questions/359424/detach-move-subdirectory-into-separate-git-repository/17864475#17864475" target="_blank" rel="noopener">this StackOverflow answer&lt;/a> so that the git commit
+history is preserved:&lt;/p>
+&lt;h4 id="0-dot">0.&lt;/h4>
+&lt;p>Walk to the monorepo path and create a branch from the commits at
+&lt;code>monorepo/modules&lt;/code> path&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">MAIN_BIGGER_REPO&lt;span style="color:#f92672">=&lt;/span>/path/to/the/monorepo
+cd &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>MAIN_BIGGER_REPO&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+git subtree split -P modules -b refact-modules
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="1-dot">1.&lt;/h4>
+&lt;p>Create the new repository&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">mkdir /path/to/the/terraform-modules &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> cd $_
+git init
+git pull &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>MAIN_BIGGER_REPO&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> refact-modules
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="2-dot">2.&lt;/h4>
+&lt;p>Link the new repository to your remote Git (server)&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">git remote add origin &amp;lt;git@git.com:user/terraform-modules.git&amp;gt;
+git push -u origin master
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="3-dot">3.&lt;/h4>
+&lt;p>[OPTIONAL] Cleanup inside $MAIN_BIGGER_REPO, if desired&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">cd &lt;span style="color:#e6db74">${&lt;/span>MAIN_BIGGER_REPO&lt;span style="color:#e6db74">}&lt;/span>
+git rm -rf modules
+git filter-branch --prune-empty &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> --tree-filter &lt;span style="color:#e6db74">&amp;#34;rm -rf modules&amp;#34;&lt;/span> -f HEAD
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="let-s-start-strangling-the-repository">Let&amp;rsquo;s start strangling the repository&lt;/h3>
+&lt;p>Now that a substantial piece of code was moved somewhere else, it is time to
+put the &lt;a href="https://martinfowler.com/bliki/StranglerFigApplication.html" target="_blank" rel="noopener">Stangler (Fig) Pattern&lt;/a> in practice.&lt;/p>
+&lt;p>Move all the existing content as-is to the &lt;code>legacy&lt;/code> sub-path, keeping the same
+repository and change history (commits). It also allows applying the &lt;code>legacy&lt;/code>
+code as it used to be from one of those paths.&lt;/p>
+&lt;pre>&lt;code class="language-nil" data-lang="nil">.
+└── legacy
+├── global
+│   └── aws
+├── production
+│   └── aws
+└── staging
+└── aws
+&lt;/code>&lt;/pre>&lt;p>Once the content is moved to legacy, the idea is to follow the &lt;a href="https://www.oreilly.com/library/view/97-things-every/9780596809515/ch08.html" target="_blank" rel="noopener">Boy Scout rule&lt;/a>
+in order to strangle the &lt;code>legacy&lt;/code> content little by little (unless you are
+really committed to migrating it all at once, which is going to be exhaustive).&lt;/p>
+&lt;p>The Boy Scout rule goes like:&lt;/p>
+&lt;ol>
+&lt;li>every time a task that involves deprecated code appears, we implement it on
+&lt;a href="../stdout/blog/2021/03/terraform-best-practices.org">the new structure&lt;/a>;&lt;/li>
+&lt;li>import the Terraform state to keep the Cloud resources that a given code
+represents/describes;&lt;/li>
+&lt;li>remove the state and the code from &lt;code>legacy&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;p>Until there is nothing left inside &lt;code>legacy&lt;/code> (or there are only unused
+resources/left-behinds that could be destroyed/garbage collected either way).&lt;/p>
+&lt;h4 id="import-state-remove-state-and-code-from-what-where">Import state? Remove state and code from what? Where?&lt;/h4>
+&lt;p>That will depend on the kind of resource we are migrating from the remote state,
+on the bottom of each &lt;code>resource&lt;/code> on Terraform&amp;rsquo;s provider documentation you can
+find a reference command to import existing resources into your Terraform code
+specification. e.g.: &lt;a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db%5Finstance#import" target="_blank" rel="noopener">AWS RDS DB instance&lt;/a>.&lt;/p>
+&lt;p>Suppose we want to replace the code of the AWS RDS Aurora defined in
+&lt;code>production/aws&lt;/code> and then re-implement the same using &lt;a href="https://github.com/terraform-aws-modules/terraform-aws-rds-aurora" target="_blank" rel="noopener">the community module&lt;/a>.
+After creating the corresponding sub-path to the monorepo according to your
+preference, provisioning the bucket and initializing the Terraform &lt;code>backend&lt;/code>:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>implement the definition of the community module
+&lt;a href="https://github.com/terraform-aws-modules/terraform-aws-rds-aurora" target="_blank" rel="noopener">github.com/terraform-aws-modules/terraform-aws-rds-aurora&lt;/a> with the closest
+parameters from the existing one; e.g.:&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-terraform" data-lang="terraform">&lt;span style="color:#66d9ef">module&lt;/span> &lt;span style="color:#e6db74">&amp;#34;aws_aurora_main_cluster&amp;#34;&lt;/span> {
+&lt;span style="color:#a6e22e">source&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;terraform-aws-modules/rds-aurora/aws&amp;#34;&lt;/span>
+&lt;span style="color:#a6e22e">version&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 5.2&amp;#34;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;span style="color:#75715e"> # ...
+&lt;/span>&lt;span style="color:#75715e">&lt;/span>}
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>import the Terraform states from the previous (existing) cluster&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">terraform import &lt;span style="color:#e6db74">&amp;#39;aws_aurora_main_cluster.aws_rds_cluster.this[0]&amp;#39;&lt;/span> main-database-name
+terraform import &lt;span style="color:#e6db74">&amp;#39;aws_aurora_main_cluster.aws_rds_cluster_instance.this[0]&amp;#39;&lt;/span> main-database-instance-name-01
+terraform import &lt;span style="color:#e6db74">&amp;#39;aws_aurora_main_cluster.aws_rds_cluster_instance.this[1]&amp;#39;&lt;/span> main-database-instance-name-02
+&lt;span style="color:#75715e"># ...&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>then if you haven&amp;rsquo;t yet and would like to &amp;ldquo;match reality&amp;rdquo; between the
+existing and the specified resource, run &lt;code>terraform plan&lt;/code> a few times and
+adjust the parameters until Terraform reports:&lt;/p>
+&lt;pre>&lt;code class="language-nil" data-lang="nil">No changes. Your infrastructure matches the configuration.
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>
+&lt;p>last but not least, remove the corresponding resources from the &lt;code>legacy&lt;/code>
+Terraform state so that it doesn&amp;rsquo;t try to keep track of the changes and also
+don&amp;rsquo;t try to destroy once the resource definition is no longer in that code
+base:&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#75715e"># Hypothetical name of the resource inside production/aws/main.tf&lt;/span>
+terraform state rm aws_rds_cluster.default &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;span style="color:#ae81ff">&lt;/span> &lt;span style="color:#e6db74">&amp;#39;aws_rds_cluster_instance.default[0]&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;aws_rds_cluster_instance.default[1]&amp;#39;&lt;/span>
+&lt;span style="color:#75715e"># ...&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>once that is performed, feel free to remove the corresponding resource&amp;rsquo;s
+definition from the &lt;code>legacy&lt;/code> code.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-terraform" data-lang="terraform">&lt;span style="color:#66d9ef">resource&lt;/span> &lt;span style="color:#e6db74">&amp;#34;aws_rds_cluster&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {&lt;span style="color:#75715e">
+&lt;/span>&lt;span style="color:#75715e"> # ...
+&lt;/span>&lt;span style="color:#75715e">&lt;/span>}
+&lt;span style="color:#66d9ef">
+&lt;/span>&lt;span style="color:#66d9ef">resource&lt;/span> &lt;span style="color:#e6db74">&amp;#34;aws_rds_cluster_instance&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {
+&lt;span style="color:#a6e22e">count&lt;/span> = var.&lt;span style="color:#a6e22e">number_of_database_instances&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;span style="color:#75715e"> # ...
+&lt;/span>&lt;span style="color:#75715e">&lt;/span>}
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol></description></item><item><title>Terraform Design Best Practices</title><link>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</link><pubDate>Wed, 31 Mar 2021 00:00:00 +0200</pubDate><guid>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</guid><description>&lt;h2 id="intro">Intro&lt;/h2>
 &lt;p>As someone who believes in empowering people and distributing power in order to
 achieve higher outcomes I always felt that the best existing best-practices proposals
 don&amp;rsquo;t touch some key aspects (IMHO) on code evolution and business structures.&lt;/p>
