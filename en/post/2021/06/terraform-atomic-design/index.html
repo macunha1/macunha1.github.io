@@ -1,0 +1,307 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=generator content="Wowchemy 5.3.0 for Hugo"><meta name=author content="Matheus Cunha"><meta name=description content="Adapting the Atomic Design methodology to Infrastructure as Code components to
+help foster code reusability, ease of maintenance and agile development of the
+infrastructure. Creates standardization, validates inputs and brings the
+Terraform definitions closer to the developers (self-service Ops).
+"><link rel=alternate hreflang=en-us href=https://macunha.me/en/post/2021/06/terraform-atomic-design/><meta name=theme-color content="#1565c0"><link rel=stylesheet href=https://macunha.me/css/vendor-bundle.min.1e75974c6945afa9e52fa8182894548d.css media=print onload="this.media='all'"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin=anonymous media=print onload="this.media='all'"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css crossorigin=anonymous title=hl-light media=print onload="this.media='all'"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css crossorigin=anonymous title=hl-dark media=print onload="this.media='all'" disabled><link rel=stylesheet href=https://macunha.me/css/wowchemy.bcde3c18a267ad29e769cbf0bb31caf6.css><script async src="https://www.googletagmanager.com/gtag/js?id=UA-143794949-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}function trackOutboundLink(a,b){gtag('event','click',{event_category:'outbound',event_label:a,transport_type:'beacon',event_callback:function(){b!=='_blank'&&(document.location=a)}}),console.debug("Outbound link clicked: "+a)}function onClickCallback(a){if(a.target.tagName!=='A'||a.target.host===window.location.host)return;trackOutboundLink(a.target,a.target.getAttribute('target'))}gtag('js',new Date),gtag('config','UA-143794949-1',{anonymize_ip:!0}),gtag('set',{cookie_flags:'SameSite=None;Secure'}),document.addEventListener('click',onClickCallback,!1)</script><link rel=manifest href=https://macunha.me/en/index.webmanifest><link rel=icon type=image/png href=https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_32x32_fill_lanczos_center_2.png><link rel=apple-touch-icon type=image/png href=https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_180x180_fill_lanczos_center_2.png><link rel=canonical href=https://macunha.me/en/post/2021/06/terraform-atomic-design/><meta property="twitter:card" content="summary"><meta property="og:site_name" content="It's me, Macunha!"><meta property="og:url" content="https://macunha.me/en/post/2021/06/terraform-atomic-design/"><meta property="og:title" content="Terraform: Atomic Design | It's me, Macunha!"><meta property="og:description" content="Adapting the Atomic Design methodology to Infrastructure as Code components to
+help foster code reusability, ease of maintenance and agile development of the
+infrastructure. Creates standardization, validates inputs and brings the
+Terraform definitions closer to the developers (self-service Ops).
+"><meta property="og:image" content="https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png"><meta property="twitter:image" content="https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us"><meta property="article:published_time" content="2021-06-29T00:00:00+02:00"><meta property="article:modified_time" content="2021-08-28T10:44:31+02:00"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://macunha.me/en/post/2021/06/terraform-atomic-design/"},"headline":"Terraform: Atomic Design","datePublished":"2021-06-29T00:00:00+02:00","dateModified":"2021-08-28T10:44:31+02:00","author":{"@type":"Person","name":"Matheus Cunha"},"publisher":{"@type":"Organization","name":"It's me, Macunha!","logo":{"@type":"ImageObject","url":"https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_192x192_fill_lanczos_center_2.png"}},"description":"Adapting the Atomic Design methodology to Infrastructure as Code components to\nhelp foster code reusability, ease of maintenance and agile development of the\ninfrastructure. Creates standardization, validates inputs and brings the\nTerraform definitions closer to the developers (self-service Ops).\n"}</script><script src=https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js integrity="sha256-5VhCqFam2Cn+yjw61zbBNrbHVJ6SRydPeKopYlngbiQ=" crossorigin=anonymous></script><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.css integrity="sha256-zQ0LblD/Af8vOppw18+2anxsuaz3pWYyVWi+bTvTH8Q=" crossorigin=anonymous><script>window.addEventListener("load",function(){window.cookieconsent.initialise({palette:{popup:{background:"#1565c0",text:"rgb(255, 255, 255)"},button:{background:"rgb(255, 255, 255)",text:"#1565c0"}},theme:"classic",content:{message:"This website uses cookies to ensure you get the best experience on our website.",dismiss:"Got it!",link:"Learn more",href:"https://www.cookiesandyou.com"}})})</script><title>Terraform: Atomic Design | It's me, Macunha!</title></head><body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=4b075a1207b1ac5d62b953a1ca9cce17><script src=https://macunha.me/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js></script><aside class=search-modal id=search><div class=container><section class=search-header><div class="row no-gutters justify-content-between mb-3"><div class=col-6><h1>Search</h1></div><div class="col-6 col-search-close"><a class=js-search href=# aria-label=Close><i class="fas fa-times-circle text-muted" aria-hidden=true></i></a></div></div><div id=search-box><input name=q id=search-query placeholder=Search... autocapitalize=off autocomplete=off autocorrect=off spellcheck=false type=search class=form-control aria-label=Search...></div></section><section class=section-search-results><div id=search-hits></div></section></div></aside><div class=page-header><nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id=navbar-main><div class=container-xl><div class="d-none d-lg-inline-flex"><a class=navbar-brand href=https://macunha.me/en/>It's me, Macunha!</a></div><button type=button class=navbar-toggler data-toggle=collapse data-target=#navbar-content aria-controls=navbar-content aria-expanded=false aria-label="Toggle navigation">
+<span><i class="fas fa-bars"></i></span></button><div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none"><a class=navbar-brand href=https://macunha.me/en/>It's me, Macunha!</a></div><div class="navbar-collapse main-menu-item collapse justify-content-end" id=navbar-content><ul class="navbar-nav d-md-inline-flex"><li class=nav-item><a class=nav-link href=https://macunha.me/en/project/><span>Projects</span></a></li><li class=nav-item><a class="nav-link active" href=https://macunha.me/en/post/><span>Posts</span></a></li><li class=nav-item><a class=nav-link href=https://macunha.me/en/author/matheus-cunha/><span>About</span></a></li></ul></div><ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2"><li class=nav-item><a class="nav-link js-search" href=# aria-label=Search><i class="fas fa-search" aria-hidden=true></i></a></li><li class="nav-item dropdown theme-dropdown"><a href=# class=nav-link data-toggle=dropdown aria-haspopup=true aria-label="Display preferences"><i class="fas fa-moon" aria-hidden=true></i></a><div class=dropdown-menu><a href=# class="dropdown-item js-set-theme-light"><span>Light</span></a>
+<a href=# class="dropdown-item js-set-theme-dark"><span>Dark</span></a>
+<a href=# class="dropdown-item js-set-theme-auto"><span>Automatic</span></a></div></li></ul></div></nav></div><div class=page-body><article class=article><div class="article-container pt-3"><h1>Terraform: Atomic Design</h1><div class=article-metadata><span class=article-date>Last updated on
+28/08/2021</span>
+<span class=middot-divider></span><span class=article-reading-time>9 min read</span>
+<span class=middot-divider></span><a href=https://macunha.me/en/post/2021/06/terraform-atomic-design/#disqus_thread></a><span class=middot-divider></span><span class=article-categories><i class="fas fa-folder mr-1"></i><a href=https://macunha.me/en/category/infrastructure-as-code/>Infrastructure As Code</a>, <a href=https://macunha.me/en/category/terraform/>Terraform</a>, <a href=https://macunha.me/en/category/devops/>DevOps</a></span></div></div><div class=article-container><div class=article-style><h2 id=intro>Intro</h2><p>Following <a href=https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/ target=_blank rel=noopener>The Pragmatic Programmer</a> mantra, I do my best to &mldr;</p><blockquote><p><strong>Learn at least one new language every year.</strong> Different languages solve the same
+problems in different ways. By learning several different approaches, you can
+help broaden your thinking and avoid getting stuck in a rut.</p></blockquote><p>Not necessarily to show it off or to be capable of talking about random
+technologies, but to expand and train my problem-solving skills, to get new
+perspectives when approaching a challenge.</p><p>We might not notice it but when we learn (or have learned) to code we aren&rsquo;t
+just learning to type some characters that a compiler/interpreter can
+understand, it is a new way of thinking, a new way of breaking down solutions
+(into sequential steps).</p><blockquote><p>It doesn&rsquo;t matter whether you ever use any of these technologies on a project,
+or even whether you put them on your resume. The process of learning will expand
+your thinking, opening you to new possibilities and new ways of doing things.
+The cross-pollination of ideas is important;</p></blockquote><p>As someone who works intensively with infrastructure components (servers,
+databases, Kubernetes, CI/CD, etc) I aimed for something completely different
+this year. Something that stands on <em>a whole different spectrum</em> of the system,
+this year I decided to learn <a href=https://flutter.dev/ target=_blank rel=noopener>Flutter</a>.</p><p>In-a-nutshell, Flutter is a better React Native. A framework that enables
+implementation of GUI applications for multiple platforms with a single code
+base.</p><p>Then it reminded me a discussion I had with a friend in the past about React
+components and the <a href=https://bradfrost.com/blog/post/atomic-web-design/ target=_blank rel=noopener>Atomic Design</a> methodology, which helps to structure web
+components into modules.</p><p>In the Atomic Design methodology, the granularity of modules is distinguished by
+using chemistry inspired names: atoms, molecules and organisms.</p><p>Then the connection of the ideas from</p><ul><li>Pragmatic Programmer&rsquo;s cross-pollination to</li><li>Atomic Design (on Flutter components) to</li><li>Terraform modules</li></ul><p>came almost like a thunderbolt, striking me with this insight when I was working
+with a huge legacy Terraform code base refactoring with lots of code duplication
+(read: copy+paste, &ldquo;we fix it later&rdquo;, then the author quits the company and
+never fix anything).</p><p>Although initially proposed as a Web UI methodology, Infrastructure as Code
+tools such as Terraform that makes heavy usage of modules can benefit from
+Atomic Design to improve its code reusability and massively reduce duplication.</p><h2 id=details>Details</h2><p>The Atomic Design methodology proposes five distinct levels, listed from the
+finest to the thickest:</p><ol><li>Atom;</li><li>Molecules;</li><li>Organisms;</li><li>Templates;</li><li>Pages.</li></ol><p>However, to extract the gist, we&rsquo;ll only be focusing on Atoms, Molecules, and
+Organisms (from 1. to 3.). Templates and Pages are too domain-specific focused
+on Web UI development.</p><h3 id=atoms>Atoms</h3><p>Atoms represent the finest grain in terms of granularity in the design. When
+referring specifically to its implementation in Terraform a <code>resource</code> and a
+small scoped single-purpose <code>module</code> could be used interchangeably.</p><p>Sometimes the idea of turning a simple resource into a module makes sense to
+ease parameterization and reusability, especially when it is necessary to parse
+inputs. Although, due to its extreme limited scope it might not look attractive
+to convert the <code>resource</code> into a <code>module</code> at first sight, on the long run it
+pays off to do so in order to achieve scalability and reproducibility.</p><p>e.g.:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-terraform data-lang=terraform><span style=color:#66d9ef>data</span> <span style=color:#e6db74>&#34;aws_route53_zone&#34;</span> <span style=color:#e6db74>&#34;default&#34;</span> {
+  <span style=color:#a6e22e>zone_id</span> = var.<span style=color:#a6e22e>zone_id</span>
+  <span style=color:#a6e22e>name</span>    = var.<span style=color:#a6e22e>zone_name</span>
+}
+<span style=color:#66d9ef>
+</span><span style=color:#66d9ef>resource</span> <span style=color:#e6db74>&#34;aws_route53_record&#34;</span> <span style=color:#e6db74>&#34;default&#34;</span> {
+  <span style=color:#a6e22e>zone_id</span> = data.<span style=color:#a6e22e>aws_route53_zone</span>.<span style=color:#a6e22e>default</span>.<span style=color:#a6e22e>zone_id</span>
+  <span style=color:#a6e22e>name</span>    = var.<span style=color:#a6e22e>name</span>
+
+  <span style=color:#a6e22e>ttl</span>  = var.<span style=color:#a6e22e>ttl</span>
+  <span style=color:#a6e22e>type</span> = var.<span style=color:#a6e22e>record_type</span>
+
+  <span style=color:#a6e22e>records</span> = var.<span style=color:#a6e22e>records</span>
+
+  <span style=color:#a6e22e>dynamic</span> <span style=color:#e6db74>&#34;alias&#34;</span> {
+    <span style=color:#a6e22e>for_each</span> = [var.<span style=color:#a6e22e>alias</span>]
+
+    <span style=color:#a6e22e>content</span> {
+      <span style=color:#a6e22e>name</span> = each.<span style=color:#a6e22e>value</span>.<span style=color:#a6e22e>name</span>
+      <span style=color:#a6e22e>zone_id</span> = try(each.<span style=color:#a6e22e>value</span>.<span style=color:#a6e22e>zone_id</span>, data.<span style=color:#a6e22e>aws_route53_zone</span>.<span style=color:#a6e22e>default</span>.<span style=color:#a6e22e>zone_id</span>)
+
+      <span style=color:#a6e22e>evaluate_target_health</span> = lookup(
+        each.<span style=color:#a6e22e>value</span>,
+        <span style=color:#e6db74>&#34;evaluate_target_health&#34;</span>,
+        <span style=color:#66d9ef>false</span>,
+      )
+    }
+  }
+}
+</code></pre></div><p>In this case, even though <code>aws_route53_record</code> is a simple resource that might
+feel too narrow in scope to write a module, the implementation of the module
+allows to bundle the AWS Route53 Zone data source together, which helps to:</p><ol><li>provide a simpler contract by allowing the usage of <code>zone_name</code> alone;</li><li>validate the <code>zone_name</code> input, ensuring that a given <code>zone_name</code> corresponds to an
+actual <strong>existing and valid</strong> AWS resource;</li><li>same goes to <code>zone_id</code>, which will feel (and oftentimes, be) redundant,
+<em>when</em> specified as an input Terraform will read the data from AWS API
+ensuring consistency.</li></ol><p>e.g.:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-terraform data-lang=terraform><span style=color:#66d9ef>module</span> <span style=color:#e6db74>&#34;awesome_dns_fqdn&#34;</span> {
+  <span style=color:#a6e22e>source</span> = <span style=color:#e6db74>&#34;path/to/modules/atoms/aws_route53_record&#34;</span>
+  <span style=color:#a6e22e>version</span> = <span style=color:#e6db74>&#34;~&gt; 1.0&#34;</span>
+
+  <span style=color:#a6e22e>name</span>      = <span style=color:#e6db74>&#34;record.example.com&#34;</span>
+  <span style=color:#a6e22e>zone_name</span> = <span style=color:#e6db74>&#34;example.com.&#34;</span>
+
+  <span style=color:#a6e22e>record_type</span> = <span style=color:#e6db74>&#34;CNAME&#34;</span>
+  <span style=color:#a6e22e>records</span>     = [<span style=color:#e6db74>&#34;1.2.3.4&#34;</span>]
+}
+</code></pre></div><p>Hence, resources and modules are sometimes interchangeable as they deliver the
+same outcome for the finest resources' granularity.</p><h3 id=molecules>Molecules</h3><p>When groups of atoms are bounded together, they create a molecule which is the
+smallest fundamental unit of a compound.</p><p>Contrary to the original Atomic Design for Web UI, in Terraform, Atoms are
+useful on their own. However, the usage of atoms comes with a high price on
+scalability: code duplication. Actually, duplication is an understatement, it is
+more like code exponentiation (more on this later).</p><h4 id=implementation-example>Implementation example</h4><p>Suppose we are creating a public facing API Gateway that needs a DNS record.</p><p>Let&rsquo;s compose it with the previous example:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-terraform data-lang=terraform><span style=color:#66d9ef>data</span> <span style=color:#e6db74>&#34;aws_route53_zone&#34;</span> <span style=color:#e6db74>&#34;default&#34;</span> {
+  <span style=color:#a6e22e>name</span> = var.<span style=color:#a6e22e>zone_name</span>
+}
+<span style=color:#66d9ef>
+</span><span style=color:#66d9ef>module</span> <span style=color:#e6db74>&#34;awesome_api_gateway_certificate&#34;</span> {
+  <span style=color:#a6e22e>source</span>  = <span style=color:#e6db74>&#34;terraform-aws-modules/acm/aws&#34;</span>
+  <span style=color:#a6e22e>version</span> = <span style=color:#e6db74>&#34;~&gt; v3.0&#34;</span>
+
+  <span style=color:#a6e22e>domain_name</span> = var.<span style=color:#a6e22e>domain_name</span>
+  <span style=color:#a6e22e>zone_id</span>     = data.<span style=color:#a6e22e>aws_route53_zone</span>.<span style=color:#a6e22e>default</span>.<span style=color:#a6e22e>zone_id</span>
+
+  <span style=color:#a6e22e>wait_for_validation</span> = <span style=color:#66d9ef>true</span>
+}
+<span style=color:#66d9ef>
+</span><span style=color:#66d9ef>module</span> <span style=color:#e6db74>&#34;awesome_api_gateway&#34;</span> {
+  <span style=color:#a6e22e>source</span> = <span style=color:#e6db74>&#34;terraform-aws-modules/apigateway-v2/aws&#34;</span>
+  <span style=color:#a6e22e>version</span> = <span style=color:#e6db74>&#34;~&gt; 1.0&#34;</span>
+
+  <span style=color:#a6e22e>name</span>          = var.<span style=color:#a6e22e>api_gateway_name</span>
+  <span style=color:#a6e22e>description</span>   = var.<span style=color:#a6e22e>api_gateway_description</span>
+  <span style=color:#a6e22e>protocol_type</span> = <span style=color:#e6db74>&#34;HTTP&#34;</span>
+
+  <span style=color:#a6e22e>cors_configuration</span> = {
+    <span style=color:#a6e22e>allow_headers</span> = [
+      <span style=color:#e6db74>&#34;content-type&#34;</span>,
+      <span style=color:#e6db74>&#34;x-amz-date&#34;</span>,
+      <span style=color:#e6db74>&#34;authorization&#34;</span>,
+      <span style=color:#e6db74>&#34;x-api-key&#34;</span>,
+      <span style=color:#e6db74>&#34;x-amz-security-token&#34;</span>,
+      <span style=color:#e6db74>&#34;x-amz-user-agent&#34;</span>,
+    ]
+    <span style=color:#a6e22e>allow_methods</span> = [<span style=color:#e6db74>&#34;*&#34;</span>]
+    <span style=color:#a6e22e>allow_origins</span> = [<span style=color:#e6db74>&#34;*&#34;</span>]
+  }<span style=color:#75715e>
+</span><span style=color:#75715e>
+</span><span style=color:#75715e>  # Custom domain
+</span><span style=color:#75715e></span>  <span style=color:#a6e22e>domain_name</span>                 = var.<span style=color:#a6e22e>domain_name</span>
+  <span style=color:#a6e22e>domain_name_certificate_arn</span> = module.<span style=color:#a6e22e>awesome_api_gateway_certificate</span>.<span style=color:#a6e22e>acm_certificate_arn</span><span style=color:#75715e>
+</span><span style=color:#75715e>
+</span><span style=color:#75715e>  # Routes and integrations
+</span><span style=color:#75715e></span>  <span style=color:#a6e22e>integrations</span> = var.<span style=color:#a6e22e>api_gateway_integrations</span>
+}
+<span style=color:#66d9ef>
+</span><span style=color:#66d9ef>module</span> <span style=color:#e6db74>&#34;awesome_dns_fqdn&#34;</span> {
+  <span style=color:#a6e22e>source</span>  = <span style=color:#e6db74>&#34;path/to/modules/atoms/aws_route53_record&#34;</span>
+  <span style=color:#a6e22e>version</span> = <span style=color:#e6db74>&#34;~&gt; 1.0&#34;</span>
+
+  <span style=color:#a6e22e>name</span>    = var.<span style=color:#a6e22e>domain_name</span>
+  <span style=color:#a6e22e>zone_id</span> = data.<span style=color:#a6e22e>aws_route53_zone</span>.<span style=color:#a6e22e>default</span>.<span style=color:#a6e22e>zone_id</span>
+
+  <span style=color:#a6e22e>record_type</span> = <span style=color:#e6db74>&#34;CNAME&#34;</span>
+  <span style=color:#a6e22e>alias</span>     = {
+    <span style=color:#a6e22e>name</span>    = module.<span style=color:#a6e22e>awesome_api_gateway</span>.<span style=color:#a6e22e>apigatewayv2_domain_name_configuration</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>target_domain_name</span>
+    <span style=color:#a6e22e>zone_id</span> = module.<span style=color:#a6e22e>awesome_api_gateway</span>.<span style=color:#a6e22e>apigatewayv2_domain_name_configuration</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>hosted_zone_id</span>
+  }
+}
+</code></pre></div><p>This helps illustrating an example in which the <code>aws_route53_record</code> atom could
+be easily replaced with its equivalent resource and it would still provide the
+<strong>same</strong> outcome.</p><p>Commonly it is possible to use <code>module</code> and <code>resource</code> interchangeably as Atoms,
+the decision of whether or not to implement a <code>module</code> is ultimately defined by
+the need of parsing and/or validating the inputs (variables).</p><h4 id=usage-example>Usage example</h4><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-terraform data-lang=terraform><span style=color:#66d9ef>module</span> <span style=color:#e6db74>&#34;awesome_lambda&#34;</span> {
+  <span style=color:#a6e22e>source</span>  = <span style=color:#e6db74>&#34;path/to/modules/molecules/aws_lambda_function&#34;</span>
+  <span style=color:#a6e22e>version</span> = <span style=color:#e6db74>&#34;~&gt; 1.0&#34;</span>
+
+  <span style=color:#a6e22e>function_name</span> = <span style=color:#e6db74>&#34;awesome&#34;</span>
+  <span style=color:#a6e22e>description</span>   = <span style=color:#e6db74>&#34;An Awesome lambda function for the Awesome API Gateway&#34;</span>
+  <span style=color:#a6e22e>handler</span>       = &#34;index.<span style=color:#a6e22e>lambda_handler</span><span style=color:#e6db74>&#34;
+</span><span style=color:#e6db74>  runtime       = &#34;</span><span style=color:#a6e22e>python3</span>.<span style=color:#ae81ff>8</span><span style=color:#e6db74>&#34;
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>  # Incomplete implementation, don&#39;t use this on production
+</span><span style=color:#e6db74>}
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>module &#34;</span><span style=color:#a6e22e>another_awesome_lambda</span><span style=color:#e6db74>&#34; {
+</span><span style=color:#e6db74>  source  = &#34;</span><span style=color:#a6e22e>path</span><span style=color:#f92672>/</span><span style=color:#a6e22e>to</span><span style=color:#f92672>/</span>module<span style=color:#a6e22e>s</span><span style=color:#f92672>/</span><span style=color:#a6e22e>molecules</span><span style=color:#f92672>/</span><span style=color:#a6e22e>aws_lambda_function</span><span style=color:#e6db74>&#34;
+</span><span style=color:#e6db74>  version = &#34;</span><span style=color:#960050;background-color:#1e0010>~</span><span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>1</span>.<span style=color:#ae81ff>0</span><span style=color:#e6db74>&#34;
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>  function_name = &#34;</span><span style=color:#a6e22e>awesome</span><span style=color:#e6db74>&#34;
+</span><span style=color:#e6db74>  description   = &#34;</span><span style=color:#a6e22e>An</span> <span style=color:#a6e22e>Awesome</span> <span style=color:#a6e22e>lambda</span> <span style=color:#a6e22e>function</span> <span style=color:#66d9ef>for</span> <span style=color:#a6e22e>the</span> <span style=color:#a6e22e>Awesome</span> <span style=color:#a6e22e>API</span> <span style=color:#a6e22e>Gateway</span><span style=color:#e6db74>&#34;
+</span><span style=color:#e6db74>  handler       = &#34;</span><span style=color:#a6e22e>index</span>.<span style=color:#a6e22e>lambda_handler</span><span style=color:#e6db74>&#34;
+</span><span style=color:#e6db74>  runtime       = &#34;</span><span style=color:#a6e22e>python3</span>.<span style=color:#ae81ff>8</span><span style=color:#e6db74>&#34;
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>  # Incomplete implementation, don&#39;t use this on production
+</span><span style=color:#e6db74>}
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>module &#34;</span><span style=color:#a6e22e>awesome_api_gateway</span><span style=color:#e6db74>&#34; {
+</span><span style=color:#e6db74>  source = &#34;</span><span style=color:#a6e22e>path</span><span style=color:#f92672>/</span><span style=color:#a6e22e>to</span><span style=color:#f92672>/</span>module<span style=color:#a6e22e>s</span><span style=color:#f92672>/</span><span style=color:#a6e22e>molecules</span><span style=color:#f92672>/</span><span style=color:#a6e22e>aws_api_gateway</span><span style=color:#e6db74>&#34;
+</span><span style=color:#e6db74>  version = &#34;</span><span style=color:#960050;background-color:#1e0010>~</span><span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>1</span>.<span style=color:#ae81ff>0</span><span style=color:#e6db74>&#34;
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>  domain_name = &#34;</span><span style=color:#a6e22e>record</span>.<span style=color:#a6e22e>example</span>.<span style=color:#a6e22e>com</span><span style=color:#e6db74>&#34;
+</span><span style=color:#e6db74>  zone_name   = &#34;</span><span style=color:#a6e22e>example</span>.<span style=color:#a6e22e>com</span>.<span style=color:#e6db74>&#34;
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>  api_gateway_name = &#34;</span><span style=color:#a6e22e>awesome</span><span style=color:#f92672>-</span><span style=color:#a6e22e>api</span><span style=color:#f92672>-</span><span style=color:#a6e22e>gateway</span><span style=color:#e6db74>&#34;
+</span><span style=color:#e6db74>  api_gateway_description = &#34;</span><span style=color:#a6e22e>An</span> <span style=color:#a6e22e>Awesome</span> <span style=color:#a6e22e>API</span> <span style=color:#a6e22e>Gateway</span><span style=color:#e6db74>&#34;
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>  api_gateway_integrations = {
+</span><span style=color:#e6db74>    &#34;</span><span style=color:#a6e22e>POST</span> <span style=color:#f92672>/</span><span style=color:#e6db74>&#34; = {
+</span><span style=color:#e6db74>      lambda_arn             = module.awesome_lambda.function_arn
+</span><span style=color:#e6db74>      payload_format_version = &#34;</span><span style=color:#ae81ff>2</span>.<span style=color:#ae81ff>0</span><span style=color:#e6db74>&#34;
+</span><span style=color:#e6db74>    }
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>    &#34;</span><span style=color:#960050;background-color:#1e0010>$</span><span style=color:#a6e22e>default</span><span style=color:#e6db74>&#34; = {
+</span><span style=color:#e6db74>      lambda_arn = module.another_awesome_lambda.function_arn
+</span><span style=color:#e6db74>    }
+</span><span style=color:#e6db74>  }
+</span><span style=color:#e6db74>}
+</span></code></pre></div><p>As you probably have already realized, when the level of abstraction goes up
+(e.g. from atom to molecule) the module implementation is in itself a good
+implementation example (i.e. as in <a href=https://github.com/terraform-aws-modules/terraform-aws-lambda/blob/master/main.tf target=_blank rel=noopener>community modules examples</a>).</p><p>They help to self-document the usage and implementation of a given module and
+through generic implementations it allows us to have multiple molecules
+implementing multiple distinct use-cases. e.g.:</p><ol><li>Public API Gateway with DNS record + TLS certificate;</li><li>Public API Gateway v1, no DNS record;</li><li>Private API Gateway.</li></ol><p>Why would we chose to implement multiple times the Atom modules in order to
+create multiple distinct use-cases? We are getting closer to the <em>code
+exponentiation</em> problem and solution proposal. Can you feel it?</p><h3 id=organisms>Organisms</h3><p>Going further, the <a href=#usage-example>example of composition for molecules</a> can have its hard-coded
+values turned into variables in order to compose an Organism, which can
+facilitate the implementation of the same definition across different
+environments. Thus, achieving reproducibility as well as the <a href=https://12factor.net/dev-prod-parity target=_blank rel=noopener>Factor X.</a> of the
+Twelve Factor App.</p><p>However, it is important to note that the level of abstraction between Organisms
+and Molecules can be easily confused or misunderstood. Generally speaking, as a
+rule of thumb an Organism is the composition of Molecules that allow parameterization for
+business or domain-specific logic (e.g. the actual <code>awesome_api</code> configuration).
+Therefore, in comparison with the previous, Organisms (usually) have a lower
+level of generalization since they are business-specialized modules.</p><p>Iterating over our implementation example, the Organism would implement the
+<code>awesome_api</code>, creating the following resources:</p><ul><li>AWS Lambda function;</li><li>AWS API Gateway;</li><li>TLS Certificate on AWS ACM;</li><li>DNS record on AWS Route53.</li></ul><p>By implementing the previous examples as organisms we:</p><ol><li>reduce the amount of boilerplate code;</li><li>foster reusability of modules;</li><li>provide a simple interface for non-operators to manage TF code.</li></ol><p>When you sum it all up, you will notice that it is <strong>all about autonomy</strong> and
+&ldquo;DevOps&rdquo; through encouragement of self-service Ops. One wouldn&rsquo;t need to know a
+lot about Terraform to grab a module and pass some parameters to it, followed by
+a code review process Operators and Software Developers can manage the
+Infrastructure in harmony, <strong>together</strong>. (:</p><h3 id=code-exponentiation-what>Code Exponentiation? What?</h3><p>Read that as a dramatization of the <a href=https://en.wikipedia.org/wiki/Duplicate%5Fcode target=_blank rel=noopener>&ldquo;code duplication&rdquo;</a> term.</p><p>When it comes to <a href=https://macunha.me/en/category/infrastructure-as-code/>Infrastructure as Code</a>, there is no easy way around the jungle
+of resources that grows over time. Fast pacing tech companies are &ldquo;moving fast
+and breaking things&rdquo;, oftentimes the Operators are worried about a massive
+amount of challenges at once: keep the servers up and running, with a consistent
+response time, low error rate, and all that <a href=https://sre.google/sre-book/table-of-contents/ target=_blank rel=noopener>playbook from Google&rsquo;s SRE wisdom</a>.</p><p>All things considered, a good Infrastructure as Code design is generally
+a first-world problem. However, as the time passes it evolves into a real issue
+that slows down the implementation of resources as code. Either that or there
+will be a <strong>huge ton</strong> of copy+paste to keep up with the pace, followed by a
+routine of find+replace when changes are applied, <em>then</em> harder to track pull
+requests and slower code reviews.</p><p>Lets take our <code>awesome_api</code> example and scale it up to multiple environments
+followed by a second <code>awesome_api</code>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>.
+├── development
+│   ├── an-awesome-api
+│   │   └── main.tf
+│   └── another-awesome-api
+│       └── main.tf
+├── staging
+│   ├── an-awesome-api
+│   │   └── main.tf
+│   └── another-awesome-api
+│       └── main.tf
+└── production
+    ├── an-awesome-api
+    │   └── main.tf
+    └── another-awesome-api
+        └── main.tf
+</code></pre></div><p>In order to replicate the configuration and ensure consistency, the following is
+way simpler to implement (and review) than copy+paste huge chunks of Terraform
+definitions</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-terraform data-lang=terraform><span style=color:#66d9ef>module</span> <span style=color:#e6db74>&#34;awesome_api&#34;</span> {
+  <span style=color:#a6e22e>source</span> = <span style=color:#e6db74>&#34;path/to/modules/organisms/aws_lambda_with_api_gateway&#34;</span>
+  <span style=color:#a6e22e>version</span> = <span style=color:#e6db74>&#34;~&gt; 1.0&#34;</span>
+
+  <span style=color:#a6e22e>domain_name</span> = <span style=color:#e6db74>&#34;record.example.com&#34;</span>
+  <span style=color:#a6e22e>zone_name</span>   = <span style=color:#e6db74>&#34;example.com.&#34;</span>
+
+  <span style=color:#a6e22e>lambda_functions</span> = [<span style=color:#75715e>
+</span><span style=color:#75715e>    # Index 0 -- An Awesome Lambda Function, used for POST
+</span><span style=color:#75715e></span>    {
+      <span style=color:#a6e22e>name</span>        = <span style=color:#e6db74>&#34;an-awesome&#34;</span>
+      <span style=color:#a6e22e>description</span> = <span style=color:#e6db74>&#34;An Awesome lambda function for the Awesome API Gateway&#34;</span>
+      <span style=color:#a6e22e>handler</span>     = <span style=color:#e6db74>&#34;an_awesome.lambda_handler&#34;</span>
+      <span style=color:#a6e22e>runtime</span>     = <span style=color:#e6db74>&#34;python3.8&#34;</span>
+    },<span style=color:#75715e>
+</span><span style=color:#75715e>    # Index 1 -- Another Awesome Lambda Function, used as $default
+</span><span style=color:#75715e></span>    {
+      <span style=color:#a6e22e>name</span>        = <span style=color:#e6db74>&#34;another-awesome&#34;</span>
+      <span style=color:#a6e22e>description</span> = <span style=color:#e6db74>&#34;Another Awesome lambda function for the Awesome API Gateway&#34;</span>
+      <span style=color:#a6e22e>handler</span>     = <span style=color:#e6db74>&#34;another_awesome.lambda_handler&#34;</span>
+      <span style=color:#a6e22e>runtime</span>     = <span style=color:#e6db74>&#34;python3.8&#34;</span>
+    },
+  ]
+
+  <span style=color:#a6e22e>api_gateway_name</span> = <span style=color:#e6db74>&#34;awesome-api-gateway&#34;</span>
+  <span style=color:#a6e22e>api_gateway_description</span> = <span style=color:#e6db74>&#34;An Awesome API Gateway&#34;</span>
+
+  <span style=color:#a6e22e>api_gateway_integrations</span> = {
+    <span style=color:#e6db74>&#34;POST /&#34;</span> <span style=color:#f92672>=</span> {
+      <span style=color:#a6e22e>lambda_function_index</span>  = <span style=color:#ae81ff>0</span>
+      <span style=color:#a6e22e>payload_format_version</span> = <span style=color:#e6db74>&#34;2.0&#34;</span>
+    }
+
+    <span style=color:#e6db74>&#34;$default&#34;</span> <span style=color:#f92672>=</span> {
+      <span style=color:#a6e22e>lambda_function_index</span> = <span style=color:#ae81ff>1</span>
+    }
+  }
+}
+</code></pre></div><h2 id=conclusion>Conclusion</h2><p>At the end of the day we get an ugly Terraform state containing many</p><pre><code class=language-nil data-lang=nil>module.something.module.something_else.module.yet_another_thing...
+</code></pre><p>But the productivity boost gained by merging modules based on context is a worth
+investment. Especially for huge Terraform repositories with multiple teams
+collaborating and managing a lot of resources.</p><p>Cross-team collaboration is fostered by applying the Atomic Design methodology
+for Terraform modules, code reusability becomes an important factor over
+copy+paste and the repository gravitates towards the <a href=https://en.wikipedia.org/wiki/Don%27t%5Frepeat%5Fyourself target=_blank rel=noopener>DRY principle</a>.</p></div><div class=share-box aria-hidden=true><ul class=share><li><a href="https://twitter.com/intent/tweet?url=https://macunha.me/en/post/2021/06/terraform-atomic-design/&text=Terraform:%20Atomic%20Design" target=_blank rel=noopener class=share-btn-twitter><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer.php?u=https://macunha.me/en/post/2021/06/terraform-atomic-design/&t=Terraform:%20Atomic%20Design" target=_blank rel=noopener class=share-btn-facebook><i class="fab fa-facebook"></i></a></li><li><a href="mailto:?subject=Terraform:%20Atomic%20Design&body=https://macunha.me/en/post/2021/06/terraform-atomic-design/" target=_blank rel=noopener class=share-btn-email><i class="fas fa-envelope"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https://macunha.me/en/post/2021/06/terraform-atomic-design/&title=Terraform:%20Atomic%20Design" target=_blank rel=noopener class=share-btn-linkedin><i class="fab fa-linkedin-in"></i></a></li><li><a href="whatsapp://send?text=Terraform:%20Atomic%20Design%20https://macunha.me/en/post/2021/06/terraform-atomic-design/" target=_blank rel=noopener class=share-btn-whatsapp><i class="fab fa-whatsapp"></i></a></li><li><a href="https://service.weibo.com/share/share.php?url=https://macunha.me/en/post/2021/06/terraform-atomic-design/&title=Terraform:%20Atomic%20Design" target=_blank rel=noopener class=share-btn-weibo><i class="fab fa-weibo"></i></a></li></ul></div><div class="media author-card content-widget-hr"><a href=https://macunha.me><img class="avatar mr-3 avatar-circle" src=https://macunha.me/en/author/matheus-cunha/avatar_hu538abb559021e5e818cc3fcb6b905317_34815_270x270_fill_q90_lanczos_center.jpg alt="Matheus Cunha"></a><div class=media-body><h5 class=card-title><a href=https://macunha.me>Matheus Cunha</a></h5><h6 class=card-subtitle>Systems Engineer and Magician</h6><p class=card-text>Just a technology lover empowering business with high-tech computing to help innovation (:</p><ul class=network-icon aria-hidden=true><li><a href=https://github.com/macunha1/ target=_blank rel=noopener><i class="fab fa-github"></i></a></li><li><a href=https://gitlab.com/macunha/ target=_blank rel=noopener><i class="fab fa-gitlab"></i></a></li><li><a href=https://www.linkedin.com/in/macunha/ target=_blank rel=noopener><i class="fab fa-linkedin"></i></a></li><li><a href=https://medium.com/@macunha1 target=_blank rel=noopener><i class="fab fa-medium"></i></a></li></ul></div></div><section id=comments><div id=disqus_thread></div><script>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='https://macunha1-me.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><div class="article-widget content-widget-hr"><h3>Related</h3><ul><li><a href=https://macunha.me/en/post/2021/08/real-life-terraform-refactoring-guide/>Real-life Terraform Refactoring Guide</a></li><li><a href=https://macunha.me/en/post/2021/03/terraform-design-best-practices/>Terraform Design Best Practices</a></li></ul></div></div></article></div><div class=page-footer><div class=container><footer class=site-footer><p class=powered-by>© 2021 Matheus Cunha</p><p class="powered-by footer-license-icons"><a href=https://creativecommons.org/licenses/by-nc-nd/4.0 rel="noopener noreferrer" target=_blank aria-label="Creative Commons"><i class="fab fa-creative-commons fa-2x" aria-hidden=true></i>
+<i class="fab fa-creative-commons-by fa-2x" aria-hidden=true></i>
+<i class="fab fa-creative-commons-nc fa-2x" aria-hidden=true></i>
+<i class="fab fa-creative-commons-nd fa-2x" aria-hidden=true></i></a></p><p class=powered-by>Published with Wowchemy — the free, open source website builder that empowers creators.</p></footer></div></div><div id=modal class="modal fade" role=dialog><div class=modal-dialog><div class=modal-content><div class=modal-header><h5 class=modal-title>Cite</h5><button type=button class=close data-dismiss=modal aria-label=Close>
+<span aria-hidden=true>&#215;</span></button></div><div class=modal-body><pre><code class="tex hljs"></code></pre></div><div class=modal-footer><a class="btn btn-outline-primary my-1 js-copy-cite" href=# target=_blank><i class="fas fa-copy"></i> Copy</a>
+<a class="btn btn-outline-primary my-1 js-download-cite" href=# target=_blank><i class="fas fa-download"></i> Download</a><div id=modal-error></div></div></div></div></div><script src=https://macunha.me/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin=anonymous></script><script id=search-hit-fuse-template type=text/x-template>
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script><script src=https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin=anonymous></script><script id=dsq-count-scr src=https://macunha1-me.disqus.com/count.js async></script><script src=https://macunha.me/en/js/wowchemy.min.1eea1e49ea567f29620cae2b6b980427.js></script><script async defer src=https://buttons.github.io/buttons.js></script></body></html>
