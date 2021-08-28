@@ -43,15 +43,15 @@ important system.&lt;/p>
 &lt;p>Let&amp;rsquo;s suppose that your Terraform code base is versioned in a single repository
 (a.k.a. monorepo), following the random structure displayed below (just to help
 illustrate)&lt;/p>
-&lt;pre>&lt;code class="language-nil" data-lang="nil">.
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">.
 ├── modules/ # Definition of TF modules used by underlying compositions
-├── global/ # Resources that aren't restricted to one environment
+├── global/ # Resources that aren&amp;#39;t restricted to one environment
 │   ├── aws/
 ├── production/ # Production environment resources
 │   └── aws/
 └── staging/ # Staging environment resources
 └── aws/
-&lt;/code>&lt;/pre>&lt;p>On this example each directory corresponds to a Terraform state. In order to
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>On this example each directory corresponds to a Terraform state. In order to
 apply changes you have to walk to a path and execute &lt;code>terraform&lt;/code>.&lt;/p>
 &lt;p>The structure on this example repository was created a few hypothetical years
 ago when the number of existing microservices and resources (DB, message queues,
@@ -72,10 +72,10 @@ in a different git repository to leverage its own versioning. Since Terraform
 modules and its implementations don&amp;rsquo;t always evolve in the same pace, keeping
 two distinct version trees is beneficial. Additionally, a separated repository
 for Terraform modules allows the specification of &amp;ldquo;pinned versions&amp;rdquo;, e.g.:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-terraform" data-lang="terraform">&lt;span style="color:#66d9ef">module&lt;/span> &lt;span style="color:#e6db74">&amp;#34;aws_main_vpc&amp;#34;&lt;/span> {
-&lt;span style="color:#a6e22e">source&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git?ref=2ca733d&amp;#34;&lt;/span>&lt;span style="color:#75715e">
-&lt;/span>&lt;span style="color:#75715e"> # Note the ref=${GIT_REVISION_DIGEST}
-&lt;/span>&lt;span style="color:#75715e">&lt;/span>}
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-ruby" data-lang="ruby">module &lt;span style="color:#e6db74">&amp;#34;aws_main_vpc&amp;#34;&lt;/span> {
+source &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git?ref=2ca733d&amp;#34;&lt;/span>
+&lt;span style="color:#75715e"># Note the ref=${GIT_REVISION_DIGEST}&lt;/span>
+}
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>That reference for a module&amp;rsquo;s version should always be specified, regardless if
 it comes from an internal/private repository or public. When you specify the
 version, you are ensuring reproducibility.&lt;/p>
@@ -109,7 +109,7 @@ put the &lt;a href="https://martinfowler.com/bliki/StranglerFigApplication.html"
 &lt;p>Move all the existing content as-is to the &lt;code>legacy&lt;/code> sub-path, keeping the same
 repository and change history (commits). It also allows applying the &lt;code>legacy&lt;/code>
 code as it used to be from one of those paths.&lt;/p>
-&lt;pre>&lt;code class="language-nil" data-lang="nil">.
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">.
 └── legacy
 ├── global
 │   └── aws
@@ -117,7 +117,7 @@ code as it used to be from one of those paths.&lt;/p>
 │   └── aws
 └── staging
 └── aws
-&lt;/code>&lt;/pre>&lt;p>Once the content is moved to legacy, the idea is to follow the &lt;a href="https://www.oreilly.com/library/view/97-things-every/9780596809515/ch08.html" target="_blank" rel="noopener">Boy Scout rule&lt;/a>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once the content is moved to legacy, the idea is to follow the &lt;a href="https://www.oreilly.com/library/view/97-things-every/9780596809515/ch08.html" target="_blank" rel="noopener">Boy Scout rule&lt;/a>
 in order to strangle the &lt;code>legacy&lt;/code> content little by little (unless you are
 really committed to migrating it all at once, which is going to be exhaustive).&lt;/p>
 &lt;p>The Boy Scout rule goes like:&lt;/p>
@@ -144,12 +144,11 @@ preference, provisioning the bucket and initializing the Terraform &lt;code>back
 &lt;p>implement the definition of the community module
 &lt;a href="https://github.com/terraform-aws-modules/terraform-aws-rds-aurora" target="_blank" rel="noopener">github.com/terraform-aws-modules/terraform-aws-rds-aurora&lt;/a> with the closest
 parameters from the existing one; e.g.:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-terraform" data-lang="terraform">&lt;span style="color:#66d9ef">module&lt;/span> &lt;span style="color:#e6db74">&amp;#34;aws_aurora_main_cluster&amp;#34;&lt;/span> {
-&lt;span style="color:#a6e22e">source&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;terraform-aws-modules/rds-aurora/aws&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">version&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 5.2&amp;#34;&lt;/span>&lt;span style="color:#75715e">
-&lt;/span>&lt;span style="color:#75715e">
-&lt;/span>&lt;span style="color:#75715e"> # ...
-&lt;/span>&lt;span style="color:#75715e">&lt;/span>}
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-ruby" data-lang="ruby">module &lt;span style="color:#e6db74">&amp;#34;aws_aurora_main_cluster&amp;#34;&lt;/span> {
+source &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;terraform-aws-modules/rds-aurora/aws&amp;#34;&lt;/span>
+version &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 5.2&amp;#34;&lt;/span>
+&lt;span style="color:#75715e"># ...&lt;/span>
+}
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>import the Terraform states from the previous (existing) cluster&lt;/p>
@@ -160,8 +159,8 @@ terraform import &lt;span style="color:#e6db74">&amp;#39;aws_aurora_main_cluster
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>then if you haven&amp;rsquo;t yet and would like to &amp;ldquo;match reality&amp;rdquo; between the
 existing and the specified resource, run &lt;code>terraform plan&lt;/code> a few times and
 adjust the parameters until Terraform reports:&lt;/p>
-&lt;pre>&lt;code class="language-nil" data-lang="nil">No changes. Your infrastructure matches the configuration.
-&lt;/code>&lt;/pre>&lt;/li>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">No changes. Your infrastructure matches the configuration.
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>last but not least, remove the corresponding resources from the &lt;code>legacy&lt;/code>
 Terraform state so that it doesn&amp;rsquo;t try to keep track of the changes and also
@@ -173,15 +172,13 @@ terraform state rm aws_rds_cluster.default &lt;span style="color:#ae81ff">\
 &lt;span style="color:#75715e"># ...&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>once that is performed, feel free to remove the corresponding resource&amp;rsquo;s
 definition from the &lt;code>legacy&lt;/code> code.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-terraform" data-lang="terraform">&lt;span style="color:#66d9ef">resource&lt;/span> &lt;span style="color:#e6db74">&amp;#34;aws_rds_cluster&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {&lt;span style="color:#75715e">
-&lt;/span>&lt;span style="color:#75715e"> # ...
-&lt;/span>&lt;span style="color:#75715e">&lt;/span>}
-&lt;span style="color:#66d9ef">
-&lt;/span>&lt;span style="color:#66d9ef">resource&lt;/span> &lt;span style="color:#e6db74">&amp;#34;aws_rds_cluster_instance&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {
-&lt;span style="color:#a6e22e">count&lt;/span> = var.&lt;span style="color:#a6e22e">number_of_database_instances&lt;/span>&lt;span style="color:#75715e">
-&lt;/span>&lt;span style="color:#75715e">
-&lt;/span>&lt;span style="color:#75715e"> # ...
-&lt;/span>&lt;span style="color:#75715e">&lt;/span>}
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-ruby" data-lang="ruby">resource &lt;span style="color:#e6db74">&amp;#34;aws_rds_cluster&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {
+&lt;span style="color:#75715e"># ...&lt;/span>
+}
+resource &lt;span style="color:#e6db74">&amp;#34;aws_rds_cluster_instance&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {
+count &lt;span style="color:#f92672">=&lt;/span> var&lt;span style="color:#f92672">.&lt;/span>number_of_database_instances
+&lt;span style="color:#75715e"># ...&lt;/span>
+}
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol></description></item><item><title>Terraform: Atomic Design</title><link>https://macunha.me/en/post/2021/06/terraform-atomic-design/</link><pubDate>Tue, 29 Jun 2021 00:00:00 +0200</pubDate><guid>https://macunha.me/en/post/2021/06/terraform-atomic-design/</guid><description>&lt;h2 id="intro">Intro&lt;/h2>
 &lt;p>Following &lt;a href="https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/" target="_blank" rel="noopener">The Pragmatic Programmer&lt;/a> mantra, I do my best to &amp;hellip;&lt;/p>
@@ -251,24 +248,23 @@ inputs. Although, due to its extreme limited scope it might not look attractive
 to convert the &lt;code>resource&lt;/code> into a &lt;code>module&lt;/code> at first sight, on the long run it
 pays off to do so in order to achieve scalability and reproducibility.&lt;/p>
 &lt;p>e.g.:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-terraform" data-lang="terraform">&lt;span style="color:#66d9ef">data&lt;/span> &lt;span style="color:#e6db74">&amp;#34;aws_route53_zone&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {
-&lt;span style="color:#a6e22e">zone_id&lt;/span> = var.&lt;span style="color:#a6e22e">zone_id&lt;/span>
-&lt;span style="color:#a6e22e">name&lt;/span> = var.&lt;span style="color:#a6e22e">zone_name&lt;/span>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-ruby" data-lang="ruby">data &lt;span style="color:#e6db74">&amp;#34;aws_route53_zone&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {
+zone_id &lt;span style="color:#f92672">=&lt;/span> var&lt;span style="color:#f92672">.&lt;/span>zone_id
+name &lt;span style="color:#f92672">=&lt;/span> var&lt;span style="color:#f92672">.&lt;/span>zone_name
 }
-&lt;span style="color:#66d9ef">
-&lt;/span>&lt;span style="color:#66d9ef">resource&lt;/span> &lt;span style="color:#e6db74">&amp;#34;aws_route53_record&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {
-&lt;span style="color:#a6e22e">zone_id&lt;/span> = data.&lt;span style="color:#a6e22e">aws_route53_zone&lt;/span>.&lt;span style="color:#a6e22e">default&lt;/span>.&lt;span style="color:#a6e22e">zone_id&lt;/span>
-&lt;span style="color:#a6e22e">name&lt;/span> = var.&lt;span style="color:#a6e22e">name&lt;/span>
-&lt;span style="color:#a6e22e">ttl&lt;/span> = var.&lt;span style="color:#a6e22e">ttl&lt;/span>
-&lt;span style="color:#a6e22e">type&lt;/span> = var.&lt;span style="color:#a6e22e">record_type&lt;/span>
-&lt;span style="color:#a6e22e">records&lt;/span> = var.&lt;span style="color:#a6e22e">records&lt;/span>
-&lt;span style="color:#a6e22e">dynamic&lt;/span> &lt;span style="color:#e6db74">&amp;#34;alias&amp;#34;&lt;/span> {
-&lt;span style="color:#a6e22e">for_each&lt;/span> = [var.&lt;span style="color:#a6e22e">alias&lt;/span>]
-&lt;span style="color:#a6e22e">content&lt;/span> {
-&lt;span style="color:#a6e22e">name&lt;/span> = each.&lt;span style="color:#a6e22e">value&lt;/span>.&lt;span style="color:#a6e22e">name&lt;/span>
-&lt;span style="color:#a6e22e">zone_id&lt;/span> = try(each.&lt;span style="color:#a6e22e">value&lt;/span>.&lt;span style="color:#a6e22e">zone_id&lt;/span>, data.&lt;span style="color:#a6e22e">aws_route53_zone&lt;/span>.&lt;span style="color:#a6e22e">default&lt;/span>.&lt;span style="color:#a6e22e">zone_id&lt;/span>)
-&lt;span style="color:#a6e22e">evaluate_target_health&lt;/span> = lookup(
-each.&lt;span style="color:#a6e22e">value&lt;/span>,
+resource &lt;span style="color:#e6db74">&amp;#34;aws_route53_record&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {
+zone_id &lt;span style="color:#f92672">=&lt;/span> data&lt;span style="color:#f92672">.&lt;/span>aws_route53_zone&lt;span style="color:#f92672">.&lt;/span>default&lt;span style="color:#f92672">.&lt;/span>zone_id
+name &lt;span style="color:#f92672">=&lt;/span> var&lt;span style="color:#f92672">.&lt;/span>name
+ttl &lt;span style="color:#f92672">=&lt;/span> var&lt;span style="color:#f92672">.&lt;/span>ttl
+type &lt;span style="color:#f92672">=&lt;/span> var&lt;span style="color:#f92672">.&lt;/span>record_type
+records &lt;span style="color:#f92672">=&lt;/span> var&lt;span style="color:#f92672">.&lt;/span>records
+dynamic &lt;span style="color:#e6db74">&amp;#34;alias&amp;#34;&lt;/span> {
+for_each &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>var&lt;span style="color:#f92672">.&lt;/span>alias&lt;span style="color:#f92672">]&lt;/span>
+content {
+name &lt;span style="color:#f92672">=&lt;/span> each&lt;span style="color:#f92672">.&lt;/span>value&lt;span style="color:#f92672">.&lt;/span>name
+zone_id &lt;span style="color:#f92672">=&lt;/span> try(each&lt;span style="color:#f92672">.&lt;/span>value&lt;span style="color:#f92672">.&lt;/span>zone_id, data&lt;span style="color:#f92672">.&lt;/span>aws_route53_zone&lt;span style="color:#f92672">.&lt;/span>default&lt;span style="color:#f92672">.&lt;/span>zone_id)
+evaluate_target_health &lt;span style="color:#f92672">=&lt;/span> lookup(
+each&lt;span style="color:#f92672">.&lt;/span>value,
 &lt;span style="color:#e6db74">&amp;#34;evaluate_target_health&amp;#34;&lt;/span>,
 &lt;span style="color:#66d9ef">false&lt;/span>,
 )
@@ -287,13 +283,13 @@ actual &lt;strong>existing and valid&lt;/strong> AWS resource;&lt;/li>
 ensuring consistency.&lt;/li>
 &lt;/ol>
 &lt;p>e.g.:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-terraform" data-lang="terraform">&lt;span style="color:#66d9ef">module&lt;/span> &lt;span style="color:#e6db74">&amp;#34;awesome_dns_fqdn&amp;#34;&lt;/span> {
-&lt;span style="color:#a6e22e">source&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;path/to/modules/atoms/aws_route53_record&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">version&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 1.0&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">name&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;record.example.com&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">zone_name&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;example.com.&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">record_type&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;CNAME&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">records&lt;/span> = [&lt;span style="color:#e6db74">&amp;#34;1.2.3.4&amp;#34;&lt;/span>]
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-ruby" data-lang="ruby">module &lt;span style="color:#e6db74">&amp;#34;awesome_dns_fqdn&amp;#34;&lt;/span> {
+source &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;path/to/modules/atoms/aws_route53_record&amp;#34;&lt;/span>
+version &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 1.0&amp;#34;&lt;/span>
+name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;record.example.com&amp;#34;&lt;/span>
+zone_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;example.com.&amp;#34;&lt;/span>
+record_type &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;A&amp;#34;&lt;/span>
+records &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;1.2.3.4&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
 }
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Hence, resources and modules are sometimes interchangeable as they deliver the
 same outcome for the finest resources' granularity.&lt;/p>
@@ -307,54 +303,49 @@ more like code exponentiation (more on this later).&lt;/p>
 &lt;h4 id="implementation-example">Implementation example&lt;/h4>
 &lt;p>Suppose we are creating a public facing API Gateway that needs a DNS record.&lt;/p>
 &lt;p>Let&amp;rsquo;s compose it with the previous example:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-terraform" data-lang="terraform">&lt;span style="color:#66d9ef">data&lt;/span> &lt;span style="color:#e6db74">&amp;#34;aws_route53_zone&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {
-&lt;span style="color:#a6e22e">name&lt;/span> = var.&lt;span style="color:#a6e22e">zone_name&lt;/span>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-ruby" data-lang="ruby">data &lt;span style="color:#e6db74">&amp;#34;aws_route53_zone&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {
+name &lt;span style="color:#f92672">=&lt;/span> var&lt;span style="color:#f92672">.&lt;/span>zone_name
 }
-&lt;span style="color:#66d9ef">
-&lt;/span>&lt;span style="color:#66d9ef">module&lt;/span> &lt;span style="color:#e6db74">&amp;#34;awesome_api_gateway_certificate&amp;#34;&lt;/span> {
-&lt;span style="color:#a6e22e">source&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;terraform-aws-modules/acm/aws&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">version&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; v3.0&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">domain_name&lt;/span> = var.&lt;span style="color:#a6e22e">domain_name&lt;/span>
-&lt;span style="color:#a6e22e">zone_id&lt;/span> = data.&lt;span style="color:#a6e22e">aws_route53_zone&lt;/span>.&lt;span style="color:#a6e22e">default&lt;/span>.&lt;span style="color:#a6e22e">zone_id&lt;/span>
-&lt;span style="color:#a6e22e">wait_for_validation&lt;/span> = &lt;span style="color:#66d9ef">true&lt;/span>
+module &lt;span style="color:#e6db74">&amp;#34;awesome_api_gateway_certificate&amp;#34;&lt;/span> {
+source &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;terraform-aws-modules/acm/aws&amp;#34;&lt;/span>
+version &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; v3.0&amp;#34;&lt;/span>
+domain_name &lt;span style="color:#f92672">=&lt;/span> var&lt;span style="color:#f92672">.&lt;/span>domain_name
+zone_id &lt;span style="color:#f92672">=&lt;/span> data&lt;span style="color:#f92672">.&lt;/span>aws_route53_zone&lt;span style="color:#f92672">.&lt;/span>default&lt;span style="color:#f92672">.&lt;/span>zone_id
+wait_for_validation &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>
 }
-&lt;span style="color:#66d9ef">
-&lt;/span>&lt;span style="color:#66d9ef">module&lt;/span> &lt;span style="color:#e6db74">&amp;#34;awesome_api_gateway&amp;#34;&lt;/span> {
-&lt;span style="color:#a6e22e">source&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;terraform-aws-modules/apigateway-v2/aws&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">version&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 1.0&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">name&lt;/span> = var.&lt;span style="color:#a6e22e">api_gateway_name&lt;/span>
-&lt;span style="color:#a6e22e">description&lt;/span> = var.&lt;span style="color:#a6e22e">api_gateway_description&lt;/span>
-&lt;span style="color:#a6e22e">protocol_type&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;HTTP&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">cors_configuration&lt;/span> = {
-&lt;span style="color:#a6e22e">allow_headers&lt;/span> = [
+module &lt;span style="color:#e6db74">&amp;#34;awesome_api_gateway&amp;#34;&lt;/span> {
+source &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;terraform-aws-modules/apigateway-v2/aws&amp;#34;&lt;/span>
+version &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 1.0&amp;#34;&lt;/span>
+name &lt;span style="color:#f92672">=&lt;/span> var&lt;span style="color:#f92672">.&lt;/span>api_gateway_name
+description &lt;span style="color:#f92672">=&lt;/span> var&lt;span style="color:#f92672">.&lt;/span>api_gateway_description
+protocol_type &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;HTTP&amp;#34;&lt;/span>
+cors_configuration &lt;span style="color:#f92672">=&lt;/span> {
+allow_headers &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>
 &lt;span style="color:#e6db74">&amp;#34;content-type&amp;#34;&lt;/span>,
 &lt;span style="color:#e6db74">&amp;#34;x-amz-date&amp;#34;&lt;/span>,
 &lt;span style="color:#e6db74">&amp;#34;authorization&amp;#34;&lt;/span>,
 &lt;span style="color:#e6db74">&amp;#34;x-api-key&amp;#34;&lt;/span>,
 &lt;span style="color:#e6db74">&amp;#34;x-amz-security-token&amp;#34;&lt;/span>,
 &lt;span style="color:#e6db74">&amp;#34;x-amz-user-agent&amp;#34;&lt;/span>,
-]
-&lt;span style="color:#a6e22e">allow_methods&lt;/span> = [&lt;span style="color:#e6db74">&amp;#34;*&amp;#34;&lt;/span>]
-&lt;span style="color:#a6e22e">allow_origins&lt;/span> = [&lt;span style="color:#e6db74">&amp;#34;*&amp;#34;&lt;/span>]
-}&lt;span style="color:#75715e">
-&lt;/span>&lt;span style="color:#75715e">
-&lt;/span>&lt;span style="color:#75715e"> # Custom domain
-&lt;/span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#a6e22e">domain_name&lt;/span> = var.&lt;span style="color:#a6e22e">domain_name&lt;/span>
-&lt;span style="color:#a6e22e">domain_name_certificate_arn&lt;/span> = module.&lt;span style="color:#a6e22e">awesome_api_gateway_certificate&lt;/span>.&lt;span style="color:#a6e22e">acm_certificate_arn&lt;/span>&lt;span style="color:#75715e">
-&lt;/span>&lt;span style="color:#75715e">
-&lt;/span>&lt;span style="color:#75715e"> # Routes and integrations
-&lt;/span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#a6e22e">integrations&lt;/span> = var.&lt;span style="color:#a6e22e">api_gateway_integrations&lt;/span>
+&lt;span style="color:#f92672">]&lt;/span>
+allow_methods &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;*&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+allow_origins &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;*&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
 }
-&lt;span style="color:#66d9ef">
-&lt;/span>&lt;span style="color:#66d9ef">module&lt;/span> &lt;span style="color:#e6db74">&amp;#34;awesome_dns_fqdn&amp;#34;&lt;/span> {
-&lt;span style="color:#a6e22e">source&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;path/to/modules/atoms/aws_route53_record&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">version&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 1.0&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">name&lt;/span> = var.&lt;span style="color:#a6e22e">domain_name&lt;/span>
-&lt;span style="color:#a6e22e">zone_id&lt;/span> = data.&lt;span style="color:#a6e22e">aws_route53_zone&lt;/span>.&lt;span style="color:#a6e22e">default&lt;/span>.&lt;span style="color:#a6e22e">zone_id&lt;/span>
-&lt;span style="color:#a6e22e">record_type&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;CNAME&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">alias&lt;/span> = {
-&lt;span style="color:#a6e22e">name&lt;/span> = module.&lt;span style="color:#a6e22e">awesome_api_gateway&lt;/span>.&lt;span style="color:#a6e22e">apigatewayv2_domain_name_configuration&lt;/span>[&lt;span style="color:#ae81ff">0&lt;/span>].&lt;span style="color:#a6e22e">target_domain_name&lt;/span>
-&lt;span style="color:#a6e22e">zone_id&lt;/span> = module.&lt;span style="color:#a6e22e">awesome_api_gateway&lt;/span>.&lt;span style="color:#a6e22e">apigatewayv2_domain_name_configuration&lt;/span>[&lt;span style="color:#ae81ff">0&lt;/span>].&lt;span style="color:#a6e22e">hosted_zone_id&lt;/span>
+&lt;span style="color:#75715e"># Custom domain&lt;/span>
+domain_name &lt;span style="color:#f92672">=&lt;/span> var&lt;span style="color:#f92672">.&lt;/span>domain_name
+domain_name_certificate_arn &lt;span style="color:#f92672">=&lt;/span> module&lt;span style="color:#f92672">.&lt;/span>awesome_api_gateway_certificate&lt;span style="color:#f92672">.&lt;/span>acm_certificate_arn
+&lt;span style="color:#75715e"># Routes and integrations&lt;/span>
+integrations &lt;span style="color:#f92672">=&lt;/span> var&lt;span style="color:#f92672">.&lt;/span>api_gateway_integrations
+}
+module &lt;span style="color:#e6db74">&amp;#34;awesome_dns_fqdn&amp;#34;&lt;/span> {
+source &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;path/to/modules/atoms/aws_route53_record&amp;#34;&lt;/span>
+version &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 1.0&amp;#34;&lt;/span>
+name &lt;span style="color:#f92672">=&lt;/span> var&lt;span style="color:#f92672">.&lt;/span>domain_name
+zone_id &lt;span style="color:#f92672">=&lt;/span> data&lt;span style="color:#f92672">.&lt;/span>aws_route53_zone&lt;span style="color:#f92672">.&lt;/span>default&lt;span style="color:#f92672">.&lt;/span>zone_id
+record_type &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;CNAME&amp;#34;&lt;/span>
+&lt;span style="color:#66d9ef">alias&lt;/span> &lt;span style="color:#f92672">=&lt;/span> {
+name &lt;span style="color:#f92672">=&lt;/span> module&lt;span style="color:#f92672">.&lt;/span>awesome_api_gateway&lt;span style="color:#f92672">.&lt;/span>apigatewayv2_domain_name_configuration&lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#f92672">].&lt;/span>target_domain_name
+zone_id &lt;span style="color:#f92672">=&lt;/span> module&lt;span style="color:#f92672">.&lt;/span>awesome_api_gateway&lt;span style="color:#f92672">.&lt;/span>apigatewayv2_domain_name_configuration&lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#f92672">].&lt;/span>hosted_zone_id
 }
 }
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>This helps illustrating an example in which the &lt;code>aws_route53_record&lt;/code> atom could
@@ -364,51 +355,42 @@ be easily replaced with its equivalent resource and it would still provide the
 the decision of whether or not to implement a &lt;code>module&lt;/code> is ultimately defined by
 the need of parsing and/or validating the inputs (variables).&lt;/p>
 &lt;h4 id="usage-example">Usage example&lt;/h4>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-terraform" data-lang="terraform">&lt;span style="color:#66d9ef">module&lt;/span> &lt;span style="color:#e6db74">&amp;#34;awesome_lambda&amp;#34;&lt;/span> {
-&lt;span style="color:#a6e22e">source&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;path/to/modules/molecules/aws_lambda_function&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">version&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 1.0&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">function_name&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;awesome&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">description&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;An Awesome lambda function for the Awesome API Gateway&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">handler&lt;/span> = &amp;#34;index.&lt;span style="color:#a6e22e">lambda_handler&lt;/span>&lt;span style="color:#e6db74">&amp;#34;
-&lt;/span>&lt;span style="color:#e6db74"> runtime = &amp;#34;&lt;/span>&lt;span style="color:#a6e22e">python3&lt;/span>.&lt;span style="color:#ae81ff">8&lt;/span>&lt;span style="color:#e6db74">&amp;#34;
-&lt;/span>&lt;span style="color:#e6db74">
-&lt;/span>&lt;span style="color:#e6db74"> # Incomplete implementation, don&amp;#39;t use this on production
-&lt;/span>&lt;span style="color:#e6db74">}
-&lt;/span>&lt;span style="color:#e6db74">
-&lt;/span>&lt;span style="color:#e6db74">module &amp;#34;&lt;/span>&lt;span style="color:#a6e22e">another_awesome_lambda&lt;/span>&lt;span style="color:#e6db74">&amp;#34; {
-&lt;/span>&lt;span style="color:#e6db74"> source = &amp;#34;&lt;/span>&lt;span style="color:#a6e22e">path&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#a6e22e">to&lt;/span>&lt;span style="color:#f92672">/&lt;/span>module&lt;span style="color:#a6e22e">s&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#a6e22e">molecules&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#a6e22e">aws_lambda_function&lt;/span>&lt;span style="color:#e6db74">&amp;#34;
-&lt;/span>&lt;span style="color:#e6db74"> version = &amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">~&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>.&lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#e6db74">&amp;#34;
-&lt;/span>&lt;span style="color:#e6db74">
-&lt;/span>&lt;span style="color:#e6db74"> function_name = &amp;#34;&lt;/span>&lt;span style="color:#a6e22e">awesome&lt;/span>&lt;span style="color:#e6db74">&amp;#34;
-&lt;/span>&lt;span style="color:#e6db74"> description = &amp;#34;&lt;/span>&lt;span style="color:#a6e22e">An&lt;/span> &lt;span style="color:#a6e22e">Awesome&lt;/span> &lt;span style="color:#a6e22e">lambda&lt;/span> &lt;span style="color:#a6e22e">function&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">the&lt;/span> &lt;span style="color:#a6e22e">Awesome&lt;/span> &lt;span style="color:#a6e22e">API&lt;/span> &lt;span style="color:#a6e22e">Gateway&lt;/span>&lt;span style="color:#e6db74">&amp;#34;
-&lt;/span>&lt;span style="color:#e6db74"> handler = &amp;#34;&lt;/span>&lt;span style="color:#a6e22e">index&lt;/span>.&lt;span style="color:#a6e22e">lambda_handler&lt;/span>&lt;span style="color:#e6db74">&amp;#34;
-&lt;/span>&lt;span style="color:#e6db74"> runtime = &amp;#34;&lt;/span>&lt;span style="color:#a6e22e">python3&lt;/span>.&lt;span style="color:#ae81ff">8&lt;/span>&lt;span style="color:#e6db74">&amp;#34;
-&lt;/span>&lt;span style="color:#e6db74">
-&lt;/span>&lt;span style="color:#e6db74"> # Incomplete implementation, don&amp;#39;t use this on production
-&lt;/span>&lt;span style="color:#e6db74">}
-&lt;/span>&lt;span style="color:#e6db74">
-&lt;/span>&lt;span style="color:#e6db74">module &amp;#34;&lt;/span>&lt;span style="color:#a6e22e">awesome_api_gateway&lt;/span>&lt;span style="color:#e6db74">&amp;#34; {
-&lt;/span>&lt;span style="color:#e6db74"> source = &amp;#34;&lt;/span>&lt;span style="color:#a6e22e">path&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#a6e22e">to&lt;/span>&lt;span style="color:#f92672">/&lt;/span>module&lt;span style="color:#a6e22e">s&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#a6e22e">molecules&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#a6e22e">aws_api_gateway&lt;/span>&lt;span style="color:#e6db74">&amp;#34;
-&lt;/span>&lt;span style="color:#e6db74"> version = &amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">~&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>.&lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#e6db74">&amp;#34;
-&lt;/span>&lt;span style="color:#e6db74">
-&lt;/span>&lt;span style="color:#e6db74"> domain_name = &amp;#34;&lt;/span>&lt;span style="color:#a6e22e">record&lt;/span>.&lt;span style="color:#a6e22e">example&lt;/span>.&lt;span style="color:#a6e22e">com&lt;/span>&lt;span style="color:#e6db74">&amp;#34;
-&lt;/span>&lt;span style="color:#e6db74"> zone_name = &amp;#34;&lt;/span>&lt;span style="color:#a6e22e">example&lt;/span>.&lt;span style="color:#a6e22e">com&lt;/span>.&lt;span style="color:#e6db74">&amp;#34;
-&lt;/span>&lt;span style="color:#e6db74">
-&lt;/span>&lt;span style="color:#e6db74"> api_gateway_name = &amp;#34;&lt;/span>&lt;span style="color:#a6e22e">awesome&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">api&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">gateway&lt;/span>&lt;span style="color:#e6db74">&amp;#34;
-&lt;/span>&lt;span style="color:#e6db74"> api_gateway_description = &amp;#34;&lt;/span>&lt;span style="color:#a6e22e">An&lt;/span> &lt;span style="color:#a6e22e">Awesome&lt;/span> &lt;span style="color:#a6e22e">API&lt;/span> &lt;span style="color:#a6e22e">Gateway&lt;/span>&lt;span style="color:#e6db74">&amp;#34;
-&lt;/span>&lt;span style="color:#e6db74">
-&lt;/span>&lt;span style="color:#e6db74"> api_gateway_integrations = {
-&lt;/span>&lt;span style="color:#e6db74"> &amp;#34;&lt;/span>&lt;span style="color:#a6e22e">POST&lt;/span> &lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#e6db74">&amp;#34; = {
-&lt;/span>&lt;span style="color:#e6db74"> lambda_arn = module.awesome_lambda.function_arn
-&lt;/span>&lt;span style="color:#e6db74"> payload_format_version = &amp;#34;&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>.&lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#e6db74">&amp;#34;
-&lt;/span>&lt;span style="color:#e6db74"> }
-&lt;/span>&lt;span style="color:#e6db74">
-&lt;/span>&lt;span style="color:#e6db74"> &amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">$&lt;/span>&lt;span style="color:#a6e22e">default&lt;/span>&lt;span style="color:#e6db74">&amp;#34; = {
-&lt;/span>&lt;span style="color:#e6db74"> lambda_arn = module.another_awesome_lambda.function_arn
-&lt;/span>&lt;span style="color:#e6db74"> }
-&lt;/span>&lt;span style="color:#e6db74"> }
-&lt;/span>&lt;span style="color:#e6db74">}
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>As you probably have already realized, when the level of abstraction goes up
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-ruby" data-lang="ruby">module &lt;span style="color:#e6db74">&amp;#34;awesome_lambda&amp;#34;&lt;/span> {
+source &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;path/to/modules/molecules/aws_lambda_function&amp;#34;&lt;/span>
+version &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 1.0&amp;#34;&lt;/span>
+function_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;awesome&amp;#34;&lt;/span>
+description &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;An Awesome lambda function for the Awesome API Gateway&amp;#34;&lt;/span>
+handler &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;index.lambda_handler&amp;#34;&lt;/span>
+runtime &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;python3.8&amp;#34;&lt;/span>
+&lt;span style="color:#75715e"># Incomplete implementation, don&amp;#39;t use this on production&lt;/span>
+}
+module &lt;span style="color:#e6db74">&amp;#34;another_awesome_lambda&amp;#34;&lt;/span> {
+source &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;path/to/modules/molecules/aws_lambda_function&amp;#34;&lt;/span>
+version &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 1.0&amp;#34;&lt;/span>
+function_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;awesome&amp;#34;&lt;/span>
+description &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;An Awesome lambda function for the Awesome API Gateway&amp;#34;&lt;/span>
+handler &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;index.lambda_handler&amp;#34;&lt;/span>
+runtime &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;python3.8&amp;#34;&lt;/span>
+&lt;span style="color:#75715e"># Incomplete implementation, don&amp;#39;t use this on production&lt;/span>
+}
+module &lt;span style="color:#e6db74">&amp;#34;awesome_api_gateway&amp;#34;&lt;/span> {
+source &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;path/to/modules/molecules/aws_api_gateway&amp;#34;&lt;/span>
+version &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 1.0&amp;#34;&lt;/span>
+domain_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;record.example.com&amp;#34;&lt;/span>
+zone_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;example.com.&amp;#34;&lt;/span>
+api_gateway_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;awesome-api-gateway&amp;#34;&lt;/span>
+api_gateway_description &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;An Awesome API Gateway&amp;#34;&lt;/span>
+api_gateway_integrations &lt;span style="color:#f92672">=&lt;/span> {
+&lt;span style="color:#e6db74">&amp;#34;POST /&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> {
+lambda_arn &lt;span style="color:#f92672">=&lt;/span> module&lt;span style="color:#f92672">.&lt;/span>awesome_lambda&lt;span style="color:#f92672">.&lt;/span>function_arn
+payload_format_version &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;2.0&amp;#34;&lt;/span>
+}
+&lt;span style="color:#e6db74">&amp;#34;$default&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> {
+lambda_arn &lt;span style="color:#f92672">=&lt;/span> module&lt;span style="color:#f92672">.&lt;/span>another_awesome_lambda&lt;span style="color:#f92672">.&lt;/span>function_arn
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>As you probably have already realized, when the level of abstraction goes up
 (e.g. from atom to molecule) the module implementation is in itself a good
 implementation example (i.e. as in &lt;a href="https://github.com/terraform-aws-modules/terraform-aws-lambda/blob/master/main.tf" target="_blank" rel="noopener">community modules examples&lt;/a>).&lt;/p>
 &lt;p>They help to self-document the usage and implementation of a given module and
@@ -487,42 +469,42 @@ followed by a second &lt;code>awesome_api&lt;/code>:&lt;/p>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>In order to replicate the configuration and ensure consistency, the following is
 way simpler to implement (and review) than copy+paste huge chunks of Terraform
 definitions&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-terraform" data-lang="terraform">&lt;span style="color:#66d9ef">module&lt;/span> &lt;span style="color:#e6db74">&amp;#34;awesome_api&amp;#34;&lt;/span> {
-&lt;span style="color:#a6e22e">source&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;path/to/modules/organisms/aws_lambda_with_api_gateway&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">version&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 1.0&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">domain_name&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;record.example.com&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">zone_name&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;example.com.&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">lambda_functions&lt;/span> = [&lt;span style="color:#75715e">
-&lt;/span>&lt;span style="color:#75715e"> # Index 0 -- An Awesome Lambda Function, used for POST
-&lt;/span>&lt;span style="color:#75715e">&lt;/span> {
-&lt;span style="color:#a6e22e">name&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;an-awesome&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">description&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;An Awesome lambda function for the Awesome API Gateway&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">handler&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;an_awesome.lambda_handler&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">runtime&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;python3.8&amp;#34;&lt;/span>
-},&lt;span style="color:#75715e">
-&lt;/span>&lt;span style="color:#75715e"> # Index 1 -- Another Awesome Lambda Function, used as $default
-&lt;/span>&lt;span style="color:#75715e">&lt;/span> {
-&lt;span style="color:#a6e22e">name&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;another-awesome&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">description&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;Another Awesome lambda function for the Awesome API Gateway&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">handler&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;another_awesome.lambda_handler&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">runtime&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;python3.8&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-ruby" data-lang="ruby">module &lt;span style="color:#e6db74">&amp;#34;awesome_api&amp;#34;&lt;/span> {
+source &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;path/to/modules/organisms/aws_lambda_with_api_gateway&amp;#34;&lt;/span>
+version &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 1.0&amp;#34;&lt;/span>
+domain_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;record.example.com&amp;#34;&lt;/span>
+zone_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;example.com.&amp;#34;&lt;/span>
+lambda_functions &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>
+&lt;span style="color:#75715e"># Index 0 -- An Awesome Lambda Function, used for POST&lt;/span>
+{
+name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;an-awesome&amp;#34;&lt;/span>
+description &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;An Awesome lambda function for the Awesome API Gateway&amp;#34;&lt;/span>
+handler &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;an_awesome.lambda_handler&amp;#34;&lt;/span>
+runtime &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;python3.8&amp;#34;&lt;/span>
 },
-]
-&lt;span style="color:#a6e22e">api_gateway_name&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;awesome-api-gateway&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">api_gateway_description&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;An Awesome API Gateway&amp;#34;&lt;/span>
-&lt;span style="color:#a6e22e">api_gateway_integrations&lt;/span> = {
+&lt;span style="color:#75715e"># Index 1 -- Another Awesome Lambda Function, used as $default&lt;/span>
+{
+name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;another-awesome&amp;#34;&lt;/span>
+description &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Another Awesome lambda function for the Awesome API Gateway&amp;#34;&lt;/span>
+handler &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;another_awesome.lambda_handler&amp;#34;&lt;/span>
+runtime &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;python3.8&amp;#34;&lt;/span>
+},
+&lt;span style="color:#f92672">]&lt;/span>
+api_gateway_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;awesome-api-gateway&amp;#34;&lt;/span>
+api_gateway_description &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;An Awesome API Gateway&amp;#34;&lt;/span>
+api_gateway_integrations &lt;span style="color:#f92672">=&lt;/span> {
 &lt;span style="color:#e6db74">&amp;#34;POST /&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> {
-&lt;span style="color:#a6e22e">lambda_function_index&lt;/span> = &lt;span style="color:#ae81ff">0&lt;/span>
-&lt;span style="color:#a6e22e">payload_format_version&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;2.0&amp;#34;&lt;/span>
+lambda_function_index &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+payload_format_version &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;2.0&amp;#34;&lt;/span>
 }
 &lt;span style="color:#e6db74">&amp;#34;$default&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> {
-&lt;span style="color:#a6e22e">lambda_function_index&lt;/span> = &lt;span style="color:#ae81ff">1&lt;/span>
+lambda_function_index &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
 }
 }
 }
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="conclusion">Conclusion&lt;/h2>
 &lt;p>At the end of the day we get an ugly Terraform state containing many&lt;/p>
-&lt;pre>&lt;code class="language-nil" data-lang="nil">module.something.module.something_else.module.yet_another_thing...
+&lt;pre>&lt;code>module.something.module.something_else.module.yet_another_thing...
 &lt;/code>&lt;/pre>&lt;p>But the productivity boost gained by merging modules based on context is a worth
 investment. Especially for huge Terraform repositories with multiple teams
 collaborating and managing a lot of resources.&lt;/p>
