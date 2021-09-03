@@ -227,7 +227,7 @@ tools such as Terraform that makes heavy usage of modules can benefit from
 Atomic Design to improve its code reusability and massively reduce duplication.&lt;/p>
 &lt;h2 id="details">Details&lt;/h2>
 &lt;p>The Atomic Design methodology proposes five distinct levels, listed from the
-finest to the thickest:&lt;/p>
+finest to the thickest granularity:&lt;/p>
 &lt;ol>
 &lt;li>Atom;&lt;/li>
 &lt;li>Molecules;&lt;/li>
@@ -236,8 +236,8 @@ finest to the thickest:&lt;/p>
 &lt;li>Pages.&lt;/li>
 &lt;/ol>
 &lt;p>However, to extract the gist, we&amp;rsquo;ll only be focusing on Atoms, Molecules, and
-Organisms (from 1. to 3.). Templates and Pages are too domain-specific focused
-on Web UI development.&lt;/p>
+Organisms (from 1. to 3.). Templates and Pages are too specialized for Web UI
+development.&lt;/p>
 &lt;h3 id="atoms">Atoms&lt;/h3>
 &lt;p>Atoms represent the finest grain in terms of granularity in the design. When
 referring specifically to its implementation in Terraform a &lt;code>resource&lt;/code> and a
@@ -288,7 +288,7 @@ source &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74"
 version &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 1.0&amp;#34;&lt;/span>
 name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;record.example.com&amp;#34;&lt;/span>
 zone_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;example.com.&amp;#34;&lt;/span>
-record_type &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;A&amp;#34;&lt;/span>
+record_type &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;CNAME&amp;#34;&lt;/span>
 records &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;1.2.3.4&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
 }
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Hence, resources and modules are sometimes interchangeable as they deliver the
@@ -466,7 +466,9 @@ followed by a second &lt;code>awesome_api&lt;/code>:&lt;/p>
 │   └── main.tf
 └── another-awesome-api
 └── main.tf
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>In order to replicate the configuration and ensure consistency, the following is
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that this directory structure is inspired on the proposed ideas from the
+&lt;a href="https://macunha.me/en/post/2021/03/terraform-design-best-practices/">Terraform best practices post&lt;/a>.&lt;/p>
+&lt;p>In order to replicate the configuration and ensure consistency, the following is
 way simpler to implement (and review) than copy+paste huge chunks of Terraform
 definitions&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-ruby" data-lang="ruby">module &lt;span style="color:#e6db74">&amp;#34;awesome_api&amp;#34;&lt;/span> {
@@ -504,18 +506,25 @@ lambda_function_index &lt;span style="color:#f92672">=&lt;/span> &lt;span style=
 }
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="conclusion">Conclusion&lt;/h2>
 &lt;p>At the end of the day we get an ugly Terraform state containing many&lt;/p>
-&lt;pre>&lt;code>module.something.module.something_else.module.yet_another_thing...
-&lt;/code>&lt;/pre>&lt;p>But the productivity boost gained by merging modules based on context is a worth
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">module.something.module.something_else.module.yet_another_thing...
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>But the productivity boost gained by merging modules based on context is a worth
 investment. Especially for huge Terraform repositories with multiple teams
 collaborating and managing a lot of resources.&lt;/p>
 &lt;p>Cross-team collaboration is fostered by applying the Atomic Design methodology
 for Terraform modules, code reusability becomes an important factor over
-copy+paste and the repository gravitates towards the &lt;a href="https://en.wikipedia.org/wiki/Don%27t%5Frepeat%5Fyourself" target="_blank" rel="noopener">DRY principle&lt;/a>.&lt;/p></description></item><item><title>Terraform Design Best Practices</title><link>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</link><pubDate>Wed, 31 Mar 2021 00:00:00 +0200</pubDate><guid>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</guid><description>&lt;h2 id="intro">Intro&lt;/h2>
+copy+paste and the repository gravitates towards the &lt;a href="https://en.wikipedia.org/wiki/Don%27t%5Frepeat%5Fyourself" target="_blank" rel="noopener">DRY principle&lt;/a>.&lt;/p>
+&lt;h2 id="same-post-different-places">Same post, different places&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://www.reddit.com/r/Terraform/comments/pd708z/terraform%5Fmodules%5Fatomic%5Fdesign/" target="_blank" rel="noopener">reddit.com: Terraform Modules: Atomic Design - r/Terraform&lt;/a>;&lt;/li>
+&lt;li>&lt;a href="https://dev.to/macunha/terraform-modules-atomic-design-3i7m" target="_blank" rel="noopener">dev.to: Terraform Modules: Atomic Design - DEV Community&lt;/a>;&lt;/li>
+&lt;li>&lt;a href="https://weekly.tf/issues/weekly-tf-issue-51-terraform-atomic-design-ec2-image-builder-736257" target="_blank" rel="noopener">weekly.tf: #51 - Terraform Atomic Design, EC2 Image Builder&lt;/a>;&lt;/li>
+&lt;/ul></description></item><item><title>Terraform Design Best Practices</title><link>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</link><pubDate>Wed, 31 Mar 2021 00:00:00 +0200</pubDate><guid>https://macunha.me/en/post/2021/03/terraform-design-best-practices/</guid><description>&lt;h2 id="intro">Intro&lt;/h2>
 &lt;p>As someone who believes in empowering people and distributing power in order to
-achieve higher outcomes I always felt that the best existing best-practices proposals
-don&amp;rsquo;t touch some key aspects (IMHO) on code evolution and business structures.&lt;/p>
-&lt;p>Therefore, this design document shall compose on the previous including some
-self-service Ops and micro-services spice to the mix.&lt;/p>
+achieve higher outcomes I always felt that the best existing best-practices
+proposals don&amp;rsquo;t touch some key aspects (IMHO) on code evolution and business
+structures.&lt;/p>
+&lt;p>Therefore, this document shall compose on the previous ones and extend them with
+some self-service Ops and micro-services spice to the mix.&lt;/p>
 &lt;p>On &lt;a href="https://www.terraform-best-practices.com" target="_blank" rel="noopener">Terraform best practices&lt;/a> great insights on how to write code inside a
 module is provided, e.g. &lt;a href="https://www.terraform-best-practices.com/naming" target="_blank" rel="noopener">naming conventions&lt;/a>, &lt;a href="https://www.terraform-best-practices.com/code-structure#getting-started-with-structuring-of-terraform-configurations" target="_blank" rel="noopener">Terraform file naming&lt;/a>.&lt;/p>
 &lt;p>We can&amp;rsquo;t leave Terragrunt epic blog post unmentioned:&lt;/p>
