@@ -43,15 +43,15 @@ important system.&lt;/p>
 &lt;p>Let&amp;rsquo;s suppose that your Terraform code base is versioned in a single repository
 (a.k.a. monorepo), following the random structure displayed below (just to help
 illustrate)&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">.
+&lt;pre>&lt;code class="language-nil" data-lang="nil">.
 ├── modules/ # Definition of TF modules used by underlying compositions
-├── global/ # Resources that aren&amp;#39;t restricted to one environment
+├── global/ # Resources that aren't restricted to one environment
 │   ├── aws/
 ├── production/ # Production environment resources
 │   └── aws/
 └── staging/ # Staging environment resources
 └── aws/
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>On this example each directory corresponds to a Terraform state. In order to
+&lt;/code>&lt;/pre>&lt;p>On this example each directory corresponds to a Terraform state. In order to
 apply changes you have to walk to a path and execute &lt;code>terraform&lt;/code>.&lt;/p>
 &lt;p>The structure on this example repository was created a few hypothetical years
 ago when the number of existing microservices and resources (DB, message queues,
@@ -109,7 +109,7 @@ put the &lt;a href="https://martinfowler.com/bliki/StranglerFigApplication.html"
 &lt;p>Move all the existing content as-is to the &lt;code>legacy&lt;/code> sub-path, keeping the same
 repository and change history (commits). It also allows applying the &lt;code>legacy&lt;/code>
 code as it used to be from one of those paths.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">.
+&lt;pre>&lt;code>.
 └── legacy
 ├── global
 │   └── aws
@@ -117,7 +117,7 @@ code as it used to be from one of those paths.&lt;/p>
 │   └── aws
 └── staging
 └── aws
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once the content is moved to legacy, the idea is to follow the &lt;a href="https://www.oreilly.com/library/view/97-things-every/9780596809515/ch08.html" target="_blank" rel="noopener">Boy Scout rule&lt;/a>
+&lt;/code>&lt;/pre>&lt;p>Once the content is moved to legacy, the idea is to follow the &lt;a href="https://www.oreilly.com/library/view/97-things-every/9780596809515/ch08.html" target="_blank" rel="noopener">Boy Scout rule&lt;/a>
 in order to strangle the &lt;code>legacy&lt;/code> content little by little (unless you are
 really committed to migrating it all at once, which is going to be exhaustive).&lt;/p>
 &lt;p>The Boy Scout rule goes like:&lt;/p>
@@ -159,8 +159,8 @@ terraform import &lt;span style="color:#e6db74">&amp;#39;aws_aurora_main_cluster
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>then if you haven&amp;rsquo;t yet and would like to &amp;ldquo;match reality&amp;rdquo; between the
 existing and the specified resource, run &lt;code>terraform plan&lt;/code> a few times and
 adjust the parameters until Terraform reports:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">No changes. Your infrastructure matches the configuration.
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;pre>&lt;code class="language-nil" data-lang="nil">No changes. Your infrastructure matches the configuration.
+&lt;/code>&lt;/pre>&lt;/li>
 &lt;li>
 &lt;p>last but not least, remove the corresponding resources from the &lt;code>legacy&lt;/code>
 Terraform state so that it doesn&amp;rsquo;t try to keep track of the changes and also
@@ -437,7 +437,7 @@ a code review process Operators and Software Developers can manage the
 Infrastructure in harmony, &lt;strong>together&lt;/strong>. (:&lt;/p>
 &lt;h3 id="code-exponentiation-what">Code Exponentiation? What?&lt;/h3>
 &lt;p>Read that as a dramatization of the &lt;a href="https://en.wikipedia.org/wiki/Duplicate%5Fcode" target="_blank" rel="noopener">&amp;ldquo;code duplication&amp;rdquo;&lt;/a> term.&lt;/p>
-&lt;p>When it comes to &lt;a href="https://macunha.me/en/category/infrastructure-as-code/">Infrastructure as Code&lt;/a>, there is no easy way around the jungle
+&lt;p>When it comes to Infrastructure as Code, there is no easy way around the jungle
 of resources that grows over time. Fast pacing tech companies are &amp;ldquo;moving fast
 and breaking things&amp;rdquo;, oftentimes the Operators are worried about a massive
 amount of challenges at once: keep the servers up and running, with a consistent
@@ -506,7 +506,7 @@ lambda_function_index &lt;span style="color:#f92672">=&lt;/span> &lt;span style=
 }
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="conclusion">Conclusion&lt;/h2>
 &lt;p>At the end of the day we get an ugly Terraform state containing many&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">module.something.module.something_else.module.yet_another_thing...
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-ruby" data-lang="ruby">module&lt;span style="color:#f92672">.&lt;/span>something&lt;span style="color:#f92672">.&lt;/span>module&lt;span style="color:#f92672">.&lt;/span>something_else&lt;span style="color:#f92672">.&lt;/span>module&lt;span style="color:#f92672">.&lt;/span>yet_another_thing&lt;span style="color:#f92672">...&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>But the productivity boost gained by merging modules based on context is a worth
 investment. Especially for huge Terraform repositories with multiple teams
 collaborating and managing a lot of resources.&lt;/p>
