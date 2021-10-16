@@ -43,7 +43,7 @@ important system.&lt;/p>
 &lt;p>Let&amp;rsquo;s suppose that your Terraform code base is versioned in a single repository
 (a.k.a. monorepo), following the random structure displayed below (just to help
 illustrate)&lt;/p>
-&lt;pre>&lt;code class="language-nil" data-lang="nil">.
+&lt;pre>&lt;code>.
 ├── modules/ # Definition of TF modules used by underlying compositions
 ├── global/ # Resources that aren't restricted to one environment
 │   ├── aws/
@@ -72,10 +72,10 @@ in a different git repository to leverage its own versioning. Since Terraform
 modules and its implementations don&amp;rsquo;t always evolve in the same pace, keeping
 two distinct version trees is beneficial. Additionally, a separated repository
 for Terraform modules allows the specification of &amp;ldquo;pinned versions&amp;rdquo;, e.g.:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-ruby" data-lang="ruby">module &lt;span style="color:#e6db74">&amp;#34;aws_main_vpc&amp;#34;&lt;/span> {
-source &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git?ref=2ca733d&amp;#34;&lt;/span>
-&lt;span style="color:#75715e"># Note the ref=${GIT_REVISION_DIGEST}&lt;/span>
-}
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-terraform" data-lang="terraform">&lt;span style="color:#66d9ef">module&lt;/span> &lt;span style="color:#e6db74">&amp;#34;aws_main_vpc&amp;#34;&lt;/span> {
+&lt;span style="color:#a6e22e">source&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git?ref=2ca733d&amp;#34;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;span style="color:#75715e"> # Note the ref=${GIT_REVISION_DIGEST}
+&lt;/span>&lt;span style="color:#75715e">&lt;/span>}
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>That reference for a module&amp;rsquo;s version should always be specified, regardless if
 it comes from an internal/private repository or public. When you specify the
 version, you are ensuring reproducibility.&lt;/p>
@@ -144,11 +144,12 @@ preference, provisioning the bucket and initializing the Terraform &lt;code>back
 &lt;p>implement the definition of the community module
 &lt;a href="https://github.com/terraform-aws-modules/terraform-aws-rds-aurora" target="_blank" rel="noopener">github.com/terraform-aws-modules/terraform-aws-rds-aurora&lt;/a> with the closest
 parameters from the existing one; e.g.:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-ruby" data-lang="ruby">module &lt;span style="color:#e6db74">&amp;#34;aws_aurora_main_cluster&amp;#34;&lt;/span> {
-source &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;terraform-aws-modules/rds-aurora/aws&amp;#34;&lt;/span>
-version &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 5.2&amp;#34;&lt;/span>
-&lt;span style="color:#75715e"># ...&lt;/span>
-}
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-terraform" data-lang="terraform">&lt;span style="color:#66d9ef">module&lt;/span> &lt;span style="color:#e6db74">&amp;#34;aws_aurora_main_cluster&amp;#34;&lt;/span> {
+&lt;span style="color:#a6e22e">source&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;terraform-aws-modules/rds-aurora/aws&amp;#34;&lt;/span>
+&lt;span style="color:#a6e22e">version&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 5.2&amp;#34;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;span style="color:#75715e"> # ...
+&lt;/span>&lt;span style="color:#75715e">&lt;/span>}
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>import the Terraform states from the previous (existing) cluster&lt;/p>
@@ -159,8 +160,8 @@ terraform import &lt;span style="color:#e6db74">&amp;#39;aws_aurora_main_cluster
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>then if you haven&amp;rsquo;t yet and would like to &amp;ldquo;match reality&amp;rdquo; between the
 existing and the specified resource, run &lt;code>terraform plan&lt;/code> a few times and
 adjust the parameters until Terraform reports:&lt;/p>
-&lt;pre>&lt;code class="language-nil" data-lang="nil">No changes. Your infrastructure matches the configuration.
-&lt;/code>&lt;/pre>&lt;/li>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">No changes. Your infrastructure matches the configuration.
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>last but not least, remove the corresponding resources from the &lt;code>legacy&lt;/code>
 Terraform state so that it doesn&amp;rsquo;t try to keep track of the changes and also
@@ -172,13 +173,15 @@ terraform state rm aws_rds_cluster.default &lt;span style="color:#ae81ff">\
 &lt;span style="color:#75715e"># ...&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>once that is performed, feel free to remove the corresponding resource&amp;rsquo;s
 definition from the &lt;code>legacy&lt;/code> code.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-ruby" data-lang="ruby">resource &lt;span style="color:#e6db74">&amp;#34;aws_rds_cluster&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {
-&lt;span style="color:#75715e"># ...&lt;/span>
-}
-resource &lt;span style="color:#e6db74">&amp;#34;aws_rds_cluster_instance&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {
-count &lt;span style="color:#f92672">=&lt;/span> var&lt;span style="color:#f92672">.&lt;/span>number_of_database_instances
-&lt;span style="color:#75715e"># ...&lt;/span>
-}
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-terraform" data-lang="terraform">&lt;span style="color:#66d9ef">resource&lt;/span> &lt;span style="color:#e6db74">&amp;#34;aws_rds_cluster&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {&lt;span style="color:#75715e">
+&lt;/span>&lt;span style="color:#75715e"> # ...
+&lt;/span>&lt;span style="color:#75715e">&lt;/span>}
+&lt;span style="color:#66d9ef">
+&lt;/span>&lt;span style="color:#66d9ef">resource&lt;/span> &lt;span style="color:#e6db74">&amp;#34;aws_rds_cluster_instance&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span> {
+&lt;span style="color:#a6e22e">count&lt;/span> = var.&lt;span style="color:#a6e22e">number_of_database_instances&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;span style="color:#75715e"> # ...
+&lt;/span>&lt;span style="color:#75715e">&lt;/span>}
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol></description></item><item><title>Terraform: Atomic Design</title><link>https://macunha.me/en/post/2021/06/terraform-atomic-design/</link><pubDate>Tue, 29 Jun 2021 00:00:00 +0200</pubDate><guid>https://macunha.me/en/post/2021/06/terraform-atomic-design/</guid><description>&lt;h2 id="intro">Intro&lt;/h2>
 &lt;p>Following &lt;a href="https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/" target="_blank" rel="noopener">The Pragmatic Programmer&lt;/a> mantra, I do my best to &amp;hellip;&lt;/p>
