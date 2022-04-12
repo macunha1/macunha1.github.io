@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>devops | It's me, Macunha!</title><link>https://macunha.me/en/tag/devops/</link><atom:link href="https://macunha.me/en/tag/devops/index.xml" rel="self" type="application/rss+xml"/><description>devops</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Matheus Cunha</copyright><lastBuildDate>Fri, 11 Jan 2019 22:00:00 +0000</lastBuildDate><image><url>https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_2.png</url><title>devops</title><link>https://macunha.me/en/tag/devops/</link></image><item><title>DevOps: Benefits</title><link>https://macunha.me/en/post/2019/01/devops-benefits/</link><pubDate>Fri, 11 Jan 2019 22:00:00 +0000</pubDate><guid>https://macunha.me/en/post/2019/01/devops-benefits/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>devops | It's me, Macunha!</title><link>https://macunha.me/en/tag/devops/</link><atom:link href="https://macunha.me/en/tag/devops/index.xml" rel="self" type="application/rss+xml"/><description>devops</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2022 Matheus Cunha</copyright><lastBuildDate>Fri, 11 Jan 2019 22:00:00 +0000</lastBuildDate><image><url>https://macunha.me/media/icon_hu176de0364afaeda8922c372b574c3cbf_6946_512x512_fill_lanczos_center_3.png</url><title>devops</title><link>https://macunha.me/en/tag/devops/</link></image><item><title>DevOps: Benefits</title><link>https://macunha.me/en/post/2019/01/devops-benefits/</link><pubDate>Fri, 11 Jan 2019 22:00:00 +0000</pubDate><guid>https://macunha.me/en/post/2019/01/devops-benefits/</guid><description>&lt;h1 id="introduction">Introduction&lt;/h1>
 &lt;p>Main benefits that a company generally expects and finds in the adoption of
 culture:&lt;/p>
 &lt;h2 id="faster-and-cheaper-releases">Faster and Cheaper Releases&lt;/h2>
@@ -367,7 +367,7 @@ cell phone operator. Nextel Happy allows users to manage their plans and
 data entirely from the mobile app, from activating your SIM to managing
 your family plan.&lt;/p>
 &lt;p>This project helped Nextel to increase their customers base, improved
-the users' experience, and decrease operational costs (in 16%) all at
+the users&amp;rsquo; experience, and decrease operational costs (in 16%) all at
 once.&lt;/p>
 &lt;h2 id="problem">Problem&lt;/h2>
 &lt;p>Nextel Brazil executive team decided to work with outsourcing on the
@@ -378,12 +378,12 @@ different perspectives into play, improving the creative process.&lt;/p>
 Cloud infrastructure ensuring high-availability, resilience and
 consistency of the software.&lt;/p>
 &lt;p>We were also responsible for the data synchronization between Nextel
-data center and the cloud. Securely moving tons of GB of users' data to
+data center and the cloud. Securely moving tons of GB of users&amp;rsquo; data to
 the cloud daily without data loss or duplication.&lt;/p>
 &lt;h1 id="solution">Solution&lt;/h1>
 &lt;h2 id="technical-implementation">Technical implementation&lt;/h2>
 &lt;p>We choose GlusterFS to ensure consistency, installed between Nextel Data
-Center and AWS. Users' data (e.g. data plan consumption, minutes of
+Center and AWS. Users&amp;rsquo; data (e.g. data plan consumption, minutes of
 call) synchronization went through GlusterFS to AWS.
 Nextel IT operations inserted data into GlusterFS directly from cell
 phone towers in near-real-time.&lt;/p>
