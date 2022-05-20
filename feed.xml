@@ -1,0 +1,1731 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Blog | macunha</title>
+        <link>https://macunha.me/feed.xml</link>
+        <description>I am an all things software tinkerer, mostly self taught, that plays all the way from the infrastructure to the front-end. Including (but not limited to :v) data engineering &amp; analytics, blockchain, functional programming, and any other knowledge area my overly curious brain takes me.</description>
+        <lastBuildDate>Fri, 20 May 2022 22:40:25 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/nuxt-community/feed-module</generator>
+        <item>
+            <title><![CDATA[Insights from a perfectionist about Over-Engineering]]></title>
+            <link>https://macunha.me/post/insights-from-a-perfectionist-about-over-engineering</link>
+            <guid>https://macunha.me/post/insights-from-a-perfectionist-about-over-engineering</guid>
+            <description><![CDATA[Software engineers are always trying to do their best when it comes to being innovative and improving their systems. This article helps to put that willingness into perspective and drive it in the right direction.]]></description>
+            <content:encoded><![CDATA[
+## Foreword
+
+NOTE: This article is an open letter for me to keep reminding myself about what
+to prioritize when developing software, I am as much of a sinner in this aspect
+as the next person.
+
+## Intro
+
+We as software engineers are always trying to do our best when it comes to being
+innovative, improving our systems to work better and faster, perhaps with a
+better design, or a more comprehensive codebase. We all have some preference
+when it comes to doing our bests which we try to achieve at all times.
+
+The main drive of this motivation is our necessity as "digital craftspeople" to
+express ourselves through quality work, along with the personal realization we
+feel by doing a great job, with great quality, that challenges us and takes
+ourselves further. It's motivating, isn't it? Assuming risks and getting out of
+the comfort zone is incredibly funny, our brain's reward system goes crazy with
+unpredictability.
+
+To help achieve that challenge, innovation, and quality in Software Engineering
+we usually think that we need the best tools available, so we'll have fewer
+things to worry about, and can concentrate our efforts in the process of
+creating great products. On top of that, having the best tools could improve our
+quality of life (allowing us not to work under pressure, avoids overwork, and
+also helps us to sleep better at night). Furthermore, "the right set of tools"
+could even enhance our productivity through self-satisfaction with work,
+everyone has their preoccupations and is willing to create something to be proud
+of.
+
+Many times during the design and development of products we take unmeasured
+solutions for a simple problem. After all, we want to have not just the right
+set of tools, but the **best** right? How can we be ground-breaking, innovative,
+disruptive, and pick-your-buzzword-poison otherwise? Well, as Nathan Marz
+(creator of Apache Storm) puts better in his [suffering-oriented programming](http://nathanmarz.com/blog/suffering-oriented-programming.html):
+
+> […] don't build technology unless you feel the pain of not having it. It applies
+> to the big, architectural decisions as well as the smaller everyday programming
+> decisions. Suffering-oriented programming greatly reduces risk by ensuring that
+> you're always working on something important, and it ensures that you are
+> well-versed in a problem space before attempting a large investment.
+
+This method describes a good way to think about LEAN and evolving products
+through [an MVP concept](https://dzone.com/articles/what-is-minimum-viable-product-and-how-to-build-it), helping to keep track of what **really** matters when it
+comes to a good balance between Product and Engineering efforts.
+
+As we're daily overfed with information, it's easy to make mistakes trying to
+choose the right set of tools to work with. From picking Frameworks to Operating
+Systems, and even the cloud provider to host our systems and products. It's OK
+to make mistakes, we all have a great first impression about all choices we
+could have done, if you read AWS or GCP documentation you'll be impressed with
+their magical solutions to your problems, where you can just throw everything in
+(including your credit card), and everything will be fine, right? The magic
+cloud will solve **all of your** problems. Yeah, _maybe_.
+
+## What is the problem I am trying to solve here?
+
+One good example of the current hype, when it comes to applications is Docker
+containers and Kubernetes. Kubernetes is the open-source version of Google's
+Borg, a great Linux containers orchestration tool developed to orchestrate
+applications on Google's data center.
+
+Kubernetes is great, but the hype goes too far sometimes with companies running
+even Production transactional databases on it, as well as entire monoliths and
+Stateful services. At this point, we have to look back and ask ourselves: "What
+problem I'm trying to solve here?". Because, if you take a second look, these
+decisions are kind of a "Hydra" solution, "for every head chopped off, the Hydra
+would regrow two heads", or even better: these solutions are creating more
+problems, by trying to solve problems **that may not even exist**.
+
+Yeah, Google orchestrated MySQL instance deployment using Borg. The first
+[version (POC) was released in 2008 and finished by 2009](https://sre.google/sre-book/automation-at-google/) at that time the revenue
+of the Ad service was [estimated at USD ~22.9 Bi](https://www.statista.com/statistics/266249/advertising-revenue-of-google/). Ask yourself, do your database
+serves a **USD 22.9 BILLION service**? Do you _really need_ orchestration there?
+Chances are, and let's face it, [You Are Not Google](https://blog.bradfieldcs.com/you-are-not-google-84912cf44afb). This is an extreme example
+but it serves to illustrate the main concept of _suffering-oriented
+programming_:
+
+> [...] don't build technology unless you **feel the pain** of not having it.
+
+A nice quote from "You Are Not Google" to sink in:
+
+> Don’t even start considering solutions until you **understand** the problem. Your
+> goal should be to “solve” the problem mostly within the problem domain, not the
+> solution domain.
+
+Otherwise, in case we insist on the inappropriate (not necessarily wrong)
+solution, we're going to spend some extra time dealing with the consequences
+(i.e. chopping additional Hydra heads). Worth noting that dealing with the
+consequences is not something bad, as long as you have the resources (time and
+money) to invest into learning and rework, investing some resources into
+inappropriate software solutions could even be seen as a way of training with
+higher outcomes (learnings) than conferences, courses, and books. There is a lot
+of lessons and knowledge to be extracted from these experiments.
+
+Learning from our experiences is the only path to success, and failures teach
+best. Failures were also the motivation for writing this article to keep
+reminding myself (:
+
+As Software Engineers the problem space analysis oftentimes fail due to an
+underrated aspect, mostly unnoticed: on the other side of the line is a user of
+this software.
+
+## And guess what?
+
+He doesn't care if you're running Elixir inside a container on Kubernetes, using
+Container OS or Core OS, which you provisioned with your bare hands, and have
+polished bit by bit to be XYZ ms faster than the Vanilla version. As long as you
+respond to their requests, and **don't break things**.
+
+Innovation has nothing to do with the fact that you want to use cutting-edge
+technology, and it's not about how fast you spend money on those solutions
+either. It's about delivering value to your customers, and enrich their
+experience from the interactions with your product.
+
+If you're going through some orchestration problems, having 10+ micro-services
+with some asynchronous task-based workers (e.g. Python's Celery). Then, _maybe_
+it's time to use Kubernetes. But, as an engineer you should know that the best
+path is to put some solutions on the table, run some benchmarks and compare
+them, so you'll have data to help in your decision, and choose what's the right
+solution for your problem, **at the right time**. We just have to keep asking
+ourselves: _"What is the problem I'm trying to solve here?"_.
+
+## Conclusion
+
+There's a quote from a great investor called Benjamin Graham that says:
+
+> If you are looking for investments\*, choose them the way you would buy
+> groceries, not the way you would buy perfume.
+> -- Graham, The Intelligent Investor (1973)
+
+We should carefully look to where we're going with our choices. So we don't
+overspend and keep things going for more time, thus we go further.
+
+NOTE: The original text is: "If you are shopping for common stocks [...]". But, as
+a Software Engineer, I just switched the syntax so we could adapt it to more
+use-cases (:
+
+I learned from my own experience that over-engineered decisions end up bringing
+more pain than solving problems, and it currently happens through early
+improvements on the system, timing really matters. Many times we try to solve
+all problems at once (even those we don't have), and it brings more problems,
+like high costs of maintenance and infrastructure, or under-utilization of the
+resources.
+
+Sooner or later, the Over-Engineering bill will come as Hydra heads keep growing
+up accumulating technical debt. Be mindful when analyzing the problem space,
+pick the right tool for the job that eases your real pain (not the imaginary
+one).
+]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Quickstart: Apache Spark on Kubernetes]]></title>
+            <link>https://macunha.me/post/quickstart-apache-spark-on-kubernetes</link>
+            <guid>https://macunha.me/post/quickstart-apache-spark-on-kubernetes</guid>
+            <description><![CDATA[Using Apache Spark Operator in Kubernetes to streamline your Big Data workflows with a cloud-native approach without relying on a Hadoop cluster.]]></description>
+            <content:encoded><![CDATA[
+# Introduction
+
+## The Apache Spark Operator for Kubernetes
+
+Since its launch in 2014 by Google, Kubernetes has gained a lot of
+popularity along with Docker itself and since 2016 has become the _de
+facto Container Orchestrator_, established as a market standard.
+Having cloud-managed versions available in **all** the _major Clouds_.
+[\[1\]](https://cloud.google.com/kubernetes-engine/)
+[\[2\]](https://aws.amazon.com/eks/)
+[\[3\]](https://docs.microsoft.com/en-us/azure/aks/) (including
+[Digital Ocean](https://www.digitalocean.com/products/kubernetes/) and
+[Alibaba](https://www.alibabacloud.com/product/kubernetes)).
+
+With this popularity came various implementations and _use-cases_ of
+the orchestrator, among them the execution of [Stateful
+applications](https://kubernetes.io/docs/tutorials/stateful-application/)
+including [databases using containers](https://vitess.io/zh/docs/get-started/kubernetes/).
+
+What would be the motivation to host an orchestrated database? That's
+a great question. But let's focus on the [Spark Operator](https://github.com/GoogleCloudPlatform/spark-on-k8s-operator/blob/master/docs/design.md)
+running workloads on Kubernetes.
+
+A native Spark Operator [idea came out](https://github.com/kubernetes/kubernetes/issues/34377)
+in 2016, before that you couldn't run Spark jobs natively except
+some _hacky alternatives_, like [running Apache Zeppelin](https://kubernetes.io/blog/2016/03/using-spark-and-zeppelin-to-process-big-data-on-kubernetes/)
+inside Kubernetes or creating your [Apache Spark cluster inside
+Kubernetes (from the official Kubernetes organization on GitHub)](https://github.com/kubernetes/examples/tree/master/staging/spark)
+referencing the [Spark workers in Stand-alone mode](http://spark.apache.org/docs/latest/spark-standalone.html).
+
+However, the native execution would be far more interesting for taking
+advantage of [Kubernetes Scheduler](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)
+responsible for taking action of allocating resources, giving
+elasticity and an simpler interface to manage Apache Spark workloads.
+
+Considering that, [Apache Spark Operator development got attention](https://issues.apache.org/jira/browse/SPARK-18278),
+merged and released into [Spark version 2.3.0](https://spark.apache.org/releases/spark-release-2-3-0.html)
+launched in [February, 2018](https://spark.apache.org/news/index.html).
+
+If you're eager for reading more regarding the Apache Spark proposal,
+you can head to the [design document published in Google Docs.](https://docs.google.com/document/d/1_bBzOZ8rKiOSjQg78DXOA3ZBIo_KkDJjqxVuq0yXdew/edit#heading=h.9bhogel14x0y)
+
+## Why Kubernetes?
+
+As companies are currently seeking to [reinvent themselves through the
+widely spoken digital transformation](https://www.cio.com/article/3211428/what-is-digital-transformation-a-necessary-disruption.html)
+in order for them to be competitive and, above all, to survive in an
+increasingly dynamic market, it is common to see approaches that
+include Big Data, Artificial Intelligence and Cloud Computing
+[\[1\]](https://www.zdnet.com/article/how-to-use-cloud-computing-and-big-data-to-support-digital-transformation/)
+[\[2\]](https://digitalhealth.london/cloud-big-data-ai-lead-nhs-digital-transformation/)
+[\[3\]](https://www.ibm.com/blogs/cloud-computing/2018/11/05/guiding-framework-digital-transformation-garage/).
+
+An interesting comparison between the benefits of using Cloud Computing in the
+context of Big Data instead of On-premises' servers can be read at [Databricks
+blog](https://databricks.com/blog/2017/05/31/top-5-reasons-for-choosing-s3-over-hdfs.html),
+which is the company [founded by the creators of Apache Spark](https://www.washingtonpost.com/news/the-switch/wp/2016/06/09/this-is-where-the-real-action-in-artificial-intelligence-takes-place/).
+
+As we see a widespread adoption of Cloud Computing (even by companies
+that would be able to afford the hardware and run on-premises), we
+notice that most of these Cloud implementations don't have an [Apache
+Hadoop](https://hadoop.apache.org/) since the Data Teams (BI/Data
+Science/Analytics) increasingly choose to use tools like [Google
+BigQuery](https://cloud.google.com/bigquery/) or [AWS Redshift](https://aws.amazon.com/redshift/).
+Therefore, it doesn't make sense to spin-up a Hadoop with the only intention to
+use [YARN](https://hortonworks.com/apache/yarn/) as the resources manager.
+
+An alternative is the use of Hadoop cluster providers such as [Google
+DataProc](https://cloud.google.com/dataproc) or [AWS EMR](https://aws.amazon.com/emr/)
+for the creation of ephemeral clusters. Just to name a few options.
+
+To better understand the design of Spark Operator, the doc from [GCP on GitHub](https://github.com/GoogleCloudPlatform/spark-on-k8s-operatoR/blob/master/docs/design.md#the-crd-controller)
+is a no-brainer.
+
+# Let's get hands-on!
+
+## Warming up the engine
+
+Now that the word has been spread, let's get our hands on it to show
+the engine running. For that, let's use:
+
+- [Docker](https://www.docker.com/) as the container engine for
+  Kubernetes [(installation guide)](https://docs.docker.com/install/);
+- Minikube [(installation guide)](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+  to facilitate the provisioning of the Kubernetes (yes, it will be
+  a local execution);
+- For interaction with the Kubernetes API it is necessary to have
+  `kubectl` installed, [if you don't have it, follow instructions
+  here](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+- a compiled version of Apache Spark larger than 2.3.0.
+  1. you can either compile [source code](https://github.com/apache/spark),
+     which will took _some hours_ to finish, or
+  2. download a compiled version [here](https://spark.apache.org/downloads.html)
+     (recommended).
+
+Once the necessary tools are installed, it's necessary to
+include Apache Spark path in `PATH` environment variable, to ease the
+invocation of Apache Spark executables. Simply run:
+
+```bash
+export PATH=${PATH}:/path/to/apache-spark-X.Y.Z/bin
+```
+
+## Creating the Minikube "cluster"
+
+At last, to have a Kubernetes "cluster" we will start a `minikube`
+with the intention of running an example from [Spark
+repository](https://github.com/apache/spark/blob/master/examples/src/main/scala/org/apache/spark/examples/SparkPi.scala)
+called `SparkPi` just as a demonstration.
+
+```bash
+minikube start --cpus=2 \
+    --memory=4g
+```
+
+## Building the Docker image
+
+Let's use the Minikube Docker daemon to not depend on an external registry (and
+only generate Docker image layers on the VM, facilitating garbage disposal
+later). Minikube has a wrapper that makes our life easier:
+
+```bash
+eval $(minikube docker-env)
+```
+
+After having the daemon environment variables configured, we need a
+Docker image to run the jobs. There is a [shell script in the Spark
+repository](https://github.com/apache/spark/blob/master/bin/docker-image-tool.sh)
+to help with this. Considering that our `PATH` was properly
+configured, just run:
+
+```bash
+docker-image-tool.sh -m -t latest build
+```
+
+_FYI:_ The `-m` parameter here indicates a minikube build.
+
+Let's take the highway to execute SparkPi, using the same command
+that would be used for a Hadoop Spark cluster [spark-submit](https://spark.apache.org/docs/latest/submitting-applications.html).
+
+However, Spark Operator supports defining jobs in the "Kubernetes
+dialect" using [CRD](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/),
+[here are some examples](https://github.com/GoogleCloudPlatform/spark-on-k8s-operator/tree/master/examples) - for later.
+
+# Fire in the hole!
+
+Mid the gap between the Scala version and .jar when you're
+parameterizing with your Apache Spark version:
+
+```bash
+spark-submit --master k8s://https://$(minikube ip):8443 \
+    --deploy-mode cluster \
+    --name spark-pi \
+    --class org.apache.spark.examples.SparkPi \
+    --conf spark.executor.instances=2 \
+    --executor-memory 1024m \
+    --conf spark.kubernetes.container.image=spark:latest \
+    local:///opt/spark/examples/jars/spark-examples_2.11-X.Y.Z.jar # here
+```
+
+What's new is:
+
+- `--master`: Accepts a prefix `k8s://` in the URL, for the
+  Kubernetes master API endpoint, exposed by the command
+  `https://$(minikube ip):8443`. BTW, in case you want to
+  know, it's a [shell command substitution](https://www.gnu.org/software/bash/manual/html_node/Command-Substitution.html);
+- `--conf spark.kubernetes.container.image=`: Configures the Docker
+  image to run in Kubernetes.
+
+Sample output:
+
+```
+...
+
+19/08/22 11:59:09 INFO LoggingPodStatusWatcherImpl: State changed,
+new state: pod name: spark-pi-1566485909677-driver namespace: default
+labels: spark-app-selector -> spark-20477e803e7648a59e9bcd37394f7f60,
+spark-role -> driver pod uid: c789c4d2-27c4-45ce-ba10-539940cccb8d
+creation time: 2019-08-22T14:58:30Z service account name: default
+volumes: spark-local-dir-1, spark-conf-volume, default-token-tj7jn
+node name: minikube start time: 2019-08-22T14:58:30Z container
+images: spark:docker phase: Succeeded status:
+[ContainerStatus(containerID=docker://e044d944d2ebee2855cd2b993c62025d
+6406258ef247648a5902bf6ac09801cc, image=spark:docker,
+imageID=docker://sha256:86649110778a10aa5d6997d1e3d556b35454e9657978f3
+a87de32c21787ff82f, lastState=ContainerState(running=null,
+terminated=null, waiting=null, additionalProperties={}),
+name=spark-kubernetes-driver, ready=false, restartCount=0,
+state=ContainerState(running=null,
+terminated=ContainerStateTerminated(containerID=docker://e044d944d2ebe
+e2855cd2b993c62025d6406258ef247648a5902bf6ac09801cc, exitCode=0,
+finishedAt=2019-08-22T14:59:08Z, message=null, reason=Completed,
+signal=null, startedAt=2019-08-22T14:58:32Z,
+additionalProperties={}), waiting=null, additionalProperties={}),
+additionalProperties={})]
+
+19/08/22 11:59:09 INFO LoggingPodStatusWatcherImpl: Container final
+statuses: Container name: spark-kubernetes-driver Container image:
+spark:docker Container state: Terminated Exit code: 0
+```
+
+To see the job result (and the whole execution) we can run a
+`kubectl logs` passing the name of the driver pod as a parameter:
+
+```bash
+kubectl logs $(kubectl get pods | grep 'spark-pi.*-driver')
+```
+
+Which brings the output (omitted some entries), similar to:
+
+```
+...
+19/08/22 14:59:08 INFO TaskSetManager: Finished task 1.0 in stage 0.0
+(TID 1) in 52 ms on 172.17.0.7 (executor 1) (2/2)
+19/08/22 14:59:08 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose
+tasks have all completed, from pool19/08/22 14:59:08 INFO
+DAGScheduler: ResultStage 0 (reduce at SparkPi.scala:38) finished in
+0.957 s
+19/08/22 14:59:08 INFO DAGScheduler: Job 0 finished: reduce at
+SparkPi.scala:38, took 1.040608 s Pi is roughly 3.138915694578473
+19/08/22 14:59:08 INFO SparkUI: Stopped Spark web UI at
+http://spark-pi-1566485909677-driver-svc.default.svc:4040
+19/08/22 14:59:08 INFO KubernetesClusterSchedulerBackend: Shutting
+down all executors
+19/08/22 14:59:08 INFO
+KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Asking
+each executor to shut down
+19/08/22 14:59:08 WARN ExecutorPodsWatchSnapshotSource: Kubernetes
+client has been closed (this is expected if the application is
+shutting down.)
+19/08/22 14:59:08 INFO MapOutputTrackerMasterEndpoint:
+MapOutputTrackerMasterEndpoint stopped!
+19/08/22 14:59:08 INFO MemoryStore: MemoryStore cleared
+19/08/22 14:59:08 INFO BlockManager: BlockManager stopped
+19/08/22 14:59:08 INFO BlockManagerMaster: BlockManagerMaster stopped
+19/08/22 14:59:08 INFO
+OutputCommitCoordinator$OutputCommitCoordinatorEndpoint:
+OutputCommitCoordinator stopped!
+19/08/22 14:59:08 INFO SparkContext: Successfully stopped SparkContext
+19/08/22 14:59:08 INFO ShutdownHookManager: Shutdown hook called
+19/08/22 14:59:08 INFO ShutdownHookManager: Deleting directory
+/tmp/spark-aeadc6ba-36aa-4b7e-8c74-53aa48c3c9b2
+19/08/22 14:59:08 INFO ShutdownHookManager: Deleting directory
+/var/data/spark-084e8326-c8ce-4042-a2ed-75c1eb80414a/spark-ef8117bf-90
+d0-4a0d-9cab-f36a7bb18910
+...
+```
+
+The result appears in:
+
+```
+19/08/22 14:59:08 INFO DAGScheduler: Job 0 finished: reduce at
+SparkPi.scala:38, took 1.040608 s Pi is roughly 3.138915694578473
+```
+
+Finally, let's delete the VM that Minikube generates, to clean up the
+environment (unless you want to keep playing with it):
+
+```bash
+minikube delete
+```
+
+## Last words
+
+I hope your curiosity got _sparked_ and some ideas for further
+development have raised for your Big Data workloads. If you have any
+doubt or suggestion, don't hesitate to share on the comment section.
+]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[DevOps: The Genesis]]></title>
+            <link>https://macunha.me/post/devops-genesis</link>
+            <guid>https://macunha.me/post/devops-genesis</guid>
+            <description><![CDATA[From where DevOps came and to where we go. DevOps isn't simply automation, but a whole culture around agile business]]></description>
+            <content:encoded><![CDATA[
+# Introduction
+
+First of all, it's all about agile.
+
+The DevOps methodology was created on top of agile methods, to deliver a higher
+value inside software releases, automating feature release through pipelines,
+that can test hypothesis faster allowing higher adaptability using "fail-fast"
+approaches. Those changes are more cultural than technical, so it's normal to
+see DevOps being called culture.
+
+The implementation of DevOps happens through processes automation, having a
+strong sense of processes re-engineering inside the company. Comparing to the
+cultural change, the technical is easy to implement. Therefore the role that a
+"DevOps Engineer/Analyst" performs is very confusing, which enables many
+SysAdmins and Infra Analysts assuming the role of "DevOps."
+
+## Lean is the basis of Agile
+
+Reality is not as happy as it sounds. After World War II, Japan was destroyed
+and under-resourced after losing the war. With a limited amount of resources,
+the country needed to reinvent itself and survive after a time of severe
+depression. During that time two guys gained attention inside a company that
+later gave its name after the methodology.
+
+Those guys were Eiji Toyoda and Taiichi Ohno, inside Toyota Motor Corporation.
+They're the founders of the "Toyota production model" also known as Toyotism.
+
+## Toyota gave birth to Lean
+
+Lean teaches how to optimize the end-to-end process, focusing on processes that
+create value for customers. Bottlenecks in the process must be removed, and
+wasteful activities need to be identified and avoided. Both explained and
+defined by LEAN 3M: Muda, Mura, and Muri.
+
+Also teaches to improve yourself day after day and always focus on quality
+through Kaizen (continuous improvement).
+
+Japanese culture truly believes that quality is the main objective to deliver
+value to customers since quality is what brings your clients back.
+
+## Kaizen
+
+A mindset that helps to look at each part of the process exclusively and think
+about the improvements. Involving the people who are part of the process,
+encourage the inclusion of these people in the decisions of change, since:
+
+- It is much easier to accept a change when it is not imposed (top-down);
+- There is a greater absorption of change by people when they're included in the
+  planning;
+- The people who are involved in the process bring their concerns and
+  suggestions, which contribute positively to the evolution of the change,
+  making the idea more robust.
+
+The process of defining improvements through Kaizen happens (usually) in the
+following order:
+
+1. Define data-driven objectives;
+2. Review the current state and develop an improvement plan;
+3. Implement improvement;
+4. Review the implementation and improve what does not work;
+5. Report the results and determine the items to be monitored.
+
+This process is also called **PDCA: Plain-Do-Control-Act**, which is summarized
+in:
+
+- Plan (develop the hypothesis);
+- Do (experiment);
+- Check (validate results);
+- Act (refine the experiment and start over).
+
+# 3M: Muda, Mura, Muri
+
+## Muda (waste)
+
+Any activity that consumes time without adding value to the final consumer. e.g.:
+
+- over-production;
+- idle time in the process;
+- products with a defect.
+
+It's important to remember that there are different levels of Muda that can be
+removed quickly or not, and the classification depends on the time for removal.
+
+An example of a more time-consuming Muda is the discontinuation of legacy
+software that ends up with longer release cycles, causing teams to be idle,
+followed by an often long or manual test routine.
+
+## Mura (unevenness)
+
+Unevenness in operation, caused by activities that are very changeable and
+unpredictable, generating different results in all executions. e.g., the
+execution of tasks that were not well planned and ended up arriving with strict
+deadlines. The team runs in the rush, generating exhaustion, despair, and
+moreover, when finished leaves the people who have performed these tasks waiting
+(for feedback, or confirmation that it is completed).
+
+## Muri (overload)
+
+Overburdening equipment or operators by requiring them to run at a higher or
+harder pace beyond the limit, to achieve some goal or expectation, causing
+fatigue and consequently failures during the process. These failures are usually
+human errors caused by fatigue during overwork.
+
+## Back to Agile
+
+In 2000 a group of 17 people met at a resort in Oregon to talk about ideas that
+could improve the flow of software development. After a year of mature ideas,
+these people met again and published the ideas, which we now know as **Agile
+Manifesto**.
+
+Main points are:
+
+**Individuals and interactions** over processes and tools **Working software**
+over comprehensive documentation **Customer collaboration** over contract
+negotiation **Responding to change** over following a plan
+
+I will restrict the explanation of these points with the DevOps point of view,
+keeping on track (now).
+
+## Individuals and interactions
+
+_over processes and tools_
+
+First comes the individuals, they should receive the necessary tooling to work
+with, and then be empowered to do their jobs. Interactions between people are
+greatly encouraged, for sharing knowledge and also for facilitating creative
+flow within development teams.
+
+An excellent example of interaction encouraged through DevOps is the code review
+habit. Considering that small parts of the software will be iterated and
+approved in the pipeline passing through different environments, automatically,
+the best way to prevent defects is through code review.
+
+This habit brings benefits such as:
+
+- Knowledge sharing;
+- Observation of the problem from a different point of view;
+- Team engagement;
+- Lesser bugs.
+
+## Working software
+
+_over comprehensive documentation_
+
+Here's a trick in "working software," software that works is not code that
+compiles. The software that works is what meets the requirements of the user;
+i.e., the software that solves the problem and the pains of the user.
+
+As the market is very dynamic, and evolves with high speed, often during the
+software development project the requirements change due to external factors.
+Therefore, knowing that it is not possible to predict all the elements, many
+"workarounds" are made during development and documented. Passing the
+responsibility to the user to handle the faults, and perform the workarounds,
+expending more effort than would be required to perform the tasks using the
+software.
+
+> Deliver a working software frequently, ranging from a few weeks to a few months, considering shorter time-scale. - Agile Manifesto
+
+Encouraging as many deployments as possible, so that failures happen as early as
+possible, thus allowing their impact to be much less.
+
+# Fail-fast!
+
+Failures are understood and encouraged because it's part of the mindset. Because:
+
+- Only those who **do** make mistakes;
+- Failures are the best opportunity for learning and evolving;
+- Shit happens.
+
+Nothing like quoting Murphy's law to contextualize
+
+> "Anything that can possibly go wrong, does."
+
+Therefore, it's best for failures to occur early, while the cost of correction
+is still low. Failing a controlled testing environment allows the fix to be much
+faster (and cheaper) than it would if the fix were already in production.
+
+For this approach to succeed, there is a premise that environments are
+production copies, or at least as close as possible. Otherwise, there will be
+behavioral changes in the software between the environments, making the test
+environment unfeasible.
+
+If the environments are divergent, the promotion of bugs for production will be
+very frequent, causing late failures, which are expensive failures.
+
+## Customer collaboration
+
+_over contract negotiation_
+
+Know your client! Including it in the process is the best approach to have
+working software. After iterating over deliverables, it's essential to create a
+positive feedback loop with your client, bringing it as close as possible to the
+development of the tools that he/she is going to use.
+
+We can describe this situation with:
+
+- From point A it is possible to see only point B;
+- From point B it is possible to see point C;
+
+Therefore there is a great incentive for the software to be delivered in parts,
+continuously. Thus gathering user feedback on the next steps, following the
+concepts of evolutionary prototyping, which were widely publicized through [_The
+Lean Startup_](http://theleanstartup.com/book).
+
+This point contrasts sharply with the previous one about continuous release, so
+that it is possible to present the prototype and evolve it throughout the
+project.
+
+Learn who your customer/consumer/user is, and whom you are making the software
+for, as this is the only way you can deliver value to that customer. An
+essential part of the software development process is to be empathic with user
+problems, and to truly understand what the problem is to be solved, and the
+result of the impact on software development (value creation for the user).
+
+## Responding to change
+
+_over following a plan_
+
+Redesigning the requirements overtime is part of the job, and a necessary step
+to success. If you want to build something useful that is going to grow and have
+absorption, it's a key feature to include your client in the implementation
+process.
+
+It will be the only way to bring all the problems of the user to the table and
+create the best solution for all these problems because the user is the only
+person that knows the real challenges he faces in their routine dealing with
+software.
+
+With continuous delivery of software along with monitoring results, the process
+of collecting feedback is much simpler and faster.
+
+# DevOps, DevOps, DevOps
+
+With the popularization of DevOps, a lot of disagreement came out there followed
+by a significant confusion about the subject. It is very common to come across
+different interpretations of **what is DevOps**. There is a lot of euphemism in
+the area, and gourmetization on LinkedIn, with many SysAdmins calling themselves
+DevOps since they learned to code shell script inside Python.
+
+Do you want to keep reading? [Here are the benefits of adopting DevOps techniques.]({{< relref "post/2019/01/devops-benefits/index.md" >}})
+]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[DevOps: Benefits]]></title>
+            <link>https://macunha.me/post/devops-benefits</link>
+            <guid>https://macunha.me/post/devops-benefits</guid>
+            <description><![CDATA[Benefits of implementing DevOps culture in business, why this is a feasible option and the DevOps world big picture in-a-nutshell from a business point of view.]]></description>
+            <content:encoded><![CDATA[
+# Introduction
+
+Main benefits that a company generally expects and finds in the adoption of
+culture:
+
+## Faster and Cheaper Releases
+
+Since releases will be continuous and frequent, deliverables will turn into
+small changes with the benefit of increasing speed in the development cycle
+(delivering always).
+
+## Improved Operational support with quick fixed
+
+If there is a failure during delivery, the impact is minimal because the amount
+of modifications is small, just as the rollback is faster. Having a simple
+inspection and debugging.
+
+## Better Time-to-market (TTM)
+
+The software will be delivered much earlier when it's still an MVP. Customers
+will be integrated as part of the development process, bringing insights and
+feedback to the development team. Thus allowing for a higher launch speed in the
+market.
+
+## Superior quality products
+
+As has been said before, early failures prevent defects from being delivered to
+production, because:
+
+- Reduces the volume of defects in the product as a whole;
+- Increases frequency of new features and releases;
+- Appropriate development processes in teams, including automation.
+
+# Now we understood WHY, let's talk about HOW
+
+## Continuous releases (integration, delivery, deployment)
+
+Usually follows a code versioning approach (through Git) using specific branches
+for each environment (e.g.: feature branches with git flow).
+
+## Continuous integration
+
+Automatic execution of unit tests, integration tests and code quality analysis
+against a git branch, to ensure that there was no disruption of the modified
+piece of code.
+
+## Continuous delivery
+
+Packaging the software that is tested and approved, to deliver it somewhere that
+it is possible to use in a deploy later. Examples are libs delivered in
+repositories to be integrated into the code during the next update and code
+deploy.
+
+## Continuous deployment
+
+Once you have completed all of the above steps, you can do automated deployments
+right in the environments, when the team is more confident about the tools they
+are testing, as well as the risk they're taking and also understanding that
+there is a possibility of failure in a tests environment without worrying that
+it's going to be divergent from production.
+
+## Configuration (and/or Infrastructure) as code
+
+To be able to test software with assertiveness, and to understand that it will
+transit between environments without changing behavior, it is essential that the
+configurations are also expressed in code. This allows the settings to be also
+versioned, following the code. Also guaranteeing a uniformity among the
+environments, which enables:
+
+- Reduction in maintenance costs, having a single point to look at and
+  understand the operation of the system;
+- Easy to recreate the infrastructure, if it is necessary to move everything to
+  another place, this can happen with a few manual interactions;
+- Allows for a code review of infrastructure and configurations, which
+  consequently brings a culture of collaboration in the development, sharing of
+  knowledge and increases the democratization of the infra;
+- Documentation as code, helping new team members get a faster warm up.
+
+These points were well-stressed by the Heroku team and gave rise to the famous
+paper: [The Twelve-Factor App](https://12factor.net/). It's an excellent reading
+for the explanation of the benefits of configuration management.
+
+## Observability, Monitoring, and self-healing
+
+At the end of the delivery process, the software must be monitored. Avoiding to
+wait for an external report of failures, ensuring that the actions are proactive
+rather than reactive.
+
+With mature monitoring, it's possible to create trigger against alerts, creating
+a self-healing system in which actions (scripts) are performed to **fix known**
+failures in the infrastructure so that everyone can sleep peacefully at night,
+without having to worry about the on-call schedule that makes you read some
+documentation at dawn. (If you have had experience with this, you know for sure
+how bad it is).
+
+Scaling up only those cases that are extreme exceptions (mistakes not
+known/expected) in the process for the employee to act, ensuring higher health
+in operation.
+
+## Processes automation
+
+All processes that cause Muda should be addressed with automation, allowing
+people to work more quickly. Good examples of processes that are usually
+automated are:
+
+- Deployment;
+- Self-healing (system resilience in response to anomalies);
+- Renewal of Certificates;
+- Execution of tests (unitary, integration, functional, etc.);
+- Monitoring (with auto-discovery);
+- User Governance;
+
+# [DevOps toolchain](https://en.wikipedia.org/wiki/DevOps_toolchain)
+
+A combination of tools to facilitate the maintenance and operation of the
+system, with the flow:
+
+![Development Cycle Using DevOps](/img/content/devops-lifecycle.png)
+
+> Note: Any similarity to the PDCA is pure certainty.
+
+- **Plan**: Project planning phase, in which feedbacks are collected for
+  requirements survey, and backlog creation;
+- **Create**: Creation of a deliverable (to validate a hypothesis), such as an
+  MVP;
+- **Verify**: Pass the deliverable to the test phase;
+- **Package:** Package the build to be able to put it in some testing
+  environment;
+- **Release**: Deploy packaged deliverable;
+- **Configure**: Perform the configuration of the deliverable in the testing
+  environment, trying to get as close as possible to the twelve-factor app.
+- **Monitor**: After deploying to the environment, track business metrics and
+  infrastructure to ensure everything is working as expected.
+
+# Conclusion
+
+During the implementation of these techniques it is possible to observe
+improvements in the development process, the most notable gains are:
+
+- Increase in team engagement;
+- Knowledge sharing;
+- Reduction of bottlenecks;
+- More free time to do work that really matters (adds value to the user
+  experience or generates impact);
+- Greater confidence in delivering software.
+]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Terraform Design Best Practices]]></title>
+            <link>https://macunha.me/post/terraform-design-best-practices</link>
+            <guid>https://macunha.me/post/terraform-design-best-practices</guid>
+            <description><![CDATA[Composing on the existing Terraform best-practices documents to empower developers and distribute the power of managing Infrastructure. In doing so, some self-service Ops and micro-services architecture were added to the mix.]]></description>
+            <content:encoded><![CDATA[
+## Intro
+
+As someone who believes in empowering people and distributing power in order to
+achieve higher outcomes I always felt that the best existing best-practices
+proposals don't touch some key aspects (IMHO) on code evolution and business
+structures.
+
+Therefore, this document shall compose on the previous ones and extend them with
+some self-service Ops and micro-services spice to the mix.
+
+On [Terraform best practices](https://www.terraform-best-practices.com) great insights on how to write code inside a
+module is provided, e.g. [naming conventions](https://www.terraform-best-practices.com/naming), [Terraform file naming](https://www.terraform-best-practices.com/code-structure#getting-started-with-structuring-of-terraform-configurations).
+
+We can't leave Terragrunt epic blog post unmentioned:
+
+- [5 Lessons Learned From Writing Over 300,000 Lines of Infrastructure Code](https://blog.gruntwork.io/5-lessons-learned-from-writing-over-300-000-lines-of-infrastructure-code-36ba7fadeac1);
+
+As well as the [Terragrunt documentation pointing](https://terragrunt.gruntwork.io/docs/getting-started/quick-start/#promote-immutable-versioned-terraform-modules-across-environments) "one of the most important
+lessons" is that:
+
+> large modules should be considered harmful. That is, it is a Bad Idea to define
+> all of your environments (dev, stage, prod, etc), or even a large amount of
+> infrastructure (servers, databases, load balancers, DNS, etc), in a single
+> Terraform module. Large modules are slow, insecure, hard to update, hard to code
+> review, hard to test, and brittle (i.e., you have all your eggs in one basket).
+
+### "Bad Idea" capitalized!
+
+Which is totally true, as this "Bad Idea" usually coming from a lack of care
+towards Terraform code design tend to be harmful in the long run, with a
+tendency towards making the implementation a [big ball of mud](https://en.wikipedia.org/wiki/Big%5Fball%5Fof%5Fmud).
+
+> A Big Ball of Mud is a haphazardly structured, sprawling, sloppy,
+> duct-tape-and-baling-wire, spaghetti-code jungle. These systems show
+> unmistakable signs of unregulated growth, and repeated, expedient repair.
+> Information is shared promiscuously among distant elements of the system,
+> often to the point where nearly all the important information becomes global
+> or duplicated.
+
+<!--quoteend-->
+
+> The overall structure of the system may never have been well defined.
+
+Oftentimes, Terraform code implementation fluctuate towards mono-repositories
+(a.k.a. monorepos) containing all the specification in a single place. In order
+to tame the chaos, the Terraform state needs to be at least sub-divided into
+logical sections.
+
+## Design
+
+### Shallow "tree" of shared resources
+
+Following the [recommendations for structuring code](https://www.terraform-best-practices.com/code-structure#common-recommendations-for-structuring-code) one of the proposals is to
+keep a shallow "tree" of resources and modules. This tree produces a small and
+clear distribution of Terraform code.
+
+Why a shallow "tree" of resources? It helps achieving a short amount of
+resources and modules that result in a small [remote state](https://www.terraform.io/docs/language/state/remote.html) file. With a small
+remote state we speed-up the development process and reduce waste (_Muda_ in the
+Toyota 3M model), as the shallow tree enables faster executions of Terraform
+(less data to sync and compare).
+
+The granularity level will be defined for each specific case (no silver bullet)
+balancing the smallest and most feasible composition possible.
+
+### Product areas (a.k.a. Business capabilities) structure and ownership
+
+Ideally, the [composition level](https://www.terraform-best-practices.com/key-concepts#composition) would be organized around Product Areas (either
+squads/crews or guilds) with a fallback to shared technologies (e.g. vpc,
+databases). Therefore, Terraform compositions are designed around what Martin
+Fowler [calls "Business capabilities"](https://youtu.be/wgdBVIX9ifA?t=388) in micro-services terminology, ideally the
+Terraform composition will follow the organizational structure so that each team
+"owns" (in both senses: ownership and freedom) its own state.
+
+The main goal here is to structure the Terraform code as a reflection of the
+organization so that is fosters self-service Ops. If the Infrastructure as Code
+is mature enough to the point of having well-described Terraform modules,
+everyone should be empowered to define these modules by setting the parameters
+according to their needs, without centralizing power on a Operations team.
+
+The resource composition must gravitate towards the following (ordered by
+priority from higher to lower):
+
+1.  Product Areas (ownership) directory structure:
+
+    1.  squad/crew OR guild;
+    2.  product.
+
+2.  Shared resources, around technologies.
+
+Looking on the structure from bottom-up it starts from the product and then
+attributes the product to a crew through the directory tree.
+
+e.g.:
+
+```text
+# Squad or Crew
+red-team
+└── payment     # Product (i.e. micro-service) name
+    └── main.tf # Any resource used by the payment product
+
+# Guild (organized around technology)
+back-end
+└─ monolith    # Shared application in terms of ownership
+   └── main.tf # Cloud resources used by the monolith
+```
+
+On the example above, we can't ignore that `monolith` is a product with shared
+ownership among back-end developers and therefore it is organized to follow the
+business structure.
+
+The structure is inspired [on Terragrunt's best-practices](https://terragrunt.gruntwork.io/docs/getting-started/quick-start/#promote-immutable-versioned-terraform-modules-across-environments) to some extend.
+However, it distinct from Terragrunt proposal in the way resources are divided,
+rather than organizing resources exclusively around technologies.
+
+### Shared resources, organized around technologies
+
+Oftentimes in organizations we will face shared resources among products, there
+is no way around reality. e.g. a shared VPC or SQL database.
+
+However, these situations should be the exception and not the norm. Dealt
+similar to the organization of Terraform compositions around
+guilds/technologies.
+
+```text
+platform # as in Platform Engineering
+└── vpc
+    └── main.tf
+
+back-end
+└── database
+    └── main.tf
+```
+
+### Files inside the composition?
+
+Ideally the files in the sub-directory (which specify the composition) are going
+to partially [follow this spec](https://www.terraform-best-practices.com/code-structure#getting-started-with-structuring-of-terraform-configurations) and include `data.tf`, `terraform.tf` and
+`providers.tf` on top of that.
+
+- **main.tf:** contains locals, module and resource definitions;
+- **variables.tf:** contains declarations of variables (i.e. inputs/parameters)
+  used in main.tf;
+- **data.tf:** contains data-resources for input data used in main.tf;
+- **outputs.tf:** contains outputs from the resources created in main.tf;
+- **providers.tf:** contains provider and provider's versions definitions;
+- **terraform.tf:** contains the terraform back-end (e.g. remote state)
+  definition;
+
+### What about Terraform modules?
+
+[Terraform modules](https://www.terraform.io/docs/language/modules/index.html) are containers for multiple resources that are used together
+to achieve a shared goal. Modules can be used to create lightweight
+abstractions, facilitating reusability and distribution of Terraform code.
+
+Therefore, we assume that the following are anti-patterns that make Terraform
+modules' reusability difficult:
+
+- Configuration of Terraform Providers inside a module;
+- Implementation of Business logic and/or hard-coded parameters in a
+  module;
+- Default values are specified in optional variables instead of
+  hard-coding;
+- Modules should be self-contained and provide a clear contract.
+  Dependencies (pre-existing resources) must be specified through required
+  variables.
+- Modules must serve to a singular purpose. Multiple purpose must be
+  achieved through composability of modules and not by "monolithic" modules.
+
+Modules are abstractions that should be used to reduce the amount of code
+duplication, implementing the [DRY (don't repeat yourself) principle](https://en.wikipedia.org/wiki/Don%27t%5Frepeat%5Fyourself).
+
+On top of that, modules are an important factor to reduce the parity among
+environments, which helps to better address the [Twelve-Factor App model](https://12factor.net/) in
+regards to [Factor X (ten)](https://12factor.net/dev-prod-parity).
+]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Real-life Terraform Refactoring Guide]]></title>
+            <link>https://macunha.me/post/real-life-terraform-refactoring-guide</link>
+            <guid>https://macunha.me/post/real-life-terraform-refactoring-guide</guid>
+            <description><![CDATA[Want to know how to better organize existing Terraform code? If you grasp these ideas, it could even serve for not-yet Infrastructure as Code resources. Jump in and take a look.]]></description>
+            <content:encoded><![CDATA[
+## Intro
+
+As reality hits, the unavoidable fact of dealing with a hard-to-manage Terraform
+[Big ball of mud](https://en.wikipedia.org/wiki/Big%5Fball%5Fof%5Fmud) code base comes in. There is no way around natural growth and
+evolution of code bases and the design flaws that come with it. Our Agile
+mindset is to ["move fast and break things"](https://www.brainyquote.com/quotes/mark%5Fzuckerberg%5F453439), implement something as simple as
+possible and let the design decisions for the next iterations (if any).
+
+Refactoring Terraform code is actually as natural as developing it, time and
+time again you will be faced with a situation where a better structure or
+organization can be achieved, maybe you want to upgrade from a home-made module
+to an open-source/community alternative, maybe you just want to segregate your
+resources into different states to speed-up development. Regardless of the goal,
+once you get into it, you will realize that Terraform code refactoring is
+actually a basic missing step on the development process that no one told you
+before.
+
+As the [Suffering-Oriented Programming](http://nathanmarz.com/blog/suffering-oriented-programming.html) mantra dictates:
+
+> "First make it possible. Then make it beautiful. Then make it fast."
+
+So, time to make the Terraform code beautiful!
+
+## How to break a big ball of mud? STRANGLE IT
+
+`<joke>` Martin Fowler has already written everything there is to write about
+(early 2000s) DevOps, Agile, and Software Development. Therefore, we could
+reference Martin Fowler for virtually anything Software related `</joke>`, but
+really, the [Refactoring book](https://martinfowler.com/books/refactoring.html) is **THE** reference on this subject.
+
+Martin Fowler shared the [Stangler (Fig) Pattern](https://martinfowler.com/bliki/StranglerFigApplication.html), which describes a strategy to
+refactor a legacy code base by re-implementing the same features (sometimes even
+the bugs) on another application.
+
+> [...] the huge strangler figs. They seed in the upper branches of a tree and
+> gradually work their way down the tree until they root in the soil. Over many
+> years they grow into fantastic and beautiful shapes, meanwhile strangling and
+> killing the tree that was their host.
+>
+> This metaphor struck me as a way of describing a way of doing a rewrite of an
+> important system.
+
+In this document we are going to follow the same idea:
+
+1.  implement the same feature on a different [Terraform composition](https://www.terraform-best-practices.com/key-concepts#composition);
+2.  migrate the Terraform state;
+3.  delete (kill) the previous implementation.
+
+## The mono-repository (monorepo) approach to Legacy
+
+Let's suppose that your Terraform code base is versioned in a single repository
+(a.k.a. monorepo), following the random structure displayed below (just to help
+illustrate)
+
+```
+.
+├── modules/    # Definition of TF modules used by underlying compositions
+├── global/     # Resources that aren't restricted to one environment
+│   ├── aws/
+├── production/ # Production environment resources
+│   └── aws/
+└── staging/    # Staging environment resources
+    └── aws/
+```
+
+On this example each directory corresponds to a Terraform state. In order to
+apply changes you have to walk to a path and execute `terraform`.
+
+The structure on this example repository was created a few hypothetical years
+ago when the number of existing microservices and resources (DB, message queues,
+etc) was significantly smaller. At the time, it was feasible to keep Terraform
+definitions together because it was easier to maintain, Cloud resources were
+managed with one-shot!
+
+As the time went by, the number of Products and the team grew, and engineers
+started facing concurrency issues: Terraform lock executions on a shared storage
+when someone else is running `terraform apply` as well as a general slowness on
+**every execution** since the number of data sources to sync is frightening.
+
+A mono-repository approach is not necessarily bad, versioning is actually
+simpler when performed in one single repository. Ideally, there won't be many
+changes on the scale of GiB meaning that it is safe to proceed on this one _as
+long as the Terraform remote states are divided_.
+
+### Splitting the `modules` sub-path to its own repository
+
+One thing to mention though is the `modules` sub-path, this one could be stored
+in a different git repository to leverage its own versioning. Since Terraform
+modules and its implementations don't always evolve in the same pace, keeping
+two distinct version trees is beneficial. Additionally, a separated repository
+for Terraform modules allows the specification of "pinned versions", e.g.:
+
+```hcl
+module "aws_main_vpc" {
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git?ref=2ca733d"
+  # Note the ref=${GIT_REVISION_DIGEST}
+}
+```
+
+That reference for a module's version should always be specified, regardless if
+it comes from an internal/private repository or public. When you specify the
+version, you are ensuring reproducibility.
+
+Therefore, let's move the `modules` sub-path to another git repository,
+following instructions from [this StackOverflow answer](https://stackoverflow.com/questions/359424/detach-move-subdirectory-into-separate-git-repository/17864475#17864475) so that the git commit
+history is preserved:
+
+#### 0.
+
+Walk to the monorepo path and create a branch from the commits at
+`monorepo/modules` path
+
+```bash
+MAIN_BIGGER_REPO=/path/to/the/monorepo
+cd "${MAIN_BIGGER_REPO}"
+git subtree split -P modules -b refact-modules
+```
+
+#### 1.
+
+Create the new repository
+
+```bash
+mkdir /path/to/the/terraform-modules && cd $_
+git init
+git pull "${MAIN_BIGGER_REPO}" refact-modules
+```
+
+#### 2.
+
+Link the new repository to your remote Git (server)
+
+```bash
+git remote add origin <git@git.com:user/terraform-modules.git>
+git push -u origin master
+```
+
+#### 3.
+
+[OPTIONAL] Cleanup inside `$MAIN_BIGGER_REPO`, if desired
+
+```bash
+cd ${MAIN_BIGGER_REPO}
+git rm -rf modules
+git filter-branch --prune-empty \
+    --tree-filter "rm -rf modules" -f HEAD
+```
+
+### Let's start strangling the repository
+
+Now that a substantial piece of code was moved somewhere else, it is time to
+put the [Stangler (Fig) Pattern](https://martinfowler.com/bliki/StranglerFigApplication.html) in practice.
+
+Move all the existing content as-is to the `legacy` sub-path, keeping the same
+repository and change history (commits). It also allows applying the `legacy`
+code as it used to be from one of those paths.
+
+```
+.
+└── legacy
+    ├── global
+    │   └── aws
+    ├── production
+    │   └── aws
+    └── staging
+        └── aws
+```
+
+Once the content is moved to legacy, the idea is to follow the [Boy Scout rule](https://www.oreilly.com/library/view/97-things-every/9780596809515/ch08.html)
+in order to strangle the `legacy` content little by little (unless you are
+really committed to migrating it all at once, which is going to be exhaustive).
+
+The Boy Scout rule goes like:
+
+1.  every time a task that involves deprecated code appears, we implement it on
+    [the new structure](../stdout/blog/2021/03/terraform-best-practices.org);
+2.  import the Terraform state to keep the Cloud resources that a given code
+    represents/describes;
+3.  remove the state and the code from `legacy`.
+
+Until there is nothing left inside `legacy` (or there are only unused
+resources/left-behinds that could be destroyed/garbage collected either way).
+
+#### Import state? Remove state and code from what? Where?
+
+That will depend on the kind of resource we are migrating from the remote state,
+on the bottom of each `resource` on Terraform's provider documentation you can
+find a reference command to import existing resources into your Terraform code
+specification. e.g.: [AWS RDS DB instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db%5Finstance#import).
+
+Suppose we want to replace the code of the AWS RDS Aurora defined in
+`production/aws` and then re-implement the same using [the community module](https://github.com/terraform-aws-modules/terraform-aws-rds-aurora).
+After creating the corresponding sub-path to the monorepo according to your
+preference, provisioning the bucket and initializing the Terraform `backend`:
+
+1.  implement the definition of the community module
+    [github.com/terraform-aws-modules/terraform-aws-rds-aurora](https://github.com/terraform-aws-modules/terraform-aws-rds-aurora) with the closest
+    parameters from the existing one; e.g.:
+
+    ```hcl
+    module "aws_aurora_main_cluster" {
+      source  = "terraform-aws-modules/rds-aurora/aws"
+      version = "~> 5.2"
+
+      # ...
+    }
+    ```
+
+2.  import the Terraform states from the previous (existing) cluster
+
+    ```bash
+    terraform import 'aws_aurora_main_cluster.aws_rds_cluster.this[0]' main-database-name
+    terraform import 'aws_aurora_main_cluster.aws_rds_cluster_instance.this[0]' main-database-instance-name-01
+    terraform import 'aws_aurora_main_cluster.aws_rds_cluster_instance.this[1]' main-database-instance-name-02
+
+    # ...
+    ```
+
+    then if you haven't yet and would like to "match reality" between the
+    existing and the specified resource, run `terraform plan` a few times and
+    adjust the parameters until Terraform reports:
+
+    ```text
+    No changes. Your infrastructure matches the configuration.
+    ```
+
+3.  last but not least, remove the corresponding resources from the `legacy`
+    Terraform state so that it doesn't try to keep track of the changes and also
+    don't try to destroy once the resource definition is no longer in that code
+    base:
+
+    ```bash
+    # Hypothetical name of the resource inside production/aws/main.tf
+    terraform state rm aws_rds_cluster.default \
+        'aws_rds_cluster_instance.default[0]' 'aws_rds_cluster_instance.default[1]'
+
+    # ...
+    ```
+
+    once that is performed, feel free to remove the corresponding resource's
+    definition from the `legacy` code.
+
+    ```hcl
+    resource "aws_rds_cluster" "default" {
+      # ...
+    }
+
+    resource "aws_rds_cluster_instance" "default" {
+      count = var.number_of_database_instances
+
+      # ...
+    }
+    ```
+]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Terraform: Atomic Design]]></title>
+            <link>https://macunha.me/post/terraform-atomic-design</link>
+            <guid>https://macunha.me/post/terraform-atomic-design</guid>
+            <description><![CDATA[Adapting the Atomic Design methodology to Infrastructure as Code components to help foster code reusability, ease of maintenance and agile development of the infrastructure. Creates standardization, validates inputs and brings the Terraform definitions closer to the developers (self-service Ops).]]></description>
+            <content:encoded><![CDATA[
+## Intro
+
+Following [The Pragmatic Programmer](https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/) mantra, I do my best to ...
+
+> **Learn at least one new language every year.** Different languages solve the same
+> problems in different ways. By learning several different approaches, you can
+> help broaden your thinking and avoid getting stuck in a rut.
+
+Not necessarily to show it off or to be capable of talking about random
+technologies, but to expand and train my problem-solving skills, to get new
+perspectives when approaching a challenge.
+
+We might not notice it but when we learn (or have learned) to code we aren't
+just learning to type some characters that a compiler/interpreter can
+understand, it is a new way of thinking, a new way of breaking down solutions
+(into sequential steps).
+
+> It doesn't matter whether you ever use any of these technologies on a project,
+> or even whether you put them on your resume. The process of learning will expand
+> your thinking, opening you to new possibilities and new ways of doing things.
+> The cross-pollination of ideas is important;
+
+As someone who works intensively with infrastructure components (servers,
+databases, Kubernetes, CI/CD, etc) I aimed for something completely different
+this year. Something that stands on _a whole different spectrum_ of the system,
+this year I decided to learn [Flutter](https://flutter.dev/).
+
+In-a-nutshell, Flutter is a better React Native. A framework that enables
+implementation of GUI applications for multiple platforms with a single code
+base.
+
+Then it reminded me a discussion I had with a friend in the past about React
+components and the [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) methodology, which helps to structure web
+components into modules.
+
+In the Atomic Design methodology, the granularity of modules is distinguished by
+using chemistry inspired names: atoms, molecules and organisms.
+
+Then the connection of the ideas from
+
+- Pragmatic Programmer's cross-pollination to
+- Atomic Design (on Flutter components) to
+- Terraform modules
+
+came almost like a thunderbolt, striking me with this insight when I was working
+with a huge legacy Terraform code base refactoring with lots of code duplication
+(read: copy+paste, "we fix it later", then the author quits the company and
+never fix anything).
+
+Although initially proposed as a Web UI methodology, Infrastructure as Code
+tools such as Terraform that makes heavy usage of modules can benefit from
+Atomic Design to improve its code reusability and massively reduce duplication.
+
+## Details
+
+The Atomic Design methodology proposes five distinct levels, listed from the
+finest to the thickest granularity:
+
+1.  Atom;
+2.  Molecules;
+3.  Organisms;
+4.  Templates;
+5.  Pages.
+
+However, to extract the gist, we'll only be focusing on Atoms, Molecules, and
+Organisms (from 1. to 3.). Templates and Pages are too specialized for Web UI
+development.
+
+### Atoms
+
+Atoms represent the finest grain in terms of granularity in the design. When
+referring specifically to its implementation in Terraform a `resource` and a
+small scoped single-purpose `module` could be used interchangeably.
+
+Sometimes the idea of turning a simple resource into a module makes sense to
+ease parameterization and reusability, especially when it is necessary to parse
+inputs. Although, due to its extreme limited scope it might not look attractive
+to convert the `resource` into a `module` at first sight, on the long run it
+pays off to do so in order to achieve scalability and reproducibility.
+
+e.g.:
+
+```hcl
+data "aws_route53_zone" "default" {
+  zone_id = var.zone_id
+  name    = var.zone_name
+}
+
+resource "aws_route53_record" "default" {
+  zone_id = data.aws_route53_zone.default.zone_id
+  name    = var.name
+
+  ttl  = var.ttl
+  type = var.record_type
+
+  records = var.records
+
+  dynamic "alias" {
+    for_each = [var.alias]
+
+    content {
+      name = each.value.name
+      zone_id = try(each.value.zone_id, data.aws_route53_zone.default.zone_id)
+
+      evaluate_target_health = lookup(
+        each.value,
+        "evaluate_target_health",
+        false,
+      )
+    }
+  }
+}
+```
+
+In this case, even though `aws_route53_record` is a simple resource that might
+feel too narrow in scope to write a module, the implementation of the module
+allows to bundle the AWS Route53 Zone data source together, which helps to:
+
+1.  provide a simpler contract by allowing the usage of `zone_name` alone;
+2.  validate the `zone_name` input, ensuring that a given `zone_name` corresponds to an
+    actual **existing and valid** AWS resource;
+3.  same goes to `zone_id`, which will feel (and oftentimes, be) redundant,
+    _when_ specified as an input Terraform will read the data from AWS API
+    ensuring consistency.
+
+e.g.:
+
+```hcl
+module "awesome_dns_fqdn" {
+  source = "path/to/modules/atoms/aws_route53_record"
+  version = "~> 1.0"
+
+  name      = "record.example.com"
+  zone_name = "example.com."
+
+  record_type = "CNAME"
+  records     = ["1.2.3.4"]
+}
+```
+
+Hence, resources and modules are sometimes interchangeable as they deliver the
+same outcome for the finest resources' granularity.
+
+### Molecules
+
+When groups of atoms are bounded together, they create a molecule which is the
+smallest fundamental unit of a compound.
+
+Contrary to the original Atomic Design for Web UI, in Terraform, Atoms are
+useful on their own. However, the usage of atoms comes with a high price on
+scalability: code duplication. Actually, duplication is an understatement, it is
+more like code exponentiation (more on this later).
+
+#### Implementation example
+
+Suppose we are creating a public facing API Gateway that needs a DNS record.
+
+Let's compose it with the previous example:
+
+```hcl
+data "aws_route53_zone" "default" {
+  name = var.zone_name
+}
+
+module "awesome_api_gateway_certificate" {
+  source  = "terraform-aws-modules/acm/aws"
+  version = "~> v3.0"
+
+  domain_name = var.domain_name
+  zone_id     = data.aws_route53_zone.default.zone_id
+
+  wait_for_validation = true
+}
+
+module "awesome_api_gateway" {
+  source = "terraform-aws-modules/apigateway-v2/aws"
+  version = "~> 1.0"
+
+  name          = var.api_gateway_name
+  description   = var.api_gateway_description
+  protocol_type = "HTTP"
+
+  cors_configuration = {
+    allow_headers = [
+      "content-type",
+      "x-amz-date",
+      "authorization",
+      "x-api-key",
+      "x-amz-security-token",
+      "x-amz-user-agent",
+    ]
+    allow_methods = ["*"]
+    allow_origins = ["*"]
+  }
+
+  # Custom domain
+  domain_name                 = var.domain_name
+  domain_name_certificate_arn = module.awesome_api_gateway_certificate.acm_certificate_arn
+
+  # Routes and integrations
+  integrations = var.api_gateway_integrations
+}
+
+module "awesome_dns_fqdn" {
+  source  = "path/to/modules/atoms/aws_route53_record"
+  version = "~> 1.0"
+
+  name    = var.domain_name
+  zone_id = data.aws_route53_zone.default.zone_id
+
+  record_type = "CNAME"
+  alias     = {
+    name    = module.awesome_api_gateway.apigatewayv2_domain_name_configuration[0].target_domain_name
+    zone_id = module.awesome_api_gateway.apigatewayv2_domain_name_configuration[0].hosted_zone_id
+  }
+}
+```
+
+This helps illustrating an example in which the `aws_route53_record` atom could
+be easily replaced with its equivalent resource and it would still provide the
+**same** outcome.
+
+Commonly it is possible to use `module` and `resource` interchangeably as Atoms,
+the decision of whether or not to implement a `module` is ultimately defined by
+the need of parsing and/or validating the inputs (variables).
+
+#### Usage example
+
+```hcl
+module "awesome_lambda" {
+  source  = "path/to/modules/molecules/aws_lambda_function"
+  version = "~> 1.0"
+
+  function_name = "awesome"
+  description   = "An Awesome lambda function for the Awesome API Gateway"
+  handler       = "index.lambda_handler"
+  runtime       = "python3.8"
+
+  # Incomplete implementation, don't use this on production
+}
+
+module "another_awesome_lambda" {
+  source  = "path/to/modules/molecules/aws_lambda_function"
+  version = "~> 1.0"
+
+  function_name = "awesome"
+  description   = "An Awesome lambda function for the Awesome API Gateway"
+  handler       = "index.lambda_handler"
+  runtime       = "python3.8"
+
+  # Incomplete implementation, don't use this on production
+}
+
+module "awesome_api_gateway" {
+  source  = "path/to/modules/molecules/aws_api_gateway"
+  version = "~> 1.0"
+
+  domain_name = "record.example.com"
+  zone_name   = "example.com."
+
+  api_gateway_name        = "awesome-api-gateway"
+  api_gateway_description = "An Awesome API Gateway"
+
+  api_gateway_integrations = {
+    "POST /" = {
+      lambda_arn             = module.awesome_lambda.function_arn
+      payload_format_version = "2.0"
+    }
+
+    "$default" = {
+      lambda_arn = module.another_awesome_lambda.function_arn
+    }
+  }
+}
+```
+
+As you probably have already realized, when the level of abstraction goes up
+(e.g. from atom to molecule) the module implementation is in itself a good
+implementation example (i.e. as in [community modules examples](https://github.com/terraform-aws-modules/terraform-aws-lambda/blob/master/main.tf)).
+
+They help to self-document the usage and implementation of a given module and
+through generic implementations it allows us to have multiple molecules
+implementing multiple distinct use-cases. e.g.:
+
+1.  Public API Gateway with DNS record + TLS certificate;
+2.  Public API Gateway v1, no DNS record;
+3.  Private API Gateway.
+
+Why would we chose to implement multiple times the Atom modules in order to
+create multiple distinct use-cases? We are getting closer to the _code
+exponentiation_ problem and solution proposal. Can you feel it?
+
+### Organisms
+
+Going further, the [example of composition for molecules](#usage-example) can have its hard-coded
+values turned into variables in order to compose an Organism, which can
+facilitate the implementation of the same definition across different
+environments. Thus, achieving reproducibility as well as the [Factor X.](https://12factor.net/dev-prod-parity) of the
+Twelve Factor App.
+
+However, it is important to note that the level of abstraction between Organisms
+and Molecules can be easily confused or misunderstood. Generally speaking, as a
+rule of thumb an Organism is the composition of Molecules that allow parameterization for
+business or domain-specific logic (e.g. the actual `awesome_api` configuration).
+Therefore, in comparison with the previous, Organisms (usually) have a lower
+level of generalization since they are business-specialized modules.
+
+Iterating over our implementation example, the Organism would implement the
+`awesome_api`, creating the following resources:
+
+- AWS Lambda function;
+- AWS API Gateway;
+- TLS Certificate on AWS ACM;
+- DNS record on AWS Route53.
+
+By implementing the previous examples as organisms we:
+
+1.  reduce the amount of boilerplate code;
+2.  foster reusability of modules;
+3.  provide a simple interface for non-operators to manage TF code.
+
+When you sum it all up, you will notice that it is **all about autonomy** and
+"DevOps" through encouragement of self-service Ops. One wouldn't need to know a
+lot about Terraform to grab a module and pass some parameters to it, followed by
+a code review process Operators and Software Developers can manage the
+Infrastructure in harmony, **together**. (:
+
+### Code Exponentiation? What?
+
+Read that as a dramatization of the ["code duplication"](https://en.wikipedia.org/wiki/Duplicate%5Fcode) term.
+
+When it comes to Infrastructure as Code, there is no easy way around the jungle
+of resources that grows over time. Fast pacing tech companies are "moving fast
+and breaking things", oftentimes the Operators are worried about a massive
+amount of challenges at once: keep the servers up and running, with a consistent
+response time, low error rate, and all that [playbook from Google's SRE wisdom](https://sre.google/sre-book/table-of-contents/).
+
+All things considered, a good Infrastructure as Code design is generally
+a first-world problem. However, as the time passes it evolves into a real issue
+that slows down the implementation of resources as code. Either that or there
+will be a **huge ton** of copy+paste to keep up with the pace, followed by a
+routine of find+replace when changes are applied, _then_ harder to track pull
+requests and slower code reviews.
+
+Lets take our `awesome_api` example and scale it up to multiple environments
+followed by a second `awesome_api`:
+
+```text
+.
+├── development
+│   ├── an-awesome-api
+│   │   └── main.tf
+│   └── another-awesome-api
+│       └── main.tf
+├── staging
+│   ├── an-awesome-api
+│   │   └── main.tf
+│   └── another-awesome-api
+│       └── main.tf
+└── production
+    ├── an-awesome-api
+    │   └── main.tf
+    └── another-awesome-api
+        └── main.tf
+```
+
+Note that this directory structure is inspired on the proposed ideas from the
+[Terraform best practices post]({{< relref "terraform-best-practices" >}}).
+
+In order to replicate the configuration and ensure consistency, the following is
+way simpler to implement (and review) than copy+paste huge chunks of Terraform
+definitions
+
+```hcl
+module "awesome_api" {
+  source = "path/to/modules/organisms/aws_lambda_with_api_gateway"
+  version = "~> 1.0"
+
+  domain_name = "record.example.com"
+  zone_name   = "example.com."
+
+  lambda_functions = [
+    # Index 0 -- An Awesome Lambda Function, used for POST
+    {
+      name        = "an-awesome"
+      description = "An Awesome lambda function for the Awesome API Gateway"
+      handler     = "an_awesome.lambda_handler"
+      runtime     = "python3.8"
+    },
+    # Index 1 -- Another Awesome Lambda Function, used as $default
+    {
+      name        = "another-awesome"
+      description = "Another Awesome lambda function for the Awesome API Gateway"
+      handler     = "another_awesome.lambda_handler"
+      runtime     = "python3.8"
+    },
+  ]
+
+  api_gateway_name = "awesome-api-gateway"
+  api_gateway_description = "An Awesome API Gateway"
+
+  api_gateway_integrations = {
+    "POST /" = {
+      lambda_function_index  = 0
+      payload_format_version = "2.0"
+    }
+
+    "$default" = {
+      lambda_function_index = 1
+    }
+  }
+}
+```
+
+## Conclusion
+
+At the end of the day we get an ugly Terraform state containing many
+
+```ruby
+module.something.module.something_else.module.yet_another_thing...
+```
+
+But the productivity boost gained by merging modules based on context is a worth
+investment. Especially for huge Terraform repositories with multiple teams
+collaborating and managing a lot of resources.
+
+Cross-team collaboration is fostered by applying the Atomic Design methodology
+for Terraform modules, code reusability becomes an important factor over
+copy+paste and the repository gravitates towards the [DRY principle](https://en.wikipedia.org/wiki/Don%27t%5Frepeat%5Fyourself).
+
+## Same post, different places
+
+- [reddit.com: Terraform Modules: Atomic Design - r/Terraform](https://www.reddit.com/r/Terraform/comments/pd708z/terraform%5Fmodules%5Fatomic%5Fdesign/);
+- [dev.to: Terraform Modules: Atomic Design - DEV Community](https://dev.to/macunha/terraform-modules-atomic-design-3i7m);
+- [weekly.tf: #51 - Terraform Atomic Design, EC2 Image Builder](https://weekly.tf/issues/weekly-tf-issue-51-terraform-atomic-design-ec2-image-builder-736257);
+]]></content:encoded>
+        </item>
+    </channel>
+</rss>

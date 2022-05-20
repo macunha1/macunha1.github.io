@@ -1,3 +1,2 @@
 User-agent: *
-
-Sitemap: https://macunha.me/sitemap.xml
+Disallow: 
