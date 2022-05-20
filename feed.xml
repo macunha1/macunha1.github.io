@@ -4,7 +4,7 @@
         <title>Blog | macunha</title>
         <link>https://macunha.me/feed.xml</link>
         <description>I am an all things software tinkerer, mostly self taught, that plays all the way from the infrastructure to the front-end. Including (but not limited to :v) data engineering &amp; analytics, blockchain, functional programming, and any other knowledge area my overly curious brain takes me.</description>
-        <lastBuildDate>Fri, 20 May 2022 22:40:25 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 20 May 2022 22:52:11 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/nuxt-community/feed-module</generator>
         <item>
@@ -162,6 +162,407 @@ Sooner or later, the Over-Engineering bill will come as Hydra heads keep growing
 up accumulating technical debt. Be mindful when analyzing the problem space,
 pick the right tool for the job that eases your real pain (not the imaginary
 one).
+]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[DevOps: Benefits]]></title>
+            <link>https://macunha.me/post/devops-benefits</link>
+            <guid>https://macunha.me/post/devops-benefits</guid>
+            <description><![CDATA[Benefits of implementing DevOps culture in business, why this is a feasible option and the DevOps world big picture in-a-nutshell from a business point of view.]]></description>
+            <content:encoded><![CDATA[
+# Introduction
+
+Main benefits that a company generally expects and finds in the adoption of
+culture:
+
+## Faster and Cheaper Releases
+
+Since releases will be continuous and frequent, deliverables will turn into
+small changes with the benefit of increasing speed in the development cycle
+(delivering always).
+
+## Improved Operational support with quick fixed
+
+If there is a failure during delivery, the impact is minimal because the amount
+of modifications is small, just as the rollback is faster. Having a simple
+inspection and debugging.
+
+## Better Time-to-market (TTM)
+
+The software will be delivered much earlier when it's still an MVP. Customers
+will be integrated as part of the development process, bringing insights and
+feedback to the development team. Thus allowing for a higher launch speed in the
+market.
+
+## Superior quality products
+
+As has been said before, early failures prevent defects from being delivered to
+production, because:
+
+- Reduces the volume of defects in the product as a whole;
+- Increases frequency of new features and releases;
+- Appropriate development processes in teams, including automation.
+
+# Now we understood WHY, let's talk about HOW
+
+## Continuous releases (integration, delivery, deployment)
+
+Usually follows a code versioning approach (through Git) using specific branches
+for each environment (e.g.: feature branches with git flow).
+
+## Continuous integration
+
+Automatic execution of unit tests, integration tests and code quality analysis
+against a git branch, to ensure that there was no disruption of the modified
+piece of code.
+
+## Continuous delivery
+
+Packaging the software that is tested and approved, to deliver it somewhere that
+it is possible to use in a deploy later. Examples are libs delivered in
+repositories to be integrated into the code during the next update and code
+deploy.
+
+## Continuous deployment
+
+Once you have completed all of the above steps, you can do automated deployments
+right in the environments, when the team is more confident about the tools they
+are testing, as well as the risk they're taking and also understanding that
+there is a possibility of failure in a tests environment without worrying that
+it's going to be divergent from production.
+
+## Configuration (and/or Infrastructure) as code
+
+To be able to test software with assertiveness, and to understand that it will
+transit between environments without changing behavior, it is essential that the
+configurations are also expressed in code. This allows the settings to be also
+versioned, following the code. Also guaranteeing a uniformity among the
+environments, which enables:
+
+- Reduction in maintenance costs, having a single point to look at and
+  understand the operation of the system;
+- Easy to recreate the infrastructure, if it is necessary to move everything to
+  another place, this can happen with a few manual interactions;
+- Allows for a code review of infrastructure and configurations, which
+  consequently brings a culture of collaboration in the development, sharing of
+  knowledge and increases the democratization of the infra;
+- Documentation as code, helping new team members get a faster warm up.
+
+These points were well-stressed by the Heroku team and gave rise to the famous
+paper: [The Twelve-Factor App](https://12factor.net/). It's an excellent reading
+for the explanation of the benefits of configuration management.
+
+## Observability, Monitoring, and self-healing
+
+At the end of the delivery process, the software must be monitored. Avoiding to
+wait for an external report of failures, ensuring that the actions are proactive
+rather than reactive.
+
+With mature monitoring, it's possible to create trigger against alerts, creating
+a self-healing system in which actions (scripts) are performed to **fix known**
+failures in the infrastructure so that everyone can sleep peacefully at night,
+without having to worry about the on-call schedule that makes you read some
+documentation at dawn. (If you have had experience with this, you know for sure
+how bad it is).
+
+Scaling up only those cases that are extreme exceptions (mistakes not
+known/expected) in the process for the employee to act, ensuring higher health
+in operation.
+
+## Processes automation
+
+All processes that cause Muda should be addressed with automation, allowing
+people to work more quickly. Good examples of processes that are usually
+automated are:
+
+- Deployment;
+- Self-healing (system resilience in response to anomalies);
+- Renewal of Certificates;
+- Execution of tests (unitary, integration, functional, etc.);
+- Monitoring (with auto-discovery);
+- User Governance;
+
+# [DevOps toolchain](https://en.wikipedia.org/wiki/DevOps_toolchain)
+
+A combination of tools to facilitate the maintenance and operation of the
+system, with the flow:
+
+![Development Cycle Using DevOps](/img/content/devops-lifecycle.png)
+
+> Note: Any similarity to the PDCA is pure certainty.
+
+- **Plan**: Project planning phase, in which feedbacks are collected for
+  requirements survey, and backlog creation;
+- **Create**: Creation of a deliverable (to validate a hypothesis), such as an
+  MVP;
+- **Verify**: Pass the deliverable to the test phase;
+- **Package:** Package the build to be able to put it in some testing
+  environment;
+- **Release**: Deploy packaged deliverable;
+- **Configure**: Perform the configuration of the deliverable in the testing
+  environment, trying to get as close as possible to the twelve-factor app.
+- **Monitor**: After deploying to the environment, track business metrics and
+  infrastructure to ensure everything is working as expected.
+
+# Conclusion
+
+During the implementation of these techniques it is possible to observe
+improvements in the development process, the most notable gains are:
+
+- Increase in team engagement;
+- Knowledge sharing;
+- Reduction of bottlenecks;
+- More free time to do work that really matters (adds value to the user
+  experience or generates impact);
+- Greater confidence in delivering software.
+]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[DevOps: The Genesis]]></title>
+            <link>https://macunha.me/post/devops-genesis</link>
+            <guid>https://macunha.me/post/devops-genesis</guid>
+            <description><![CDATA[From where DevOps came and to where we go. DevOps isn't simply automation, but a whole culture around agile business]]></description>
+            <content:encoded><![CDATA[
+# Introduction
+
+First of all, it's all about agile.
+
+The DevOps methodology was created on top of agile methods, to deliver a higher
+value inside software releases, automating feature release through pipelines,
+that can test hypothesis faster allowing higher adaptability using "fail-fast"
+approaches. Those changes are more cultural than technical, so it's normal to
+see DevOps being called culture.
+
+The implementation of DevOps happens through processes automation, having a
+strong sense of processes re-engineering inside the company. Comparing to the
+cultural change, the technical is easy to implement. Therefore the role that a
+"DevOps Engineer/Analyst" performs is very confusing, which enables many
+SysAdmins and Infra Analysts assuming the role of "DevOps."
+
+## Lean is the basis of Agile
+
+Reality is not as happy as it sounds. After World War II, Japan was destroyed
+and under-resourced after losing the war. With a limited amount of resources,
+the country needed to reinvent itself and survive after a time of severe
+depression. During that time two guys gained attention inside a company that
+later gave its name after the methodology.
+
+Those guys were Eiji Toyoda and Taiichi Ohno, inside Toyota Motor Corporation.
+They're the founders of the "Toyota production model" also known as Toyotism.
+
+## Toyota gave birth to Lean
+
+Lean teaches how to optimize the end-to-end process, focusing on processes that
+create value for customers. Bottlenecks in the process must be removed, and
+wasteful activities need to be identified and avoided. Both explained and
+defined by LEAN 3M: Muda, Mura, and Muri.
+
+Also teaches to improve yourself day after day and always focus on quality
+through Kaizen (continuous improvement).
+
+Japanese culture truly believes that quality is the main objective to deliver
+value to customers since quality is what brings your clients back.
+
+## Kaizen
+
+A mindset that helps to look at each part of the process exclusively and think
+about the improvements. Involving the people who are part of the process,
+encourage the inclusion of these people in the decisions of change, since:
+
+- It is much easier to accept a change when it is not imposed (top-down);
+- There is a greater absorption of change by people when they're included in the
+  planning;
+- The people who are involved in the process bring their concerns and
+  suggestions, which contribute positively to the evolution of the change,
+  making the idea more robust.
+
+The process of defining improvements through Kaizen happens (usually) in the
+following order:
+
+1. Define data-driven objectives;
+2. Review the current state and develop an improvement plan;
+3. Implement improvement;
+4. Review the implementation and improve what does not work;
+5. Report the results and determine the items to be monitored.
+
+This process is also called **PDCA: Plain-Do-Control-Act**, which is summarized
+in:
+
+- Plan (develop the hypothesis);
+- Do (experiment);
+- Check (validate results);
+- Act (refine the experiment and start over).
+
+# 3M: Muda, Mura, Muri
+
+## Muda (waste)
+
+Any activity that consumes time without adding value to the final consumer. e.g.:
+
+- over-production;
+- idle time in the process;
+- products with a defect.
+
+It's important to remember that there are different levels of Muda that can be
+removed quickly or not, and the classification depends on the time for removal.
+
+An example of a more time-consuming Muda is the discontinuation of legacy
+software that ends up with longer release cycles, causing teams to be idle,
+followed by an often long or manual test routine.
+
+## Mura (unevenness)
+
+Unevenness in operation, caused by activities that are very changeable and
+unpredictable, generating different results in all executions. e.g., the
+execution of tasks that were not well planned and ended up arriving with strict
+deadlines. The team runs in the rush, generating exhaustion, despair, and
+moreover, when finished leaves the people who have performed these tasks waiting
+(for feedback, or confirmation that it is completed).
+
+## Muri (overload)
+
+Overburdening equipment or operators by requiring them to run at a higher or
+harder pace beyond the limit, to achieve some goal or expectation, causing
+fatigue and consequently failures during the process. These failures are usually
+human errors caused by fatigue during overwork.
+
+## Back to Agile
+
+In 2000 a group of 17 people met at a resort in Oregon to talk about ideas that
+could improve the flow of software development. After a year of mature ideas,
+these people met again and published the ideas, which we now know as **Agile
+Manifesto**.
+
+Main points are:
+
+**Individuals and interactions** over processes and tools **Working software**
+over comprehensive documentation **Customer collaboration** over contract
+negotiation **Responding to change** over following a plan
+
+I will restrict the explanation of these points with the DevOps point of view,
+keeping on track (now).
+
+## Individuals and interactions
+
+_over processes and tools_
+
+First comes the individuals, they should receive the necessary tooling to work
+with, and then be empowered to do their jobs. Interactions between people are
+greatly encouraged, for sharing knowledge and also for facilitating creative
+flow within development teams.
+
+An excellent example of interaction encouraged through DevOps is the code review
+habit. Considering that small parts of the software will be iterated and
+approved in the pipeline passing through different environments, automatically,
+the best way to prevent defects is through code review.
+
+This habit brings benefits such as:
+
+- Knowledge sharing;
+- Observation of the problem from a different point of view;
+- Team engagement;
+- Lesser bugs.
+
+## Working software
+
+_over comprehensive documentation_
+
+Here's a trick in "working software," software that works is not code that
+compiles. The software that works is what meets the requirements of the user;
+i.e., the software that solves the problem and the pains of the user.
+
+As the market is very dynamic, and evolves with high speed, often during the
+software development project the requirements change due to external factors.
+Therefore, knowing that it is not possible to predict all the elements, many
+"workarounds" are made during development and documented. Passing the
+responsibility to the user to handle the faults, and perform the workarounds,
+expending more effort than would be required to perform the tasks using the
+software.
+
+> Deliver a working software frequently, ranging from a few weeks to a few months, considering shorter time-scale. - Agile Manifesto
+
+Encouraging as many deployments as possible, so that failures happen as early as
+possible, thus allowing their impact to be much less.
+
+# Fail-fast!
+
+Failures are understood and encouraged because it's part of the mindset. Because:
+
+- Only those who **do** make mistakes;
+- Failures are the best opportunity for learning and evolving;
+- Shit happens.
+
+Nothing like quoting Murphy's law to contextualize
+
+> "Anything that can possibly go wrong, does."
+
+Therefore, it's best for failures to occur early, while the cost of correction
+is still low. Failing a controlled testing environment allows the fix to be much
+faster (and cheaper) than it would if the fix were already in production.
+
+For this approach to succeed, there is a premise that environments are
+production copies, or at least as close as possible. Otherwise, there will be
+behavioral changes in the software between the environments, making the test
+environment unfeasible.
+
+If the environments are divergent, the promotion of bugs for production will be
+very frequent, causing late failures, which are expensive failures.
+
+## Customer collaboration
+
+_over contract negotiation_
+
+Know your client! Including it in the process is the best approach to have
+working software. After iterating over deliverables, it's essential to create a
+positive feedback loop with your client, bringing it as close as possible to the
+development of the tools that he/she is going to use.
+
+We can describe this situation with:
+
+- From point A it is possible to see only point B;
+- From point B it is possible to see point C;
+
+Therefore there is a great incentive for the software to be delivered in parts,
+continuously. Thus gathering user feedback on the next steps, following the
+concepts of evolutionary prototyping, which were widely publicized through [_The
+Lean Startup_](http://theleanstartup.com/book).
+
+This point contrasts sharply with the previous one about continuous release, so
+that it is possible to present the prototype and evolve it throughout the
+project.
+
+Learn who your customer/consumer/user is, and whom you are making the software
+for, as this is the only way you can deliver value to that customer. An
+essential part of the software development process is to be empathic with user
+problems, and to truly understand what the problem is to be solved, and the
+result of the impact on software development (value creation for the user).
+
+## Responding to change
+
+_over following a plan_
+
+Redesigning the requirements overtime is part of the job, and a necessary step
+to success. If you want to build something useful that is going to grow and have
+absorption, it's a key feature to include your client in the implementation
+process.
+
+It will be the only way to bring all the problems of the user to the table and
+create the best solution for all these problems because the user is the only
+person that knows the real challenges he faces in their routine dealing with
+software.
+
+With continuous delivery of software along with monitoring results, the process
+of collecting feedback is much simpler and faster.
+
+# DevOps, DevOps, DevOps
+
+With the popularization of DevOps, a lot of disagreement came out there followed
+by a significant confusion about the subject. It is very common to come across
+different interpretations of **what is DevOps**. There is a lot of euphemism in
+the area, and gourmetization on LinkedIn, with many SysAdmins calling themselves
+DevOps since they learned to code shell script inside Python.
+
+Do you want to keep reading? [Here are the benefits of adopting DevOps techniques.]({{< relref "post/2019/01/devops-benefits/index.md" >}})
 ]]></content:encoded>
         </item>
         <item>
@@ -440,407 +841,6 @@ doubt or suggestion, don't hesitate to share on the comment section.
 ]]></content:encoded>
         </item>
         <item>
-            <title><![CDATA[DevOps: The Genesis]]></title>
-            <link>https://macunha.me/post/devops-genesis</link>
-            <guid>https://macunha.me/post/devops-genesis</guid>
-            <description><![CDATA[From where DevOps came and to where we go. DevOps isn't simply automation, but a whole culture around agile business]]></description>
-            <content:encoded><![CDATA[
-# Introduction
-
-First of all, it's all about agile.
-
-The DevOps methodology was created on top of agile methods, to deliver a higher
-value inside software releases, automating feature release through pipelines,
-that can test hypothesis faster allowing higher adaptability using "fail-fast"
-approaches. Those changes are more cultural than technical, so it's normal to
-see DevOps being called culture.
-
-The implementation of DevOps happens through processes automation, having a
-strong sense of processes re-engineering inside the company. Comparing to the
-cultural change, the technical is easy to implement. Therefore the role that a
-"DevOps Engineer/Analyst" performs is very confusing, which enables many
-SysAdmins and Infra Analysts assuming the role of "DevOps."
-
-## Lean is the basis of Agile
-
-Reality is not as happy as it sounds. After World War II, Japan was destroyed
-and under-resourced after losing the war. With a limited amount of resources,
-the country needed to reinvent itself and survive after a time of severe
-depression. During that time two guys gained attention inside a company that
-later gave its name after the methodology.
-
-Those guys were Eiji Toyoda and Taiichi Ohno, inside Toyota Motor Corporation.
-They're the founders of the "Toyota production model" also known as Toyotism.
-
-## Toyota gave birth to Lean
-
-Lean teaches how to optimize the end-to-end process, focusing on processes that
-create value for customers. Bottlenecks in the process must be removed, and
-wasteful activities need to be identified and avoided. Both explained and
-defined by LEAN 3M: Muda, Mura, and Muri.
-
-Also teaches to improve yourself day after day and always focus on quality
-through Kaizen (continuous improvement).
-
-Japanese culture truly believes that quality is the main objective to deliver
-value to customers since quality is what brings your clients back.
-
-## Kaizen
-
-A mindset that helps to look at each part of the process exclusively and think
-about the improvements. Involving the people who are part of the process,
-encourage the inclusion of these people in the decisions of change, since:
-
-- It is much easier to accept a change when it is not imposed (top-down);
-- There is a greater absorption of change by people when they're included in the
-  planning;
-- The people who are involved in the process bring their concerns and
-  suggestions, which contribute positively to the evolution of the change,
-  making the idea more robust.
-
-The process of defining improvements through Kaizen happens (usually) in the
-following order:
-
-1. Define data-driven objectives;
-2. Review the current state and develop an improvement plan;
-3. Implement improvement;
-4. Review the implementation and improve what does not work;
-5. Report the results and determine the items to be monitored.
-
-This process is also called **PDCA: Plain-Do-Control-Act**, which is summarized
-in:
-
-- Plan (develop the hypothesis);
-- Do (experiment);
-- Check (validate results);
-- Act (refine the experiment and start over).
-
-# 3M: Muda, Mura, Muri
-
-## Muda (waste)
-
-Any activity that consumes time without adding value to the final consumer. e.g.:
-
-- over-production;
-- idle time in the process;
-- products with a defect.
-
-It's important to remember that there are different levels of Muda that can be
-removed quickly or not, and the classification depends on the time for removal.
-
-An example of a more time-consuming Muda is the discontinuation of legacy
-software that ends up with longer release cycles, causing teams to be idle,
-followed by an often long or manual test routine.
-
-## Mura (unevenness)
-
-Unevenness in operation, caused by activities that are very changeable and
-unpredictable, generating different results in all executions. e.g., the
-execution of tasks that were not well planned and ended up arriving with strict
-deadlines. The team runs in the rush, generating exhaustion, despair, and
-moreover, when finished leaves the people who have performed these tasks waiting
-(for feedback, or confirmation that it is completed).
-
-## Muri (overload)
-
-Overburdening equipment or operators by requiring them to run at a higher or
-harder pace beyond the limit, to achieve some goal or expectation, causing
-fatigue and consequently failures during the process. These failures are usually
-human errors caused by fatigue during overwork.
-
-## Back to Agile
-
-In 2000 a group of 17 people met at a resort in Oregon to talk about ideas that
-could improve the flow of software development. After a year of mature ideas,
-these people met again and published the ideas, which we now know as **Agile
-Manifesto**.
-
-Main points are:
-
-**Individuals and interactions** over processes and tools **Working software**
-over comprehensive documentation **Customer collaboration** over contract
-negotiation **Responding to change** over following a plan
-
-I will restrict the explanation of these points with the DevOps point of view,
-keeping on track (now).
-
-## Individuals and interactions
-
-_over processes and tools_
-
-First comes the individuals, they should receive the necessary tooling to work
-with, and then be empowered to do their jobs. Interactions between people are
-greatly encouraged, for sharing knowledge and also for facilitating creative
-flow within development teams.
-
-An excellent example of interaction encouraged through DevOps is the code review
-habit. Considering that small parts of the software will be iterated and
-approved in the pipeline passing through different environments, automatically,
-the best way to prevent defects is through code review.
-
-This habit brings benefits such as:
-
-- Knowledge sharing;
-- Observation of the problem from a different point of view;
-- Team engagement;
-- Lesser bugs.
-
-## Working software
-
-_over comprehensive documentation_
-
-Here's a trick in "working software," software that works is not code that
-compiles. The software that works is what meets the requirements of the user;
-i.e., the software that solves the problem and the pains of the user.
-
-As the market is very dynamic, and evolves with high speed, often during the
-software development project the requirements change due to external factors.
-Therefore, knowing that it is not possible to predict all the elements, many
-"workarounds" are made during development and documented. Passing the
-responsibility to the user to handle the faults, and perform the workarounds,
-expending more effort than would be required to perform the tasks using the
-software.
-
-> Deliver a working software frequently, ranging from a few weeks to a few months, considering shorter time-scale. - Agile Manifesto
-
-Encouraging as many deployments as possible, so that failures happen as early as
-possible, thus allowing their impact to be much less.
-
-# Fail-fast!
-
-Failures are understood and encouraged because it's part of the mindset. Because:
-
-- Only those who **do** make mistakes;
-- Failures are the best opportunity for learning and evolving;
-- Shit happens.
-
-Nothing like quoting Murphy's law to contextualize
-
-> "Anything that can possibly go wrong, does."
-
-Therefore, it's best for failures to occur early, while the cost of correction
-is still low. Failing a controlled testing environment allows the fix to be much
-faster (and cheaper) than it would if the fix were already in production.
-
-For this approach to succeed, there is a premise that environments are
-production copies, or at least as close as possible. Otherwise, there will be
-behavioral changes in the software between the environments, making the test
-environment unfeasible.
-
-If the environments are divergent, the promotion of bugs for production will be
-very frequent, causing late failures, which are expensive failures.
-
-## Customer collaboration
-
-_over contract negotiation_
-
-Know your client! Including it in the process is the best approach to have
-working software. After iterating over deliverables, it's essential to create a
-positive feedback loop with your client, bringing it as close as possible to the
-development of the tools that he/she is going to use.
-
-We can describe this situation with:
-
-- From point A it is possible to see only point B;
-- From point B it is possible to see point C;
-
-Therefore there is a great incentive for the software to be delivered in parts,
-continuously. Thus gathering user feedback on the next steps, following the
-concepts of evolutionary prototyping, which were widely publicized through [_The
-Lean Startup_](http://theleanstartup.com/book).
-
-This point contrasts sharply with the previous one about continuous release, so
-that it is possible to present the prototype and evolve it throughout the
-project.
-
-Learn who your customer/consumer/user is, and whom you are making the software
-for, as this is the only way you can deliver value to that customer. An
-essential part of the software development process is to be empathic with user
-problems, and to truly understand what the problem is to be solved, and the
-result of the impact on software development (value creation for the user).
-
-## Responding to change
-
-_over following a plan_
-
-Redesigning the requirements overtime is part of the job, and a necessary step
-to success. If you want to build something useful that is going to grow and have
-absorption, it's a key feature to include your client in the implementation
-process.
-
-It will be the only way to bring all the problems of the user to the table and
-create the best solution for all these problems because the user is the only
-person that knows the real challenges he faces in their routine dealing with
-software.
-
-With continuous delivery of software along with monitoring results, the process
-of collecting feedback is much simpler and faster.
-
-# DevOps, DevOps, DevOps
-
-With the popularization of DevOps, a lot of disagreement came out there followed
-by a significant confusion about the subject. It is very common to come across
-different interpretations of **what is DevOps**. There is a lot of euphemism in
-the area, and gourmetization on LinkedIn, with many SysAdmins calling themselves
-DevOps since they learned to code shell script inside Python.
-
-Do you want to keep reading? [Here are the benefits of adopting DevOps techniques.]({{< relref "post/2019/01/devops-benefits/index.md" >}})
-]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[DevOps: Benefits]]></title>
-            <link>https://macunha.me/post/devops-benefits</link>
-            <guid>https://macunha.me/post/devops-benefits</guid>
-            <description><![CDATA[Benefits of implementing DevOps culture in business, why this is a feasible option and the DevOps world big picture in-a-nutshell from a business point of view.]]></description>
-            <content:encoded><![CDATA[
-# Introduction
-
-Main benefits that a company generally expects and finds in the adoption of
-culture:
-
-## Faster and Cheaper Releases
-
-Since releases will be continuous and frequent, deliverables will turn into
-small changes with the benefit of increasing speed in the development cycle
-(delivering always).
-
-## Improved Operational support with quick fixed
-
-If there is a failure during delivery, the impact is minimal because the amount
-of modifications is small, just as the rollback is faster. Having a simple
-inspection and debugging.
-
-## Better Time-to-market (TTM)
-
-The software will be delivered much earlier when it's still an MVP. Customers
-will be integrated as part of the development process, bringing insights and
-feedback to the development team. Thus allowing for a higher launch speed in the
-market.
-
-## Superior quality products
-
-As has been said before, early failures prevent defects from being delivered to
-production, because:
-
-- Reduces the volume of defects in the product as a whole;
-- Increases frequency of new features and releases;
-- Appropriate development processes in teams, including automation.
-
-# Now we understood WHY, let's talk about HOW
-
-## Continuous releases (integration, delivery, deployment)
-
-Usually follows a code versioning approach (through Git) using specific branches
-for each environment (e.g.: feature branches with git flow).
-
-## Continuous integration
-
-Automatic execution of unit tests, integration tests and code quality analysis
-against a git branch, to ensure that there was no disruption of the modified
-piece of code.
-
-## Continuous delivery
-
-Packaging the software that is tested and approved, to deliver it somewhere that
-it is possible to use in a deploy later. Examples are libs delivered in
-repositories to be integrated into the code during the next update and code
-deploy.
-
-## Continuous deployment
-
-Once you have completed all of the above steps, you can do automated deployments
-right in the environments, when the team is more confident about the tools they
-are testing, as well as the risk they're taking and also understanding that
-there is a possibility of failure in a tests environment without worrying that
-it's going to be divergent from production.
-
-## Configuration (and/or Infrastructure) as code
-
-To be able to test software with assertiveness, and to understand that it will
-transit between environments without changing behavior, it is essential that the
-configurations are also expressed in code. This allows the settings to be also
-versioned, following the code. Also guaranteeing a uniformity among the
-environments, which enables:
-
-- Reduction in maintenance costs, having a single point to look at and
-  understand the operation of the system;
-- Easy to recreate the infrastructure, if it is necessary to move everything to
-  another place, this can happen with a few manual interactions;
-- Allows for a code review of infrastructure and configurations, which
-  consequently brings a culture of collaboration in the development, sharing of
-  knowledge and increases the democratization of the infra;
-- Documentation as code, helping new team members get a faster warm up.
-
-These points were well-stressed by the Heroku team and gave rise to the famous
-paper: [The Twelve-Factor App](https://12factor.net/). It's an excellent reading
-for the explanation of the benefits of configuration management.
-
-## Observability, Monitoring, and self-healing
-
-At the end of the delivery process, the software must be monitored. Avoiding to
-wait for an external report of failures, ensuring that the actions are proactive
-rather than reactive.
-
-With mature monitoring, it's possible to create trigger against alerts, creating
-a self-healing system in which actions (scripts) are performed to **fix known**
-failures in the infrastructure so that everyone can sleep peacefully at night,
-without having to worry about the on-call schedule that makes you read some
-documentation at dawn. (If you have had experience with this, you know for sure
-how bad it is).
-
-Scaling up only those cases that are extreme exceptions (mistakes not
-known/expected) in the process for the employee to act, ensuring higher health
-in operation.
-
-## Processes automation
-
-All processes that cause Muda should be addressed with automation, allowing
-people to work more quickly. Good examples of processes that are usually
-automated are:
-
-- Deployment;
-- Self-healing (system resilience in response to anomalies);
-- Renewal of Certificates;
-- Execution of tests (unitary, integration, functional, etc.);
-- Monitoring (with auto-discovery);
-- User Governance;
-
-# [DevOps toolchain](https://en.wikipedia.org/wiki/DevOps_toolchain)
-
-A combination of tools to facilitate the maintenance and operation of the
-system, with the flow:
-
-![Development Cycle Using DevOps](/img/content/devops-lifecycle.png)
-
-> Note: Any similarity to the PDCA is pure certainty.
-
-- **Plan**: Project planning phase, in which feedbacks are collected for
-  requirements survey, and backlog creation;
-- **Create**: Creation of a deliverable (to validate a hypothesis), such as an
-  MVP;
-- **Verify**: Pass the deliverable to the test phase;
-- **Package:** Package the build to be able to put it in some testing
-  environment;
-- **Release**: Deploy packaged deliverable;
-- **Configure**: Perform the configuration of the deliverable in the testing
-  environment, trying to get as close as possible to the twelve-factor app.
-- **Monitor**: After deploying to the environment, track business metrics and
-  infrastructure to ensure everything is working as expected.
-
-# Conclusion
-
-During the implementation of these techniques it is possible to observe
-improvements in the development process, the most notable gains are:
-
-- Increase in team engagement;
-- Knowledge sharing;
-- Reduction of bottlenecks;
-- More free time to do work that really matters (adds value to the user
-  experience or generates impact);
-- Greater confidence in delivering software.
-]]></content:encoded>
-        </item>
-        <item>
             <title><![CDATA[Terraform Design Best Practices]]></title>
             <link>https://macunha.me/post/terraform-design-best-practices</link>
             <guid>https://macunha.me/post/terraform-design-best-practices</guid>
@@ -1021,267 +1021,6 @@ duplication, implementing the [DRY (don't repeat yourself) principle](https://en
 On top of that, modules are an important factor to reduce the parity among
 environments, which helps to better address the [Twelve-Factor App model](https://12factor.net/) in
 regards to [Factor X (ten)](https://12factor.net/dev-prod-parity).
-]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Real-life Terraform Refactoring Guide]]></title>
-            <link>https://macunha.me/post/real-life-terraform-refactoring-guide</link>
-            <guid>https://macunha.me/post/real-life-terraform-refactoring-guide</guid>
-            <description><![CDATA[Want to know how to better organize existing Terraform code? If you grasp these ideas, it could even serve for not-yet Infrastructure as Code resources. Jump in and take a look.]]></description>
-            <content:encoded><![CDATA[
-## Intro
-
-As reality hits, the unavoidable fact of dealing with a hard-to-manage Terraform
-[Big ball of mud](https://en.wikipedia.org/wiki/Big%5Fball%5Fof%5Fmud) code base comes in. There is no way around natural growth and
-evolution of code bases and the design flaws that come with it. Our Agile
-mindset is to ["move fast and break things"](https://www.brainyquote.com/quotes/mark%5Fzuckerberg%5F453439), implement something as simple as
-possible and let the design decisions for the next iterations (if any).
-
-Refactoring Terraform code is actually as natural as developing it, time and
-time again you will be faced with a situation where a better structure or
-organization can be achieved, maybe you want to upgrade from a home-made module
-to an open-source/community alternative, maybe you just want to segregate your
-resources into different states to speed-up development. Regardless of the goal,
-once you get into it, you will realize that Terraform code refactoring is
-actually a basic missing step on the development process that no one told you
-before.
-
-As the [Suffering-Oriented Programming](http://nathanmarz.com/blog/suffering-oriented-programming.html) mantra dictates:
-
-> "First make it possible. Then make it beautiful. Then make it fast."
-
-So, time to make the Terraform code beautiful!
-
-## How to break a big ball of mud? STRANGLE IT
-
-`<joke>` Martin Fowler has already written everything there is to write about
-(early 2000s) DevOps, Agile, and Software Development. Therefore, we could
-reference Martin Fowler for virtually anything Software related `</joke>`, but
-really, the [Refactoring book](https://martinfowler.com/books/refactoring.html) is **THE** reference on this subject.
-
-Martin Fowler shared the [Stangler (Fig) Pattern](https://martinfowler.com/bliki/StranglerFigApplication.html), which describes a strategy to
-refactor a legacy code base by re-implementing the same features (sometimes even
-the bugs) on another application.
-
-> [...] the huge strangler figs. They seed in the upper branches of a tree and
-> gradually work their way down the tree until they root in the soil. Over many
-> years they grow into fantastic and beautiful shapes, meanwhile strangling and
-> killing the tree that was their host.
->
-> This metaphor struck me as a way of describing a way of doing a rewrite of an
-> important system.
-
-In this document we are going to follow the same idea:
-
-1.  implement the same feature on a different [Terraform composition](https://www.terraform-best-practices.com/key-concepts#composition);
-2.  migrate the Terraform state;
-3.  delete (kill) the previous implementation.
-
-## The mono-repository (monorepo) approach to Legacy
-
-Let's suppose that your Terraform code base is versioned in a single repository
-(a.k.a. monorepo), following the random structure displayed below (just to help
-illustrate)
-
-```
-.
-├── modules/    # Definition of TF modules used by underlying compositions
-├── global/     # Resources that aren't restricted to one environment
-│   ├── aws/
-├── production/ # Production environment resources
-│   └── aws/
-└── staging/    # Staging environment resources
-    └── aws/
-```
-
-On this example each directory corresponds to a Terraform state. In order to
-apply changes you have to walk to a path and execute `terraform`.
-
-The structure on this example repository was created a few hypothetical years
-ago when the number of existing microservices and resources (DB, message queues,
-etc) was significantly smaller. At the time, it was feasible to keep Terraform
-definitions together because it was easier to maintain, Cloud resources were
-managed with one-shot!
-
-As the time went by, the number of Products and the team grew, and engineers
-started facing concurrency issues: Terraform lock executions on a shared storage
-when someone else is running `terraform apply` as well as a general slowness on
-**every execution** since the number of data sources to sync is frightening.
-
-A mono-repository approach is not necessarily bad, versioning is actually
-simpler when performed in one single repository. Ideally, there won't be many
-changes on the scale of GiB meaning that it is safe to proceed on this one _as
-long as the Terraform remote states are divided_.
-
-### Splitting the `modules` sub-path to its own repository
-
-One thing to mention though is the `modules` sub-path, this one could be stored
-in a different git repository to leverage its own versioning. Since Terraform
-modules and its implementations don't always evolve in the same pace, keeping
-two distinct version trees is beneficial. Additionally, a separated repository
-for Terraform modules allows the specification of "pinned versions", e.g.:
-
-```hcl
-module "aws_main_vpc" {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git?ref=2ca733d"
-  # Note the ref=${GIT_REVISION_DIGEST}
-}
-```
-
-That reference for a module's version should always be specified, regardless if
-it comes from an internal/private repository or public. When you specify the
-version, you are ensuring reproducibility.
-
-Therefore, let's move the `modules` sub-path to another git repository,
-following instructions from [this StackOverflow answer](https://stackoverflow.com/questions/359424/detach-move-subdirectory-into-separate-git-repository/17864475#17864475) so that the git commit
-history is preserved:
-
-#### 0.
-
-Walk to the monorepo path and create a branch from the commits at
-`monorepo/modules` path
-
-```bash
-MAIN_BIGGER_REPO=/path/to/the/monorepo
-cd "${MAIN_BIGGER_REPO}"
-git subtree split -P modules -b refact-modules
-```
-
-#### 1.
-
-Create the new repository
-
-```bash
-mkdir /path/to/the/terraform-modules && cd $_
-git init
-git pull "${MAIN_BIGGER_REPO}" refact-modules
-```
-
-#### 2.
-
-Link the new repository to your remote Git (server)
-
-```bash
-git remote add origin <git@git.com:user/terraform-modules.git>
-git push -u origin master
-```
-
-#### 3.
-
-[OPTIONAL] Cleanup inside `$MAIN_BIGGER_REPO`, if desired
-
-```bash
-cd ${MAIN_BIGGER_REPO}
-git rm -rf modules
-git filter-branch --prune-empty \
-    --tree-filter "rm -rf modules" -f HEAD
-```
-
-### Let's start strangling the repository
-
-Now that a substantial piece of code was moved somewhere else, it is time to
-put the [Stangler (Fig) Pattern](https://martinfowler.com/bliki/StranglerFigApplication.html) in practice.
-
-Move all the existing content as-is to the `legacy` sub-path, keeping the same
-repository and change history (commits). It also allows applying the `legacy`
-code as it used to be from one of those paths.
-
-```
-.
-└── legacy
-    ├── global
-    │   └── aws
-    ├── production
-    │   └── aws
-    └── staging
-        └── aws
-```
-
-Once the content is moved to legacy, the idea is to follow the [Boy Scout rule](https://www.oreilly.com/library/view/97-things-every/9780596809515/ch08.html)
-in order to strangle the `legacy` content little by little (unless you are
-really committed to migrating it all at once, which is going to be exhaustive).
-
-The Boy Scout rule goes like:
-
-1.  every time a task that involves deprecated code appears, we implement it on
-    [the new structure](../stdout/blog/2021/03/terraform-best-practices.org);
-2.  import the Terraform state to keep the Cloud resources that a given code
-    represents/describes;
-3.  remove the state and the code from `legacy`.
-
-Until there is nothing left inside `legacy` (or there are only unused
-resources/left-behinds that could be destroyed/garbage collected either way).
-
-#### Import state? Remove state and code from what? Where?
-
-That will depend on the kind of resource we are migrating from the remote state,
-on the bottom of each `resource` on Terraform's provider documentation you can
-find a reference command to import existing resources into your Terraform code
-specification. e.g.: [AWS RDS DB instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db%5Finstance#import).
-
-Suppose we want to replace the code of the AWS RDS Aurora defined in
-`production/aws` and then re-implement the same using [the community module](https://github.com/terraform-aws-modules/terraform-aws-rds-aurora).
-After creating the corresponding sub-path to the monorepo according to your
-preference, provisioning the bucket and initializing the Terraform `backend`:
-
-1.  implement the definition of the community module
-    [github.com/terraform-aws-modules/terraform-aws-rds-aurora](https://github.com/terraform-aws-modules/terraform-aws-rds-aurora) with the closest
-    parameters from the existing one; e.g.:
-
-    ```hcl
-    module "aws_aurora_main_cluster" {
-      source  = "terraform-aws-modules/rds-aurora/aws"
-      version = "~> 5.2"
-
-      # ...
-    }
-    ```
-
-2.  import the Terraform states from the previous (existing) cluster
-
-    ```bash
-    terraform import 'aws_aurora_main_cluster.aws_rds_cluster.this[0]' main-database-name
-    terraform import 'aws_aurora_main_cluster.aws_rds_cluster_instance.this[0]' main-database-instance-name-01
-    terraform import 'aws_aurora_main_cluster.aws_rds_cluster_instance.this[1]' main-database-instance-name-02
-
-    # ...
-    ```
-
-    then if you haven't yet and would like to "match reality" between the
-    existing and the specified resource, run `terraform plan` a few times and
-    adjust the parameters until Terraform reports:
-
-    ```text
-    No changes. Your infrastructure matches the configuration.
-    ```
-
-3.  last but not least, remove the corresponding resources from the `legacy`
-    Terraform state so that it doesn't try to keep track of the changes and also
-    don't try to destroy once the resource definition is no longer in that code
-    base:
-
-    ```bash
-    # Hypothetical name of the resource inside production/aws/main.tf
-    terraform state rm aws_rds_cluster.default \
-        'aws_rds_cluster_instance.default[0]' 'aws_rds_cluster_instance.default[1]'
-
-    # ...
-    ```
-
-    once that is performed, feel free to remove the corresponding resource's
-    definition from the `legacy` code.
-
-    ```hcl
-    resource "aws_rds_cluster" "default" {
-      # ...
-    }
-
-    resource "aws_rds_cluster_instance" "default" {
-      count = var.number_of_database_instances
-
-      # ...
-    }
-    ```
 ]]></content:encoded>
         </item>
         <item>
@@ -1725,6 +1464,267 @@ copy+paste and the repository gravitates towards the [DRY principle](https://en.
 - [reddit.com: Terraform Modules: Atomic Design - r/Terraform](https://www.reddit.com/r/Terraform/comments/pd708z/terraform%5Fmodules%5Fatomic%5Fdesign/);
 - [dev.to: Terraform Modules: Atomic Design - DEV Community](https://dev.to/macunha/terraform-modules-atomic-design-3i7m);
 - [weekly.tf: #51 - Terraform Atomic Design, EC2 Image Builder](https://weekly.tf/issues/weekly-tf-issue-51-terraform-atomic-design-ec2-image-builder-736257);
+]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Real-life Terraform Refactoring Guide]]></title>
+            <link>https://macunha.me/post/real-life-terraform-refactoring-guide</link>
+            <guid>https://macunha.me/post/real-life-terraform-refactoring-guide</guid>
+            <description><![CDATA[Want to know how to better organize existing Terraform code? If you grasp these ideas, it could even serve for not-yet Infrastructure as Code resources. Jump in and take a look.]]></description>
+            <content:encoded><![CDATA[
+## Intro
+
+As reality hits, the unavoidable fact of dealing with a hard-to-manage Terraform
+[Big ball of mud](https://en.wikipedia.org/wiki/Big%5Fball%5Fof%5Fmud) code base comes in. There is no way around natural growth and
+evolution of code bases and the design flaws that come with it. Our Agile
+mindset is to ["move fast and break things"](https://www.brainyquote.com/quotes/mark%5Fzuckerberg%5F453439), implement something as simple as
+possible and let the design decisions for the next iterations (if any).
+
+Refactoring Terraform code is actually as natural as developing it, time and
+time again you will be faced with a situation where a better structure or
+organization can be achieved, maybe you want to upgrade from a home-made module
+to an open-source/community alternative, maybe you just want to segregate your
+resources into different states to speed-up development. Regardless of the goal,
+once you get into it, you will realize that Terraform code refactoring is
+actually a basic missing step on the development process that no one told you
+before.
+
+As the [Suffering-Oriented Programming](http://nathanmarz.com/blog/suffering-oriented-programming.html) mantra dictates:
+
+> "First make it possible. Then make it beautiful. Then make it fast."
+
+So, time to make the Terraform code beautiful!
+
+## How to break a big ball of mud? STRANGLE IT
+
+`<joke>` Martin Fowler has already written everything there is to write about
+(early 2000s) DevOps, Agile, and Software Development. Therefore, we could
+reference Martin Fowler for virtually anything Software related `</joke>`, but
+really, the [Refactoring book](https://martinfowler.com/books/refactoring.html) is **THE** reference on this subject.
+
+Martin Fowler shared the [Stangler (Fig) Pattern](https://martinfowler.com/bliki/StranglerFigApplication.html), which describes a strategy to
+refactor a legacy code base by re-implementing the same features (sometimes even
+the bugs) on another application.
+
+> [...] the huge strangler figs. They seed in the upper branches of a tree and
+> gradually work their way down the tree until they root in the soil. Over many
+> years they grow into fantastic and beautiful shapes, meanwhile strangling and
+> killing the tree that was their host.
+>
+> This metaphor struck me as a way of describing a way of doing a rewrite of an
+> important system.
+
+In this document we are going to follow the same idea:
+
+1.  implement the same feature on a different [Terraform composition](https://www.terraform-best-practices.com/key-concepts#composition);
+2.  migrate the Terraform state;
+3.  delete (kill) the previous implementation.
+
+## The mono-repository (monorepo) approach to Legacy
+
+Let's suppose that your Terraform code base is versioned in a single repository
+(a.k.a. monorepo), following the random structure displayed below (just to help
+illustrate)
+
+```
+.
+├── modules/    # Definition of TF modules used by underlying compositions
+├── global/     # Resources that aren't restricted to one environment
+│   ├── aws/
+├── production/ # Production environment resources
+│   └── aws/
+└── staging/    # Staging environment resources
+    └── aws/
+```
+
+On this example each directory corresponds to a Terraform state. In order to
+apply changes you have to walk to a path and execute `terraform`.
+
+The structure on this example repository was created a few hypothetical years
+ago when the number of existing microservices and resources (DB, message queues,
+etc) was significantly smaller. At the time, it was feasible to keep Terraform
+definitions together because it was easier to maintain, Cloud resources were
+managed with one-shot!
+
+As the time went by, the number of Products and the team grew, and engineers
+started facing concurrency issues: Terraform lock executions on a shared storage
+when someone else is running `terraform apply` as well as a general slowness on
+**every execution** since the number of data sources to sync is frightening.
+
+A mono-repository approach is not necessarily bad, versioning is actually
+simpler when performed in one single repository. Ideally, there won't be many
+changes on the scale of GiB meaning that it is safe to proceed on this one _as
+long as the Terraform remote states are divided_.
+
+### Splitting the `modules` sub-path to its own repository
+
+One thing to mention though is the `modules` sub-path, this one could be stored
+in a different git repository to leverage its own versioning. Since Terraform
+modules and its implementations don't always evolve in the same pace, keeping
+two distinct version trees is beneficial. Additionally, a separated repository
+for Terraform modules allows the specification of "pinned versions", e.g.:
+
+```hcl
+module "aws_main_vpc" {
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git?ref=2ca733d"
+  # Note the ref=${GIT_REVISION_DIGEST}
+}
+```
+
+That reference for a module's version should always be specified, regardless if
+it comes from an internal/private repository or public. When you specify the
+version, you are ensuring reproducibility.
+
+Therefore, let's move the `modules` sub-path to another git repository,
+following instructions from [this StackOverflow answer](https://stackoverflow.com/questions/359424/detach-move-subdirectory-into-separate-git-repository/17864475#17864475) so that the git commit
+history is preserved:
+
+#### 0.
+
+Walk to the monorepo path and create a branch from the commits at
+`monorepo/modules` path
+
+```bash
+MAIN_BIGGER_REPO=/path/to/the/monorepo
+cd "${MAIN_BIGGER_REPO}"
+git subtree split -P modules -b refact-modules
+```
+
+#### 1.
+
+Create the new repository
+
+```bash
+mkdir /path/to/the/terraform-modules && cd $_
+git init
+git pull "${MAIN_BIGGER_REPO}" refact-modules
+```
+
+#### 2.
+
+Link the new repository to your remote Git (server)
+
+```bash
+git remote add origin <git@git.com:user/terraform-modules.git>
+git push -u origin master
+```
+
+#### 3.
+
+[OPTIONAL] Cleanup inside `$MAIN_BIGGER_REPO`, if desired
+
+```bash
+cd ${MAIN_BIGGER_REPO}
+git rm -rf modules
+git filter-branch --prune-empty \
+    --tree-filter "rm -rf modules" -f HEAD
+```
+
+### Let's start strangling the repository
+
+Now that a substantial piece of code was moved somewhere else, it is time to
+put the [Stangler (Fig) Pattern](https://martinfowler.com/bliki/StranglerFigApplication.html) in practice.
+
+Move all the existing content as-is to the `legacy` sub-path, keeping the same
+repository and change history (commits). It also allows applying the `legacy`
+code as it used to be from one of those paths.
+
+```
+.
+└── legacy
+    ├── global
+    │   └── aws
+    ├── production
+    │   └── aws
+    └── staging
+        └── aws
+```
+
+Once the content is moved to legacy, the idea is to follow the [Boy Scout rule](https://www.oreilly.com/library/view/97-things-every/9780596809515/ch08.html)
+in order to strangle the `legacy` content little by little (unless you are
+really committed to migrating it all at once, which is going to be exhaustive).
+
+The Boy Scout rule goes like:
+
+1.  every time a task that involves deprecated code appears, we implement it on
+    [the new structure](../stdout/blog/2021/03/terraform-best-practices.org);
+2.  import the Terraform state to keep the Cloud resources that a given code
+    represents/describes;
+3.  remove the state and the code from `legacy`.
+
+Until there is nothing left inside `legacy` (or there are only unused
+resources/left-behinds that could be destroyed/garbage collected either way).
+
+#### Import state? Remove state and code from what? Where?
+
+That will depend on the kind of resource we are migrating from the remote state,
+on the bottom of each `resource` on Terraform's provider documentation you can
+find a reference command to import existing resources into your Terraform code
+specification. e.g.: [AWS RDS DB instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db%5Finstance#import).
+
+Suppose we want to replace the code of the AWS RDS Aurora defined in
+`production/aws` and then re-implement the same using [the community module](https://github.com/terraform-aws-modules/terraform-aws-rds-aurora).
+After creating the corresponding sub-path to the monorepo according to your
+preference, provisioning the bucket and initializing the Terraform `backend`:
+
+1.  implement the definition of the community module
+    [github.com/terraform-aws-modules/terraform-aws-rds-aurora](https://github.com/terraform-aws-modules/terraform-aws-rds-aurora) with the closest
+    parameters from the existing one; e.g.:
+
+    ```hcl
+    module "aws_aurora_main_cluster" {
+      source  = "terraform-aws-modules/rds-aurora/aws"
+      version = "~> 5.2"
+
+      # ...
+    }
+    ```
+
+2.  import the Terraform states from the previous (existing) cluster
+
+    ```bash
+    terraform import 'aws_aurora_main_cluster.aws_rds_cluster.this[0]' main-database-name
+    terraform import 'aws_aurora_main_cluster.aws_rds_cluster_instance.this[0]' main-database-instance-name-01
+    terraform import 'aws_aurora_main_cluster.aws_rds_cluster_instance.this[1]' main-database-instance-name-02
+
+    # ...
+    ```
+
+    then if you haven't yet and would like to "match reality" between the
+    existing and the specified resource, run `terraform plan` a few times and
+    adjust the parameters until Terraform reports:
+
+    ```text
+    No changes. Your infrastructure matches the configuration.
+    ```
+
+3.  last but not least, remove the corresponding resources from the `legacy`
+    Terraform state so that it doesn't try to keep track of the changes and also
+    don't try to destroy once the resource definition is no longer in that code
+    base:
+
+    ```bash
+    # Hypothetical name of the resource inside production/aws/main.tf
+    terraform state rm aws_rds_cluster.default \
+        'aws_rds_cluster_instance.default[0]' 'aws_rds_cluster_instance.default[1]'
+
+    # ...
+    ```
+
+    once that is performed, feel free to remove the corresponding resource's
+    definition from the `legacy` code.
+
+    ```hcl
+    resource "aws_rds_cluster" "default" {
+      # ...
+    }
+
+    resource "aws_rds_cluster_instance" "default" {
+      count = var.number_of_database_instances
+
+      # ...
+    }
+    ```
 ]]></content:encoded>
         </item>
     </channel>
