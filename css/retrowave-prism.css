@@ -21,7 +21,7 @@ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascr
   --extra-bold: 800;
   --ultra-bold: 1000;
 
-  --background: #111111;
+  --background: #1a1a1a;
   --comment: #888888;
   --foreground: #f8f8f2;
   --selection: #44475a;
@@ -504,3 +504,4 @@ pre[class*="language-"] {
 .highlight-line-remove {
   background-color: var(--red-50);
 }
+
