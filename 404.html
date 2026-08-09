@@ -11,6 +11,7 @@
       (() => {
         const currentPath = window.location.pathname;
         const canonicalPath = currentPath
+          .replace(/^\/$/, "/en")
           .replace(/^\/en\/posts(?=\/|$)/, "/en/post")
           .replace(/^\/posts(?=\/|$)/, "/post")
           .replace(/\/$/, "") || "/";

@@ -1,4 +1,5 @@
+/    /en    302!
 /en/posts/*    /en/post/:splat    301!
 /posts/*       /post/:splat       301!
 /*/            /:splat            301
-/*             /index.html        200
+/*             /en                200
