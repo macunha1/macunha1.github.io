@@ -1,0 +1,1 @@
+var e=e=>e.replace(/^\/[^/]+\//,``),t=e=>{let t=e.slice(0,10);return new Intl.DateTimeFormat(`en-US`,{weekday:`short`,day:`numeric`,month:`short`,year:`numeric`,timeZone:`UTC`}).format(new Date(`${t}T00:00:00Z`))};export{e as n,t};
