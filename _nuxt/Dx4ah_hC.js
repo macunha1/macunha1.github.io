@@ -1,0 +1,1 @@
+import{mt as e,qt as t,v as n,xt as r}from"./BKdLzFmX.js";import{t as i}from"./BngIma-W.js";var a={__name:`ProseH3`,props:{id:{type:String,default:void 0}},setup(a){return(o,s)=>{let c=i;return e(),n(c,{id:a.id,level:3},{default:t(()=>[r(o.$slots,`default`)]),_:3},8,[`id`])}}};export{a as default};
